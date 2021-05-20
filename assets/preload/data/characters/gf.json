@@ -1,0 +1,90 @@
+{
+    "$schema": "./character-schema.json",
+    "type": "sparrow",
+    "atlas": "GF_assets",
+    "animations": [
+        {
+            "name": "cheer",
+            "prefix": "GF Cheer",
+            "frameRate": 24,
+            "looped": false
+        },
+        {
+            "name": "singLEFT",
+            "prefix": "GF left note",
+            "frameRate": 24,
+            "looped": false
+        },
+        {
+            "name": "singRIGHT",
+            "prefix": "GF Right Note",
+            "frameRate": 24,
+            "looped": false
+        },
+        {
+            "name": "singUP",
+            "prefix": "GF Up Note",
+            "frameRate": 24,
+            "looped": false
+        },
+        {
+            "name": "singDOWN",
+            "prefix": "GF Down Note",
+            "frameRate": 24,
+            "looped": false
+        },
+        {
+            "name": "sad",
+            "prefix": "gf sad",
+            "indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            "frameRate": 24,
+            "looped": false
+        },
+        {
+            "name": "danceLeft",
+            "prefix": "GF Dancing Beat",
+            "indices": [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+            "frameRate": 24,
+            "looped": false
+        },
+        {
+            "name": "danceRight",
+            "prefix": "GF Dancing Beat",
+            "indices": [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+            "frameRate": 24,
+            "looped": false
+        },
+        {
+            "name": "hairBlow",
+            "prefix": "GF Dancing Beat Hair blowing",
+            "indices": [0, 1, 2, 3],
+            "frameRate": 24
+        },
+        {
+            "name": "hairFall",
+            "prefix": "GF Dancing Beat Hair Landing",
+            "indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+            "frameRate": 24,
+            "looping": false
+        },
+        {
+            "name": "scared",
+            "prefix": "GF FEAR",
+            "frameRate": 24
+        }
+    ],
+    "offsets": {
+        "cheer": [0, 0],
+        "sad": [-2, -2],
+        "danceLeft": [0, -9],
+        "danceRight": [0, -9],
+        "singUP": [0, 4],
+        "singRIGHT": [0, -20],
+        "singLEFT": [0, -19],
+        "singDOWN": [0, -20],
+        "hairBlow": [45, -8],
+        "hairFall": [0, -9],
+        "scared": [-2, -17]
+    },
+    "startingAnimation": "danceRight"
+}
