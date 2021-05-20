@@ -1,0 +1,104 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "FNF Modish Character",
+    "description": "A character definition file for the Friday Night Funkin' mod loader Modish.",
+    "type": "object",
+    "properties": {
+        "type": {
+            "type": "string",
+            "enum": [ "sparrow", "packer" ]
+        },
+        "atlas": {
+            "type": "string"
+        },
+        "animations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "prefix": {
+                        "type": "string"
+                    },
+                    "indices": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "postfix": {
+                        "type": "string"
+                    },
+                    "frameRate": {
+                        "type": "integer"
+                    },
+                    "looped": {
+                        "type": "boolean"
+                    },
+                    "if": {
+                        "type": "string",
+                        "const": "player"
+                    },
+                    "unless": {
+                        "type": "string",
+                        "const": "player"
+                    }
+                },
+                "required": [ "name", "prefix" ],
+                "dependencies": {
+                    "postfix": [ "indices" ]
+                }
+            }
+        },
+        "offsets": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                    "type": "integer"
+                }
+            }
+        },
+        "startingAnimation": {
+            "description": "The animation to play after initialization.",
+            "type": [ "string", "object" ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "force": {
+                    "type": "boolean"
+                },
+                "reversed": {
+                    "type": "boolean"
+                },
+                "frame": {
+                    "type": "integer"
+                },
+                "playOnly": {
+                    "type": "boolean"
+                }
+            },
+            "required": [ "name" ]
+        },
+        "antialiasing": {
+            "type": "boolean"
+        },
+        "flipX": {
+            "type": "boolean"
+        },
+        "flipY": {
+            "type": "boolean"
+        },
+        "pixel": {
+            "$comment": "TODO: Replace this with something more extensible.",
+            "description": "Scales the sprite up 6x.",
+            "type": "boolean"
+        }
+    },
+    "required": [ "type", "atlas" ]
+}
