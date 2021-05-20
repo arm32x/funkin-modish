@@ -61,6 +61,12 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
+		#if polymod
+		var modList = CoolUtil.coolTextFile("mods/modList.txt");
+		trace(modList);
+		polymod.Polymod.init({modRoot: "mods", dirs: modList});
+		#end
+
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 
