@@ -13,10 +13,11 @@ class MenuItem extends FlxSpriteGroup
 	public var week:FlxSprite;
 	public var flashingInt:Int = 0;
 
-	public function new(x:Float, y:Float, weekNum:Int = 0)
+	public function new(x:Float, y:Float, weekNum:Int = 0, ?weekName:String)
 	{
 		super(x, y);
-		week = new FlxSprite().loadGraphic(Paths.image('storymenu/week' + weekNum));
+		var pathSuffix = weekNum <= 6 ? Std.string(weekNum) : "_" + HelperFunctions.sanitizeString(weekName);
+		week = new FlxSprite().loadGraphic(Paths.image('storymenu/week' + pathSuffix));
 		add(week);
 	}
 
