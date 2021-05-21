@@ -7,6 +7,40 @@ import flixel.graphics.frames.FlxAtlasFrames;
 
 using StringTools;
 
+@:nullSafety(Strict)
+typedef CharacterJSON = {
+	var type:String;
+	var atlas:String;
+	var ?animations:Array<{
+		var name:String;
+		var prefix:String;
+		var ?indices:Array<Int>;
+		var ?postfix:String;
+		var ?frameRate:Int;
+		var ?looped:Bool;
+		var ?condition:String;
+		var offsets:Array<Int>;
+	}>;
+	var ?startingAnimation:{
+		var name:String;
+		var ?force:Bool;
+		var ?reversed:Bool;
+		var ?frame:Int;
+		var ?playOnly:Bool;
+	};
+	var ?antialiasing:Bool;
+	var ?flipX:Bool;
+	var ?flipY:Bool;
+	var ?size:Array<Null<{
+		var operation:String;
+		var value:Float;
+	}>>;
+	var ?graphicSize:Array<Null<{
+		var operation:String;
+		var value:Float;
+	}>>;
+};
+
 class Character extends FlxSprite
 {
 	public var animOffsets:Map<String, Array<Dynamic>>;
