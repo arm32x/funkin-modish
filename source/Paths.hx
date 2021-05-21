@@ -79,6 +79,11 @@ class Paths
 	{
 		return getPath('data/$key.json', TEXT, library);
 	}
+	
+	inline static public function csv(key:String, ?library:String)
+	{
+		return getPath('data/$key.csv', TEXT, library);
+	}
 
 	static public function sound(key:String, ?library:String)
 	{

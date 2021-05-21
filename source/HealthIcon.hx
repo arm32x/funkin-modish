@@ -1,6 +1,10 @@
 package;
 
 import flixel.FlxSprite;
+import format.csv.Data;
+import format.csv.Reader;
+import haxe.Exception;
+import openfl.utils.Assets;
 
 class HealthIcon extends FlxSprite
 {
@@ -8,44 +12,77 @@ class HealthIcon extends FlxSprite
 	 * Used for FreeplayState! If you use it elsewhere, prob gonna annoying
 	 */
 	public var sprTracker:FlxSprite;
+	
+	private final isPlayer:Bool;
 
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
 		super();
+		this.isPlayer = isPlayer;
 		
-		loadGraphic(Paths.image('iconGrid'), true, 150, 150);
-
 		antialiasing = true;
-		animation.add('bf', [0, 1], 0, false, isPlayer);
-		animation.add('bf-car', [0, 1], 0, false, isPlayer);
-		animation.add('bf-christmas', [0, 1], 0, false, isPlayer);
-		animation.add('bf-pixel', [21, 21], 0, false, isPlayer);
-		animation.add('spooky', [2, 3], 0, false, isPlayer);
-		animation.add('pico', [4, 5], 0, false, isPlayer);
-		animation.add('mom', [6, 7], 0, false, isPlayer);
-		animation.add('mom-car', [6, 7], 0, false, isPlayer);
-		animation.add('tankman', [8, 9], 0, false, isPlayer);
-		animation.add('face', [10, 11], 0, false, isPlayer);
-		animation.add('dad', [12, 13], 0, false, isPlayer);
-		animation.add('senpai', [22, 22], 0, false, isPlayer);
-		animation.add('senpai-angry', [22, 22], 0, false, isPlayer);
-		animation.add('spirit', [23, 23], 0, false, isPlayer);
-		animation.add('bf-old', [14, 15], 0, false, isPlayer);
-		animation.add('gf', [16], 0, false, isPlayer);
-		animation.add('gf-christmas', [16], 0, false, isPlayer);
-		animation.add('gf-pixel', [16], 0, false, isPlayer);
-		animation.add('parents-christmas', [17, 18], 0, false, isPlayer);
-		animation.add('monster', [19, 20], 0, false, isPlayer);
-		animation.add('monster-christmas', [19, 20], 0, false, isPlayer);
+		loadIcon(char);
 		animation.play(char);
-
-		switch(char)
+		
+		scrollFactor.set();
+	}
+	
+	public function loadIcon(char:String)
+	{
+		var csv = Assets.getText(Paths.csv("healthIcons"));
+		var reader = new Reader();
+		reader.open(csv);
+		
+		var charRecord:Null<Record> = null;
+		for (record in reader)
 		{
-			case 'bf-pixel' | 'senpai' | 'senpai-angry' | 'spirit' | 'gf-pixel':
-				antialiasing = false;
+			if (record.length >= 1 && record[0] == char)
+			{
+				charRecord = record;
+				break;
+			}
 		}
 
-		scrollFactor.set();
+		if (charRecord != null)
+		{
+			if (charRecord.length >= 4)
+			{
+				loadGraphic(Paths.image(charRecord[1]), true, 150, 150);
+				var alive = Std.parseInt(charRecord[2]);
+				if (alive == null)
+				{
+					throw new Exception('Alive icon index for character "$char" must be an integer.');
+				}
+				var dead = Std.parseInt(charRecord[3]);
+				if (dead == null)
+				{
+					throw new Exception('Alive icon index for character "$char" must be an integer.');
+				}
+				animation.add(char, [alive, dead], 0, false, isPlayer);
+				
+				if (charRecord.length >= 5 && charRecord[4] == "noaa")
+				{
+					antialiasing = false;
+				}
+			}
+			else
+			{
+				throw new Exception('Character "$char" is missing data in "healthIcons.csv".');
+			}
+		}
+		else
+		{
+			throw new Exception('Character "$char" has no health icon in "healthIcons.csv".');
+		}
+	}
+	
+	public function setIcon(char:String)
+	{
+		if (animation.getByName(char) == null)
+		{
+			loadIcon(char);
+		}
+		animation.play(char);
 	}
 
 	override function update(elapsed:Float)
