@@ -40,28 +40,25 @@
                     "condition": {
                         "type": "string",
                         "enum": [ "player", "not-player" ]
+                    },
+                    "offsets": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                            "type": "integer"
+                        }
                     }
                 },
-                "required": [ "name", "prefix" ],
+                "required": [ "name", "prefix", "offsets" ],
                 "dependencies": {
                     "postfix": [ "indices" ]
                 }
             }
         },
-        "offsets": {
-            "type": "object",
-            "additionalProperties": {
-                "type": "array",
-                "minItems": 2,
-                "maxItems": 2,
-                "items": {
-                    "type": "integer"
-                }
-            }
-        },
         "startingAnimation": {
             "description": "The animation to play after initialization.",
-            "type": [ "string", "object" ],
+            "type": "object",
             "properties": {
                 "name": {
                     "type": "string"
