@@ -1,0 +1,107 @@
+{
+    "$schema": "./character-schema.json",
+    "type": "sparrow",
+    "atlas": "Pico_FNF_assetss",
+    "animations": [
+        {
+            "name": "idle",
+            "prefix": "Pico Idle Dance",
+            "frameRate": 24,
+            "offsets": [0, 0]
+        },
+        {
+            "name": "singUP",
+            "prefix": "pico Up note0",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-29, 27]
+        },
+        {
+            "name": "singDOWN",
+            "prefix": "Pico Down Note0",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [200, -70]
+        },
+        {
+            "condition": "player",
+            "name": "singLEFT",
+            "prefix": "Pico Note LEFT0",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [65, 9]
+        },
+        {
+            "condition": "player",
+            "name": "singRIGHT",
+            "prefix": "Pico Note Right0",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-68, -7]
+        },
+        {
+            "condition": "player",
+            "name": "singRIGHTmiss",
+            "prefix": "Pico Note Right Miss",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-60, 41]
+        },
+        {
+            "condition": "player",
+            "name": "singLEFTmiss",
+            "prefix": "Pico NOTE LEFT miss",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [62, 64]
+        },
+        {
+            "condition": "not-player",
+            "name": "singLEFT",
+            "prefix": "Pico Note Right0",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [65, 9]
+        },
+        {
+            "condition": "not-player",
+            "name": "singRIGHT",
+            "prefix": "Pico Note LEFT0",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-68, -7]
+        },
+        {
+            "condition": "not-player",
+            "name": "singRIGHTmiss",
+            "prefix": "Pico NOTE LEFT miss",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-60, 41]
+        },
+        {
+            "condition": "not-player",
+            "name": "singLEFTmiss",
+            "prefix": "Pico Note Right Miss",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [62, 64]
+        },
+        {
+            "name": "singUPmiss",
+            "prefix": "pico Up note miss",
+            "frameRate": 24,
+            "offsets": [-19, 67]
+        },
+        {
+            "name": "singDOWNmiss",
+            "prefix": "Pico Down Note MISS",
+            "frameRate": 24,
+            "offsets": [210, -28]
+        }
+    ],
+    "flipX": true,
+    "startingAnimation": {
+        "name": "idle"
+    }
+}
