@@ -1,5 +1,8 @@
 package;
 
+import format.csv.Data;
+import format.csv.Reader;
+import openfl.utils.Assets;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
@@ -23,38 +26,14 @@ class StoryMenuState extends MusicBeatState
 {
 	var scoreText:FlxText;
 
-	var weekData:Array<Dynamic> = [
-		['Tutorial'],
-		['Bopeebo', 'Fresh', 'Dad Battle'],
-		['Spookeez', 'South', "Monster"],
-		['Pico', 'Philly Nice', "Blammed"],
-		['Satin Panties', "High", "Milf"],
-		['Cocoa', 'Eggnog', 'Winter Horrorland'],
-		['Senpai', 'Roses', 'Thorns']
-	];
+	var weekData:Array<Array<String>> = [];
 	var curDifficulty:Int = 1;
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true];
+	public static var weekUnlocked:Array<Bool> = [];
 
-	var weekCharacters:Array<Dynamic> = [
-		['', 'bf', 'gf'],
-		['dad', 'bf', 'gf'],
-		['spooky', 'bf', 'gf'],
-		['pico', 'bf', 'gf'],
-		['mom', 'bf', 'gf'],
-		['parents-christmas', 'bf', 'gf'],
-		['senpai', 'bf', 'gf']
-	];
+	var weekCharacters:Array<Array<String>> = [];
 
-	var weekNames:Array<String> = [
-		"",
-		"Daddy Dearest",
-		"Spooky Month",
-		"PICO",
-		"MOMMY MUST MURDER",
-		"RED SNOW",
-		"Hating Simulator ft. Moawling"
-	];
+	var weekNames:Array<String> = [];
 
 	var txtWeekTitle:FlxText;
 
@@ -74,6 +53,11 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
+		if (weekData.length == 0)
+		{
+			loadData();
+		}
+		
 		#if windows
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Story Mode Menu", null);
@@ -197,6 +181,32 @@ class StoryMenuState extends MusicBeatState
 		trace("Line 165");
 
 		super.create();
+	}
+	
+	private function loadData()
+	{
+		var csv = Assets.getText(Paths.csv("storyWeeks"));
+		var reader = new Reader();
+		reader.open(csv);
+		
+		for (record in reader) {
+			if (record.length < 4)
+			{
+				continue;
+			}
+
+			weekNames.push(record[0]);
+			weekCharacters.push([record[1], record[2], record[3]]);
+			
+			var songs:Array<String> = [];
+			for (index in 4...(record.length))
+			{
+				songs.push(record[index]);
+			}
+			
+			weekData.push(songs);
+			weekUnlocked.push(true);
+		}
 	}
 
 	override function update(elapsed:Float)
