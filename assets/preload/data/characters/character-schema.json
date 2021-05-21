@@ -87,10 +87,43 @@
         "flipY": {
             "type": "boolean"
         },
-        "pixel": {
-            "$comment": "TODO: Replace this with something more extensible.",
-            "description": "Scales the sprite up 6x.",
-            "type": "boolean"
+        "size": {
+            "description": "The hitbox size of the character.",
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+                "type": [ "null", "object" ],
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "enum": [ "set", "add", "scale" ]
+                    },
+                    "value": {
+                        "type": "number"
+                    }
+                },
+                "required": [ "operation", "value" ]
+            }
+        },
+        "graphicSize": {
+            "description": "The graphic size of the character.",
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+                "type": [ "null", "object" ],
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "enum": [ "set", "add", "scale" ]
+                    },
+                    "value": {
+                        "type": "number"
+                    }
+                },
+                "required": [ "operation", "value" ]
+            }
         }
     },
     "required": [ "type", "atlas" ]
