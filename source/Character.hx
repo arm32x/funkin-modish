@@ -1,5 +1,8 @@
 package;
 
+import haxe.Exception;
+import openfl.utils.Assets;
+import haxe.Json;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
@@ -19,7 +22,7 @@ typedef CharacterJSON = {
 		var ?frameRate:Int;
 		var ?looped:Bool;
 		var ?condition:String;
-		var offsets:Array<Int>;
+		var offsets:Array<Float>;
 	}>;
 	var ?startingAnimation:{
 		var name:String;
@@ -64,37 +67,37 @@ class Character extends FlxSprite
 
 		switch (curCharacter)
 		{
-			case 'gf':
-				// GIRLFRIEND CODE
-				tex = Paths.getSparrowAtlas('characters/GF_assets');
-				frames = tex;
-				animation.addByPrefix('cheer', 'GF Cheer', 24, false);
-				animation.addByPrefix('singLEFT', 'GF left note', 24, false);
-				animation.addByPrefix('singRIGHT', 'GF Right Note', 24, false);
-				animation.addByPrefix('singUP', 'GF Up Note', 24, false);
-				animation.addByPrefix('singDOWN', 'GF Down Note', 24, false);
-				animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
-				animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-				animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-				animation.addByIndices('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3], "", 24);
-				animation.addByIndices('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "", 24, false);
-				animation.addByPrefix('scared', 'GF FEAR', 24);
+			// case 'gf':
+			// 	// GIRLFRIEND CODE
+			// 	tex = Paths.getSparrowAtlas('characters/GF_assets');
+			// 	frames = tex;
+			// 	animation.addByPrefix('cheer', 'GF Cheer', 24, false);
+			// 	animation.addByPrefix('singLEFT', 'GF left note', 24, false);
+			// 	animation.addByPrefix('singRIGHT', 'GF Right Note', 24, false);
+			// 	animation.addByPrefix('singUP', 'GF Up Note', 24, false);
+			// 	animation.addByPrefix('singDOWN', 'GF Down Note', 24, false);
+			// 	animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
+			// 	animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+			// 	animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+			// 	animation.addByIndices('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3], "", 24);
+			// 	animation.addByIndices('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "", 24, false);
+			// 	animation.addByPrefix('scared', 'GF FEAR', 24);
 
-				addOffset('cheer');
-				addOffset('sad', -2, -2);
-				addOffset('danceLeft', 0, -9);
-				addOffset('danceRight', 0, -9);
+			// 	addOffset('cheer');
+			// 	addOffset('sad', -2, -2);
+			// 	addOffset('danceLeft', 0, -9);
+			// 	addOffset('danceRight', 0, -9);
 
-				addOffset("singUP", 0, 4);
-				addOffset("singRIGHT", 0, -20);
-				addOffset("singLEFT", 0, -19);
-				addOffset("singDOWN", 0, -20);
-				addOffset('hairBlow', 45, -8);
-				addOffset('hairFall', 0, -9);
+			// 	addOffset("singUP", 0, 4);
+			// 	addOffset("singRIGHT", 0, -20);
+			// 	addOffset("singLEFT", 0, -19);
+			// 	addOffset("singDOWN", 0, -20);
+			// 	addOffset('hairBlow', 45, -8);
+			// 	addOffset('hairFall', 0, -9);
 
-				addOffset('scared', -2, -17);
+			// 	addOffset('scared', -2, -17);
 
-				playAnim('danceRight');
+			// 	playAnim('danceRight');
 
 			case 'gf-christmas':
 				tex = Paths.getSparrowAtlas('characters/gfChristmas');
@@ -529,6 +532,112 @@ class Character extends FlxSprite
 				addOffset("singDOWN-alt", -30, -27);
 
 				playAnim('idle');
+
+			default:
+				// TODO: Load all characters with JSON.
+				var json = Assets.getText(Paths.json('characters/$curCharacter'));
+				var data:CharacterJSON = Json.parse(json);
+				
+				trace('Loading character "$curCharacter" from JSON.');
+				
+				switch (data.type)
+				{
+					case "sparrow":
+						frames = Paths.getSparrowAtlas('characters/${data.atlas}');
+					case "packer":
+						frames = Paths.getPackerAtlas('characters/${data.atlas}');
+					default:
+						throw new Exception('Invalid "type" in "$curCharacter.json" - must be "sparrow" or "packer".');
+				}
+				
+				if (data.animations != null)
+				{
+					for (anim in data.animations)
+					{
+						// Skip this animation if the condition is not met.
+						switch (anim.condition)
+						{
+							case "player" if (!isPlayer):
+								continue;
+							case "not-player" if (isPlayer):
+								continue;
+						}
+						
+						var frameRate = anim.frameRate != null ? anim.frameRate : 30;
+						var looped = anim.looped != null ? anim.looped : true;
+						if (anim.indices != null)
+						{
+							var postfix = anim.postfix != null ? anim.postfix : "";
+							animation.addByIndices(anim.name, anim.prefix, anim.indices, postfix, frameRate, looped);
+						}
+						else
+						{
+							animation.addByPrefix(anim.name, anim.prefix, frameRate, looped);
+						}
+						
+						while (anim.offsets.length < 2)
+						{
+							anim.offsets.push(0);
+						}
+						addOffset(anim.name, anim.offsets[0], anim.offsets[1]);
+					}
+				}
+
+				if (data.graphicSize != null)
+				{
+					var widthOp = data.graphicSize.length >= 1 ? data.graphicSize[0] : null;
+					var graphicWidth = 0;
+					if (widthOp != null)
+					{
+						graphicWidth = Std.int(applyOperation(width, widthOp));
+					}
+
+					var heightOp = data.graphicSize.length >= 2 ? data.graphicSize[1] : null;
+					var graphicHeight = 0;
+					if (heightOp != null)
+					{
+						graphicHeight = Std.int(applyOperation(height, heightOp));	
+					}
+					
+					setGraphicSize(graphicWidth, graphicHeight);
+					updateHitbox();
+				}
+				
+				if (data.size != null)
+				{
+					var widthOp = data.size.length >= 1 ? data.size[0] : null;
+					if (widthOp != null)
+					{
+						width = applyOperation(width, widthOp);
+					}
+
+					var heightOp = data.size.length >= 2 ? data.size[1] : null;
+					if (heightOp != null)
+					{
+						height = applyOperation(height, heightOp);
+					}
+				}
+				
+				antialiasing = data.antialiasing != null ? data.antialiasing : true;
+				flipX = data.flipX != null ? data.flipX : false;
+				flipY = data.flipY != null ? data.flipY : false;
+				
+				if (data.startingAnimation != null)
+				{
+					var force = data.startingAnimation.force != null ? data.startingAnimation.force : false;
+					var reversed = data.startingAnimation.reversed != null ? data.startingAnimation.reversed : false;
+					var frame = data.startingAnimation.frame != null ? data.startingAnimation.frame : 0;
+					var playOnly = data.startingAnimation.playOnly != null ? data.startingAnimation.playOnly : false;
+					
+					if (playOnly)
+					{
+						animation.play(data.startingAnimation.name, force, reversed, frame);
+					}
+					else
+					{
+						playAnim(data.startingAnimation.name, force, reversed, frame);
+					}
+				}
 		}
 
 		dance();
@@ -597,39 +706,7 @@ class Character extends FlxSprite
 		{
 			switch (curCharacter)
 			{
-				case 'gf':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-
-				case 'gf-christmas':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-
-				case 'gf-car':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-				case 'gf-pixel':
+				case 'gf' | 'gf-christmas' | 'gf-car' | 'gf-pixel':
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;
@@ -686,5 +763,20 @@ class Character extends FlxSprite
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)
 	{
 		animOffsets[name] = [x, y];
+	}
+	
+	private static function applyOperation(value:Float, operation:{ operation:String, value:Float }) 
+	{
+		switch (operation.operation)
+		{
+			case "set":
+				return operation.value;
+			case "add":
+				return value + operation.value;
+			case "scale":
+				return value * operation.value;
+			default:
+				throw new Exception('Invalid operation "${operation.operation}".');
+		}
 	}
 }
