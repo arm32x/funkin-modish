@@ -100,15 +100,7 @@ class MenuCharacter extends FlxSprite
 				frames.destroy();
 			}
 			animation.destroyAnimations();
-			switch (data.type)
-			{
-				case "sparrow":
-					frames = Paths.getSparrowAtlas(data.atlas);
-				case "packer":
-					frames = Paths.getPackerAtlas(data.atlas);
-				default:
-					throw new Exception('Invalid "type" in "menu-characters/$character.json" - must be "sparrow" or "packer".');
-			}
+			frames = Paths.getAtlas(data.type, data.atlas);
 			currentAtlas = data.atlas;
 			
 			// Setting 'frames' resets the size of the sprite.

@@ -1,5 +1,6 @@
 package;
 
+import haxe.Exception;
 import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
@@ -128,5 +129,18 @@ class Paths
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
+	}
+	
+	inline static public function getAtlas(type:String, key:String, ?library:String)
+	{
+			switch (type)
+			{
+				case "sparrow":
+					return Paths.getSparrowAtlas(key, library);
+				case "packer":
+					return Paths.getPackerAtlas(key, library);
+				default:
+					throw new Exception('Invalid atlas type - must be "sparrow" or "packer".');
+			}
 	}
 }

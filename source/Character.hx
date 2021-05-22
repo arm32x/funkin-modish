@@ -540,15 +540,7 @@ class Character extends FlxSprite
 				
 				trace('Loading character "$curCharacter" from JSON.');
 				
-				switch (data.type)
-				{
-					case "sparrow":
-						frames = Paths.getSparrowAtlas('characters/${data.atlas}');
-					case "packer":
-						frames = Paths.getPackerAtlas('characters/${data.atlas}');
-					default:
-						throw new Exception('Invalid "type" in "characters/$curCharacter.json" - must be "sparrow" or "packer".');
-				}
+				frames = Paths.getAtlas(data.type, data.atlas);
 				
 				if (data.animations != null)
 				{
