@@ -36,11 +36,13 @@ class MenuCharacter extends FlxSprite
 	private static var cachedData:Map<String, MenuCharacterJSON> = [];
 	private var currentAtlas:Null<String> = null;
 
+	private var initialScale:Float;
 	private var flipped:Bool = false;
 
 	public function new(x:Int, y:Int, scale:Float, flipped:Bool)
 	{
 		super(x, y);
+		this.initialScale = scale;
 		this.flipped = flipped;
 
 		antialiasing = true;
@@ -108,6 +110,10 @@ class MenuCharacter extends FlxSprite
 					throw new Exception('Invalid "type" in "menu-characters/$character.json" - must be "sparrow" or "packer".');
 			}
 			currentAtlas = data.atlas;
+			
+			// Setting 'frames' resets the size of the sprite.
+			setGraphicSize(Std.int(width * initialScale));
+			updateHitbox();
 		}
 		
 		if (animation.getByName(character) == null)
