@@ -42,5 +42,8 @@
             "type": "boolean"
         }
     },
-    "required": [ "type", "atlas", "prefix" ]
+    "required": [ "type", "atlas", "prefix" ],
+    "dependencies": {
+        "postfix": [ "indices" ]
+    }
 }
