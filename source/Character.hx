@@ -547,7 +547,7 @@ class Character extends FlxSprite
 					case "packer":
 						frames = Paths.getPackerAtlas('characters/${data.atlas}');
 					default:
-						throw new Exception('Invalid "type" in "$curCharacter.json" - must be "sparrow" or "packer".');
+						throw new Exception('Invalid "type" in "characters/$curCharacter.json" - must be "sparrow" or "packer".');
 				}
 				
 				if (data.animations != null)
