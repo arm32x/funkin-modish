@@ -93,7 +93,10 @@ class MenuCharacter extends FlxSprite
 
 		if (data.atlas != currentAtlas)
 		{
-			frames.destroy();
+			if (frames != null)
+			{
+				frames.destroy();
+			}
 			animation.destroyAnimations();
 			switch (data.type)
 			{
