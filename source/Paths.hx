@@ -131,6 +131,11 @@ class Paths
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
 	}
 	
+	inline static public function getLibGdxAtlas(key:String, ?library:String)
+	{
+		return FlxAtlasFrames.fromLibGdx(image(key, library), file('images/$key.atlas', library));
+	}
+	
 	inline static public function getAtlas(type:String, key:String, ?library:String)
 	{
 			switch (type)
@@ -139,8 +144,10 @@ class Paths
 					return Paths.getSparrowAtlas(key, library);
 				case "packer":
 					return Paths.getPackerAtlas(key, library);
+				case "libgdx":
+					return Paths.getLibGdxAtlas(key, library);
 				default:
-					throw new Exception('Invalid atlas type - must be "sparrow" or "packer".');
+					throw new Exception('Invalid atlas type - must be "sparrow", "packer", or "libgdx".');
 			}
 	}
 }

@@ -6,7 +6,7 @@
     "properties": {
         "type": {
             "type": "string",
-            "enum": [ "sparrow", "packer" ]
+            "enum": [ "sparrow", "packer", "libgdx" ]
         },
         "atlas": {
             "type": "string"
