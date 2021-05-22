@@ -1,0 +1,8 @@
+{
+    "$schema": "./menu-character-schema.json",
+    "type": "sparrow",
+    "atlas": "campaign_menu_UI_characters",
+    "prefix": "BF HEY!!",
+    "frameRate": 24,
+    "looped": false
+}

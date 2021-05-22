@@ -1,0 +1,10 @@
+{
+    "$schema": "./menu-character-schema.json",
+    "type": "sparrow",
+    "atlas": "campaign_menu_UI_characters",
+    "prefix": "Parent Christmas Idle",
+    "frameRate": 24,
+    "x": 100,
+    "y": 130,
+    "scale": 1.8
+}

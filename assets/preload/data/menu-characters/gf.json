@@ -1,0 +1,11 @@
+{
+    "$schema": "./menu-character-schema.json",
+    "type": "sparrow",
+    "atlas": "campaign_menu_UI_characters",
+    "prefix": "GF Dancing Beat WHITE",
+    "frameRate": 24,
+    "x": 50,
+    "y": 80,
+    "scale": 1.5,
+    "flipped": true
+}
