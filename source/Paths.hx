@@ -85,6 +85,11 @@ class Paths
 	{
 		return getPath('data/$key.csv', TEXT, library);
 	}
+	
+	inline static public function script(key:String, ?library:String)
+	{
+		return getPath('data/scripts/$key.hs', TEXT, library);
+	}
 
 	static public function sound(key:String, ?library:String)
 	{
