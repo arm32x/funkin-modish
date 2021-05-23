@@ -700,34 +700,19 @@ class Character extends FlxSprite
 		}
 	}
 
-	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
+	public function playAnim(animName:String, force:Bool = false, reversed:Bool = false, frame:Int = 0):Void
 	{
-		animation.play(AnimName, Force, Reversed, Frame);
+		animation.play(animName, force, reversed, frame);
 
-		var daOffset = animOffsets.get(AnimName);
-		if (animOffsets.exists(AnimName))
+		var daOffset = animOffsets.get(animName);
+		if (animOffsets.exists(animName))
 		{
 			offset.set(daOffset[0], daOffset[1]);
 		}
 		else
 			offset.set(0, 0);
 
-		if (curCharacter == 'gf')
-		{
-			if (AnimName == 'singLEFT')
-			{
-				danced = true;
-			}
-			else if (AnimName == 'singRIGHT')
-			{
-				danced = false;
-			}
-
-			if (AnimName == 'singUP' || AnimName == 'singDOWN')
-			{
-				danced = !danced;
-			}
-		}
+		ScriptHost.runScripts("afterCharacterAnimationPlay", {animName: animName, force: force, reversed: reversed, frame: frame});
 	}
 
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)
@@ -735,7 +720,7 @@ class Character extends FlxSprite
 		animOffsets[name] = [x, y];
 	}
 	
-	private static function applyOperation(value:Float, operation:{ operation:String, value:Float }) 
+	private static function applyOperation(value:Float, operation:{operation:String, value:Float}) 
 	{
 		switch (operation.operation)
 		{

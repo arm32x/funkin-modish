@@ -1,1 +1,1 @@
-basegame/dance
+basegame/onCharacterDance
