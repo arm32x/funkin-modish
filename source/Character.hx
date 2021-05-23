@@ -540,7 +540,7 @@ class Character extends FlxSprite
 				
 				trace('Loading character "$curCharacter" from JSON.');
 				
-				frames = Paths.getAtlas(data.type, data.atlas);
+				frames = Paths.getAtlas(data.type, 'characters/${data.atlas}');
 				
 				if (data.animations != null)
 				{
