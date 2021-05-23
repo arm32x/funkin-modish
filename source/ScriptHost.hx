@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxG;
 import hscript.Interp;
 import hscript.Parser;
 import openfl.utils.Assets;
@@ -12,21 +13,30 @@ class ScriptHost
     
     public static var interpreter:Null<Interp> = null;
     
-    public static inline function runScripts(event:String)
+    public static inline function runScripts(event:String, ?data:Dynamic)
     {
         if (loadedScripts.exists(event))
         {
-            runScriptsInternal(event);
+            runScriptsInternal(event, data);
         }
     }
     
-    private static function runScriptsInternal(event:String)
+    private static function runScriptsInternal(event:String, ?data:Dynamic)
     {
         var scripts = loadedScripts.get(event);
+        interpreter.variables.set("data", data);
         for (script in scripts)
         {
-            interpreter.execute(script);
+            try
+            {
+                interpreter.execute(script);
+            }
+            catch (e: Dynamic)
+            {
+                trace("HScript crashed!", interpreter.posInfos());
+            }
         }
+        interpreter.variables.set("data", null);
     }
     
     public static function loadScripts()
@@ -40,9 +50,12 @@ class ScriptHost
             var scripts:Array<Expr> = [];
             for (path in scriptPaths)
             {
-                var scriptText = Assets.getText(Paths.script(path));
-                var script = parser.parseString(scriptText, Paths.script(path));
-                scripts.push(script);
+                if (path != "")
+                {
+                    var scriptText = Assets.getText(Paths.script(path));
+                    var script = parser.parseString(scriptText, Paths.script(path));
+                    scripts.push(script);
+                }
             }
             if (scripts.length > 0)
             {
