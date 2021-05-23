@@ -32,16 +32,16 @@ class Highscore
 		}else trace('BotPlay detected. Score saving is disabled.');
 	}
 
-	public static function saveWeekScore(week:Int = 1, score:Int = 0, ?diff:Int = 0):Void
+	public static function saveWeekScore(weekName:String, score:Int = 0, ?diff:Int = 0):Void
 	{
 
 		#if !switch
-		NGio.postScore(score, "Week " + week);
+		NGio.postScore(score, weekName);
 		#end
 
 		if(!FlxG.save.data.botplay)
 		{
-			var daWeek:String = formatSong('week' + week, diff);
+			var daWeek:String = formatSong('week_' + HelperFunctions.sanitizeString(weekName), diff);
 
 			if (songScores.exists(daWeek))
 			{

@@ -26,14 +26,14 @@ class StoryMenuState extends MusicBeatState
 {
 	var scoreText:FlxText;
 
-	var weekData:Array<Array<String>> = [];
+	public static var weekData:Array<Array<String>> = [];
 	var curDifficulty:Int = 1;
 
 	public static var weekUnlocked:Array<Bool> = [];
 
-	var weekCharacters:Array<Array<String>> = [];
+	public static var weekCharacters:Array<Array<String>> = [];
 
-	var weekNames:Array<String> = [];
+	public static var weekNames:Array<String> = [];
 
 	var txtWeekTitle:FlxText;
 
@@ -105,7 +105,7 @@ class StoryMenuState extends MusicBeatState
 
 		for (i in 0...weekData.length)
 		{
-			var weekThing:MenuItem = new MenuItem(0, yellowBG.y + yellowBG.height + 10, i, weekNames[i]);
+			var weekThing:MenuItem = new MenuItem(0, yellowBG.y + yellowBG.height + 10, weekNames[i]);
 			weekThing.y += ((weekThing.height + 20) * i);
 			weekThing.targetY = i;
 			grpWeekText.add(weekThing);
