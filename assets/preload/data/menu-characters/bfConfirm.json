@@ -4,5 +4,8 @@
     "atlas": "campaign_menu_UI_characters",
     "prefix": "BF HEY!!",
     "frameRate": 24,
-    "looped": false
+    "looped": false,
+    "flipped": true,
+    "x": 10,
+    "y": -17
 }
