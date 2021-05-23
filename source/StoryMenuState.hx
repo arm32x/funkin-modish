@@ -53,10 +53,7 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
-		if (weekData.length == 0)
-		{
-			loadData();
-		}
+		loadData();
 		
 		#if windows
 		// Updating Discord Rich Presence
@@ -188,6 +185,11 @@ class StoryMenuState extends MusicBeatState
 		var csv = Assets.getText(Paths.csv("storyWeeks"));
 		var reader = new Reader();
 		reader.open(csv);
+		
+		weekNames = [];
+		weekData = [];
+		weekCharacters = [];
+		weekUnlocked = [];
 		
 		for (record in reader) {
 			if (record.length < 4)
