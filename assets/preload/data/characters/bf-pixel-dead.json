@@ -1,0 +1,47 @@
+{
+    "$schema": "./character-schema.json",
+    "type": "sparrow",
+    "atlas": "bfPixelsDEAD",
+    "animations": [
+        {
+            "name": "singUP",
+            "prefix": "BF Dies pixel",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [0, 0]
+        },
+        {
+            "name": "firstDeath",
+            "prefix": "BF Dies pixel",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [0, 0]
+        },
+        {
+            "name": "deathLoop",
+            "prefix": "Retry Loop",
+            "frameRate": 24,
+            "looped": true,
+            "offsets": [-37, 0]
+        },
+        {
+            "name": "deathConfirm",
+            "prefix": "RETRY CONFIRM",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-37, 0]
+        }
+    ],
+    "startingAnimation": {
+        "name": "firstDeath"
+    },
+    "graphicSize": [
+        {
+            "operation": "scale",
+            "value": 6
+        },
+        null
+    ],
+    "antialiasing": false,
+    "flipX": true
+}

@@ -1,0 +1,53 @@
+{
+    "$schema": "./character-schema.json",
+    "type": "packer",
+    "atlas": "spirit",
+    "animations": [
+        {
+            "name": "idle",
+            "prefix": "idle spirit_",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-220, -280]
+        },
+        {
+            "name": "singUP",
+            "prefix": "up_",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-220, -240]
+        },
+        {
+            "name": "singRIGHT",
+            "prefix": "right_",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-220, -280]
+        },
+        {
+            "name": "singLEFT",
+            "prefix": "left_",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-200, -280]
+        },
+        {
+            "name": "singDOWN",
+            "prefix": "spirit down_",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [170, 110]
+        }
+    ],
+    "graphicSize": [
+        {
+            "operation": "scale",
+            "value": 6
+        },
+        null
+    ],
+    "startingAnimation": {
+        "name": "idle"
+    },
+    "antialiasing": false
+}
