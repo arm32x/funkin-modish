@@ -687,8 +687,6 @@ class Character extends FlxSprite
 		super.update(elapsed);
 	}
 
-	private var danced:Bool = false;
-
 	/**
 	 * FOR GF DANCING SHIT
 	 */
@@ -712,7 +710,7 @@ class Character extends FlxSprite
 		else
 			offset.set(0, 0);
 
-		ScriptHost.runScripts("afterCharacterAnimationPlay", {animName: animName, force: force, reversed: reversed, frame: frame});
+		ScriptHost.runScripts("afterCharacterAnimationPlay", {character: this, animName: animName, force: force, reversed: reversed, frame: frame});
 	}
 
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)

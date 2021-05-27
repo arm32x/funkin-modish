@@ -1,5 +1,7 @@
 package;
 
+import haxe.ds.StringMap;
+import haxe.ds.ObjectMap;
 import flixel.FlxG;
 import hscript.Interp;
 import hscript.Parser;
@@ -12,6 +14,8 @@ class ScriptHost
     private static final loadedScripts:Map<String, Array<Expr>> = [];
     
     public static var interpreter:Null<Interp> = null;
+    
+    public static final storage:Map<String, Dynamic> = [];
     
     public static inline function runScripts(event:String, ?data:Dynamic)
     {
@@ -92,7 +96,8 @@ class ScriptHost
                 {
                     return false;
                 }
-            }
+            },
+            storage: storage
         });
     }
 }
