@@ -732,4 +732,8 @@ class Character extends FlxSprite
 				throw new Exception('Invalid operation "${operation.operation}".');
 		}
 	}
+	
+	// Storage for usage by scripts.
+	@:keep
+	public var storage: Map<String, Dynamic> = [];
 }

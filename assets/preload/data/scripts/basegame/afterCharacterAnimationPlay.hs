@@ -1,18 +1,18 @@
 var char = data.character;
-var storageKey = char.curCharacter + "-danced";
+var danced = char.storage.get("danced");
 
 if (char.curCharacter == "gf")
 {
     if (data.animName == "singLEFT")
     {
-        host.storage.set(storageKey, true);
+        char.storage.set("danced", true);
     }
     else if (data.animName == "singRIGHT")
     {
-        host.storage.set(storageKey, false);
+        char.storage.set("danced", false);
     }
     else if (data.animName == "singUP" || data.animName == "singDOWN")
     {
-        host.storage.set(storageKey, !host.storage.get(storageKey));
+        char.storage.set("danced", !danced);
     }
 }
