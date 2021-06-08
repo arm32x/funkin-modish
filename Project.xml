@@ -40,6 +40,7 @@
 
 	<classpath name="source" />
 
+	<!-- BEGIN OLD ASSETS LAYOUT -->
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/preload" rename="assets" exclude="*.mp3" unless="web"/>
 	
@@ -89,6 +90,18 @@
 	<assets path="assets/week5"    library="week5"    exclude="*.mp3" unless="web"/>
 	<assets path="assets/week6"    library="week6"    exclude="*.ogg" if="web"/>
 	<assets path="assets/week6"    library="week6"    exclude="*.mp3" unless="web"/>
+	<!-- END OLD ASSETS LAYOUT -->
+	
+	<!-- BEGIN NEW ASSETS LAYOUT -->
+	<section if="web">
+		<library name="basegame" preload="false" />
+		<assets path="assets/basegame" library="basegame" exclude="*.ogg" />
+	</section>
+	<section unless="web">
+		<library name="basegame" preload="true" />
+		<assets path="assets/basegame" library="basegame" exclude="*.mp3" />
+	</section>
+	<!-- END NEW ASSETS LAYOUT -->
 	
 	<assets path='example_mods' rename='mods' embed='false'/>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />

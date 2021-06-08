@@ -1,7 +1,6 @@
 {
-    "$schema": "./character-schema.json",
-    "type": "packer",
-    "atlas": "spirit",
+    "$schema": "../character-schema.json",
+    "version": 2,
     "animations": [
         {
             "name": "idle",

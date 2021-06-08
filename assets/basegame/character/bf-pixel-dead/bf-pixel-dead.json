@@ -1,7 +1,6 @@
 {
-    "$schema": "./character-schema.json",
-    "type": "sparrow",
-    "atlas": "bfPixelsDEAD",
+    "$schema": "../character-schema.json",
+    "version": 2,
     "animations": [
         {
             "name": "singUP",

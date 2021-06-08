@@ -1,7 +1,6 @@
 {
-    "$schema": "./character-schema.json",
-    "type": "sparrow",
-    "atlas": "momCar",
+    "$schema": "../character-schema.json",
+    "version": 2,
     "animations": [
         {
             "name": "idle",

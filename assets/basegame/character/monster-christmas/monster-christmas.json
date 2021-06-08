@@ -1,43 +1,41 @@
 {
-    "$schema": "./character-schema.json",
-    "type": "sparrow",
-    "atlas": "Mom_Assets",
+    "$schema": "../character-schema.json",
+    "version": 2,
     "animations": [
         {
             "name": "idle",
-            "prefix": "Mom Idle",
+            "prefix": "monster idle",
             "frameRate": 24,
             "looped": false,
             "offsets": [0, 0]
         },
         {
             "name": "singUP",
-            "prefix": "Mom Up Pose",
+            "prefix": "monster up note",
             "frameRate": 24,
             "looped": false,
-            "offsets": [14, 71]
+            "offsets": [-20, 50]
         },
         {
             "name": "singDOWN",
-            "prefix": "MOM DOWN POSE",
+            "prefix": "monster down",
             "frameRate": 24,
             "looped": false,
-            "offsets": [20, -160]
+            "offsets": [-40, -94]
         },
         {
             "name": "singLEFT",
-            "prefix": "Mom Left Pose",
+            "prefix": "Monster left note",
             "frameRate": 24,
             "looped": false,
-            "offsets": [250, -23]
+            "offsets": [-30, 0]
         },
         {
-            "$comment": "ANIMATION IS CALLED MOM LEFT POSE BUT ITS FOR THE RIGHT CUZ DAVE IS DUMB!",
             "name": "singRIGHT",
-            "prefix": "Mom Pose Left",
+            "prefix": "Monster Right note",
             "frameRate": 24,
             "looped": false,
-            "offsets": [10, -60]
+            "offsets": [-51, 0]
         }
     ],
     "startingAnimation": {

@@ -1,7 +1,6 @@
 {
-    "$schema": "./character-schema.json",
-    "type": "sparrow",
-    "atlas": "Pico_FNF_assetss",
+    "$schema": "../character-schema.json",
+    "version": 2,
     "animations": [
         {
             "name": "idle",

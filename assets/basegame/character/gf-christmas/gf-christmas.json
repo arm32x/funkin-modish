@@ -1,7 +1,6 @@
 {
-    "$schema": "./character-schema.json",
-    "type": "sparrow",
-    "atlas": "GF_assets",
+    "$schema": "../character-schema.json",
+    "version": 2,
     "animations": [
         {
             "name": "cheer",

@@ -1,7 +1,6 @@
 {
-    "$schema": "./character-schema.json",
-    "type": "sparrow",
-    "atlas": "monsterChristmas",
+    "$schema": "../character-schema.json",
+    "version": 2,
     "animations": [
         {
             "name": "idle",
@@ -22,7 +21,7 @@
             "prefix": "monster down",
             "frameRate": 24,
             "looped": false,
-            "offsets": [-40, -94]
+            "offsets": [-30, -40]
         },
         {
             "name": "singLEFT",

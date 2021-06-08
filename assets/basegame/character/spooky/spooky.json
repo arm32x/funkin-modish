@@ -1,7 +1,6 @@
 {
-    "$schema": "./character-schema.json",
-    "type": "sparrow",
-    "atlas": "spooky_kids_assets",
+    "$schema": "../character-schema.json",
+    "version": 2,
     "animations": [
         {
             "name": "singUP",

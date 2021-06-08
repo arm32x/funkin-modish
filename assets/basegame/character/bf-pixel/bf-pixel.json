@@ -1,81 +1,91 @@
 {
-    "$schema": "./character-schema.json",
-    "type": "sparrow",
-    "atlas": "bfCar",
+    "$schema": "../character-schema.json",
+    "version": 2,
     "animations": [
         {
             "name": "idle",
-            "prefix": "BF idle dance",
+            "prefix": "BF IDLE",
             "frameRate": 24,
             "looped": false,
-            "offsets": [-5, 0]
+            "offsets": [0, 0]
         },
         {
             "name": "singUP",
-            "prefix": "BF NOTE UP0",
+            "prefix": "BF UP NOTE",
             "frameRate": 24,
             "looped": false,
-            "offsets": [-29, 27]
+            "offsets": [0, 0]
         },
         {
             "name": "singLEFT",
-            "prefix": "BF NOTE LEFT0",
+            "prefix": "BF LEFT NOTE",
             "frameRate": 24,
             "looped": false,
-            "offsets": [12, -6]
+            "offsets": [0, 0]
         },
         {
             "name": "singRIGHT",
-            "prefix": "BF NOTE RIGHT0",
+            "prefix": "BF RIGHT NOTE",
             "frameRate": 24,
             "looped": false,
-            "offsets": [-38, -7]
+            "offsets": [0, 0]
         },
         {
             "name": "singDOWN",
-            "prefix": "BF NOTE DOWN0",
+            "prefix": "BF DOWN NOTE",
             "frameRate": 24,
             "looped": false,
-            "offsets": [-10, -50]
+            "offsets": [0, 0]
         },
         {
             "name": "singUPmiss",
-            "prefix": "BF NOTE UP MISS",
+            "prefix": "BF UP MISS",
             "frameRate": 24,
             "looped": false,
-            "offsets": [-29, 27]
+            "offsets": [0, 0]
         },
         {
             "name": "singLEFTmiss",
-            "prefix": "BF NOTE LEFT MISS",
+            "prefix": "BF LEFT MISS",
             "frameRate": 24,
             "looped": false,
-            "offsets": [12, 24]
+            "offsets": [0, 0]
         },
         {
             "name": "singRIGHTmiss",
-            "prefix": "BF NOTE RIGHT MISS",
+            "prefix": "BF RIGHT MISS",
             "frameRate": 24,
             "looped": false,
-            "offsets": [-30, 21]
+            "offsets": [0, 0]
         },
         {
             "name": "singDOWNmiss",
-            "prefix": "BF NOTE DOWN MISS",
+            "prefix": "BF DOWN MISS",
             "frameRate": 24,
             "looped": false,
-            "offsets": [-11, -19]
-        },
-        {
-            "name": "hey",
-            "prefix": "BF HEY",
-            "frameRate": 24,
-            "looped": false,
-            "offsets": [7, 4]
+            "offsets": [0, 0]
         }
     ],
+    "graphicSize": [
+        {
+            "operation": "scale",
+            "value": 6
+        },
+        null
+    ],
+    "size": [
+        {
+            "operation": "add",
+            "value": -100
+        },
+        {
+            "operation": "add",
+            "value": -100
+        }
+    ],
+    "antialiasing": false,
+    "flipX": true,
     "startingAnimation": {
         "name": "idle"
-    },
-    "flipX": true
+    }
 }

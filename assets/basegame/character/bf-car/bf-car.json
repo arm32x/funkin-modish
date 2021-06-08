@@ -1,7 +1,6 @@
 {
-    "$schema": "./character-schema.json",
-    "type": "sparrow",
-    "atlas": "BOYFRIEND",
+    "$schema": "../character-schema.json",
+    "version": 2,
     "animations": [
         {
             "name": "idle",
@@ -72,33 +71,6 @@
             "frameRate": 24,
             "looped": false,
             "offsets": [7, 4]
-        },
-        {
-            "name": "firstDeath",
-            "prefix": "BF dies",
-            "frameRate": 24,
-            "looped": false,
-            "offsets": [37, 11]
-        },
-        {
-            "name": "deathLoop",
-            "prefix": "BF Dead Loop",
-            "frameRate": 24,
-            "looped": true,
-            "offsets": [37, 5]
-        },
-        {
-            "name": "deathConfirm",
-            "prefix": "BF Dead confirm",
-            "frameRate": 24,
-            "looped": false,
-            "offsets": [37, 69]
-        },
-        {
-            "name": "scared",
-            "prefix": "BF idle shaking",
-            "frameRate": 24,
-            "offsets": [-4, 0]
         }
     ],
     "startingAnimation": {

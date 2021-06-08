@@ -22,12 +22,16 @@ class AnimationDebug extends FlxState
 	var animList:Array<String> = [];
 	var curAnim:Int = 0;
 	var isDad:Bool = true;
-	var daAnim:String = 'spooky';
+	var daAnim:Identifier;
 	var camFollow:FlxObject;
 
-	public function new(daAnim:String = 'spooky')
+	public function new(?daAnim:Identifier)
 	{
 		super();
+		if (daAnim == null)
+		{
+			daAnim = new Identifier("basegame", "spooky");
+		}
 		this.daAnim = daAnim;
 	}
 
@@ -39,7 +43,7 @@ class AnimationDebug extends FlxState
 		gridBG.scrollFactor.set(0.5, 0.5);
 		add(gridBG);
 
-		if (daAnim == 'bf')
+		if (daAnim == new Identifier("basegame", "bf"))
 			isDad = false;
 
 		if (isDad)
