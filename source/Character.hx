@@ -532,6 +532,7 @@ class Character extends FlxSprite
 			// 	addOffset("singDOWN-alt", -30, -27);
 
 			// 	playAnim('idle');
+			// NOTE: Merge conflict, maybe broke something.
 
 			default:
 				// TODO: Load all characters with JSON.
@@ -672,6 +673,7 @@ class Character extends FlxSprite
 				dadVar = 6.1;
 			if (holdTimer >= Conductor.stepCrochet * dadVar * 0.001)
 			{
+				trace('dance');
 				dance();
 				holdTimer = 0;
 			}

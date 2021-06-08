@@ -18,11 +18,13 @@ import lime.utils.Assets;
 
 class OptionsMenu extends MusicBeatState
 {
+	public static var instance:OptionsMenu;
+
 	var selector:FlxText;
 	var curSelected:Int = 0;
 
-	var options:Array<OptionCatagory> = [
-		new OptionCatagory("Gameplay", [
+	var options:Array<OptionCategory> = [
+		new OptionCategory("Gameplay", [
 			new DFJKOption(controls),
 			new DownscrollOption("Change the layout of the strumline."),
 			new GhostTapOption("Ghost Tapping is when you tap a direction and it doesn't give you a miss."),
@@ -36,7 +38,7 @@ class OptionsMenu extends MusicBeatState
 			// new OffsetMenu("Get a note offset based off of your inputs!"),
 			new CustomizeGameplay("Drag'n'Drop Gameplay Modules around to your preference")
 		]),
-		new OptionCatagory("Appearance", [
+		new OptionCategory("Appearance", [
 			#if desktop
 			new DistractionsAndEffectsOption("Toggle stage distractions that can hinder your gameplay."),
 			new RainbowFPSOption("Make the FPS Counter Rainbow"),
@@ -49,7 +51,7 @@ class OptionsMenu extends MusicBeatState
 			#end
 		]),
 		
-		new OptionCatagory("Misc", [
+		new OptionCategory("Misc", [
 			#if desktop
 			new FPSOption("Toggle the FPS Counter"),
 			new ReplayOption("View replays"),
@@ -61,14 +63,17 @@ class OptionsMenu extends MusicBeatState
 		
 	];
 
+	public var acceptInput:Bool = true;
+
 	private var currentDescription:String = "";
 	private var grpControls:FlxTypedGroup<Alphabet>;
 	public static var versionShit:FlxText;
 
-	var currentSelectedCat:OptionCatagory;
+	var currentSelectedCat:OptionCategory;
 	var blackBorder:FlxSprite;
 	override function create()
 	{
+		instance = this;
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menuDesat"));
 
 		menuBG.color = 0xFFea71fd;
@@ -116,6 +121,8 @@ class OptionsMenu extends MusicBeatState
 	{
 		super.update(elapsed);
 
+		if (acceptInput)
+		{
 			if (controls.BACK && !isCat)
 				FlxG.switchState(new MainMenuState());
 			else if (controls.BACK)
@@ -225,6 +232,7 @@ class OptionsMenu extends MusicBeatState
 					curSelected = 0;
 				}
 			}
+		}
 		FlxG.save.flush();
 	}
 
