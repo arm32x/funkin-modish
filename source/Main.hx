@@ -61,11 +61,11 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
-		#if polymod
-		var modList = CoolUtil.coolTextFile("mods/modList.txt");
-		trace(modList);
-		polymod.Polymod.init({modRoot: "mods", dirs: modList});
-		#end
+		// #if polymod
+		// var modList = CoolUtil.coolTextFile("mods/modList.txt");
+		// trace(modList);
+		// polymod.Polymod.init({modRoot: "mods", dirs: modList});
+		// #end
 		
 		ScriptHost.loadScripts();
 		ScriptHost.runScripts("onInitialize");
