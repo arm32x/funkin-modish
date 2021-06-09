@@ -66,7 +66,7 @@ class Character extends FlxSprite
 
 		var data = getCharacterJSON(character);
 		
-		trace('Loading character "$curCharacter" from JSON.');
+		trace('Loading character "$character" from JSON.');
 		
 		frames = getCharacterAtlas(character);
 		
@@ -261,15 +261,15 @@ class Character extends FlxSprite
 	{
 		var imagePath = character.getAssetPath("character", "png");
 		var atlasPath:String;
-		if (Assets.exists(atlasPath = character.getAssetPath("character", "xml")))
+		if (Assets.exists(atlasPath = character.getAssetPath("characters", "xml")))
 		{
 			return FlxAtlasFrames.fromSparrow(imagePath, atlasPath);
 		}
-		else if (Assets.exists(atlasPath = character.getAssetPath("character", "txt")))
+		else if (Assets.exists(atlasPath = character.getAssetPath("characters", "txt")))
 		{
 			return FlxAtlasFrames.fromSpriteSheetPacker(imagePath, atlasPath);
 		}
-		else if (Assets.exists(atlasPath = character.getAssetPath("character", "atlas")))
+		else if (Assets.exists(atlasPath = character.getAssetPath("characters", "atlas")))
 		{
 			return FlxAtlasFrames.fromLibGdx(imagePath, atlasPath);
 		}
@@ -281,7 +281,7 @@ class Character extends FlxSprite
 	
 	public static inline function getCharacterJSON(character:Identifier):CharacterJSON
 	{
-		return Json.parse(Assets.getText(character.getAssetPath("character", "json")));
+		return Json.parse(Assets.getText(character.getAssetPath("characters", "json")));
 	}
 
 	// Storage for usage by scripts.
