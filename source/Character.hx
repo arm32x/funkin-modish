@@ -12,6 +12,7 @@ using StringTools;
 
 @:nullSafety(Strict)
 typedef CharacterJSON = {
+	var version:Int;
 	var animations:Array<{
 		var name:String;
 		var prefix:String;
@@ -65,6 +66,10 @@ class Character extends FlxSprite
 		antialiasing = true;
 
 		var data = getCharacterJSON(character);
+		if (data.version != 2)
+		{
+			throw new Exception('Error loading character "$character": Unsupported version ${data.version}, expected 2.');
+		}
 		
 		trace('Loading character "$character" from JSON.');
 		
