@@ -264,17 +264,17 @@ class Character extends FlxSprite
 	
 	public static inline function getCharacterAtlas(character:Identifier):FlxAtlasFrames
 	{
-		var imagePath = character.getAssetPath("character", "png");
+		var imagePath = character.getAssetPath("characters", null, "png");
 		var atlasPath:String;
-		if (Assets.exists(atlasPath = character.getAssetPath("characters", "xml")))
+		if (Assets.exists(atlasPath = character.getAssetPath("characters", null, "xml")))
 		{
 			return FlxAtlasFrames.fromSparrow(imagePath, atlasPath);
 		}
-		else if (Assets.exists(atlasPath = character.getAssetPath("characters", "txt")))
+		else if (Assets.exists(atlasPath = character.getAssetPath("characters", null, "txt")))
 		{
 			return FlxAtlasFrames.fromSpriteSheetPacker(imagePath, atlasPath);
 		}
-		else if (Assets.exists(atlasPath = character.getAssetPath("characters", "atlas")))
+		else if (Assets.exists(atlasPath = character.getAssetPath("characters", null, "atlas")))
 		{
 			return FlxAtlasFrames.fromLibGdx(imagePath, atlasPath);
 		}
@@ -286,7 +286,7 @@ class Character extends FlxSprite
 	
 	public static inline function getCharacterJSON(character:Identifier):CharacterJSON
 	{
-		return Json.parse(Assets.getText(character.getAssetPath("characters", "json")));
+		return Json.parse(Assets.getText(character.getAssetPath("characters", null, "json")));
 	}
 
 	// Storage for usage by scripts.

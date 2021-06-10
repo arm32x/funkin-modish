@@ -37,20 +37,16 @@ class Identifier
     {
         return '$namespace:$path';
     }
-
-    public static final MULTIFILE_TYPES:Array<String> = [
-        "character"
-    ];
     
-    public function getAssetPath(type:String, extension:String):String
+    public function getAssetPath(type:String, file:Null<String>, extension:String):String
     {
-        if (MULTIFILE_TYPES.contains(type))
+        if (file != null)
         {
-            return '$namespace:assets/$namespace/$type/$path/$path.$extension';
+            return '$namespace:assets/$namespace/$type/$path/$file.$extension';
         }
         else
         {
-            return '$namespace:assets/$namespace/$type/$path.$extension';
+            return '$namespace:assets/$namespace/$type/$path/$path.$extension';
         }
     }
 }
