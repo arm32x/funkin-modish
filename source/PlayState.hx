@@ -723,7 +723,7 @@ class PlayState extends MusicBeatState
 					add(stageCurtains);
 			}
 		}
-		var gfVersion:Identifier = Identifier.parse(SONG.gfVersion);
+		var gfVersion:Identifier = Identifier.parse(SONG.gfVersion != null ? SONG.gfVersion : "basegame:gf");
 
 		gf = new Character(400, 130, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
