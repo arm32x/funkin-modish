@@ -36,6 +36,7 @@ class Song
 	public var gfVersion:String = 'gf';
 	public var noteStyle:String = 'normal';
 	public var stage:String = 'stage';
+	public var validScore:Bool = true;
 
 	public function new(song, notes, bpm)
 	{
@@ -44,7 +45,7 @@ class Song
 		this.bpm = bpm;
 	}
 
-	public static function loadFromJson(jsonInput:String, ?folder:String):SwagSong
+	public static function loadFromJson(jsonInput:String, ?folder:String):Song
 	{
 		trace(jsonInput);
 		
@@ -84,10 +85,17 @@ class Song
 		return parseJSONshit(rawJson);
 	}
 
-	public static function parseJSONshit(rawJson:String):SwagSong
+	public static function parseJSONshit(rawJson:String):Song
 	{
 		var swagShit:SwagSong = cast Json.parse(rawJson).song;
-		swagShit.validScore = true;
-		return swagShit;
+		var song = new Song(swagShit.song, swagShit.notes, swagShit.bpm);
+		song.needsVoices = swagShit.needsVoices;
+		song.speed = swagShit.speed;
+		song.player1 = swagShit.player1;
+		song.player2 = swagShit.player2;
+		song.gfVersion = swagShit.gfVersion;
+		song.noteStyle = swagShit.noteStyle;
+		song.stage = swagShit.stage;
+		return song;
 	}
 }

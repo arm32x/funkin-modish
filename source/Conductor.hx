@@ -41,7 +41,7 @@ class Conductor
 		Conductor.timeScale = Conductor.safeZoneOffset / 166;
 	}
 
-	public static function mapBPMChanges(song:SwagSong)
+	public static function mapBPMChanges(song:Song)
 	{
 		bpmChangeMap = [];
 
