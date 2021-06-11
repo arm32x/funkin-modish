@@ -215,15 +215,71 @@ class Character extends FlxSprite
 
 		super.update(elapsed);
 	}
+	
+	private var danced:Bool = false;
 
 	/**
 	 * FOR GF DANCING SHIT
 	 */
 	public function dance()
 	{
-		if (!debugMode)
+		if (!debugMode && curCharacter.namespace == "basegame")
 		{
-			ScriptHost.runScripts("onCharacterDance", {character: this});
+			switch (curCharacter.path)
+			{
+				case 'gf':
+					if (!animation.curAnim.name.startsWith('hair'))
+					{
+						danced = !danced;
+
+						if (danced)
+							playAnim('danceRight');
+						else
+							playAnim('danceLeft');
+					}
+
+				case 'gf-christmas':
+					if (!animation.curAnim.name.startsWith('hair'))
+					{
+						danced = !danced;
+
+						if (danced)
+							playAnim('danceRight');
+						else
+							playAnim('danceLeft');
+					}
+
+				case 'gf-car':
+					if (!animation.curAnim.name.startsWith('hair'))
+					{
+						danced = !danced;
+
+						if (danced)
+							playAnim('danceRight');
+						else
+							playAnim('danceLeft');
+					}
+				case 'gf-pixel':
+					if (!animation.curAnim.name.startsWith('hair'))
+					{
+						danced = !danced;
+
+						if (danced)
+							playAnim('danceRight');
+						else
+							playAnim('danceLeft');
+					}
+
+				case 'spooky':
+					danced = !danced;
+
+					if (danced)
+						playAnim('danceRight');
+					else
+						playAnim('danceLeft');
+				default:
+					playAnim('idle');
+			}
 		}
 	}
 
@@ -239,7 +295,22 @@ class Character extends FlxSprite
 		else
 			offset.set(0, 0);
 
-		ScriptHost.runScripts("afterCharacterAnimationPlay", {character: this, animName: animName, force: force, reversed: reversed, frame: frame});
+		if (curCharacter == new Identifier('basegame', 'gf'))
+		{
+			if (animName == 'singLEFT')
+			{
+				danced = true;
+			}
+			else if (animName == 'singRIGHT')
+			{
+				danced = false;
+			}
+
+			if (animName == 'singUP' || animName == 'singDOWN')
+			{
+				danced = !danced;
+			}
+		}
 	}
 
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)
@@ -288,8 +359,4 @@ class Character extends FlxSprite
 	{
 		return Json.parse(Assets.getText(character.getAssetPath("characters", null, "json")));
 	}
-
-	// Storage for usage by scripts.
-	@:keep
-	public var storage: Map<String, Dynamic> = [];
 }

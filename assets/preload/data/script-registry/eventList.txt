@@ -1,3 +1,0 @@
-afterCharacterAnimationPlay
-onCharacterDance
-onInitialize
