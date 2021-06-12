@@ -5,7 +5,6 @@ import flixel.addons.ui.FlxUIText;
 import haxe.zip.Writer;
 import Conductor.BPMChangeEvent;
 import Section.SwagSection;
-import Song.SwagSong;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -106,7 +105,8 @@ class ChartingState extends MusicBeatState
 			_song = PlayState.SONG;
 		else
 		{
-			_song = new Song("Test", [], 150);
+			_song = new Song(new Identifier("basegame", "test"));
+			_song.name = "Test";
 		}
 
 		gridBG = FlxGridOverlay.create(GRID_SIZE, GRID_SIZE, GRID_SIZE * 8, GRID_SIZE * 16);
@@ -137,12 +137,12 @@ class ChartingState extends MusicBeatState
 
 		updateGrid();
 
-		loadSong(_song.song);
+		loadSong(_song.id);
 		Conductor.changeBPM(_song.bpm);
 		Conductor.mapBPMChanges(_song);
 
-		leftIcon = new HealthIcon(_song.player1);
-		rightIcon = new HealthIcon(_song.player2);
+		leftIcon = new HealthIcon(_song.player1.path);
+		rightIcon = new HealthIcon(_song.player2.path);
 		leftIcon.scrollFactor.set(1, 1);
 		rightIcon.scrollFactor.set(1, 1);
 
@@ -196,7 +196,7 @@ class ChartingState extends MusicBeatState
 
 	function addSongUI():Void
 	{
-		var UI_songTitle = new FlxUIInputText(10, 10, 70, _song.song, 8);
+		var UI_songTitle = new FlxUIInputText(10, 10, 70, _song.name, 8);
 		typingShit = UI_songTitle;
 
 		var check_voices = new FlxUICheckBox(10, 25, null, null, "Has voice track", 100);
@@ -227,12 +227,12 @@ class ChartingState extends MusicBeatState
 
 		var reloadSong:FlxButton = new FlxButton(saveButton.x + saveButton.width + 10, saveButton.y, "Reload Audio", function()
 		{
-			loadSong(_song.song);
+			loadSong(_song.id);
 		});
 
 		var reloadSongJson:FlxButton = new FlxButton(reloadSong.x, saveButton.y + 30, "Reload JSON", function()
 		{
-			loadJson(_song.song.toLowerCase());
+			loadJson(_song.id);
 		});
 
 		
@@ -297,32 +297,32 @@ class ChartingState extends MusicBeatState
 			shiftNotes(Std.int(stepperShiftNoteDial.value),Std.int(stepperShiftNoteDialstep.value),Std.int(stepperShiftNoteDialms.value));
 		});
 
-		var characters:Array<String> = CoolUtil.coolTextFile(Paths.txt('characterList'));
-		var gfVersions:Array<String> = CoolUtil.coolTextFile(Paths.txt('gfVersionList'));
+		var characters:Array<Identifier> = CoolUtil.coolTextFile(Paths.txt('characterList')).map(Identifier.parse);
+		var gfVersions:Array<Identifier> = CoolUtil.coolTextFile(Paths.txt('gfVersionList')).map(Identifier.parse);
 		var stages:Array<String> = CoolUtil.coolTextFile(Paths.txt('stageList'));
 		var noteStyles:Array<String> = CoolUtil.coolTextFile(Paths.txt('noteStyleList'));
 
-		var player1DropDown = new FlxUIDropDownMenu(10, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
+		var player1DropDown = new FlxUIDropDownMenu(10, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters.map(Std.string), true), function(character:String)
 		{
 			_song.player1 = characters[Std.parseInt(character)];
 		});
-		player1DropDown.selectedLabel = _song.player1;
+		player1DropDown.selectedLabel = _song.player1.toString();
 
 		var player1Label = new FlxText(10,80,64,'Player 1');
 
-		var player2DropDown = new FlxUIDropDownMenu(140, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
+		var player2DropDown = new FlxUIDropDownMenu(140, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters.map(Std.string), true), function(character:String)
 		{
 			_song.player2 = characters[Std.parseInt(character)];
 		});
-		player2DropDown.selectedLabel = _song.player2;
+		player2DropDown.selectedLabel = _song.player2.toString();
 
 		var player2Label = new FlxText(140,80,64,'Player 2');
 
-		var gfVersionDropDown = new FlxUIDropDownMenu(10, 200, FlxUIDropDownMenu.makeStrIdLabelArray(gfVersions, true), function(gfVersion:String)
+		var gfVersionDropDown = new FlxUIDropDownMenu(10, 200, FlxUIDropDownMenu.makeStrIdLabelArray(gfVersions.map(Std.string), true), function(gfVersion:String)
 			{
 				_song.gfVersion = gfVersions[Std.parseInt(gfVersion)];
 			});
-		gfVersionDropDown.selectedLabel = _song.gfVersion;
+		gfVersionDropDown.selectedLabel = _song.gfVersion.toString();
 
 		var gfVersionLabel = new FlxText(10,180,64,'Girlfriend');
 
@@ -495,7 +495,7 @@ class ChartingState extends MusicBeatState
 
 	}
 
-	function loadSong(daSong:String):Void
+	function loadSong(daSong:Identifier):Void
 	{
 		if (FlxG.sound.music != null)
 		{
@@ -503,10 +503,10 @@ class ChartingState extends MusicBeatState
 			// vocals.stop();
 		}
 
-		FlxG.sound.playMusic(Paths.inst(daSong), 0.6);
+		FlxG.sound.playMusic(daSong.getAssetPath("songs", "instrumental", Paths.SOUND_EXT), 0.6);
 
 		// WONT WORK FOR TUTORIAL OR TEST SONG!!! REDO LATER
-		vocals = new FlxSound().loadEmbedded(Paths.voices(daSong));
+		vocals = new FlxSound().loadEmbedded(daSong.getAssetPath("songs", "instrumental", Paths.SOUND_EXT));
 		FlxG.sound.list.add(vocals);
 
 		FlxG.sound.music.pause();
@@ -671,7 +671,7 @@ class ChartingState extends MusicBeatState
 			doSnapShit = !doSnapShit;
 
 		Conductor.songPosition = FlxG.sound.music.time;
-		_song.song = typingShit.text;
+		_song.name = typingShit.text;
 
 		var left = FlxG.keys.justPressed.ONE;
 		var down = FlxG.keys.justPressed.TWO;
@@ -1154,13 +1154,13 @@ class ChartingState extends MusicBeatState
 	{
 		if (check_mustHitSection.checked)
 		{
-			leftIcon.setIcon(_song.player1);
-			rightIcon.setIcon(_song.player2);
+			leftIcon.setIcon(_song.player1.path);
+			rightIcon.setIcon(_song.player2.path);
 		}
 		else
 		{
-			leftIcon.setIcon(_song.player2);
-			rightIcon.setIcon(_song.player1);
+			leftIcon.setIcon(_song.player2.path);
+			rightIcon.setIcon(_song.player1.path);
 		}
 	}
 
@@ -1449,15 +1449,15 @@ class ChartingState extends MusicBeatState
 		return noteData;
 	}
 
-	function loadJson(song:String):Void
+	function loadJson(song:Identifier):Void
 	{
-		PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
+		PlayState.SONG = new Song(song).load("normal");
 		LoadingState.loadAndSwitchState(new ChartingState());
 	}
 
 	function loadAutosave():Void
 	{
-		PlayState.SONG = Song.parseJSONshit(FlxG.save.data.autosave);
+		PlayState.SONG = new Song(new Identifier("unknown", "unknown")).loadFromJSON(FlxG.save.data.autosave);
 		LoadingState.loadAndSwitchState(new ChartingState());
 	}
 
@@ -1483,7 +1483,8 @@ class ChartingState extends MusicBeatState
 			_file.addEventListener(Event.COMPLETE, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
-			_file.save(data.trim(), _song.song.toLowerCase() + ".json");
+			// TODO: bad
+			_file.save(data.trim(), _song.id.path + ".json");
 		}
 	}
 

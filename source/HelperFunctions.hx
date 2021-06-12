@@ -1,3 +1,5 @@
+import haxe.Exception;
+
 class HelperFunctions
 {
     public static function truncateFloat( number : Float, precision : Int): Float {
@@ -13,5 +15,21 @@ class HelperFunctions
 		str = ~/_+/g.replace(str, "_");
 		str = ~/^_+|_+$/g.replace(str, "");
 		return str;
+	}
+	
+	// TODO: Replace difficulties with strings throughout the codebase.
+	public static inline function difficultyToString(difficultyNumber:Int):String
+	{
+		switch (difficultyNumber)
+		{
+			case 0:
+				return "easy";
+			case 1:
+				return "normal";
+			case 2:
+				return "hard";
+			default:
+				throw new Exception('Unknown difficulty number $difficultyNumber.');
+		}
 	}
 }

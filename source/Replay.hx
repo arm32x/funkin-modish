@@ -15,7 +15,7 @@ typedef ReplayJSON =
 {
     public var replayGameVer:String;
     public var timestamp:Date;
-    public var songName:String;
+    public var songId:String;
     public var songDiff:Int;
     public var songNotes:Array<Float>;
 	public var noteSpeed:Float;
@@ -32,7 +32,7 @@ class Replay
     {
         this.path = path;
         replay = {
-            songName: "Tutorial", 
+            songId: "basegame:tutorial", 
             songDiff: 1,
 			noteSpeed: 1.5,
 			isDownscroll: false,
@@ -48,7 +48,7 @@ class Replay
 
         rep.LoadFromJSON();
 
-        trace('basic replay data:\nSong Name: ' + rep.replay.songName + '\nSong Diff: ' + rep.replay.songDiff + '\nNotes Length: ' + rep.replay.songNotes.length);
+        trace('basic replay data:\nSong ID: ' + rep.replay.songId + '\nSong Diff: ' + rep.replay.songDiff + '\nNotes Length: ' + rep.replay.songNotes.length);
 
         return rep;
     }
@@ -56,7 +56,7 @@ class Replay
     public function SaveReplay(notearray:Array<Float>)
     {
         var json = {
-            "songName": PlayState.SONG.song.toLowerCase(),
+            "songId": PlayState.SONG.id.toString(),
             "songDiff": PlayState.storyDifficulty,
 			"noteSpeed": (FlxG.save.data.scrollSpeed > 1 ? FlxG.save.data.scrollSpeed : PlayState.SONG.speed),
 			"isDownscroll": FlxG.save.data.downscroll,
@@ -68,7 +68,7 @@ class Replay
         var data:String = Json.stringify(json);
 
         #if sys
-        File.saveContent("assets/replays/replay-" + PlayState.SONG.song + "-time" + Date.now().getTime() + ".kadeReplay", data);
+        File.saveContent("assets/replays/replay-" + PlayState.SONG.id.namespace + "-" + PlayState.SONG.id.path + "-time" + Date.now().getTime() + ".kadeReplay", data);
         #end
     }
 

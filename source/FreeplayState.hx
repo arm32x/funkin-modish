@@ -41,8 +41,8 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...initSonglist.length)
 		{
-			var data:Array<String> = initSonglist[i].split(':');
-			songs.push(new SongMetadata(data[0], Std.parseInt(data[2]), data[1]));
+			var data:Array<String> = initSonglist[i].split(',');
+			songs.push(new SongMetadata(Identifier.parse(data[0]), data[1], Std.parseInt(data[3]), data[2]));
 		}
 
 		/* 
@@ -141,20 +141,20 @@ class FreeplayState extends MusicBeatState
 		super.create();
 	}
 
-	public function addSong(songName:String, weekNum:Int, songCharacter:String)
+	public function addSong(songId:Identifier, songName:String, weekNum:Int, songCharacter:String)
 	{
-		songs.push(new SongMetadata(songName, weekNum, songCharacter));
+		songs.push(new SongMetadata(songId, songName, weekNum, songCharacter));
 	}
 
-	public function addWeek(songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>)
+	public function addWeek(songIds:Array<Identifier>, songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>)
 	{
 		if (songCharacters == null)
 			songCharacters = ['dad'];
 
 		var num:Int = 0;
-		for (song in songs)
+		for (index => id in songIds)
 		{
-			addSong(song, weekNum, songCharacters[num]);
+			addSong(id, songs[index], weekNum, songCharacters[num]);
 
 			if (songCharacters.length != 1)
 				num++;
@@ -202,27 +202,7 @@ class FreeplayState extends MusicBeatState
 
 		if (accepted)
 		{
-			// pre lowercasing the song name (update)
-			var songLowercase = StringTools.replace(songs[curSelected].songName, " ", "-").toLowerCase();
-			switch (songLowercase) {
-				case 'dad-battle': songLowercase = 'dadbattle';
-				case 'philly-nice': songLowercase = 'philly';
-			}
-			// adjusting the highscore song name to be compatible (update)
-			// would read original scores if we didn't change packages
-			var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");
-			switch (songHighscore) {
-				case 'Dad-Battle': songHighscore = 'Dadbattle';
-				case 'Philly-Nice': songHighscore = 'Philly';
-			}
-			
-			trace(songLowercase);
-
-			var poop:String = Highscore.formatSong(songHighscore, curDifficulty);
-
-			trace(poop);
-			
-			PlayState.SONG = Song.loadFromJson(poop, songLowercase);
+			PlayState.SONG = new Song(songs[curSelected].songId).load(HelperFunctions.difficultyToString(curDifficulty));
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
 			PlayState.storyWeek = songs[curSelected].week;
@@ -251,15 +231,7 @@ class FreeplayState extends MusicBeatState
 		intendedScore = Highscore.getScore(songHighscore, curDifficulty);
 		#end
 
-		switch (curDifficulty)
-		{
-			case 0:
-				diffText.text = "EASY";
-			case 1:
-				diffText.text = 'NORMAL';
-			case 2:
-				diffText.text = "HARD";
-		}
+		diffText.text = HelperFunctions.difficultyToString(curDifficulty).toUpperCase();
 	}
 
 	function changeSelection(change:Int = 0)
@@ -294,7 +266,7 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		#if PRELOAD_ALL
-		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
+		FlxG.sound.playMusic(songs[curSelected].songId.getAssetPath("songs", "instrumental", Paths.SOUND_EXT), 0);
 		#end
 
 		var bullShit:Int = 0;
@@ -325,12 +297,14 @@ class FreeplayState extends MusicBeatState
 
 class SongMetadata
 {
+	public var songId:Identifier = null;
 	public var songName:String = "";
 	public var week:Int = 0;
 	public var songCharacter:String = "";
 
-	public function new(song:String, week:Int, songCharacter:String)
+	public function new(id:Identifier, song:String, week:Int, songCharacter:String)
 	{
+		this.songId = id;
 		this.songName = song;
 		this.week = week;
 		this.songCharacter = songCharacter;

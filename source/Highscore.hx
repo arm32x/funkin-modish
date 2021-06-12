@@ -11,6 +11,7 @@ class Highscore
 	#end
 
 
+	// TODO: Make high scores use Identifier to identify songs.
 	public static function saveScore(song:String, score:Int = 0, ?diff:Int = 0):Void
 	{
 		var daSong:String = formatSong(song, diff);
@@ -66,7 +67,11 @@ class Highscore
 
 	public static function formatSong(song:String, diff:Int):String
 	{
-		var daSong:String = song;
+		var daSong = StringTools.replace(song, " ", "-");
+		switch (daSong) {
+			case 'Dad-Battle': daSong = 'Dadbattle';
+			case 'Philly-Nice': daSong = 'Philly';
+		}
 
 		if (diff == 0)
 			daSong += '-easy';
@@ -84,6 +89,7 @@ class Highscore
 		return songScores.get(formatSong(song, diff));
 	}
 
+	// FIXME: This loads the wrong data because it uses week numbers instead of week names.
 	public static function getWeekScore(week:Int, diff:Int):Int
 	{
 		if (!songScores.exists(formatSong('week' + week, diff)))

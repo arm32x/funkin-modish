@@ -1,19 +1,19 @@
-Tutorial:gf:1
-Bopeebo:dad:1
-Fresh:dad:1
-Dad Battle:dad:1
-Spookeez:spooky:2
-South:spooky:2
-Monster:monster:2
-Pico:pico:3
-Philly Nice:pico:3
-Blammed:pico:3
-Satin Panties:mom:4
-High:mom:4
-Milf:mom:4
-Cocoa:parents-christmas:5
-Eggnog:parents-christmas:5
-Winter Horrorland:monster-christmas:5
-Senpai:senpai:6
-Roses:senpai:6
-Thorns:spirit:6
+basegame:tutorial,Tutorial,gf,1
+basegame:bopeebo,Bopeebo,dad,1
+basegame:fresh,Fresh,dad,1
+basegame:dad-battle,Dad Battle,dad,1
+basegame:spookeez,Spookeez,spooky,2
+basegame:south,South,spooky,2
+basegame:monster,Monster,monster,2
+basegame:pico,Pico,pico,3
+basegame:philly-nice,Philly Nice,pico,3
+basegame:blammed,Blammed,pico,3
+basegame:satin-panties,Satin Panties,mom,4
+basegame:high,High,mom,4
+basegame:milf,Milf,mom,4
+basegame:cocoa,Cocoa,parents-christmas,5
+basegame:eggnog,Eggnog,parents-christmas,5
+basegame:winter-horrorland,Winter Horrorland,monster-christmas,5
+basegame:senpai,Senpai,senpai,6
+basegame:roses,Roses,senpai,6
+basegame:thorns,Thorns,spirit,6

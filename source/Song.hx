@@ -7,95 +7,66 @@ import lime.utils.Assets;
 
 using StringTools;
 
-typedef SwagSong =
+typedef SongJSON =
 {
-	var song:String;
-	var notes:Array<SwagSection>;
-	var bpm:Float;
-	var needsVoices:Bool;
-	var speed:Float;
+	var ?id:String;
+	var ?song:String;
+	var ?notes:Array<SwagSection>;
+	var ?bpm:Float;
+	var ?needsVoices:Bool;
+	var ?speed:Float;
 
-	var player1:String;
-	var player2:String;
-	var gfVersion:String;
-	var noteStyle:String;
-	var stage:String;
-	var validScore:Bool;
+	var ?player1:String;
+	var ?player2:String;
+	var ?gfVersion:String;
+	var ?noteStyle:String;
+	var ?stage:String;
+	var ?validScore:Bool;
 }
 
 class Song
 {
-	public var song:String;
-	public var notes:Array<SwagSection>;
-	public var bpm:Float;
+	public var id:Identifier;
+	
+	public var name:String = "Untitled";
+	public var notes:Array<SwagSection> = [];
+	public var bpm:Float = 150;
 	public var needsVoices:Bool = true;
 	public var speed:Float = 1;
 
-	public var player1:String = 'bf';
-	public var player2:String = 'dad';
-	public var gfVersion:String = 'gf';
-	public var noteStyle:String = 'normal';
-	public var stage:String = 'stage';
-	public var validScore:Bool = true;
+	public var player1:Identifier = new Identifier("basegame", "bf");
+	public var player2:Identifier = new Identifier("basegame", "dad");
+	public var gfVersion:Identifier = new Identifier("basegame", "gf");
+	public var noteStyle:String = 'normal'; // TODO: Replace with Identifier.
+	public var stage:String = 'stage'; // TODO: Replace with Identifier.
+	public final validScore:Bool = true; // TODO: Remove.
 
-	public function new(song, notes, bpm)
+	public function new(id:Identifier)
 	{
-		this.song = song;
-		this.notes = notes;
-		this.bpm = bpm;
+		this.id = id;
 	}
 
-	public static function loadFromJson(jsonInput:String, ?folder:String):Song
+	public function load(difficulty:String):Song
 	{
-		trace(jsonInput);
-		
-		// pre lowercasing the song name (update)
-		var folderLowercase = StringTools.replace(folder, " ", "-").toLowerCase();
-		switch (folderLowercase) {
-			case 'dad-battle': folderLowercase = 'dadbattle';
-			case 'philly-nice': folderLowercase = 'philly';
-		}
-		
-		trace('loading ' + folderLowercase + '/' + jsonInput.toLowerCase());
-
-		var rawJson = Assets.getText(Paths.json(folderLowercase + '/' + jsonInput.toLowerCase())).trim();
-
-		while (!rawJson.endsWith("}"))
-		{
-			rawJson = rawJson.substr(0, rawJson.length - 1);
-			// LOL GOING THROUGH THE BULLSHIT TO CLEAN IDK WHATS STRANGE
-		}
-
-		// FIX THE CASTING ON WINDOWS/NATIVE
-		// Windows???
-		// trace(songData);
-
-		// trace('LOADED FROM JSON: ' + songData.notes);
-		/* 
-			for (i in 0...songData.notes.length)
-			{
-				trace('LOADED FROM JSON: ' + songData.notes[i].sectionNotes);
-				// songData.notes[i].sectionNotes = songData.notes[i].sectionNotes
-			}
-
-				daNotes = songData.notes;
-				daSong = songData.song;
-				daBpm = songData.bpm; */
-
-		return parseJSONshit(rawJson);
+		var jsonText = Assets.getText(id.getAssetPath("songs", difficulty, "json"));
+		loadFromJSON(jsonText, false);
+		return this;
 	}
 
-	public static function parseJSONshit(rawJson:String):Song
+	public function loadFromJSON(jsonText:String, ?allowOverwritingId:Bool = true):Song
 	{
-		var swagShit:SwagSong = cast Json.parse(rawJson).song;
-		var song = new Song(swagShit.song, swagShit.notes, swagShit.bpm);
-		song.needsVoices = swagShit.needsVoices;
-		song.speed = swagShit.speed;
-		song.player1 = swagShit.player1;
-		song.player2 = swagShit.player2;
-		song.gfVersion = swagShit.gfVersion;
-		song.noteStyle = swagShit.noteStyle;
-		song.stage = swagShit.stage;
-		return song;
+		var data:SongJSON = cast Json.parse(jsonText).song;
+		if (allowOverwritingId && data.id != null) id = Identifier.parse(data.id);
+		if (data.song != null) name = data.song;
+		if (data.notes != null) notes = data.notes;
+		if (data.bpm != null) bpm = data.bpm;
+		if (data.needsVoices != null) needsVoices = data.needsVoices;
+		if (data.speed != null) speed = data.speed;
+		if (data.player1 != null) player1 = Identifier.parse(data.player1);
+		if (data.player2 != null) player2 = Identifier.parse(data.player2);
+		if (data.gfVersion != null) gfVersion = Identifier.parse(data.gfVersion);
+		if (data.noteStyle != null) noteStyle = data.noteStyle;
+		if (data.stage != null) stage = data.stage;
+		return this;
 	}
 }
