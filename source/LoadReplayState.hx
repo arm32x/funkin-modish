@@ -55,7 +55,7 @@ class LoadReplayState extends MusicBeatState
             var string:String = controlsStrings[i];
             actualNames[i] = string;
 			var rep:Replay = Replay.LoadReplay(string);
-            controlsStrings[i] = string.split("time")[0] + " " + (rep.replay.songDiff == 2 ? "HARD" : rep.replay.songDiff == 1 ? "EASY" : "NORMAL");
+            controlsStrings[i] = string.split("time")[0] + " " + CoolUtil.difficultyFromInt(rep.replay.songDiff).toUpperCase();
         }
 
         if (controlsStrings.length == 0)
@@ -81,7 +81,7 @@ class LoadReplayState extends MusicBeatState
 		}
 
 
-		versionShit = new FlxText(5, FlxG.height - 34, 0, "Replay Loader (ESCAPE TO GO BACK)\nNOTICE!!!! Replays are in a beta stage, and they are probably not 100% correct. expect misses and other stuff that isn't there!", 12);
+		versionShit = new FlxText(5, FlxG.height - 34, 0, "Replay Loader (ESCAPE TO GO BACK)\nNOTICE!!!! Replays are in a beta stage, and they are probably not 100% correct. expect misses and other stuff that isn't there!\n", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -161,11 +161,19 @@ class LoadReplayState extends MusicBeatState
 
                 PlayState.loadRep = true;
 
-				PlayState.SONG = new Song(Identifier.parse(PlayState.rep.replay.songId)).load(HelperFunctions.difficultyToString(PlayState.rep.replay.songDiff));
-                PlayState.isStoryMode = false;
-                PlayState.storyDifficulty = PlayState.rep.replay.songDiff;
-                PlayState.storyWeek = getWeekNumbFromSong(Identifier.parse(PlayState.rep.replay.songId));
-                LoadingState.loadAndSwitchState(new PlayState());
+				if (PlayState.rep.replay.replayGameVer == Replay.version)
+				{
+					PlayState.SONG = new Song(Identifier.parse(PlayState.rep.replay.songId)).load(HelperFunctions.difficultyToString(PlayState.rep.replay.songDiff));
+					PlayState.isStoryMode = false;
+					PlayState.storyDifficulty = PlayState.rep.replay.songDiff;
+					PlayState.storyWeek = getWeekNumbFromSong(Identifier.parse(PlayState.rep.replay.songId));
+					LoadingState.loadAndSwitchState(new PlayState());
+				}
+				else
+				{
+					PlayState.rep = null;
+					PlayState.loadRep = false;
+				}
 			}
 	}
 
@@ -188,7 +196,7 @@ class LoadReplayState extends MusicBeatState
 
 		var rep:Replay = Replay.LoadReplay(actualNames[curSelected]);
 
-		poggerDetails.text = "Replay Details - \nDate Created: " + rep.replay.timestamp + "\nSong: " + getSongNameFromSongId(Identifier.parse(rep.replay.songId)) + "\nReplay Version: " + (rep.replay.replayGameVer != Replay.version ? "OUTDATED" : "Latest");
+		poggerDetails.text = "Replay Details - \nDate Created: " + rep.replay.timestamp + "\nSong: " + getSongNameFromSongId(Identifier.parse(rep.replay.songId)) + "\nReplay Version: " + (rep.replay.replayGameVer != Replay.version ? "OUTDATED not useable!" : "Latest");
 
 		// selector.y = (70 * curSelected) + 30;
 

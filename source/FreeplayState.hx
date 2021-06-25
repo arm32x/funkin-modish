@@ -1,5 +1,6 @@
 package;
 
+import flixel.input.gamepad.FlxGamepad;
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -26,9 +27,11 @@ class FreeplayState extends MusicBeatState
 	var curDifficulty:Int = 1;
 
 	var scoreText:FlxText;
+	var comboText:FlxText;
 	var diffText:FlxText;
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
+	var combo:String = '';
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -106,6 +109,10 @@ class FreeplayState extends MusicBeatState
 		diffText.font = scoreText.font;
 		add(diffText);
 
+		comboText = new FlxText(diffText.x + 100, diffText.y, 0, "", 24);
+		comboText.font = diffText.font;
+		add(comboText);
+
 		add(scoreText);
 
 		changeSelection();
@@ -176,10 +183,33 @@ class FreeplayState extends MusicBeatState
 			lerpScore = intendedScore;
 
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
+		comboText.text = combo + '\n';
 
-		var upP = controls.UP_P;
-		var downP = controls.DOWN_P;
+		var upP = FlxG.keys.justPressed.UP;
+		var downP = FlxG.keys.justPressed.DOWN;
 		var accepted = controls.ACCEPT;
+
+		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
+
+		if (gamepad != null)
+		{
+			if (gamepad.justPressed.DPAD_UP)
+			{
+				changeSelection(-1);
+			}
+			if (gamepad.justPressed.DPAD_DOWN)
+			{
+				changeSelection(1);
+			}
+			if (gamepad.justPressed.DPAD_LEFT)
+			{
+				changeDiff(-1);
+			}
+			if (gamepad.justPressed.DPAD_RIGHT)
+			{
+				changeDiff(1);
+			}
+		}
 
 		if (upP)
 		{
@@ -190,9 +220,9 @@ class FreeplayState extends MusicBeatState
 			changeSelection(1);
 		}
 
-		if (controls.LEFT_P)
+		if (FlxG.keys.justPressed.LEFT)
 			changeDiff(-1);
-		if (controls.RIGHT_P)
+		if (FlxG.keys.justPressed.RIGHT)
 			changeDiff(1);
 
 		if (controls.BACK)
@@ -229,9 +259,10 @@ class FreeplayState extends MusicBeatState
 		
 		#if !switch
 		intendedScore = Highscore.getScore(songHighscore, curDifficulty);
+		combo = Highscore.getCombo(songHighscore, curDifficulty);
 		#end
 
-		diffText.text = HelperFunctions.difficultyToString(curDifficulty).toUpperCase();
+		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
 	}
 
 	function changeSelection(change:Int = 0)
@@ -262,6 +293,7 @@ class FreeplayState extends MusicBeatState
 
 		#if !switch
 		intendedScore = Highscore.getScore(songHighscore, curDifficulty);
+		combo = Highscore.getCombo(songHighscore, curDifficulty);
 		// lerpScore = 0;
 		#end
 

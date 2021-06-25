@@ -1,4 +1,5 @@
 import haxe.Exception;
+import flixel.math.FlxMath;
 
 class HelperFunctions
 {
@@ -31,5 +32,9 @@ class HelperFunctions
 			default:
 				throw new Exception('Unknown difficulty number $difficultyNumber.');
 		}
+	}
+
+	public static function GCD(a, b) {
+		return b == 0 ? FlxMath.absInt(a) : GCD(b, a % b);
 	}
 }
