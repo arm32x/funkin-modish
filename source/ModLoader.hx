@@ -1,32 +1,30 @@
 package;
 
+import haxe.Exception;
+import lime.utils.AssetLibrary;
 #if sys
 import sys.FileSystem;
 #end
 
 class ModLoader
 {
-    public function load(id:String):Bool
+    public function load(id:String)
     {
         #if sys
         if (FileSystem.exists('./mods/$id') && FileSystem.isDirectory('./mods/$id'))
         {
-            trace("Not yet implemented.");
-            return false;
+            throw new Exception("Not yet implemented.");
         }
         else if (FileSystem.exists('./mods/$id.zip') && !FileSystem.isDirectory('./mods/$id.zip'))
         {
-            trace("Not yet implemented.");
-            return false;
+            throw new Exception("Not yet implemented.");
         }
         else
         {
-            trace('Mod "$id" not found.');
-            return false;
+            throw new Exception('Mod "$id" not found.');
         }
         #else
-        trace("Mod loading is not implemented on non-sys targets.");
-        return false;
+        throw new Exception("Mod loading is not implemented on non-sys targets.");
         #end
     }
 }
