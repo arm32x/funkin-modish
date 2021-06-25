@@ -66,6 +66,8 @@ class Main extends Sprite
 		// trace(modList);
 		// polymod.Polymod.init({modRoot: "mods", dirs: modList});
 		// #end
+		
+		ModLoader.load("basegame");
 
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;

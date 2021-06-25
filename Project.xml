@@ -93,14 +93,14 @@
 	<!-- END OLD ASSETS LAYOUT -->
 	
 	<!-- BEGIN NEW ASSETS LAYOUT -->
-	<section if="web">
+	<!-- <section if="web">
 		<library name="basegame" preload="false" />
 		<assets path="assets/basegame" library="basegame" exclude="*.ogg" />
 	</section>
 	<section unless="web">
 		<library name="basegame" preload="true" />
 		<assets path="assets/basegame" library="basegame" exclude="*.mp3" />
-	</section>
+	</section> -->
 	<!-- END NEW ASSETS LAYOUT -->
 	
 	<assets path='example_mods' rename='mods' embed='false'/>

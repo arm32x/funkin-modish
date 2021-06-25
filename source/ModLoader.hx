@@ -1,5 +1,6 @@
 package;
 
+import lime.utils.Assets;
 import haxe.Exception;
 import lime.utils.AssetLibrary;
 #if sys
@@ -8,12 +9,17 @@ import sys.FileSystem;
 
 class ModLoader
 {
-    public function load(id:String)
+    public static function load(id:String)
     {
+        if (Assets.hasLibrary(id))
+        {
+            throw new Exception('Mod "$id" already loaded!');
+        }
         #if sys
         if (FileSystem.exists('./mods/$id') && FileSystem.isDirectory('./mods/$id'))
         {
-            throw new Exception("Not yet implemented.");
+            var library = new DirectoryAssetLibrary('./mods/$id', 'assets/$id/');
+            Assets.registerLibrary(id, library);
         }
         else if (FileSystem.exists('./mods/$id.zip') && !FileSystem.isDirectory('./mods/$id.zip'))
         {
