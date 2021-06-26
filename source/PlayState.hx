@@ -353,12 +353,27 @@ class PlayState extends MusicBeatState
 					"If you can beat me here...",
 					"Only then I will even CONSIDER letting you\ndate my daughter!"
 				];
+			// Temporarily hardcode this so it doesn’t crash.
 			case 'senpai':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('senpai/senpaiDialogue'));
+				dialogue = [
+					":dad:Ah, a new fair maiden has come in search of true love!",
+					":dad:A serenade between gentlemen shall decide where her beautiful heart shall reside.",
+					":bf:Beep bo bop"
+				];
 			case 'roses':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('roses/rosesDialogue'));
+				dialogue = [
+					":dad:Not bad for an ugly worm.",
+					":dad:But this time I'll rip your nuts off right after your girlfriend finishes gargling mine.",
+					":bf:Bop beep be be skdoo bep"
+				];
 			case 'thorns':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('thorns/thornsDialogue'));
+				dialogue = [
+					":dad:Direct contact with real humans, after being trapped in here for so long...",
+					":dad:and HER of all people.",
+					":dad:I'll make her father pay for what he's done to me and all the others,,,,",
+					":dad:I'll beat you and make you take my place.",
+					":dad:You don't mind your bodies being borrowed right? It's only fair..."
+				];
 		}
 
 		//defaults if no stage was found in chart

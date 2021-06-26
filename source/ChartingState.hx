@@ -297,8 +297,8 @@ class ChartingState extends MusicBeatState
 			shiftNotes(Std.int(stepperShiftNoteDial.value),Std.int(stepperShiftNoteDialstep.value),Std.int(stepperShiftNoteDialms.value));
 		});
 
-		var characters:Array<Identifier> = CoolUtil.coolTextFile(Paths.txt('characterList')).map(Identifier.parse);
-		var gfVersions:Array<Identifier> = CoolUtil.coolTextFile(Paths.txt('gfVersionList')).map(Identifier.parse);
+		var characters:Array<Identifier> = ModLoader.Registry.characters;
+		var gfVersions:Array<Identifier> = ModLoader.Registry.characters; // TODO: Filter based on animations.
 		var stages:Array<String> = CoolUtil.coolTextFile(Paths.txt('stageList'));
 		var noteStyles:Array<String> = CoolUtil.coolTextFile(Paths.txt('noteStyleList'));
 

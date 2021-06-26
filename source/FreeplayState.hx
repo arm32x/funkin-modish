@@ -20,7 +20,7 @@ using StringTools;
 
 class FreeplayState extends MusicBeatState
 {
-	var songs:Array<SongMetadata> = [];
+	// var songs:Array<SongMetadata> = [];
 
 	var selector:FlxText;
 	var curSelected:Int = 0;
@@ -40,13 +40,13 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
+		// var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
 
-		for (i in 0...initSonglist.length)
-		{
-			var data:Array<String> = initSonglist[i].split(',');
-			songs.push(new SongMetadata(Identifier.parse(data[0]), data[1], Std.parseInt(data[3]), data[2]));
-		}
+		// for (i in 0...initSonglist.length)
+		// {
+		// 	var data:Array<String> = initSonglist[i].split(',');
+		// 	songs.push(new SongMetadata(Identifier.parse(data[0]), data[1], Std.parseInt(data[3]), data[2]));
+		// }
 
 		/* 
 			if (FlxG.sound.music != null)
@@ -77,14 +77,14 @@ class FreeplayState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-		for (i in 0...songs.length)
+		for (i in 0...ModLoader.Registry.songs.length)
 		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false, true);
+			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, ModLoader.Registry.songs[i].songName, true, false, true);
 			songText.isMenuItem = true;
 			songText.targetY = i;
 			grpSongs.add(songText);
 
-			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
+			var icon:HealthIcon = new HealthIcon(ModLoader.Registry.songs[i].songCharacter);
 			icon.sprTracker = songText;
 
 			// using a FlxGroup is too much fuss!
@@ -148,25 +148,25 @@ class FreeplayState extends MusicBeatState
 		super.create();
 	}
 
-	public function addSong(songId:Identifier, songName:String, weekNum:Int, songCharacter:String)
-	{
-		songs.push(new SongMetadata(songId, songName, weekNum, songCharacter));
-	}
+	// public function addSong(songId:Identifier, songName:String, weekNum:Int, songCharacter:String)
+	// {
+	// 	songs.push(new SongMetadata(songId, songName, weekNum, songCharacter));
+	// }
 
-	public function addWeek(songIds:Array<Identifier>, songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>)
-	{
-		if (songCharacters == null)
-			songCharacters = ['dad'];
+	// public function addWeek(songIds:Array<Identifier>, songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>)
+	// {
+	// 	if (songCharacters == null)
+	// 		songCharacters = ['dad'];
 
-		var num:Int = 0;
-		for (index => id in songIds)
-		{
-			addSong(id, songs[index], weekNum, songCharacters[num]);
+	// 	var num:Int = 0;
+	// 	for (index => id in songIds)
+	// 	{
+	// 		addSong(id, songs[index], weekNum, songCharacters[num]);
 
-			if (songCharacters.length != 1)
-				num++;
-		}
-	}
+	// 		if (songCharacters.length != 1)
+	// 			num++;
+	// 	}
+	// }
 
 	override function update(elapsed:Float)
 	{
@@ -232,10 +232,10 @@ class FreeplayState extends MusicBeatState
 
 		if (accepted)
 		{
-			PlayState.SONG = new Song(songs[curSelected].songId).load(HelperFunctions.difficultyToString(curDifficulty));
+			PlayState.SONG = new Song(ModLoader.Registry.songs[curSelected].songId).load(HelperFunctions.difficultyToString(curDifficulty));
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
-			PlayState.storyWeek = songs[curSelected].week;
+			PlayState.storyWeek = ModLoader.Registry.songs[curSelected].week;
 			trace('CUR WEEK' + PlayState.storyWeek);
 			LoadingState.loadAndSwitchState(new PlayState());
 		}
@@ -251,7 +251,7 @@ class FreeplayState extends MusicBeatState
 			curDifficulty = 0;
 
 		// adjusting the highscore song name to be compatible (changeDiff)
-		var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");
+		var songHighscore = StringTools.replace(ModLoader.Registry.songs[curSelected].songName, " ", "-");
 		switch (songHighscore) {
 			case 'Dad-Battle': songHighscore = 'Dadbattle';
 			case 'Philly-Nice': songHighscore = 'Philly';
@@ -277,15 +277,15 @@ class FreeplayState extends MusicBeatState
 		curSelected += change;
 
 		if (curSelected < 0)
-			curSelected = songs.length - 1;
-		if (curSelected >= songs.length)
+			curSelected = ModLoader.Registry.songs.length - 1;
+		if (curSelected >= ModLoader.Registry.songs.length)
 			curSelected = 0;
 
 		// selector.y = (70 * curSelected) + 30;
 		
 		// adjusting the highscore song name to be compatible (changeSelection)
 		// would read original scores if we didn't change packages
-		var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");
+		var songHighscore = StringTools.replace(ModLoader.Registry.songs[curSelected].songName, " ", "-");
 		switch (songHighscore) {
 			case 'Dad-Battle': songHighscore = 'Dadbattle';
 			case 'Philly-Nice': songHighscore = 'Philly';
@@ -298,7 +298,7 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		#if PRELOAD_ALL
-		FlxG.sound.playMusic(songs[curSelected].songId.getAssetPath("songs", "instrumental", Paths.SOUND_EXT), 0);
+		FlxG.sound.playMusic(ModLoader.Registry.songs[curSelected].songId.getAssetPath("songs", "instrumental", Paths.SOUND_EXT), 0);
 		#end
 
 		var bullShit:Int = 0;

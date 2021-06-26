@@ -19,7 +19,9 @@ class Registry
 {
     public static var mods:Array<Mod> = [];
 
+    public static var characters:Array<Identifier> = [];
     public static var introTexts:Array<Array<String>> = [];
+    public static var songs:Array<FreeplayState.SongMetadata> = [];
 }
 
 class ModLoader
@@ -87,8 +89,17 @@ class ModLoader
             {
                 switch (export.name)
                 {
+                    case "character":
+                        Registry.characters.push(Identifier.parse(export.att.id));
                     case "introText":
                         Registry.introTexts.push([export.att.top, export.att.bottom]);
+                    case "song":
+                        Registry.songs.push(new FreeplayState.SongMetadata(
+                            Identifier.parse(export.att.id),
+                            export.att.name,
+                            Std.parseInt(export.att.week),
+                            export.att.icon
+                        ));
                     default:
                         throw new Exception('Invalid export type "${export.name}" in mod "$id".');
                 }
