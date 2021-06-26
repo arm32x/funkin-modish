@@ -15,6 +15,7 @@ import sys.io.File;
 
 using StringTools;
 
+// TODO: Add caching.
 class DirectoryAssetLibrary extends AssetLibrary
 {
     private final directory:String;

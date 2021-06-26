@@ -333,6 +333,7 @@ class PlayState extends MusicBeatState
 		trace('INFORMATION ABOUT WHAT U PLAYIN WIT:\nFRAMES: ' + PlayStateChangeables.safeFrames + '\nZONE: ' + Conductor.safeZoneOffset + '\nTS: ' + Conductor.timeScale + '\nBotPlay : ' + PlayStateChangeables.botPlay);
 	
 		//dialogue shit
+		// TODO: Load dialogue from the new assets layout.
 		if (SONG.id.namespace == "basegame") switch (SONG.id.path)
 		{
 			case 'tutorial':
