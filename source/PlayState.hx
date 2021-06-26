@@ -255,33 +255,20 @@ class PlayState extends MusicBeatState
 		repPresses = 0;
 		repReleases = 0;
 
-<<<<<<< HEAD
-		// TODO: Make modcharts work on operating systems other than Windows.
-		// TODO: Make modcharts load from the assets system using Identifier.
-		#if windows
-		executeModchart = FileSystem.exists(Paths.lua(SONG.id.path  + "/modchart"));
-=======
-
 		PlayStateChangeables.useDownscroll = FlxG.save.data.downscroll;
 		PlayStateChangeables.safeFrames = FlxG.save.data.frames;
 		PlayStateChangeables.scrollSpeed = FlxG.save.data.scrollSpeed;
 		PlayStateChangeables.botPlay = FlxG.save.data.botplay;
 		PlayStateChangeables.Optimize = FlxG.save.data.optimize;
-
-		// pre lowercasing the song name (create)
-		var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
-		switch (songLowercase) {
-			case 'dad-battle': songLowercase = 'dadbattle';
-			case 'philly-nice': songLowercase = 'philly';
-		}
 		
 		removedVideo = false;
 
+		// TODO: Make modcharts work on operating systems other than Windows.
+		// TODO: Make modcharts load from the assets system using Identifier.
 		#if windows
-		executeModchart = FileSystem.exists(Paths.lua(songLowercase  + "/modchart"));
+		executeModchart = FileSystem.exists(Paths.lua(SONG.id.path  + "/modchart"));
 		if (executeModchart)
 			PlayStateChangeables.Optimize = false;
->>>>>>> upstream/stable
 		#end
 		#if !cpp
 		executeModchart = false; // FORCE disable for non cpp targets
@@ -338,11 +325,7 @@ class PlayState extends MusicBeatState
 		persistentDraw = true;
 
 		if (SONG == null)
-<<<<<<< HEAD
 			SONG = new Song(new Identifier("basegame", "tutorial")).load("normal");
-=======
-			SONG = Song.loadFromJson('tutorial', 'tutorial');
->>>>>>> upstream/stable
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
@@ -378,19 +361,7 @@ class PlayState extends MusicBeatState
 		}
 
 		//defaults if no stage was found in chart
-		var stageCheck:String = 'stage';
-		
-		if (SONG.stage == null) {
-			switch(storyWeek)
-			{
-				case 2: stageCheck = 'halloween';
-				case 3: stageCheck = 'philly';
-				case 4: stageCheck = 'limo';
-				case 5: if (songLowercase == 'winter-horrorland') {stageCheck = 'mallEvil';} else {stageCheck = 'mall';}
-				case 6: if (songLowercase == 'thorns') {stageCheck = 'schoolEvil';} else {stageCheck = 'school';}
-				//i should check if its stage (but this is when none is found in chart anyway)
-			}
-		} else {stageCheck = SONG.stage;}
+		var stageCheck:String = SONG.stage != null ? SONG.stage : "stage";
 
 		if (!PlayStateChangeables.Optimize)
 		{
@@ -774,39 +745,10 @@ class PlayState extends MusicBeatState
 					add(stageCurtains);
 			}
 		}
-<<<<<<< HEAD
+		}
 		var gfVersion:Identifier = SONG.gfVersion;
 
 		gf = new Character(400, 130, gfVersion);
-=======
-		}
-		//defaults if no gf was found in chart
-		var gfCheck:String = 'gf';
-		
-		if (SONG.gfVersion == null) {
-			switch(storyWeek)
-			{
-				case 4: gfCheck = 'gf-car';
-				case 5: gfCheck = 'gf-christmas';
-				case 6: gfCheck = 'gf-pixel';
-			}
-		} else {gfCheck = SONG.gfVersion;}
-
-		var curGf:String = '';
-		switch (gfCheck)
-		{
-			case 'gf-car':
-				curGf = 'gf-car';
-			case 'gf-christmas':
-				curGf = 'gf-christmas';
-			case 'gf-pixel':
-				curGf = 'gf-pixel';
-			default:
-				curGf = 'gf';
-		}
-		
-		gf = new Character(400, 130, curGf);
->>>>>>> upstream/stable
 		gf.scrollFactor.set(0.95, 0.95);
 
 		dad = new Character(100, 100, SONG.player2);
@@ -991,13 +933,8 @@ class PlayState extends MusicBeatState
 				songPosBar.createFilledBar(FlxColor.GRAY, FlxColor.LIME);
 				add(songPosBar);
 	
-<<<<<<< HEAD
-				var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - 20,songPosBG.y,0,SONG.name, 16);
-				if (FlxG.save.data.downscroll)
-=======
-				var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - (SONG.song.length * 5),songPosBG.y,0,SONG.song, 16);
+				var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - (SONG.name.length * 5),songPosBG.y,0,SONG.name, 16);
 				if (PlayStateChangeables.useDownscroll)
->>>>>>> upstream/stable
 					songName.y -= 3;
 				songName.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 				songName.scrollFactor.set();
@@ -1020,11 +957,7 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 
 		// Add Kade Engine watermark
-<<<<<<< HEAD
-		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.name + " " + (storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") + (Main.watermarks ? " - KE " + MainMenuState.kadeEngineVer : ""), 16);
-=======
-		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | KE " + MainMenuState.kadeEngineVer : ""), 16);
->>>>>>> upstream/stable
+		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.name + " - " + CoolUtil.difficultyFromInt(storyDifficulty) + (Main.watermarks ? " | KE " + MainMenuState.kadeEngineVer : ""), 16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
@@ -1152,7 +1085,7 @@ class PlayState extends MusicBeatState
 		super.create();
 	}
 
-	function schoolIntro(?dialogueBox:DialogueBox):Void
+	private function schoolIntro(?dialogueBox:DialogueBox):Void
 	{
 		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();
@@ -1169,25 +1102,14 @@ class PlayState extends MusicBeatState
 		senpaiEvil.updateHitbox();
 		senpaiEvil.screenCenter();
 
-<<<<<<< HEAD
 		if (SONG.id == new Identifier("basegame", "roses"))
 		{
 			remove(black);
-		}
-		else if (SONG.id == new Identifier("basegame", "thorns"))
-		{
-			remove(black);
-			add(red);
-=======
-		if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'roses' || StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'thorns')
-		{
-			remove(black);
 
-			if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'thorns')
+			if (SONG.id == new Identifier("basegame", "thorns"))
 			{
 				add(red);
 			}
->>>>>>> upstream/stable
 		}
 
 		new FlxTimer().start(0.3, function(tmr:FlxTimer)
@@ -1204,11 +1126,7 @@ class PlayState extends MusicBeatState
 				{
 					inCutscene = true;
 
-<<<<<<< HEAD
 					if (SONG.id == new Identifier("basegame", "thorns"))
-=======
-					if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'thorns')
->>>>>>> upstream/stable
 					{
 						add(senpaiEvil);
 						senpaiEvil.alpha = 0;
@@ -1260,7 +1178,7 @@ class PlayState extends MusicBeatState
 	public static var luaModchart:ModchartState = null;
 	#end
 
-	function startCountdown():Void
+	private function startCountdown():Void
 	{
 		inCutscene = false;
 
@@ -1509,13 +1427,8 @@ class PlayState extends MusicBeatState
 			songPosBar.createFilledBar(FlxColor.GRAY, FlxColor.LIME);
 			add(songPosBar);
 
-<<<<<<< HEAD
-			var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - 20,songPosBG.y,0,SONG.name, 16);
-			if (FlxG.save.data.downscroll)
-=======
-			var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - (SONG.song.length * 5),songPosBG.y,0,SONG.song, 16);
+			var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - (SONG.name.length * 5),songPosBG.y,0,SONG.name, 16);
 			if (PlayStateChangeables.useDownscroll)
->>>>>>> upstream/stable
 				songName.y -= 3;
 			songName.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 			songName.scrollFactor.set();
@@ -2738,12 +2651,8 @@ class PlayState extends MusicBeatState
 		if (SONG.validScore)
 		{
 			#if !switch
-<<<<<<< HEAD
 			Highscore.saveScore(SONG.name, Math.round(songScore), storyDifficulty);
-=======
-			Highscore.saveScore(songHighscore, Math.round(songScore), storyDifficulty);
-			Highscore.saveCombo(songHighscore, Ratings.GenerateLetterRank(accuracy), storyDifficulty);
->>>>>>> upstream/stable
+			Highscore.saveCombo(SONG.name, Ratings.GenerateLetterRank(accuracy), storyDifficulty);
 			#end
 		}
 
@@ -2801,7 +2710,6 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-<<<<<<< HEAD
 					var difficulty:String = HelperFunctions.difficultyToString(storyDifficulty);
 
 					trace('LOADING NEXT SONG');
@@ -2809,22 +2717,6 @@ class PlayState extends MusicBeatState
 					trace('$nextSong-$difficulty');
 
 					if (SONG.id == new Identifier("basegame", "eggnog"))
-=======
-					
-					// adjusting the song name to be compatible
-					var songFormat = StringTools.replace(PlayState.storyPlaylist[0], " ", "-");
-					switch (songFormat) {
-						case 'Dad-Battle': songFormat = 'Dadbattle';
-						case 'Philly-Nice': songFormat = 'Philly';
-					}
-
-					var poop:String = Highscore.formatSong(songFormat, storyDifficulty);
-
-					trace('LOADING NEXT SONG');
-					trace(poop);
-
-					if (StringTools.replace(PlayState.storyPlaylist[0], " ", "-").toLowerCase() == 'eggnog')
->>>>>>> upstream/stable
 					{
 						var blackShit:FlxSprite = new FlxSprite(-FlxG.width * FlxG.camera.zoom,
 							-FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
@@ -2839,12 +2731,7 @@ class PlayState extends MusicBeatState
 					FlxTransitionableState.skipNextTransOut = true;
 					prevCamFollow = camFollow;
 
-<<<<<<< HEAD
 					PlayState.SONG = new Song(nextSong).load(difficulty);
-=======
-
-					PlayState.SONG = Song.loadFromJson(poop, PlayState.storyPlaylist[0]);
->>>>>>> upstream/stable
 					FlxG.sound.music.stop();
 
 					LoadingState.loadAndSwitchState(new PlayState());
@@ -3894,26 +3781,15 @@ class PlayState extends MusicBeatState
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
 
-<<<<<<< HEAD
-		// HARDCODING FOR MILF ZOOMS!
-		if (curSong == new Identifier("basegame", "milf") && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
-		{
-			FlxG.camera.zoom += 0.015;
-			camHUD.zoom += 0.03;
-		}
-
-		if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
-=======
 		if (FlxG.save.data.camzoom)
->>>>>>> upstream/stable
 		{
 			// HARDCODING FOR MILF ZOOMS!
-			if (curSong.toLowerCase() == 'milf' && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
+			if (curSong == new Identifier("basegame", "milf") && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
 			{
 				FlxG.camera.zoom += 0.015;
 				camHUD.zoom += 0.03;
 			}
-	
+
 			if (camZooming && FlxG.camera.zoom < 1.35 && curBeat % 4 == 0)
 			{
 				FlxG.camera.zoom += 0.015;

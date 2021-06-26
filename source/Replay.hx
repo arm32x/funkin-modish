@@ -79,7 +79,7 @@ class Replay
 
 		rep.LoadFromJSON();
 
-		trace('basic replay data:\nSong Name: ' + rep.replay.songName + '\nSong Diff: ' + rep.replay.songDiff);
+		trace('basic replay data:\nSong ID: ' + rep.replay.songId + '\nSong Diff: ' + rep.replay.songDiff);
 
 		return rep;
 	}
@@ -106,7 +106,7 @@ class Replay
         #if sys
         File.saveContent("assets/replays/replay-" + PlayState.SONG.id.namespace + "-" + PlayState.SONG.id.path + "-time" + time + ".kadeReplay", data);
 
-		path = "replay-" + PlayState.SONG.song + "-time" + time + ".kadeReplay"; // for score screen shit
+		path = "replay-" + PlayState.SONG.id.namespace + PlayState.SONG.id.path + "-time" + time + ".kadeReplay"; // for score screen shit
 
 		LoadFromJSON();
 

@@ -106,17 +106,19 @@ class Caching extends MusicBeatState
 
         for (i in images)
         {
-            var replaced = i.replace(".png","");
-            FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
-            trace("cached " + replaced);
+            // TODO: Do this with Identifier.
+            // var replaced = i.replace(".png","");
+            // FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
+            // trace("cached " + replaced);
             done++;
         }
 
         for (i in music)
         {
-            FlxG.sound.cache(Paths.inst(i));
-            FlxG.sound.cache(Paths.voices(i));
-            trace("cached " + i);
+            // TODO: Do this with Identifier.
+            // FlxG.sound.cache(Paths.inst(i));
+            // FlxG.sound.cache(Paths.voices(i));
+            // trace("cached " + i);
             done++;
         }
 

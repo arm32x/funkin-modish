@@ -39,6 +39,7 @@ class Song
 	public var gfVersion:Identifier = new Identifier("basegame", "gf");
 	public var noteStyle:String = 'normal'; // TODO: Replace with Identifier.
 	public var stage:String = 'stage'; // TODO: Replace with Identifier.
+	public var validScore:Bool = true; // TODO: Remove.
 
 	public function new(id:Identifier)
 	{
