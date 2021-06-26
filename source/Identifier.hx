@@ -1,6 +1,9 @@
 package;
 
+import haxe.Exception;
 import openfl.utils.Assets;
+
+using StringTools;
 
 class Identifier
 {
@@ -11,6 +14,14 @@ class Identifier
     {
         this.namespace = namespace;
         this.path = path;
+        if (!isValidPart(namespace))
+        {
+            throw new Exception('Invalid Identifier namespace "$namespace".');
+        }
+        if (!isValidPart(path))
+        {
+            throw new Exception('Invalid Identifier path "$path".');
+        }
     }
     
     public static function parse(identifier:String):Identifier
@@ -22,7 +33,8 @@ class Identifier
             var path = identifier.substring(colonIndex + 1);
             return new Identifier(namespace, path);
         }
-        else {
+        else
+        {
             return new Identifier("basegame", identifier);
         }
     }
@@ -48,5 +60,21 @@ class Identifier
         {
             return '$namespace:assets/$namespace/$type/$path/$path.$extension';
         }
+    }
+    
+    private static final VALID_CHARS:String = "0123456789abcdefghijklmnopqrstuvwxyz-";
+    
+    public static function isValidPart(part:String):Bool
+    {
+        // The .. syntax didn’t compile.
+        for (index in new IntIterator(0, part.length))
+        {
+            var char = part.charAt(index);
+            if (!VALID_CHARS.contains(char))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
