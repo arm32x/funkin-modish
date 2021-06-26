@@ -81,48 +81,48 @@ class Caching extends MusicBeatState
     function cache()
     {
 
-        var images = [];
-        var music = [];
+        // var images = [];
+        // var music = [];
 
-        trace("caching images...");
+        // trace("caching images...");
 
-        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/characters")))
-        {
-            if (!i.endsWith(".png"))
-                continue;
-            images.push(i);
-        }
+        // for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/characters")))
+        // {
+        //     if (!i.endsWith(".png"))
+        //         continue;
+        //     images.push(i);
+        // }
 
-        trace("caching music...");
+        // trace("caching music...");
 
-        for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/songs")))
-        {
-            music.push(i);
-        }
+        // for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/songs")))
+        // {
+        //     music.push(i);
+        // }
 
-        toBeDone = Lambda.count(images) + Lambda.count(music);
+        // toBeDone = Lambda.count(images) + Lambda.count(music);
 
-        trace("LOADING: " + toBeDone + " OBJECTS.");
+        // trace("LOADING: " + toBeDone + " OBJECTS.");
 
-        for (i in images)
-        {
-            // TODO: Do this with Identifier.
-            // var replaced = i.replace(".png","");
-            // FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
-            // trace("cached " + replaced);
-            done++;
-        }
+        // for (i in images)
+        // {
+        //     // TODO: Do this with Identifier.
+        //     // var replaced = i.replace(".png","");
+        //     // FlxG.bitmap.add(Paths.image("characters/" + replaced,"shared"));
+        //     // trace("cached " + replaced);
+        //     done++;
+        // }
 
-        for (i in music)
-        {
-            // TODO: Do this with Identifier.
-            // FlxG.sound.cache(Paths.inst(i));
-            // FlxG.sound.cache(Paths.voices(i));
-            // trace("cached " + i);
-            done++;
-        }
+        // for (i in music)
+        // {
+        //     // TODO: Do this with Identifier.
+        //     // FlxG.sound.cache(Paths.inst(i));
+        //     // FlxG.sound.cache(Paths.voices(i));
+        //     // trace("cached " + i);
+        //     done++;
+        // }
 
-        trace("Finished caching...");
+        // trace("Finished caching...");
 
         FlxG.switchState(new TitleState());
     }

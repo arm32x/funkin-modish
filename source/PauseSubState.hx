@@ -2,9 +2,9 @@ package;
 
 import flixel.input.gamepad.FlxGamepad;
 import openfl.Lib;
-#if windows
-import llua.Lua;
-#end
+// #if windows
+// import llua.Lua;
+// #end
 import Controls.Control;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -223,13 +223,13 @@ class PauseSubState extends MusicBeatSubstate
 						FlxG.save.data.downscroll = false;
 					}
 					PlayState.loadRep = false;
-					#if windows
-					if (PlayState.luaModchart != null)
-					{
-						PlayState.luaModchart.die();
-						PlayState.luaModchart = null;
-					}
-					#end
+					// #if windows
+					// if (PlayState.luaModchart != null)
+					// {
+					// 	PlayState.luaModchart.die();
+					// 	PlayState.luaModchart = null;
+					// }
+					// #end
 					if (FlxG.save.data.fpsCap > 290)
 						(cast (Lib.current.getChildAt(0), Main)).setFPSCap(290);
 					
