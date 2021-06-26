@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mod id="intro-mod" format="0">
+    <name>Intro Mod</name>
+    <version>1.0.0</version>
+    <description>Adds a single line of splash text.</description>
+    
+    <exports>
+        <introText top="swagshit" bottom="moneymoney" />
+    </exports>
+</mod>

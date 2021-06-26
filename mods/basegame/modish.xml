@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mod id="basegame" format="0">
+    <name>Friday Night Funkin' - Kade Engine</name>
+    <version>1.5.4</version>
+    
+    <exports>
+        <introText top="shoutouts to tom fulp" bottom="lmao" />
+        <introText top="Ludum dare" bottom="extraordinaire" />
+        <introText top="cyberzone" bottom="coming soon" />
+        <introText top="love to thriftman" bottom="swag" />
+        <introText top="ultimate rhythm gaming" bottom="probably" />
+        <introText top="dope ass game" bottom="playstation magazine" />
+        <introText top="in loving memory of" bottom="henryeyes" />
+        <introText top="dancin" bottom="forever" />
+        <introText top="funkin" bottom="forever" />
+        <introText top="ritz dx" bottom="rest in peace lol" />
+        <introText top="rate five" bottom="pls no blam" />
+        <introText top="rhythm gaming" bottom="ultimate" />
+        <introText top="game of the year" bottom="forever" />
+        <introText top="you already know" bottom="we really out here" />
+        <introText top="rise and grind" bottom="love to luis" />
+        <introText top="like parappa" bottom="but cooler" />
+        <introText top="album of the year" bottom="chuckie finster" />
+        <introText top="free gitaroo man" bottom="with love to wandaboy" />
+        <introText top="better than geometry dash" bottom="fight me robtop" />
+        <introText top="kiddbrute for president" bottom="vote now" />
+        <introText top="play dead estate" bottom="on newgrounds" />
+        <introText top="this is a god damn prototype" bottom="we workin on it okay" />
+        <introText top="women are real" bottom="this is official" />
+        <introText top="too over exposed" bottom="newgrounds cant handle us" />
+        <introText top="Hatsune Miku" bottom="biggest inspiration" />
+        <introText top="too many people" bottom="my head hurts" />
+        <introText top="newgrounds" bottom="forever" />
+        <introText top="refined taste in music" bottom="if i say so myself" />
+        <introText top="his name isnt keith" bottom="dumb eggy lol" />
+        <introText top="his name isnt evan" bottom="silly tiktok" />
+        <introText top="stream chuckie finster" bottom="on spotify" />
+        <introText top="never forget to" bottom="pray to god" />
+        <introText top="dont play rust" bottom="we only funkin" />
+        <introText top="good bye" bottom="my penis" />
+        <introText top="dababy" bottom="biggest inspiration" />
+        <introText top="fashionably late" bottom="but here it is" />
+        <introText top="yooooooooooo" bottom="yooooooooo" />
+        <introText top="pico funny" bottom="pico funny" />
+        <introText top="updates each friday" bottom="on time every time" />
+        <introText top="shoutouts to mason" bottom="for da homies" />
+        <introText top="bonk" bottom="get in the discord call" />
+    </exports>
+</mod>

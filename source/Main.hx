@@ -69,7 +69,11 @@ class Main extends Sprite
 		// polymod.Polymod.init({modRoot: "mods", dirs: modList});
 		// #end
 		
-		ModLoader.load("basegame");
+		var modList = CoolUtil.coolTextFile("default:mods/mod-list.txt");
+		for (mod in modList)
+		{
+			ModLoader.load(mod);
+		}
 
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
