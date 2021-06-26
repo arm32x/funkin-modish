@@ -11,6 +11,10 @@ class ModLoader
 {
     public static function load(id:String)
     {
+        if (!Identifier.isValidPart(id))
+        {
+            throw new Exception('Invalid mod ID "$id".');
+        }
         if (Assets.hasLibrary(id))
         {
             throw new Exception('Mod "$id" already loaded!');
@@ -18,7 +22,7 @@ class ModLoader
         #if sys
         if (FileSystem.exists('./mods/$id') && FileSystem.isDirectory('./mods/$id'))
         {
-            var library = new DirectoryAssetLibrary('./mods/$id', 'assets/$id/');
+            var library = new DirectoryAssetLibrary('./mods/$id');
             Assets.registerLibrary(id, library);
         }
         else if (FileSystem.exists('./mods/$id.zip') && !FileSystem.isDirectory('./mods/$id.zip'))

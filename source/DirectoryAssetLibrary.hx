@@ -19,13 +19,11 @@ using StringTools;
 class DirectoryAssetLibrary extends AssetLibrary
 {
     private final directory:String;
-    private final idPrefix:Null<String>;
     
-    public function new(directory:String, ?idPrefix:String)
+    public function new(directory:String)
     {
         super();
         this.directory = directory;
-        this.idPrefix = idPrefix;
     }
     
     override public function exists(id:String, type:String):Bool
@@ -55,7 +53,7 @@ class DirectoryAssetLibrary extends AssetLibrary
     
     override public function getPath(id:String):String
     {
-        return Path.join([directory, stripPathPrefix(id)]);
+        return Path.join([directory, id]);
     }
     
     override public function getText(id:String):String
@@ -119,17 +117,6 @@ class DirectoryAssetLibrary extends AssetLibrary
         // I don’t know why this is an HTTP request, but this is how the
         // standard AssetLibrary does it.
         return new HTTPRequest<String>().load(getPath(id));
-    }
-    
-    private function stripPathPrefix(id:String):String
-    {
-        if (id.startsWith(idPrefix))
-        {
-            return id.substring(idPrefix.length);
-        }
-        else {
-            return id;
-        }
     }
 }
 

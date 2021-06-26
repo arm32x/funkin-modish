@@ -54,11 +54,11 @@ class Identifier
     {
         if (file != null)
         {
-            return '$namespace:assets/$namespace/$type/$path/$file.$extension';
+            return '$namespace:$type/$path/$file.$extension';
         }
         else
         {
-            return '$namespace:assets/$namespace/$type/$path/$path.$extension';
+            return '$namespace:$type/$path/$path.$extension';
         }
     }
     
