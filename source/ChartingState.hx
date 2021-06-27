@@ -1041,7 +1041,7 @@ class ChartingState extends MusicBeatState
 		super.beatHit();
 		if (!player2.animation.curAnim.name.startsWith("sing"))
 		{
-			player2.playAnim('idle');
+			player2.dance();
 		}
 		player1.dance();
 	}

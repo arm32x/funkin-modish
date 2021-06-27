@@ -278,14 +278,14 @@ class Character extends FlxSprite
 	/**
 	 * FOR GF DANCING SHIT
 	 */
-	public function dance()
+	public function dance(?force:Bool, ?reversed:Bool, ?frame:Int)
 	{
 		if (!debugMode)
 		{
 			switch (animationMode)
 			{
 				case Idle:
-					playAnim('idle');
+					playAnim('idle', force, reversed, frame);
 				case Dance:
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
