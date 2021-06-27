@@ -1,6 +1,6 @@
 {
     "$schema": "../character-schema.json",
-    "version": 2,
+    "version": 3,
     "animations": [
         {
             "name": "cheer",
@@ -85,5 +85,8 @@
     ],
     "startingAnimation": {
         "name": "danceRight"
-    }
+    },
+    "animationMode": "dance",
+    "replacesGF": true,
+    "cameraOffset": [600, 0]
 }

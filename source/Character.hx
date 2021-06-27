@@ -30,6 +30,7 @@ typedef CharacterJSON = {
 		var ?frame:Int;
 		var ?playOnly:Bool;
 	};
+	var ?animationMode:String;
 	var ?antialiasing:Bool;
 	var ?flipX:Bool;
 	var ?flipY:Bool;
@@ -41,10 +42,22 @@ typedef CharacterJSON = {
 		var operation:String;
 		var value:Float;
 	}>>;
+	var ?replacesGF:Bool;
+	var ?positionOffset:Array<Float>;
+	var ?cameraOffset:Array<Float>;
 };
+
+enum AnimationMode
+{
+	Idle;
+	Dance;
+}
 
 class Character extends FlxSprite
 {
+	static final CURRENT_FORMAT:Int = 3;
+	static final MIN_SUPPORTED_FORMAT:Int = 2;
+	
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
 
@@ -52,6 +65,15 @@ class Character extends FlxSprite
 	public var curCharacter:Identifier;
 
 	public var holdTimer:Float = 0;
+	
+	public var replacesGF:Bool = false;
+	
+	public var positionOffsetX:Float = 0;
+	public var positionOffsetY:Float = 0;
+	public var cameraOffsetX:Float = 0;
+	public var cameraOffsetY:Float = 0;
+	
+	var animationMode:AnimationMode = Idle;
 
 	public function new(x:Float, y:Float, ?character:Identifier, ?isPlayer:Bool = false)
 	{
@@ -66,9 +88,13 @@ class Character extends FlxSprite
 		antialiasing = true;
 
 		var data = getCharacterJSON(character);
-		if (data.version != 2)
+		if (data.version > CURRENT_FORMAT)
 		{
-			throw new Exception('Error loading character "$character": Unsupported version ${data.version}, expected 2.');
+			throw new Exception('Error loading character "$character": Unsupported format ${data.version}, current version is $CURRENT_FORMAT.');
+		}
+		else if (data.version < MIN_SUPPORTED_FORMAT)
+		{
+			throw new Exception('Error loading character "$character": Outdated format ${data.version}, minimum supported version is $MIN_SUPPORTED_FORMAT.');
 		}
 		
 		trace('Loading character "$character" from JSON.');
@@ -163,6 +189,37 @@ class Character extends FlxSprite
 				playAnim(data.startingAnimation.name, force, reversed, frame);
 			}
 		}
+		
+		if (data.animationMode != null)
+		{
+			switch (data.animationMode)
+			{
+				case "idle":
+					animationMode = Idle;
+				case "dance":
+					animationMode = Dance;
+			}
+		}
+		
+		if (data.replacesGF != null)
+		{
+			replacesGF = data.replacesGF;
+		}
+		
+		if (data.positionOffset != null)
+		{
+			if (data.positionOffset.length >= 1)
+				positionOffsetX = data.positionOffset[0];
+			if (data.positionOffset.length >= 2)
+				positionOffsetY = data.positionOffset[1];
+		}
+		if (data.cameraOffset != null)
+		{
+			if (data.cameraOffset.length >= 1)
+				cameraOffsetX = data.cameraOffset[0];
+			if (data.cameraOffset.length >= 2)
+				cameraOffsetY = data.cameraOffset[1];
+		}
 
 		dance();
 
@@ -223,62 +280,22 @@ class Character extends FlxSprite
 	 */
 	public function dance()
 	{
-		if (!debugMode && curCharacter.namespace == "basegame")
+		if (!debugMode)
 		{
-			switch (curCharacter.path)
+			switch (animationMode)
 			{
-				case 'gf':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-
-				case 'gf-christmas':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-
-				case 'gf-car':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-				case 'gf-pixel':
-					if (!animation.curAnim.name.startsWith('hair'))
-					{
-						danced = !danced;
-
-						if (danced)
-							playAnim('danceRight');
-						else
-							playAnim('danceLeft');
-					}
-
-				case 'spooky':
-					danced = !danced;
-
-					if (danced)
-						playAnim('danceRight');
-					else
-						playAnim('danceLeft');
-				default:
+				case Idle:
 					playAnim('idle');
+				case Dance:
+					if (!animation.curAnim.name.startsWith('hair'))
+					{
+						danced = !danced;
+
+						if (danced)
+							playAnim('danceRight');
+						else
+							playAnim('danceLeft');
+					}
 			}
 		}
 	}

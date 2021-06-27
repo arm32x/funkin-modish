@@ -1,6 +1,6 @@
 {
     "$schema": "../character-schema.json",
-    "version": 2,
+    "version": 3,
     "animations": [
         {
             "name": "singUP",
@@ -49,5 +49,7 @@
     ],
     "startingAnimation": {
         "name": "danceRight"
-    }
+    },
+    "animationMode": "dance",
+    "positionOffset": [0, 200]
 }

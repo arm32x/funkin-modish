@@ -40,5 +40,7 @@
     ],
     "startingAnimation": {
         "name": "idle"
-    }
+    },
+    "animationMode": "idle",
+    "positionOffset": [0, 100]
 }

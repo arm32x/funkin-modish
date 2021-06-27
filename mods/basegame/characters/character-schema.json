@@ -6,7 +6,7 @@
     "properties": {
         "version": {
             "type": "integer",
-            "const": 2
+            "const": 3
         },
         "animations": {
             "type": "array",
@@ -75,6 +75,10 @@
             },
             "required": [ "name" ]
         },
+        "animationMode": {
+            "type": "string",
+            "enum": [ "idle", "dance" ]
+        },
         "antialiasing": {
             "type": "boolean"
         },
@@ -120,6 +124,26 @@
                     }
                 },
                 "required": [ "operation", "value" ]
+            }
+        },
+        "replacesGF": {
+            "description": "Places this character in the GF position when it is set as opponent.",
+            "type": "boolean"
+        },
+        "positionOffset": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+                "type": "number"
+            }
+        },
+        "cameraOffset": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+                "type": "number"
             }
         }
     },
