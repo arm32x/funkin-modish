@@ -771,45 +771,54 @@ class PlayState extends MusicBeatState
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
-		if (SONG.player2.namespace == "basegame") switch (SONG.player2.path)
+		// if (SONG.player2.namespace == "basegame") switch (SONG.player2.path)
+		// {
+		// 	case 'gf':
+		// 		dad.setPosition(gf.x, gf.y);
+		// 		gf.visible = false;
+		// 		if (isStoryMode)
+		// 		{
+		// 			camPos.x += 600;
+		// 			tweenCamIn();
+		// 		}
+
+		// 	case "spooky":
+		// 		dad.y += 200;
+		// 	case "monster":
+		// 		dad.y += 100;
+		// 	case 'monster-christmas':
+		// 		dad.y += 130;
+		// 	case 'dad':
+		// 		camPos.x += 400;
+		// 	case 'pico':
+		// 		camPos.x += 600;
+		// 		dad.y += 300;
+		// 	case 'parents-christmas':
+		// 		dad.x -= 500;
+		// 	case 'senpai':
+		// 		dad.x += 150;
+		// 		dad.y += 360;
+		// 		camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+		// 	case 'senpai-angry':
+		// 		dad.x += 150;
+		// 		dad.y += 360;
+		// 		camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+		// 	case 'spirit':
+		// 		dad.x -= 150;
+		// 		dad.y += 100;
+		// 		camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+		// }
+
+		if (dad.replacesGF)
 		{
-			case 'gf':
-				dad.setPosition(gf.x, gf.y);
-				gf.visible = false;
-				if (isStoryMode)
-				{
-					camPos.x += 600;
-					tweenCamIn();
-				}
-
-			case "spooky":
-				dad.y += 200;
-			case "monster":
-				dad.y += 100;
-			case 'monster-christmas':
-				dad.y += 130;
-			case 'dad':
-				camPos.x += 400;
-			case 'pico':
-				camPos.x += 600;
-				dad.y += 300;
-			case 'parents-christmas':
-				dad.x -= 500;
-			case 'senpai':
-				dad.x += 150;
-				dad.y += 360;
-				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-			case 'senpai-angry':
-				dad.x += 150;
-				dad.y += 360;
-				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-			case 'spirit':
-				dad.x -= 150;
-				dad.y += 100;
-				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
+			dad.setPosition(gf.x, gf.y);
+			gf.visible = false;
 		}
-
-
+		
+		dad.x += dad.positionOffsetX;
+		dad.y += dad.positionOffsetY;
+		camPos.x += dad.cameraOffsetX;
+		camPos.y += dad.cameraOffsetY;
 		
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
 
@@ -1227,7 +1236,7 @@ class PlayState extends MusicBeatState
 		{
 			dad.dance();
 			gf.dance();
-			boyfriend.playAnim('idle');
+			boyfriend.dance();
 
 			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 			introAssets.set('default', ['ready', "set", "go"]);
@@ -3248,7 +3257,7 @@ class PlayState extends MusicBeatState
 				if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && (!holdArray.contains(true) || PlayStateChangeables.botPlay))
 				{
 					if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
-						boyfriend.playAnim('idle');
+						boyfriend.dance();
 				}
 		 
 				playerStrums.forEach(function(spr:FlxSprite)
@@ -3827,7 +3836,7 @@ class PlayState extends MusicBeatState
 
 		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
 		{
-			boyfriend.playAnim('idle');
+			boyfriend.dance();
 		}
 		
 
