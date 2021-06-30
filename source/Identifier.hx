@@ -10,6 +10,8 @@ class Identifier
     public final namespace:String;
     public final path:String;
     
+    private var hash:Null<Int> = null;
+    
     public inline function new(?namespace:String = "basegame", path:String)
     {
         this.namespace = namespace;
@@ -39,10 +41,28 @@ class Identifier
         }
     }
     
-    @:op(A == B)
+    // FIXME: Operator overloading only works on abstracts, so all usage of
+    // A == B needs to be updated to A.equals(B).
     public function equals(other:Identifier):Bool
     {
         return namespace == other.namespace && path == other.path;
+    }
+    
+    public function hashCode():Int
+    {
+        // Copypasta’d from Java’s implementation.
+        var h = hash;
+        var value = toString();
+        if (h == null && value.length > 0)
+        {
+            h = 0;
+            for (charCode in value)
+            {
+                h = 31 * h + charCode;
+            }
+            hash = h;
+        }
+        return h;
     }
     
     public function toString():String
