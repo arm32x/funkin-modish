@@ -141,8 +141,8 @@ class ChartingState extends MusicBeatState
 		Conductor.changeBPM(_song.bpm);
 		Conductor.mapBPMChanges(_song);
 
-		leftIcon = new HealthIcon(_song.player1.path);
-		rightIcon = new HealthIcon(_song.player2.path);
+		leftIcon = new HealthIcon(_song.player1);
+		rightIcon = new HealthIcon(_song.player2);
 		leftIcon.scrollFactor.set(1, 1);
 		rightIcon.scrollFactor.set(1, 1);
 
@@ -297,8 +297,8 @@ class ChartingState extends MusicBeatState
 			shiftNotes(Std.int(stepperShiftNoteDial.value),Std.int(stepperShiftNoteDialstep.value),Std.int(stepperShiftNoteDialms.value));
 		});
 
-		var characters:Array<Identifier> = ModLoader.Registry.characters;
-		var gfVersions:Array<Identifier> = ModLoader.Registry.characters; // TODO: Filter based on animations.
+		var characters:Array<Identifier> = HelperFunctions.collectToArray(ModLoader.Registry.characters.keys());
+		var gfVersions:Array<Identifier> = HelperFunctions.collectToArray(ModLoader.Registry.characters.keys()); // TODO: Filter based on animations.
 		var stages:Array<String> = CoolUtil.coolTextFile(Paths.txt('stageList'));
 		var noteStyles:Array<String> = CoolUtil.coolTextFile(Paths.txt('noteStyleList'));
 
@@ -1154,13 +1154,13 @@ class ChartingState extends MusicBeatState
 	{
 		if (check_mustHitSection.checked)
 		{
-			leftIcon.setIcon(_song.player1.path);
-			rightIcon.setIcon(_song.player2.path);
+			leftIcon.setIcon(_song.player1);
+			rightIcon.setIcon(_song.player2);
 		}
 		else
 		{
-			leftIcon.setIcon(_song.player2.path);
-			rightIcon.setIcon(_song.player1.path);
+			leftIcon.setIcon(_song.player2);
+			rightIcon.setIcon(_song.player1);
 		}
 	}
 

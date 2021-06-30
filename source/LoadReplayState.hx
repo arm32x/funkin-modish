@@ -40,14 +40,14 @@ class LoadReplayState extends MusicBeatState
         controlsStrings.sort(Reflect.compare);
 
 		// TODO: Make not hardcoded.
-        addWeek(["bopeepo", "fresh", "dad-battle"].map(Identifier.parse), ['Bopeebo', 'Fresh', 'Dadbattle'], 1, ['dad']);
-        addWeek(["spookeez", "south", "monster"].map(Identifier.parse), ['Spookeez', 'South', 'Monster'], 2, ['spooky']);
-        addWeek(["pico", "philly-nice", "blammed"].map(Identifier.parse), ['Pico', 'Philly', 'Blammed'], 3, ['pico']);
+        addWeek(["bopeepo", "fresh", "dad-battle"].map(Identifier.parse), ['Bopeebo', 'Fresh', 'Dadbattle'], 1, ['dad'].map(Identifier.parse));
+        addWeek(["spookeez", "south", "monster"].map(Identifier.parse), ['Spookeez', 'South', 'Monster'], 2, ['spooky'].map(Identifier.parse));
+        addWeek(["pico", "philly-nice", "blammed"].map(Identifier.parse), ['Pico', 'Philly', 'Blammed'], 3, ['pico'].map(Identifier.parse));
 
-        addWeek(["satin-panties", "high", "milf"].map(Identifier.parse), ['Satin-Panties', 'High', 'Milf'], 4, ['mom']);
-        addWeek(["cocoa", "eggnog", "winter-horrorland"].map(Identifier.parse), ['Cocoa', 'Eggnog', 'Winter-Horrorland'], 5, ['parents-christmas', 'parents-christmas', 'monster-christmas']);
+        addWeek(["satin-panties", "high", "milf"].map(Identifier.parse), ['Satin-Panties', 'High', 'Milf'], 4, ['mom'].map(Identifier.parse));
+        addWeek(["cocoa", "eggnog", "winter-horrorland"].map(Identifier.parse), ['Cocoa', 'Eggnog', 'Winter-Horrorland'], 5, ['parents-christmas', 'parents-christmas', 'monster-christmas'].map(Identifier.parse));
         
-        addWeek(["senpai", "roses", "thorns"].map(Identifier.parse), ['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai', 'spirit']);
+        addWeek(["senpai", "roses", "thorns"].map(Identifier.parse), ['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai', 'spirit'].map(Identifier.parse));
 
 
         for(i in 0...controlsStrings.length)
@@ -121,22 +121,22 @@ class LoadReplayState extends MusicBeatState
         return name;
     }
 
-	public function addSong(songId:Identifier, songName:String, weekNum:Int, songCharacter:String)
+	public function addSong(songId:Identifier, songName:String, weekNum:Int, songIcon:Identifier)
         {
-            songs.push(new FreeplayState.SongMetadata(songId, songName, weekNum, songCharacter));
+            songs.push(new FreeplayState.SongMetadata(songId, songName, weekNum, songIcon));
         }
     
-        public function addWeek(songIds:Array<Identifier>, songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>)
+        public function addWeek(songIds:Array<Identifier>, songs:Array<String>, weekNum:Int, ?songIcons:Array<Identifier>)
         {
-            if (songCharacters == null)
-                songCharacters = ['bf'];
+            if (songIcons == null)
+                songIcons = [new Identifier("basegame", "bf")];
     
             var num:Int = 0;
             for (index => id in songIds)
             {
-                addSong(id, songs[index], weekNum, songCharacters[num]);
+                addSong(id, songs[index], weekNum, songIcons[num]);
     
-                if (songCharacters.length != 1)
+                if (songIcons.length != 1)
                     num++;
             }
         }

@@ -1020,11 +1020,13 @@ class PlayState extends MusicBeatState
 		botPlayState.borderQuality = 2;
 		if(PlayStateChangeables.botPlay && !loadRep) add(botPlayState);
 
-		iconP1 = new HealthIcon(SONG.player1.path, true);
+		var iconP1Id = ModLoader.Registry.characters.get(SONG.player1).icon;
+		iconP1 = new HealthIcon(iconP1Id, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 		add(iconP1);
 
-		iconP2 = new HealthIcon(SONG.player2.path, false);
+		var iconP2Id = ModLoader.Registry.characters.get(SONG.player2).icon;
+		iconP2 = new HealthIcon(iconP2Id, false);
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
@@ -1956,10 +1958,16 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.justPressed.NINE)
 		{
-			if (iconP1.animation.curAnim.name == 'bf-old')
-				iconP1.setIcon(SONG.player1.path);
+			if (iconP1.animation.curAnim.name == 'basegame:bf-old')
+			{
+				var iconP1Id = ModLoader.Registry.characters.get(SONG.player1).icon;
+				iconP1.setIcon(iconP1Id);
+			}
 			else
-				iconP1.setIcon('bf-old');
+			{
+				// TODO: Remove the dependency on the "basegame" mod.
+				iconP1.setIcon(new Identifier("basegame", "bf-old"));
+			}
 		}
 
 		switch (curStage)

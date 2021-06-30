@@ -7,22 +7,22 @@
         <character id="basegame:bf" />
         <character id="basegame:dad" />
         <character id="basegame:gf" />
-        <character id="basegame:gf-car" />
-        <character id="basegame:gf-christmas" />
-        <character id="basegame:gf-pixel" />
+        <character id="basegame:gf-car" icon="basegame:gf" />
+        <character id="basegame:gf-christmas" icon="basegame:gf" />
+        <character id="basegame:gf-pixel" icon="basegame:gf" />
         <character id="basegame:spooky" />
         <character id="basegame:pico" />
         <character id="basegame:mom" />
-        <character id="basegame:mom-car" />
-        <character id="basegame:bf-car" />
+        <character id="basegame:mom-car" icon="basegame:mom" />
+        <character id="basegame:bf-car" icon="basegame:bf" />
         <character id="basegame:parents-christmas" />
-        <character id="basegame:monster-christmas" />
-        <character id="basegame:bf-christmas" />
-        <character id="basegame:gf-christmas" />
+        <character id="basegame:monster-christmas" icon="basegame:monster" />
+        <character id="basegame:bf-christmas" icon="basegame:bf" />
+        <character id="basegame:gf-christmas" icon="basegame:bf" />
         <character id="basegame:monster" />
         <character id="basegame:bf-pixel" />
         <character id="basegame:senpai" />
-        <character id="basegame:senpai-angry" />
+        <character id="basegame:senpai-angry" icon="basegame:senpai" />
         <character id="basegame:spirit" />
         
         <introText top="shoutouts to tom fulp" bottom="lmao" />
@@ -67,24 +67,39 @@
         <introText top="shoutouts to mason" bottom="for da homies" />
         <introText top="bonk" bottom="get in the discord call" />
         
-        <song id="basegame:tutorial" name="Tutorial" icon="gf" week="1" />
-        <song id="basegame:bopeebo" name="Bopeebo" icon="dad" week="1" />
-        <song id="basegame:fresh" name="Fresh" icon="dad" week="1" />
-        <song id="basegame:dad-battle" name="Dad Battle" icon="dad" week="1" />
-        <song id="basegame:spookeez" name="Spookeez" icon="spooky" week="2" />
-        <song id="basegame:south" name="South" icon="spooky" week="2" />
-        <song id="basegame:monster" name="Monster" icon="monster" week="2" />
-        <song id="basegame:pico" name="Pico" icon="pico" week="3" />
-        <song id="basegame:philly-nice" name="Philly Nice" icon="pico" week="3" />
-        <song id="basegame:blammed" name="Blammed" icon="pico" week="3" />
-        <song id="basegame:satin-panties" name="Satin Panties" icon="mom" week="4" />
-        <song id="basegame:high" name="High" icon="mom" week="4" />
-        <song id="basegame:milf" name="Milf" icon="mom" week="4" />
-        <song id="basegame:cocoa" name="Cocoa" icon="parents-christmas" week="5" />
-        <song id="basegame:eggnog" name="Eggnog" icon="parents-christmas" week="5" />
-        <song id="basegame:winter-horrorland" name="Winter Horrorland" icon="monster-christmas" week="5" />
-        <song id="basegame:senpai" name="Senpai" icon="senpai" week="6" />
-        <song id="basegame:roses" name="Roses" icon="senpai" week="6" />
-        <song id="basegame:thorns" name="Thorns" icon="spirit" week="6" />
+        <healthIcon id="basegame:bf" />
+        <healthIcon id="basegame:bf-old" />
+        <healthIcon id="basegame:bf-pixel" antialiasing="false" />
+        <healthIcon id="basegame:dad" />
+        <healthIcon id="basegame:face" />
+        <healthIcon id="basegame:gf" />
+        <healthIcon id="basegame:mom" />
+        <healthIcon id="basegame:monster" />
+        <healthIcon id="basegame:parents-christmas" />
+        <healthIcon id="basegame:pico" />
+        <healthIcon id="basegame:senpai" antialiasing="false" />
+        <healthIcon id="basegame:spirit" antialiasing="false" />
+        <healthIcon id="basegame:spooky" />
+        <healthIcon id="basegame:tankman" />
+        
+        <song id="basegame:tutorial" name="Tutorial" icon="basegame:gf" week="1" />
+        <song id="basegame:bopeebo" name="Bopeebo" icon="basegame:dad" week="1" />
+        <song id="basegame:fresh" name="Fresh" icon="basegame:dad" week="1" />
+        <song id="basegame:dad-battle" name="Dad Battle" icon="basegame:dad" week="1" />
+        <song id="basegame:spookeez" name="Spookeez" icon="basegame:spooky" week="2" />
+        <song id="basegame:south" name="South" icon="basegame:spooky" week="2" />
+        <song id="basegame:monster" name="Monster" icon="basegame:monster" week="2" />
+        <song id="basegame:pico" name="Pico" icon="basegame:pico" week="3" />
+        <song id="basegame:philly-nice" name="Philly Nice" icon="basegame:pico" week="3" />
+        <song id="basegame:blammed" name="Blammed" icon="basegame:pico" week="3" />
+        <song id="basegame:satin-panties" name="Satin Panties" icon="basegame:mom" week="4" />
+        <song id="basegame:high" name="High" icon="basegame:mom" week="4" />
+        <song id="basegame:milf" name="Milf" icon="basegame:mom" week="4" />
+        <song id="basegame:cocoa" name="Cocoa" icon="basegame:parents-christmas" week="5" />
+        <song id="basegame:eggnog" name="Eggnog" icon="basegame:parents-christmas" week="5" />
+        <song id="basegame:winter-horrorland" name="Winter Horrorland" icon="basegame:monster" week="5" />
+        <song id="basegame:senpai" name="Senpai" icon="basegame:senpai" week="6" />
+        <song id="basegame:roses" name="Roses" icon="basegame:senpai" week="6" />
+        <song id="basegame:thorns" name="Thorns" icon="basegame:spirit" week="6" />
     </exports>
 </mod>

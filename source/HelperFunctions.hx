@@ -37,4 +37,14 @@ class HelperFunctions
 	public static function GCD(a, b) {
 		return b == 0 ? FlxMath.absInt(a) : GCD(b, a % b);
 	}
+	
+	public static function collectToArray<T>(it:Iterator<T>):Array<T>
+	{
+		var result = [];
+		while (it.hasNext())
+		{
+			result.push(it.next());
+		}
+		return result;
+	}
 }

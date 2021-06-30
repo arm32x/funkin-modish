@@ -15,74 +15,34 @@ class HealthIcon extends FlxSprite
 	
 	private final isPlayer:Bool;
 
-	public function new(char:String = 'bf', isPlayer:Bool = false)
+	public function new(id:Identifier, isPlayer:Bool = false)
 	{
 		super();
 		this.isPlayer = isPlayer;
 		
 		antialiasing = true;
-		loadIcon(char);
-		animation.play(char);
+		loadIcon(id);
+		animation.play(id.toString());
 		
 		scrollFactor.set();
 	}
 	
-	public function loadIcon(char:String)
+	public function loadIcon(id:Identifier)
 	{
-		var csv = Assets.getText(Paths.csv("healthIcons"));
-		var reader = new Reader();
-		reader.open(csv);
-		
-		var charRecord:Null<Record> = null;
-		for (record in reader)
-		{
-			if (record.length >= 1 && record[0] == char)
-			{
-				charRecord = record;
-				break;
-			}
+		var data = ModLoader.Registry.healthIcons.get(id);
+		if (data == null) {
+			throw new Exception('Health icon "$id" does not exist.');
 		}
 
-		if (charRecord != null)
-		{
-			if (charRecord.length >= 4)
-			{
-				loadGraphic(Paths.image(charRecord[1]), true, 150, 150);
-				var alive = Std.parseInt(charRecord[2]);
-				if (alive == null)
-				{
-					throw new Exception('Alive icon index for character "$char" must be an integer.');
-				}
-				var dead = Std.parseInt(charRecord[3]);
-				if (dead == null)
-				{
-					throw new Exception('Alive icon index for character "$char" must be an integer.');
-				}
-				animation.add(char, [alive, dead], 0, false, isPlayer);
-				
-				if (charRecord.length >= 5 && charRecord[4] == "noaa")
-				{
-					antialiasing = false;
-				}
-			}
-			else
-			{
-				throw new Exception('Character "$char" is missing data in "healthIcons.csv".');
-			}
-		}
-		else
-		{
-			throw new Exception('Character "$char" has no health icon in "healthIcons.csv".');
-		}
+		loadGraphic(id.getAssetPath("health-icons", null, "png"), true, 150, 150);
+		animation.add(id.toString(), [0, 1], 0, false, isPlayer);
+		antialiasing = data.antialiasing;
 	}
 	
-	public function setIcon(char:String)
+	public function setIcon(id:Identifier)
 	{
-		if (animation.getByName(char) == null)
-		{
-			loadIcon(char);
-		}
-		animation.play(char);
+		loadIcon(id);
+		animation.play(id.toString());
 	}
 
 	override function update(elapsed:Float)

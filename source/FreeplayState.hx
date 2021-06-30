@@ -84,7 +84,7 @@ class FreeplayState extends MusicBeatState
 			songText.targetY = i;
 			grpSongs.add(songText);
 
-			var icon:HealthIcon = new HealthIcon(ModLoader.Registry.songs[i].songCharacter);
+			var icon:HealthIcon = new HealthIcon(ModLoader.Registry.songs[i].songIcon);
 			icon.sprTracker = songText;
 
 			// using a FlxGroup is too much fuss!
@@ -332,13 +332,13 @@ class SongMetadata
 	public var songId:Identifier = null;
 	public var songName:String = "";
 	public var week:Int = 0;
-	public var songCharacter:String = "";
+	public var songIcon:Identifier;
 
-	public function new(id:Identifier, song:String, week:Int, songCharacter:String)
+	public function new(id:Identifier, song:String, week:Int, songIcon:Identifier)
 	{
 		this.songId = id;
 		this.songName = song;
 		this.week = week;
-		this.songCharacter = songCharacter;
+		this.songIcon = songIcon;
 	}
 }
