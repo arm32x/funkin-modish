@@ -1,6 +1,6 @@
 {
     "$schema": "../character-schema.json",
-    "version": 2,
+    "version": 3,
     "animations": [
         {
             "name": "cheer",
@@ -73,7 +73,7 @@
             "prefix": "GF Dancing Beat Hair Landing",
             "indices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             "frameRate": 24,
-            "looping": false,
+            "looped": false,
             "offsets": [0, -9]
         },
         {
@@ -85,5 +85,6 @@
     ],
     "startingAnimation": {
         "name": "danceRight"
-    }
+    },
+    "animationMode": "dance"
 }
