@@ -235,7 +235,7 @@ class FreeplayState extends MusicBeatState
 
 		if (accepted)
 		{
-			PlayState.SONG = new Song(songs[curSelected].id).load(HelperFunctions.difficultyToString(curDifficulty));
+			PlayState.SONG = new Song(songs[curSelected].id).load(CoolUtil.difficultyFromInt(curDifficulty).toLowerCase());
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
 			PlayState.storyWeek = songs[curSelected].item.week;

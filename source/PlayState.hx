@@ -2748,7 +2748,7 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					var difficulty:String = HelperFunctions.difficultyToString(storyDifficulty);
+					var difficulty:String = CoolUtil.difficultyFromInt(storyDifficulty).toLowerCase();
 
 					trace('LOADING NEXT SONG');
 					var nextSong = storyPlaylist[0];

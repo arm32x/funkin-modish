@@ -155,7 +155,7 @@ class LoadReplayState extends MusicBeatState
 
 				if (PlayState.rep.replay.replayGameVer == Replay.version)
 				{
-					PlayState.SONG = new Song(Identifier.parse(PlayState.rep.replay.songId)).load(HelperFunctions.difficultyToString(PlayState.rep.replay.songDiff));
+					PlayState.SONG = new Song(Identifier.parse(PlayState.rep.replay.songId)).load(CoolUtil.difficultyFromInt(PlayState.rep.replay.songDiff).toLowerCase());
 					PlayState.isStoryMode = false;
 					PlayState.storyDifficulty = PlayState.rep.replay.songDiff;
 					PlayState.storyWeek = getWeekIdFromSongId(Identifier.parse(PlayState.rep.replay.songId));

@@ -224,7 +224,7 @@ class ResultsScreen extends FlxSubState
 
             music.fadeOut(0.3);
 
-            PlayState.SONG = new Song(Identifier.parse(PlayState.rep.replay.songId)).load(HelperFunctions.difficultyToString(PlayState.rep.replay.songDiff));
+            PlayState.SONG = new Song(Identifier.parse(PlayState.rep.replay.songId)).load(CoolUtil.difficultyFromInt(PlayState.rep.replay.songDiff).toLowerCase());
             PlayState.isStoryMode = false;
             PlayState.storyDifficulty = PlayState.rep.replay.songDiff;
             PlayState.storyWeek = null;
@@ -244,7 +244,7 @@ class ResultsScreen extends FlxSubState
 
             music.fadeOut(0.3);
 
-            PlayState.SONG = new Song(Identifier.parse(PlayState.rep.replay.songId)).load(HelperFunctions.difficultyToString(PlayState.storyDifficulty));
+            PlayState.SONG = new Song(Identifier.parse(PlayState.rep.replay.songId)).load(CoolUtil.difficultyFromInt(PlayState.storyDifficulty).toLowerCase());
             PlayState.isStoryMode = false;
             PlayState.storyDifficulty = PlayState.storyDifficulty;
             PlayState.storyWeek = null;
