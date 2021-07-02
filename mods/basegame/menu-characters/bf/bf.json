@@ -1,0 +1,10 @@
+{
+    "$schema": "../menu-character-schema.json",
+    "version": 2,
+    "prefix": "BF-idle-dance-white",
+    "frameRate": 24,
+    "x": 0,
+    "y": -20,
+    "scale": 1.0,
+    "flipped": true
+}

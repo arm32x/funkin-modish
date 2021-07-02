@@ -34,7 +34,7 @@ class StoryMenuState extends MusicBeatState
 
 	public static var weekUnlocked:Array<Bool> = [];
 
-	public static var weekCharacters:Array<Array<Null<String>>> = [];
+	public static var weekCharacters:Array<Array<Null<Identifier>>> = [];
 
 	public static var weekNames:Array<String> = [];
 
@@ -304,11 +304,11 @@ class StoryMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
 				grpWeekText.members[curWeek].startFlashing();
-				grpWeekCharacters.members[1].setCharacter('bfConfirm');
+				// TODO: This shouldn’t be hardcoded.
+				grpWeekCharacters.members[1].setCharacter(new Identifier("basegame", "bf-confirm"));
 				stopspamming = true;
 			}
 
-			// TODO: Replace week data with identifiers at the source.
 			PlayState.storyPlaylist = weekData[curWeek];
 			PlayState.isStoryMode = true;
 			selectedWeek = true;

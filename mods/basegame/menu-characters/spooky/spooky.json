@@ -1,0 +1,8 @@
+{
+    "$schema": "../menu-character-schema.json",
+    "version": 2,
+    "prefix": "spooky-dance-idle-BLACK-LINES",
+    "frameRate": 24,
+    "x": 20,
+    "y": 30
+}

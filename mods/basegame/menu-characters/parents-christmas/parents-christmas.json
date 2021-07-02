@@ -1,0 +1,9 @@
+{
+    "$schema": "../menu-character-schema.json",
+    "version": 2,
+    "prefix": "Parent-Christmas-Idle",
+    "frameRate": 24,
+    "x": 100,
+    "y": 130,
+    "scale": 1.8
+}

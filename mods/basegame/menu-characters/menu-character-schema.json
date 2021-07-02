@@ -4,12 +4,9 @@
     "description": "Defines characters seen on the story mode menu in the Friday Night Funkin' mod loader Modish.",
     "type": "object",
     "properties": {
-        "type": {
-            "type": "string",
-            "enum": [ "sparrow", "packer", "libgdx" ]
-        },
-        "atlas": {
-            "type": "string"
+        "version": {
+            "type": "integer",
+            "const": 2
         },
         "prefix": {
             "type": "string"
@@ -42,7 +39,7 @@
             "type": "boolean"
         }
     },
-    "required": [ "type", "atlas", "prefix" ],
+    "required": [ "version", "prefix" ],
     "dependencies": {
         "postfix": [ "indices" ]
     }

@@ -1,0 +1,104 @@
+
+pico.png
+size: 2048,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Pico-Idle-Dance0000
+  rotate: false
+  xy: 2, 479
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0001
+  rotate: false
+  xy: 2, 479
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0002
+  rotate: false
+  xy: 2, 2
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0003
+  rotate: false
+  xy: 2, 2
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0004
+  rotate: false
+  xy: 457, 479
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0005
+  rotate: false
+  xy: 457, 2
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0006
+  rotate: false
+  xy: 912, 479
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0007
+  rotate: false
+  xy: 912, 2
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0008
+  rotate: false
+  xy: 1367, 479
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0009
+  rotate: false
+  xy: 1367, 479
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0010
+  rotate: false
+  xy: 1367, 479
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0011
+  rotate: false
+  xy: 1367, 479
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0012
+  rotate: false
+  xy: 1367, 479
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1
+Pico-Idle-Dance0013
+  rotate: false
+  xy: 1367, 479
+  size: 453, 475
+  orig: 453, 475
+  offset: 0, 0
+  index: -1

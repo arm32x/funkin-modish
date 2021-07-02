@@ -14,35 +14,37 @@ typedef ModMetadata =
 typedef CharacterMetadata =
 {
     var icon:Identifier;
-}
+};
 
 typedef HealthIconMetadata =
 {
     var antialiasing:Bool;
-}
+};
+
+typedef MenuCharacterMetadata = {};
 
 typedef SongMetadata =
 {
     var name:String;
     var icon:Identifier;
     var ?week:Identifier;
-}
+};
 
 typedef WeekMetadata =
 {
     var name:String;
-    var ?leftCharacter:String;
-    var ?middleCharacter:String;
-    var ?rightCharacter:String;
+    var ?leftCharacter:Identifier;
+    var ?middleCharacter:Identifier;
+    var ?rightCharacter:Identifier;
     var locked:Bool;
     var playlist:Array<Identifier>;
-}
+};
 
 typedef Entry<T> =
 {
     var id:Identifier;
     var item:T;
-}
+};
 
 class Registry<T>
 {
@@ -51,6 +53,7 @@ class Registry<T>
     public static var characters:Registry<CharacterMetadata> = new Registry("characters");
     public static var introTexts:Array<Array<String>> = [];
     public static var healthIcons:Registry<HealthIconMetadata> = new Registry("health-icons");
+    public static var menuCharacters:Registry<MenuCharacterMetadata> = new Registry("menu-characters");
     public static var songs:Registry<SongMetadata> = new Registry("songs");
     public static var weeks:Registry<WeekMetadata> = new Registry("weeks");
     

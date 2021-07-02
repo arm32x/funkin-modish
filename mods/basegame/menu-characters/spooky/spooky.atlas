@@ -1,0 +1,118 @@
+
+spooky.png
+size: 1024,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+spooky-dance-idle-BLACK-LINES0000
+  rotate: false
+  xy: 2, 2
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0001
+  rotate: false
+  xy: 2, 2
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0002
+  rotate: false
+  xy: 496, 553
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0003
+  rotate: false
+  xy: 496, 553
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0008
+  rotate: false
+  xy: 496, 2
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0009
+  rotate: false
+  xy: 496, 2
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0010
+  rotate: false
+  xy: 2, 1104
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0011
+  rotate: false
+  xy: 2, 1104
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0012
+  rotate: false
+  xy: 2, 553
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0004
+  rotate: false
+  xy: 2, 553
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0005
+  rotate: false
+  xy: 2, 553
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0013
+  rotate: false
+  xy: 2, 553
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0014
+  rotate: false
+  xy: 496, 1104
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0006
+  rotate: false
+  xy: 496, 1104
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0007
+  rotate: false
+  xy: 496, 1104
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1
+spooky-dance-idle-BLACK-LINES0015
+  rotate: false
+  xy: 496, 1104
+  size: 492, 549
+  orig: 492, 549
+  offset: 0, 0
+  index: -1

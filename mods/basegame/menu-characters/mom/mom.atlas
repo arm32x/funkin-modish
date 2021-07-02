@@ -1,0 +1,104 @@
+
+mom.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Mom-Idle-BLACK-LINES0000
+  rotate: false
+  xy: 786, 833
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0001
+  rotate: false
+  xy: 786, 833
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0002
+  rotate: false
+  xy: 786, 2
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0003
+  rotate: false
+  xy: 786, 2
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0004
+  rotate: false
+  xy: 1178, 833
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0005
+  rotate: false
+  xy: 1178, 833
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0006
+  rotate: false
+  xy: 2, 833
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0007
+  rotate: false
+  xy: 2, 833
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0008
+  rotate: false
+  xy: 2, 2
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0009
+  rotate: false
+  xy: 2, 2
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0010
+  rotate: false
+  xy: 394, 833
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0011
+  rotate: false
+  xy: 394, 833
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0012
+  rotate: false
+  xy: 394, 2
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1
+Mom-Idle-BLACK-LINES0013
+  rotate: false
+  xy: 394, 2
+  size: 390, 829
+  orig: 390, 829
+  offset: 0, 0
+  index: -1

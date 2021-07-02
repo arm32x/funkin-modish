@@ -1,0 +1,104 @@
+
+senpai.png
+size: 2048,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+SENPAI-idle-Black-Lines0000
+  rotate: false
+  xy: 340, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0001
+  rotate: false
+  xy: 340, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0002
+  rotate: false
+  xy: 678, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0003
+  rotate: false
+  xy: 678, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0004
+  rotate: false
+  xy: 1016, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0005
+  rotate: false
+  xy: 1016, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0006
+  rotate: false
+  xy: 1354, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0007
+  rotate: false
+  xy: 1354, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0010
+  rotate: false
+  xy: 2, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0008
+  rotate: false
+  xy: 2, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0009
+  rotate: false
+  xy: 2, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0011
+  rotate: false
+  xy: 2, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0012
+  rotate: false
+  xy: 2, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1
+SENPAI-idle-Black-Lines0013
+  rotate: false
+  xy: 2, 2
+  size: 336, 288
+  orig: 336, 288
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,10 @@
+{
+    "$schema": "../menu-character-schema.json",
+    "version": 2,
+    "prefix": "GF-Dancing-Beat-WHITE",
+    "frameRate": 24,
+    "x": 50,
+    "y": 80,
+    "scale": 1.5,
+    "flipped": true
+}

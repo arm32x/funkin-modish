@@ -1,3 +1,5 @@
+import flixel.graphics.frames.FlxAtlasFrames;
+import lime.utils.Assets;
 import haxe.Exception;
 import flixel.math.FlxMath;
 
@@ -48,5 +50,27 @@ class HelperFunctions
 			result.push(it.next());
 		}
 		return result;
+	}
+
+	public static inline function getAtlas(id:Identifier, type:String, ?file:Null<String>):FlxAtlasFrames
+	{
+		var imagePath = id.getAssetPath(type, file, "png");
+		var atlasPath:String;
+		if (Assets.exists(atlasPath = id.getAssetPath(type, file, "xml")))
+		{
+			return FlxAtlasFrames.fromSparrow(imagePath, atlasPath);
+		}
+		else if (Assets.exists(atlasPath = id.getAssetPath(type, file, "txt")))
+		{
+			return FlxAtlasFrames.fromSpriteSheetPacker(imagePath, atlasPath);
+		}
+		else if (Assets.exists(atlasPath = id.getAssetPath(type, file, "atlas")))
+		{
+			return FlxAtlasFrames.fromLibGdx(imagePath, atlasPath);
+		}
+		else
+		{
+			throw new Exception('Could not find texture atlas for "$id" - tried ".xml", ".txt", and ".atlas" formats.');
+		}
 	}
 }

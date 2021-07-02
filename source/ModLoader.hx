@@ -85,6 +85,8 @@ class ModLoader
                         Registry.healthIcons.register(Identifier.parse(export.att.id), {
                             antialiasing: export.has.antialiasing ? (export.att.antialiasing.toLowerCase() == "true") : true
                         });
+                    case "menuCharacter":
+                        Registry.menuCharacters.register(Identifier.parse(export.att.id), {});
                     case "song":
                         Registry.songs.register(Identifier.parse(export.att.id), {
                             name: export.att.name,
@@ -94,9 +96,9 @@ class ModLoader
                     case "week":
                         Registry.weeks.register(Identifier.parse(export.att.id), {
                             name: export.att.name,
-                            leftCharacter: export.has.left ? export.att.left : null,
-                            middleCharacter: export.has.middle ? export.att.middle : null,
-                            rightCharacter: export.has.right ? export.att.right : null,
+                            leftCharacter: export.has.left ? Identifier.parse(export.att.left) : null,
+                            middleCharacter: export.has.middle ? Identifier.parse(export.att.middle) : null,
+                            rightCharacter: export.has.right ? Identifier.parse(export.att.right) : null,
                             playlist: export.nodes.song
                                 .map(function(node) return Identifier.parse(node.att.id)),
                             locked: export.has.locked ? (export.att.locked.toLowerCase() == "true") : false

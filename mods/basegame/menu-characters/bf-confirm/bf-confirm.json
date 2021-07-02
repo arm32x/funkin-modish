@@ -1,0 +1,10 @@
+{
+    "$schema": "../menu-character-schema.json",
+    "version": 2,
+    "prefix": "BF-HEY--",
+    "frameRate": 24,
+    "looped": false,
+    "flipped": true,
+    "x": 10,
+    "y": -17
+}

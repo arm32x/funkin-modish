@@ -1,0 +1,8 @@
+{
+    "$schema": "../menu-character-schema.json",
+    "version": 2,
+    "prefix": "Dad-idle-dance-BLACK-LINE",
+    "frameRate": 24,
+    "x": -15,
+    "y": 130
+}

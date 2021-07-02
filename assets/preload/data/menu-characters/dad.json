@@ -1,9 +1,0 @@
-{
-    "$schema": "./menu-character-schema.json",
-    "type": "sparrow",
-    "atlas": "campaign_menu_UI_characters",
-    "prefix": "Dad idle dance BLACK LINE",
-    "frameRate": 24,
-    "x": -15,
-    "y": 130
-}

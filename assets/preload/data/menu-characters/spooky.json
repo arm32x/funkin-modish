@@ -1,9 +1,0 @@
-{
-    "$schema": "./menu-character-schema.json",
-    "type": "sparrow",
-    "atlas": "campaign_menu_UI_characters",
-    "prefix": "spooky dance idle BLACK LINES",
-    "frameRate": 24,
-    "x": 20,
-    "y": 30
-}

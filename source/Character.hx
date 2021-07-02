@@ -99,7 +99,7 @@ class Character extends FlxSprite
 		
 		trace('Loading character "$character" from JSON.');
 		
-		frames = getCharacterAtlas(character);
+		frames = HelperFunctions.getAtlas(character, "characters", null);
 		
 		if (data.animations != null)
 		{
@@ -347,28 +347,6 @@ class Character extends FlxSprite
 				return value * operation.value;
 			default:
 				throw new Exception('Invalid operation "${operation.operation}".');
-		}
-	}
-	
-	public static inline function getCharacterAtlas(character:Identifier):FlxAtlasFrames
-	{
-		var imagePath = character.getAssetPath("characters", null, "png");
-		var atlasPath:String;
-		if (Assets.exists(atlasPath = character.getAssetPath("characters", null, "xml")))
-		{
-			return FlxAtlasFrames.fromSparrow(imagePath, atlasPath);
-		}
-		else if (Assets.exists(atlasPath = character.getAssetPath("characters", null, "txt")))
-		{
-			return FlxAtlasFrames.fromSpriteSheetPacker(imagePath, atlasPath);
-		}
-		else if (Assets.exists(atlasPath = character.getAssetPath("characters", null, "atlas")))
-		{
-			return FlxAtlasFrames.fromLibGdx(imagePath, atlasPath);
-		}
-		else
-		{
-			throw new Exception('Could not find texture atlas for "$character" - tried ".xml", ".txt", and ".atlas" formats.');
 		}
 	}
 	

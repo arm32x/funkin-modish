@@ -1,0 +1,104 @@
+
+bf.png
+size: 2048,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+BF-idle-dance-white0001
+  rotate: false
+  xy: 2, 416
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0000
+  rotate: false
+  xy: 2, 416
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0002
+  rotate: false
+  xy: 2, 2
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0003
+  rotate: false
+  xy: 2, 2
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0004
+  rotate: false
+  xy: 415, 416
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0005
+  rotate: false
+  xy: 415, 416
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0006
+  rotate: false
+  xy: 415, 2
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0007
+  rotate: false
+  xy: 415, 2
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0008
+  rotate: false
+  xy: 828, 416
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0009
+  rotate: false
+  xy: 828, 416
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0010
+  rotate: false
+  xy: 828, 416
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0011
+  rotate: false
+  xy: 828, 416
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0012
+  rotate: false
+  xy: 828, 416
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1
+BF-idle-dance-white0013
+  rotate: false
+  xy: 828, 416
+  size: 411, 412
+  orig: 411, 412
+  offset: 0, 0
+  index: -1

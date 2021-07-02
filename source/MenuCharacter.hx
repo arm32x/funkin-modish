@@ -1,5 +1,6 @@
 package;
 
+import haxe.ds.HashMap;
 import haxe.Exception;
 import haxe.Json;
 import openfl.utils.Assets;
@@ -7,8 +8,7 @@ import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 
 typedef MenuCharacterJSON = {
-	var type:String;
-	var atlas:String;
+	var version:Int;
 	var prefix:String;
 	var ?indices:Array<Int>;
 	var ?postfix:String;
@@ -22,6 +22,8 @@ typedef MenuCharacterJSON = {
 
 class MenuCharacter extends FlxSprite
 {
+	private static var CURRENT_FORMAT:Int = 2;
+	
 	// private static var settings:Map<String, CharacterSetting> = [
 	// 	'bf' => new CharacterSetting(0, -20, 1.0, true),
 	// 	'gf' => new CharacterSetting(50, 80, 1.5, true),
@@ -33,8 +35,7 @@ class MenuCharacter extends FlxSprite
 	// 	'senpai' => new CharacterSetting(-40, -45, 1.4)
 	// ];
 	
-	private static var cachedData:Map<String, MenuCharacterJSON> = [];
-	private var currentAtlas:Null<String> = null;
+	private static var cachedData:HashMap<Identifier, MenuCharacterJSON> = new HashMap();
 
 	private var initialScale:Float;
 	private var flipped:Bool = false;
@@ -63,7 +64,7 @@ class MenuCharacter extends FlxSprite
 		updateHitbox();
 	}
 	
-	private function loadCharacter(character:String):MenuCharacterJSON
+	private function loadCharacter(character:Identifier):MenuCharacterJSON
 	{
 		var data = cachedData.get(character);
 		if (data != null)
@@ -72,14 +73,14 @@ class MenuCharacter extends FlxSprite
 		}
 		else
 		{
-			var json = Assets.getText(Paths.json('menu-characters/$character'));	
+			var json = Assets.getText(character.getAssetPath("menu-characters", null, "json"));	
 			var newData:MenuCharacterJSON = Json.parse(json);
 			cachedData.set(character, newData);
 			return newData;
 		}
 	}
 
-	public function setCharacter(character:Null<String>):Void
+	public function setCharacter(character:Null<Identifier>):Void
 	{
 		if (character == null)
 		{
@@ -93,43 +94,36 @@ class MenuCharacter extends FlxSprite
 
 		var data = loadCharacter(character);
 
-		if (data.atlas != currentAtlas)
-		{
-			if (frames != null)
-			{
-				frames.destroy();
-			}
-			animation.destroyAnimations();
-			frames = Paths.getAtlas(data.type, data.atlas);
-			currentAtlas = data.atlas;
-			
-			// Setting 'frames' resets the size of the sprite.
-			setGraphicSize(Std.int(width * initialScale));
-			updateHitbox();
-		}
+		animation.destroyAnimations();
+		frames = HelperFunctions.getAtlas(character, "menu-characters", null);
 		
-		if (animation.getByName(character) == null)
+		// Setting 'frames' resets the size of the sprite.
+		setGraphicSize(Std.int(width * initialScale));
+		updateHitbox();
+		
+		if (animation.getByName(character.toString()) == null)
 		{
 			var frameRate = data.frameRate != null ? data.frameRate : 30;
 			var looped = data.looped != null ? data.looped : true;
 			if (data.indices != null)
 			{
 				var postfix = data.postfix != null ? data.postfix : "";
-				animation.addByIndices(character, data.prefix, data.indices, postfix, frameRate, looped);
+				animation.addByIndices(character.toString(), data.prefix, data.indices, postfix, frameRate, looped);
 			}
 			else
 			{
-				animation.addByPrefix(character, data.prefix, frameRate, looped);
+				animation.addByPrefix(character.toString(), data.prefix, frameRate, looped);
 			}
 		}
 
-		animation.play(character);
+		animation.play(character.toString());
 		
 		var x = data.x != null ? data.x : 0;
 		var y = data.y != null ? data.y : 0;
 		var scale = data.scale != null ? data.scale : 1.0;
 		var flipped = data.flipped != null ? data.flipped : false;
 
+		updateHitbox();
 		offset.set(x, y);
 		setGraphicSize(Std.int(width * scale));
 		flipX = flipped != this.flipped;
