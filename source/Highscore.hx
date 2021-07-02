@@ -5,23 +5,16 @@ import flixel.FlxG;
 using StringTools;
 class Highscore
 {
-	#if (haxe >= "4.0.0")
 	public static var songScores:Map<String, Int> = new Map();
 	public static var songCombos:Map<String, String> = new Map();
-	#else
-	public static var songScores:Map<String, Int> = new Map<String, Int>();
-	public static var songCombos:Map<String, String> = new Map<String, String>();
-	#end
 
-
-	// TODO: Make high scores use Identifier to identify songs.
-	public static function saveScore(song:String, score:Int = 0, ?diff:Int = 0):Void
+	public static function saveScore(song:Identifier, score:Int = 0, ?diff:Int = 0):Void
 	{
 		var daSong:String = formatSong(song, diff);
 
 
 		#if !switch
-		NGio.postScore(score, song);
+		NGio.postScore(score, song.toString());
 		#end
 
 		if(!FlxG.save.data.botplay)
@@ -36,7 +29,7 @@ class Highscore
 		}else trace('BotPlay detected. Score saving is disabled.');
 	}
 
-	public static function saveCombo(song:String, combo:String, ?diff:Int = 0):Void
+	public static function saveCombo(song:Identifier, combo:String, ?diff:Int = 0):Void
 	{
 		var daSong:String = formatSong(song, diff);
 		var finalCombo:String = combo.split(')')[0].replace('(', '');
@@ -53,16 +46,16 @@ class Highscore
 		}
 	}
 
-	public static function saveWeekScore(weekName:String, score:Int = 0, ?diff:Int = 0):Void
+	public static function saveWeekScore(week:Identifier, score:Int = 0, ?diff:Int = 0):Void
 	{
+		var daWeek:String = formatSong("week", week, diff);
 
 		#if !switch
-		NGio.postScore(score, weekName);
+		NGio.postScore(score, daWeek);
 		#end
 
 		if(!FlxG.save.data.botplay)
 		{
-			var daWeek:String = formatSong('week_' + HelperFunctions.sanitizeString(weekName), diff);
 
 			if (songScores.exists(daWeek))
 			{
@@ -93,20 +86,13 @@ class Highscore
 		FlxG.save.flush();
 	}
 
-	public static function formatSong(song:String, diff:Int):String
+	// TODO: Make difficulties strings.
+	static function formatSong(?prefix:String, song:Identifier, diff:Int):String
 	{
-		var daSong = StringTools.replace(song, " ", "-");
-		switch (daSong) {
-			case 'Dad-Battle': daSong = 'Dadbattle';
-			case 'Philly-Nice': daSong = 'Philly';
-		}
-
-		if (diff == 0)
-			daSong += '-easy';
-		else if (diff == 2)
-			daSong += '-hard';
-
-		return daSong;
+		if (prefix != null)
+			return '$prefix $song ${CoolUtil.difficultyFromInt(diff).toLowerCase()}';
+		else
+			return '$song ${CoolUtil.difficultyFromInt(diff).toLowerCase()}';
 	}
 
 	static function getComboInt(combo:String):Int
@@ -126,7 +112,7 @@ class Highscore
 		}
 	}
 
-	public static function getScore(song:String, diff:Int):Int
+	public static function getScore(song:Identifier, diff:Int):Int
 	{
 		if (!songScores.exists(formatSong(song, diff)))
 			setScore(formatSong(song, diff), 0);
@@ -134,7 +120,7 @@ class Highscore
 		return songScores.get(formatSong(song, diff));
 	}
 
-	public static function getCombo(song:String, diff:Int):String
+	public static function getCombo(song:Identifier, diff:Int):String
 	{
 		if (!songCombos.exists(formatSong(song, diff)))
 			setCombo(formatSong(song, diff), '');
@@ -142,13 +128,12 @@ class Highscore
 		return songCombos.get(formatSong(song, diff));
 	}
 
-	// FIXME: This loads the wrong data because it uses week numbers instead of week names.
-	public static function getWeekScore(week:Int, diff:Int):Int
+	public static function getWeekScore(week:Identifier, diff:Int):Int
 	{
-		if (!songScores.exists(formatSong('week' + week, diff)))
-			setScore(formatSong('week' + week, diff), 0);
+		if (!songScores.exists(formatSong('week', week, diff)))
+			setScore(formatSong('week', week, diff), 0);
 
-		return songScores.get(formatSong('week' + week, diff));
+		return songScores.get(formatSong('week', week, diff));
 	}
 
 	public static function load():Void

@@ -26,13 +26,15 @@ using StringTools;
 class StoryMenuState extends MusicBeatState
 {
 	var scoreText:FlxText;
+	
+	public static var weekIds:Array<Identifier> = [];
 
-	public static var weekData:Array<Array<String>> = [];
+	public static var weekData:Array<Array<Identifier>> = [];
 	var curDifficulty:Int = 1;
 
 	public static var weekUnlocked:Array<Bool> = [];
 
-	public static var weekCharacters:Array<Array<String>> = [];
+	public static var weekCharacters:Array<Array<Null<String>>> = [];
 
 	public static var weekNames:Array<String> = [];
 
@@ -183,33 +185,13 @@ class StoryMenuState extends MusicBeatState
 	
 	private function loadData()
 	{
-		var csv = Assets.getText(Paths.csv("storyWeeks"));
-		var reader = new Reader();
-		reader.open(csv);
+		var entries = Registry.weeks.getAllEntries();
 		
-		weekNames = [];
-		weekData = [];
-		weekCharacters = [];
-		weekUnlocked = [];
-		
-		for (record in reader) {
-			if (record.length < 4)
-			{
-				continue;
-			}
-
-			weekNames.push(record[0]);
-			weekCharacters.push([record[1], record[2], record[3]]);
-			
-			var songs:Array<String> = [];
-			for (index in 4...(record.length))
-			{
-				songs.push(record[index]);
-			}
-			
-			weekData.push(songs);
-			weekUnlocked.push(true);
-		}
+		weekIds        = entries.map(function(e) return e.id);
+		weekData       = entries.map(function(e) return e.item.playlist);
+		weekUnlocked   = entries.map(function(e) return !e.item.locked);
+		weekCharacters = entries.map(function(e) return [e.item.leftCharacter, e.item.middleCharacter, e.item.rightCharacter]);
+		weekNames      = entries.map(function(e) return e.item.name);
 	}
 
 	override function update(elapsed:Float)
@@ -327,7 +309,7 @@ class StoryMenuState extends MusicBeatState
 			}
 
 			// TODO: Replace week data with identifiers at the source.
-			PlayState.storyPlaylist = weekData[curWeek].map(Identifier.parse);
+			PlayState.storyPlaylist = weekData[curWeek];
 			PlayState.isStoryMode = true;
 			selectedWeek = true;
 
@@ -341,7 +323,7 @@ class StoryMenuState extends MusicBeatState
 			PlayState.goods = 0;
 			PlayState.campaignMisses = 0;
 			PlayState.SONG = new Song(PlayState.storyPlaylist[0]).load(diffic);
-			PlayState.storyWeek = curWeek;
+			PlayState.storyWeek = weekIds[curWeek];
 			PlayState.campaignScore = 0;
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
@@ -378,10 +360,10 @@ class StoryMenuState extends MusicBeatState
 
 		// USING THESE WEIRD VALUES SO THAT IT DOESNT FLOAT UP
 		sprDifficulty.y = leftArrow.y - 15;
-		intendedScore = Highscore.getWeekScore(curWeek, curDifficulty);
+		intendedScore = Highscore.getWeekScore(weekIds[curWeek], curDifficulty);
 
 		#if !switch
-		intendedScore = Highscore.getWeekScore(curWeek, curDifficulty);
+		intendedScore = Highscore.getWeekScore(weekIds[curWeek], curDifficulty);
 		#end
 
 		FlxTween.tween(sprDifficulty, {y: leftArrow.y + 15, alpha: 1}, 0.07);
@@ -423,7 +405,7 @@ class StoryMenuState extends MusicBeatState
 		grpWeekCharacters.members[2].setCharacter(weekCharacters[curWeek][2]);
 
 		txtTracklist.text = "Tracks\n";
-		var stringThing:Array<String> = weekData[curWeek];
+		var stringThing:Array<String> = weekData[curWeek].map(function(id) return Registry.songs.get(id).name);
 
 		for (i in stringThing)
 			txtTracklist.text += "\n" + i;
@@ -436,7 +418,7 @@ class StoryMenuState extends MusicBeatState
 		txtTracklist.text += "\n";
 
 		#if !switch
-		intendedScore = Highscore.getWeekScore(curWeek, curDifficulty);
+		intendedScore = Highscore.getWeekScore(weekIds[curWeek], curDifficulty);
 		#end
 	}
 }

@@ -10,6 +10,7 @@ class HelperFunctions
 		return num;
 	}
 	
+	@:deprecated
 	public static function sanitizeString(str:String)
 	{
 		str = ~/[^a-zA-Z0-9_]/g.replace(str, "_");
@@ -19,6 +20,7 @@ class HelperFunctions
 	}
 	
 	// TODO: Replace difficulties with strings throughout the codebase.
+	@:deprecated("'HelperFunctions.difficultyToString()' is deprecated, use 'CoolUtil.difficultyFromInt().toLowerCase()' instead.")
 	public static inline function difficultyToString(difficultyNumber:Int):String
 	{
 		switch (difficultyNumber)

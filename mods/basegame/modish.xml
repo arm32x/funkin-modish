@@ -18,7 +18,6 @@
         <character id="basegame:parents-christmas" />
         <character id="basegame:monster-christmas" icon="basegame:monster" />
         <character id="basegame:bf-christmas" icon="basegame:bf" />
-        <character id="basegame:gf-christmas" icon="basegame:bf" />
         <character id="basegame:monster" />
         <character id="basegame:bf-pixel" />
         <character id="basegame:senpai" />
@@ -101,5 +100,39 @@
         <song id="basegame:senpai" name="Senpai" icon="basegame:senpai" week="6" />
         <song id="basegame:roses" name="Roses" icon="basegame:senpai" week="6" />
         <song id="basegame:thorns" name="Thorns" icon="basegame:spirit" week="6" />
+        
+        <week id="basegame:tutorial" name="" middle="bf" right="gf">
+            <song id="basegame:tutorial" />
+        </week>
+        <week id="basegame:week1" name="Daddy Dearest" left="dad" middle="bf" right="gf">
+            <song id="basegame:bopeebo" />
+            <song id="basegame:fresh" />
+            <song id="basegame:dad-battle" />
+        </week>
+        <week id="basegame:week2" name="Spooky Month" left="spooky" middle="bf" right="gf">
+            <song id="basegame:spookeez" />
+            <song id="basegame:south" />
+            <song id="basegame:monster" />
+        </week>
+        <week id="basegame:week3" name="PICO" left="pico" middle="bf" right="gf">
+            <song id="basegame:pico" />
+            <song id="basegame:philly-nice" />
+            <song id="basegame:blammed" />
+        </week>
+        <week id="basegame:week4" name="MOMMY MUST MURDER" left="mom" middle="bf" right="gf">
+            <song id="basegame:satin-panties" />
+            <song id="basegame:high" />
+            <song id="basegame:milf" />
+        </week>
+        <week id="basegame:week5" name="RED SNOW" left="parents-christmas" middle="bf" right="gf">
+            <song id="basegame:cocoa" />
+            <song id="basegame:eggnog" />
+            <song id="basegame:winter-horrorland" />
+        </week>
+        <week id="basegame:week6" name="Hating Simulator ft. Moawling" left="senpai" middle="bf" right="gf">
+            <song id="basegame:senpai" />
+            <song id="basegame:roses" />
+            <song id="basegame:thorns" />
+        </week>
     </exports>
 </mod>

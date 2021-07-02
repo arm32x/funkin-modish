@@ -1,5 +1,6 @@
 package;
 
+import Registry.SongMetadata;
 import flixel.input.gamepad.FlxGamepad;
 import flash.text.TextField;
 import flixel.FlxG;
@@ -20,7 +21,7 @@ using StringTools;
 
 class FreeplayState extends MusicBeatState
 {
-	// var songs:Array<SongMetadata> = [];
+	var songs:Array<Registry.Entry<SongMetadata>> = [];
 
 	var selector:FlxText;
 	var curSelected:Int = 0;
@@ -55,6 +56,8 @@ class FreeplayState extends MusicBeatState
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 		 */
+		
+		songs = Registry.songs.getAllEntries();
 
 		 #if windows
 		 // Updating Discord Rich Presence
@@ -77,14 +80,14 @@ class FreeplayState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-		for (i in 0...ModLoader.Registry.songs.length)
+		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, ModLoader.Registry.songs[i].songName, true, false, true);
+			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].item.name, true, false, true);
 			songText.isMenuItem = true;
 			songText.targetY = i;
 			grpSongs.add(songText);
 
-			var icon:HealthIcon = new HealthIcon(ModLoader.Registry.songs[i].songIcon);
+			var icon:HealthIcon = new HealthIcon(songs[i].item.icon);
 			icon.sprTracker = songText;
 
 			// using a FlxGroup is too much fuss!
@@ -232,10 +235,10 @@ class FreeplayState extends MusicBeatState
 
 		if (accepted)
 		{
-			PlayState.SONG = new Song(ModLoader.Registry.songs[curSelected].songId).load(HelperFunctions.difficultyToString(curDifficulty));
+			PlayState.SONG = new Song(songs[curSelected].id).load(HelperFunctions.difficultyToString(curDifficulty));
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
-			PlayState.storyWeek = ModLoader.Registry.songs[curSelected].week;
+			PlayState.storyWeek = songs[curSelected].item.week;
 			trace('CUR WEEK' + PlayState.storyWeek);
 			LoadingState.loadAndSwitchState(new PlayState());
 		}
@@ -249,17 +252,10 @@ class FreeplayState extends MusicBeatState
 			curDifficulty = 2;
 		if (curDifficulty > 2)
 			curDifficulty = 0;
-
-		// adjusting the highscore song name to be compatible (changeDiff)
-		var songHighscore = StringTools.replace(ModLoader.Registry.songs[curSelected].songName, " ", "-");
-		switch (songHighscore) {
-			case 'Dad-Battle': songHighscore = 'Dadbattle';
-			case 'Philly-Nice': songHighscore = 'Philly';
-		}
 		
 		#if !switch
-		intendedScore = Highscore.getScore(songHighscore, curDifficulty);
-		combo = Highscore.getCombo(songHighscore, curDifficulty);
+		intendedScore = Highscore.getScore(songs[curSelected].id, curDifficulty);
+		combo = Highscore.getCombo(songs[curSelected].id, curDifficulty);
 		#end
 
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
@@ -277,28 +273,20 @@ class FreeplayState extends MusicBeatState
 		curSelected += change;
 
 		if (curSelected < 0)
-			curSelected = ModLoader.Registry.songs.length - 1;
-		if (curSelected >= ModLoader.Registry.songs.length)
+			curSelected = songs.length - 1;
+		if (curSelected >= songs.length)
 			curSelected = 0;
 
 		// selector.y = (70 * curSelected) + 30;
-		
-		// adjusting the highscore song name to be compatible (changeSelection)
-		// would read original scores if we didn't change packages
-		var songHighscore = StringTools.replace(ModLoader.Registry.songs[curSelected].songName, " ", "-");
-		switch (songHighscore) {
-			case 'Dad-Battle': songHighscore = 'Dadbattle';
-			case 'Philly-Nice': songHighscore = 'Philly';
-		}
 
 		#if !switch
-		intendedScore = Highscore.getScore(songHighscore, curDifficulty);
-		combo = Highscore.getCombo(songHighscore, curDifficulty);
+		intendedScore = Highscore.getScore(songs[curSelected].id, curDifficulty);
+		combo = Highscore.getCombo(songs[curSelected].id, curDifficulty);
 		// lerpScore = 0;
 		#end
 
 		#if PRELOAD_ALL
-		FlxG.sound.playMusic(ModLoader.Registry.songs[curSelected].songId.getAssetPath("songs", "instrumental", Paths.SOUND_EXT), 0);
+		FlxG.sound.playMusic(songs[curSelected].id.getAssetPath("songs", "instrumental", Paths.SOUND_EXT), 0);
 		#end
 
 		var bullShit:Int = 0;
@@ -327,18 +315,18 @@ class FreeplayState extends MusicBeatState
 	}
 }
 
-class SongMetadata
-{
-	public var songId:Identifier = null;
-	public var songName:String = "";
-	public var week:Int = 0;
-	public var songIcon:Identifier;
+// class SongMetadata
+// {
+// 	public var songId:Identifier = null;
+// 	public var songName:String = "";
+// 	public var week:Int = 0;
+// 	public var songIcon:Identifier;
 
-	public function new(id:Identifier, song:String, week:Int, songIcon:Identifier)
-	{
-		this.songId = id;
-		this.songName = song;
-		this.week = week;
-		this.songIcon = songIcon;
-	}
-}
+// 	public function new(id:Identifier, song:String, week:Int, songIcon:Identifier)
+// 	{
+// 		this.songId = id;
+// 		this.songName = song;
+// 		this.week = week;
+// 		this.songIcon = songIcon;
+// 	}
+// }

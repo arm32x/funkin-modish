@@ -80,7 +80,7 @@ class PlayState extends MusicBeatState
 	public static var curStage:String = '';
 	public static var SONG:Song;
 	public static var isStoryMode:Bool = false;
-	public static var storyWeek:Int = 0;
+	public static var storyWeek:Null<Identifier> = null;
 	public static var storyPlaylist:Array<Identifier> = [];
 	public static var storyDifficulty:Int = 1;
 	public static var weekSong:Int = 0;
@@ -1020,12 +1020,12 @@ class PlayState extends MusicBeatState
 		botPlayState.borderQuality = 2;
 		if(PlayStateChangeables.botPlay && !loadRep) add(botPlayState);
 
-		var iconP1Id = ModLoader.Registry.characters.get(SONG.player1).icon;
+		var iconP1Id = Registry.characters.get(SONG.player1).icon;
 		iconP1 = new HealthIcon(iconP1Id, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 		add(iconP1);
 
-		var iconP2Id = ModLoader.Registry.characters.get(SONG.player2).icon;
+		var iconP2Id = Registry.characters.get(SONG.player2).icon;
 		iconP2 = new HealthIcon(iconP2Id, false);
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
@@ -1628,14 +1628,10 @@ class PlayState extends MusicBeatState
 			var babyArrow:FlxSprite = new FlxSprite(0, strumLine.y);
 
 			//defaults if no noteStyle was found in chart
-			var noteTypeCheck:String = 'normal';
+			var noteTypeCheck:String = SONG.noteStyle != null ? SONG.noteStyle : "normal";
 		
 			if (PlayStateChangeables.Optimize && player == 0)
 				continue;
-
-			if (SONG.noteStyle == null) {
-				switch(storyWeek) {case 6: noteTypeCheck = 'pixel';}
-			} else {noteTypeCheck = SONG.noteStyle;}
 
 			switch (noteTypeCheck)
 			{
@@ -1958,15 +1954,17 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.justPressed.NINE)
 		{
-			if (iconP1.animation.curAnim.name == 'basegame:bf-old')
+			var iconP1Id = Registry.characters.get(SONG.player1).icon;
+			var iconP2Id = Registry.characters.get(SONG.player2).icon;
+			if (iconP1.animation.curAnim.name == iconP2Id.toString() && iconP2.animation.curAnim.name == iconP1Id.toString())
 			{
-				var iconP1Id = ModLoader.Registry.characters.get(SONG.player1).icon;
 				iconP1.setIcon(iconP1Id);
+				iconP2.setIcon(iconP2Id);
 			}
 			else
 			{
-				// TODO: Remove the dependency on the "basegame" mod.
-				iconP1.setIcon(new Identifier("basegame", "bf-old"));
+				iconP1.setIcon(iconP2Id);
+				iconP2.setIcon(iconP1Id);
 			}
 		}
 
@@ -2684,8 +2682,8 @@ class PlayState extends MusicBeatState
 		if (SONG.validScore)
 		{
 			#if !switch
-			Highscore.saveScore(SONG.name, Math.round(songScore), storyDifficulty);
-			Highscore.saveCombo(SONG.name, Ratings.GenerateLetterRank(accuracy), storyDifficulty);
+			Highscore.saveScore(SONG.id, Math.round(songScore), storyDifficulty);
+			Highscore.saveCombo(SONG.id, Ratings.GenerateLetterRank(accuracy), storyDifficulty);
 			#end
 		}
 
@@ -2730,12 +2728,19 @@ class PlayState extends MusicBeatState
 					// #end
 
 					// if ()
-					StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
+					if (storyWeek != null)
+					{
+						var curWeekIndex = Registry.weeks.list().indexOf(storyWeek);
+						if (curWeekIndex != -1)
+						{
+							StoryMenuState.weekUnlocked[Std.int(Math.min(curWeekIndex + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
+						}
+					}
 
 					if (SONG.validScore)
 					{
 						NGio.unlockMedal(60961);
-						Highscore.saveWeekScore(StoryMenuState.weekNames[storyWeek], campaignScore, storyDifficulty);
+						Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
 					}
 
 					FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;

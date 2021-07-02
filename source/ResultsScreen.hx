@@ -181,15 +181,9 @@ class ResultsScreen extends FlxSubState
             PlayState.loadRep = false;
             PlayState.rep = null;
 
-			var songHighscore = StringTools.replace(PlayState.SONG.name, " ", "-");
-			switch (songHighscore) {
-				case 'Dad-Battle': songHighscore = 'Dadbattle';
-				case 'Philly-Nice': songHighscore = 'Philly';
-			}
-
 			#if !switch
-			Highscore.saveScore(songHighscore, Math.round(PlayState.instance.songScore), PlayState.storyDifficulty);
-			Highscore.saveCombo(songHighscore, Ratings.GenerateLetterRank(PlayState.instance.accuracy),PlayState.storyDifficulty);
+			Highscore.saveScore(PlayState.SONG.id, Math.round(PlayState.instance.songScore), PlayState.storyDifficulty);
+			Highscore.saveCombo(PlayState.SONG.id, Ratings.GenerateLetterRank(PlayState.instance.accuracy),PlayState.storyDifficulty);
 			#end
 
             if (PlayState.isStoryMode)
@@ -224,8 +218,8 @@ class ResultsScreen extends FlxSubState
 			// }
 
 			#if !switch
-			Highscore.saveScore(PlayState.SONG.name, Math.round(PlayState.instance.songScore), PlayState.storyDifficulty);
-			Highscore.saveCombo(PlayState.SONG.name, Ratings.GenerateLetterRank(PlayState.instance.accuracy),PlayState.storyDifficulty);
+			Highscore.saveScore(PlayState.SONG.id, Math.round(PlayState.instance.songScore), PlayState.storyDifficulty);
+			Highscore.saveCombo(PlayState.SONG.id, Ratings.GenerateLetterRank(PlayState.instance.accuracy),PlayState.storyDifficulty);
 			#end
 
             music.fadeOut(0.3);
@@ -233,7 +227,7 @@ class ResultsScreen extends FlxSubState
             PlayState.SONG = new Song(Identifier.parse(PlayState.rep.replay.songId)).load(HelperFunctions.difficultyToString(PlayState.rep.replay.songDiff));
             PlayState.isStoryMode = false;
             PlayState.storyDifficulty = PlayState.rep.replay.songDiff;
-            PlayState.storyWeek = 0;
+            PlayState.storyWeek = null;
             LoadingState.loadAndSwitchState(new PlayState());
         }
 
@@ -244,8 +238,8 @@ class ResultsScreen extends FlxSubState
             PlayState.loadRep = false;
 
 			#if !switch
-			Highscore.saveScore(PlayState.SONG.name, Math.round(PlayState.instance.songScore), PlayState.storyDifficulty);
-			Highscore.saveCombo(PlayState.SONG.name, Ratings.GenerateLetterRank(PlayState.instance.accuracy),PlayState.storyDifficulty);
+			Highscore.saveScore(PlayState.SONG.id, Math.round(PlayState.instance.songScore), PlayState.storyDifficulty);
+			Highscore.saveCombo(PlayState.SONG.id, Ratings.GenerateLetterRank(PlayState.instance.accuracy),PlayState.storyDifficulty);
 			#end
 
             music.fadeOut(0.3);
@@ -253,7 +247,7 @@ class ResultsScreen extends FlxSubState
             PlayState.SONG = new Song(Identifier.parse(PlayState.rep.replay.songId)).load(HelperFunctions.difficultyToString(PlayState.storyDifficulty));
             PlayState.isStoryMode = false;
             PlayState.storyDifficulty = PlayState.storyDifficulty;
-            PlayState.storyWeek = 0;
+            PlayState.storyWeek = null;
             LoadingState.loadAndSwitchState(new PlayState());
         }
 

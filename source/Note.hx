@@ -62,12 +62,7 @@ class Note extends FlxSprite
 
 		var daStage:String = PlayState.curStage;
 
-		//defaults if no noteStyle was found in chart
-		var noteTypeCheck:String = 'normal';
-
-		if (PlayState.SONG.noteStyle == null) {
-			switch(PlayState.storyWeek) {case 6: noteTypeCheck = 'pixel';}
-		} else {noteTypeCheck = PlayState.SONG.noteStyle;}
+		var noteTypeCheck:String = PlayState.SONG.noteStyle != null ? PlayState.SONG.noteStyle : 'normal';
 
 		switch (noteTypeCheck)
 		{

@@ -251,7 +251,7 @@ class TitleState extends MusicBeatState
 
 	function getIntroTextShit():Array<Array<String>>
 	{
-		return ModLoader.Registry.introTexts;
+		return Registry.introTexts;
 	}
 
 	var transitioning:Bool = false;

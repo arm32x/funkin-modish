@@ -9,27 +9,6 @@ import lime.utils.Assets;
 import sys.FileSystem;
 #end
 
-typedef Mod =
-{
-    var id:String;
-    var name:String;
-    var ?description:String;
-};
-
-class Registry
-{
-    public static var mods:Array<Mod> = [];
-
-    public static var characters:HashMap<Identifier, {
-        var icon:Identifier;
-    }> = new HashMap();
-    public static var introTexts:Array<Array<String>> = [];
-    public static var healthIcons:HashMap<Identifier, {
-        var antialiasing:Bool;
-    }> = new HashMap();
-    public static var songs:Array<FreeplayState.SongMetadata> = [];
-}
-
 class ModLoader
 {
     // The mod API is not stable yet, so this number will stay at 0 for a while.
@@ -97,21 +76,31 @@ class ModLoader
                 {
                     case "character":
                         var id = Identifier.parse(export.att.id);
-                        Registry.characters.set(id, {
+                        Registry.characters.register(id, {
                             icon: export.has.icon ? Identifier.parse(export.att.icon) : id
                         });
                     case "introText":
                         Registry.introTexts.push([export.att.top, export.att.bottom]);
                     case "healthIcon":
-                        Registry.healthIcons.set(Identifier.parse(export.att.id), {
-                            antialiasing: export.has.antialiasing ? (export.att.antialiasing.toLowerCase() == "true") : true                        });
+                        Registry.healthIcons.register(Identifier.parse(export.att.id), {
+                            antialiasing: export.has.antialiasing ? (export.att.antialiasing.toLowerCase() == "true") : true
+                        });
                     case "song":
-                        Registry.songs.push(new FreeplayState.SongMetadata(
-                            Identifier.parse(export.att.id),
-                            export.att.name,
-                            Std.parseInt(export.att.week),
-                            Identifier.parse(export.att.icon)
-                        ));
+                        Registry.songs.register(Identifier.parse(export.att.id), {
+                            name: export.att.name,
+                            icon: Identifier.parse(export.att.icon),
+                            week: export.has.week ? Identifier.parse(export.att.week) : null
+                        });
+                    case "week":
+                        Registry.weeks.register(Identifier.parse(export.att.id), {
+                            name: export.att.name,
+                            leftCharacter: export.has.left ? export.att.left : null,
+                            middleCharacter: export.has.middle ? export.att.middle : null,
+                            rightCharacter: export.has.right ? export.att.right : null,
+                            playlist: export.nodes.song
+                                .map(function(node) return Identifier.parse(node.att.id)),
+                            locked: export.has.locked ? (export.att.locked.toLowerCase() == "true") : false
+                        });
                     default:
                         throw new Exception('Invalid export type "${export.name}" in mod "$id".');
                 }

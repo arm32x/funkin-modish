@@ -29,7 +29,7 @@ class HealthIcon extends FlxSprite
 	
 	public function loadIcon(id:Identifier)
 	{
-		var data = ModLoader.Registry.healthIcons.get(id);
+		var data = Registry.healthIcons.get(id);
 		if (data == null) {
 			throw new Exception('Health icon "$id" does not exist.');
 		}

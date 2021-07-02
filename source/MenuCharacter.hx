@@ -79,9 +79,9 @@ class MenuCharacter extends FlxSprite
 		}
 	}
 
-	public function setCharacter(character:String):Void
+	public function setCharacter(character:Null<String>):Void
 	{
-		if (character == '')
+		if (character == null)
 		{
 			visible = false;
 			return;
