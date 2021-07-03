@@ -95,7 +95,7 @@ class LoadReplayState extends MusicBeatState
         for (i in 0...songs.length)
         {
             var pog = songs[i];
-            if (pog.id == songId)
+            if (pog.id.equals(songId))
                 week = pog.item.week;
         }
         return week;
@@ -107,7 +107,7 @@ class LoadReplayState extends MusicBeatState
         for (i in 0...songs.length)
         {
             var pog = songs[i];
-            if (pog.id == songId)
+            if (pog.id.equals(songId))
                 name = pog.item.name;
         }
         return name;

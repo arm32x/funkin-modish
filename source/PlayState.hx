@@ -637,7 +637,7 @@ class PlayState extends MusicBeatState
 					bgGirls = new BackgroundGirls(-100, 190);
 					bgGirls.scrollFactor.set(0.9, 0.9);
 
-					if (SONG.id == new Identifier("basegame", "roses"))
+					if (SONG.id.equals(new Identifier("basegame", "roses")))
 						{
 							if(FlxG.save.data.distractions){
 								bgGirls.getScared();
@@ -1129,11 +1129,11 @@ class PlayState extends MusicBeatState
 		senpaiEvil.updateHitbox();
 		senpaiEvil.screenCenter();
 
-		if (SONG.id == new Identifier("basegame", "roses"))
+		if (SONG.id.equals(new Identifier("basegame", "roses")))
 		{
 			remove(black);
 
-			if (SONG.id == new Identifier("basegame", "thorns"))
+			if (SONG.id.equals(new Identifier("basegame", "thorns")))
 			{
 				add(red);
 			}
@@ -1153,7 +1153,7 @@ class PlayState extends MusicBeatState
 				{
 					inCutscene = true;
 
-					if (SONG.id == new Identifier("basegame", "thorns"))
+					if (SONG.id.equals(new Identifier("basegame", "thorns")))
 					{
 						add(senpaiEvil);
 						senpaiEvil.alpha = 0;
@@ -2270,7 +2270,7 @@ class PlayState extends MusicBeatState
 						camFollow.x = dad.getMidpoint().x - 100;
 				}
 
-				if (dad.curCharacter == new Identifier("basegame", "mom"))
+				if (dad.curCharacter.equals(new Identifier("basegame", "mom")))
 					vocals.volume = 1;
 			}
 
@@ -2317,7 +2317,7 @@ class PlayState extends MusicBeatState
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
 
-		if (curSong == new Identifier("basegame", "fresh"))
+		if (curSong.equals(new Identifier("basegame", "fresh")))
 		{
 			switch (curBeat)
 			{
@@ -2336,7 +2336,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (curSong == new Identifier("basegame", "bopeebo"))
+		if (curSong.equals(new Identifier("basegame", "bopeebo")))
 		{
 			switch (curBeat)
 			{
@@ -2754,7 +2754,7 @@ class PlayState extends MusicBeatState
 					var nextSong = storyPlaylist[0];
 					trace('$nextSong-$difficulty');
 
-					if (SONG.id == new Identifier("basegame", "eggnog"))
+					if (SONG.id.equals(new Identifier("basegame", "eggnog")))
 					{
 						var blackShit:FlxSprite = new FlxSprite(-FlxG.width * FlxG.camera.zoom,
 							-FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
@@ -3795,7 +3795,7 @@ class PlayState extends MusicBeatState
 		// }
 		// #end
 
-		if (curSong == new Identifier("basegame", "tutorial") && dad.curCharacter == new Identifier("basegame", "gf")) {
+		if (curSong.equals(new Identifier("basegame", "tutorial")) && dad.curCharacter.equals(new Identifier("basegame", "gf"))) {
 			if (curBeat % 2 == 1 && dad.animOffsets.exists('danceLeft'))
 				dad.playAnim('danceLeft');
 			if (curBeat % 2 == 0 && dad.animOffsets.exists('danceRight'))
@@ -3822,7 +3822,7 @@ class PlayState extends MusicBeatState
 		if (FlxG.save.data.camzoom)
 		{
 			// HARDCODING FOR MILF ZOOMS!
-			if (curSong == new Identifier("basegame", "milf") && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
+			if (curSong.equals(new Identifier("basegame", "milf")) && curBeat >= 168 && curBeat < 200 && camZooming && FlxG.camera.zoom < 1.35)
 			{
 				FlxG.camera.zoom += 0.015;
 				camHUD.zoom += 0.03;
@@ -3853,12 +3853,12 @@ class PlayState extends MusicBeatState
 		}
 		
 
-		if (curBeat % 8 == 7 && curSong == new Identifier("basegame", "bopeepo"))
+		if (curBeat % 8 == 7 && curSong.equals(new Identifier("basegame", "bopeepo")))
 		{
 			boyfriend.playAnim('hey', true);
 		}
 
-		if (curBeat % 16 == 15 && SONG.id == new Identifier("basegame", "tutorial") && dad.curCharacter == new Identifier("basegame", "gf") && curBeat > 16 && curBeat < 48)
+		if (curBeat % 16 == 15 && SONG.id.equals(new Identifier("basegame", "tutorial")) && dad.curCharacter.equals(new Identifier("basegame", "gf")) && curBeat > 16 && curBeat < 48)
 			{
 				boyfriend.playAnim('hey', true);
 				dad.playAnim('cheer', true);

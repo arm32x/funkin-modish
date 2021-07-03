@@ -151,9 +151,9 @@ class DialogueBox extends FlxSpriteGroup
 	override function update(elapsed:Float)
 	{
 		// HARD CODING CUZ IM STUPDI
-		if (PlayState.SONG.id == new Identifier("basegame", "roses"))
+		if (PlayState.SONG.id.equals(new Identifier("basegame", "roses")))
 			portraitLeft.visible = false;
-		if (PlayState.SONG.id == new Identifier("basegame", "thorns"))
+		if (PlayState.SONG.id.equals(new Identifier("basegame", "thorns")))
 		{
 			portraitLeft.color = FlxColor.BLACK;
 			swagDialogue.color = FlxColor.WHITE;
@@ -189,7 +189,7 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					isEnding = true;
 
-					if (PlayState.SONG.id == new Identifier("basegame", "senpai") || PlayState.SONG.id == new Identifier("basegame", "thorns"))
+					if (PlayState.SONG.id.equals(new Identifier("basegame", "senpai")) || PlayState.SONG.id.equals(new Identifier("basegame", "thorns")))
 						FlxG.sound.music.fadeOut(2.2, 0);
 
 					new FlxTimer().start(0.2, function(tmr:FlxTimer)

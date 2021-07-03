@@ -267,9 +267,6 @@ class Character extends FlxSprite
 			}
 		}
 
-		if (curCharacter == new Identifier("basegame", "gf") && animation.curAnim.name == 'hairFall' && animation.curAnim.finished)
-			playAnim('danceRight');
-
 		super.update(elapsed);
 	}
 	
@@ -287,7 +284,7 @@ class Character extends FlxSprite
 				case Idle:
 					playAnim('idle', force, reversed, frame);
 				case Dance:
-					if (!animation.curAnim.name.startsWith('hair'))
+					if (!animation.curAnim.name.startsWith('hair') || animation.curAnim.name == "hairFall" && animation.curAnim.finished)
 					{
 						danced = !danced;
 
@@ -312,7 +309,7 @@ class Character extends FlxSprite
 		else
 			offset.set(0, 0);
 
-		if (curCharacter == new Identifier('basegame', 'gf'))
+		if (animationMode == Dance)
 		{
 			if (animName == 'singLEFT')
 			{
