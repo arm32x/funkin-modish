@@ -37,6 +37,7 @@ class Identifier
         }
         else
         {
+            trace('String "$identifier" parsed as "basegame:$identifier" using default namespace "basegame".');
             return new Identifier("basegame", identifier);
         }
     }
