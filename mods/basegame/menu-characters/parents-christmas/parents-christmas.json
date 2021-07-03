@@ -3,7 +3,8 @@
     "version": 2,
     "prefix": "Parent-Christmas-Idle",
     "frameRate": 24,
-    "x": 100,
-    "y": 130,
+    "x": 235,
+    "y": 235,
+    "width": 415,
     "scale": 1.8
 }

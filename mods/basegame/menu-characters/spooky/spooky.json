@@ -3,6 +3,7 @@
     "version": 2,
     "prefix": "spooky-dance-idle-BLACK-LINES",
     "frameRate": 24,
-    "x": 20,
-    "y": 30
+    "x": 42,
+    "y": 67,
+    "width": 415
 }

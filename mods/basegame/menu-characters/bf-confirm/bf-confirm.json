@@ -5,6 +5,7 @@
     "frameRate": 24,
     "looped": false,
     "flipped": true,
-    "x": 10,
-    "y": -17
+    "x": 0,
+    "y": -17,
+    "scale": 1.1
 }

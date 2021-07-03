@@ -3,6 +3,7 @@
     "version": 2,
     "prefix": "Dad-idle-dance-BLACK-LINE",
     "frameRate": 24,
-    "x": -15,
-    "y": 130
+    "x": -10,
+    "y": 220,
+    "width": 415
 }

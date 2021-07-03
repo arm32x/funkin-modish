@@ -16,6 +16,8 @@ typedef MenuCharacterJSON = {
 	var ?looped:Bool;
 	var ?x:Int;
 	var ?y:Int;
+	var ?width:Int;
+	var ?height:Int;
 	var ?scale:Float;
 	var ?flipped:Bool;
 };
@@ -97,8 +99,18 @@ class MenuCharacter extends FlxSprite
 		animation.destroyAnimations();
 		frames = HelperFunctions.getAtlas(character, "menu-characters", null);
 		
-		// Setting 'frames' resets the size of the sprite.
-		setGraphicSize(Std.int(width * initialScale));
+		// When loading an atlas, the size of the sprite is set to the size of
+		// the first frame in the sprite by default.
+		// 
+		// In the original game, all the characters are loaded from the same
+		// atlas. Therefore, the scales and offsets for these characters are
+		// based on the size of the first one.
+		// 
+		// This code allows the split characters to set their size to the size
+		// of the original first character before applying their own scale.
+		var width = data.width != null ? data.width : 0;
+		var height = data.height != null ? data.height : 0;
+		setGraphicSize(width, height);
 		updateHitbox();
 		
 		if (animation.getByName(character.toString()) == null)
@@ -120,12 +132,12 @@ class MenuCharacter extends FlxSprite
 		
 		var x = data.x != null ? data.x : 0;
 		var y = data.y != null ? data.y : 0;
-		var scale = data.scale != null ? data.scale : 1.0;
+		var dataScale = data.scale != null ? data.scale : 1.0;
 		var flipped = data.flipped != null ? data.flipped : false;
 
-		updateHitbox();
 		offset.set(x, y);
-		setGraphicSize(Std.int(width * scale));
+		scale.scale(initialScale);
+		scale.scale(dataScale);
 		flipX = flipped != this.flipped;
 	}
 }

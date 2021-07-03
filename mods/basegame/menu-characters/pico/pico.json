@@ -3,8 +3,9 @@
     "version": 2,
     "prefix": "Pico-Idle-Dance",
     "frameRate": 24,
-    "x": 0,
-    "y": 0,
+    "x": 10,
+    "y": 15,
+    "width": 415,
     "scale": 1.0,
     "flipped": true
 }

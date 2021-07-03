@@ -3,8 +3,9 @@
     "version": 2,
     "prefix": "GF-Dancing-Beat-WHITE",
     "frameRate": 24,
-    "x": 50,
-    "y": 80,
+    "x": 130,
+    "y": 145,
+    "width": 415,
     "scale": 1.5,
     "flipped": true
 }

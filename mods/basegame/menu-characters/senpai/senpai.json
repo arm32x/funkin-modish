@@ -3,7 +3,8 @@
     "version": 2,
     "prefix": "SENPAI-idle-Black-Lines",
     "frameRate": 24,
-    "x": -40,
-    "y": -45,
+    "x": -45,
+    "y": -54,
+    "width": 415,
     "scale": 1.4
 }
