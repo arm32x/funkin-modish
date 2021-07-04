@@ -252,6 +252,9 @@ class MainMenuState extends MusicBeatState
 
 			case 'options':
 				FlxG.switchState(new OptionsMenu());
+			
+			case 'mods':
+				FlxG.switchState(new ModsMenuState());
 		}
 	}
 

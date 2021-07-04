@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mod id="basegame" format="0">
-    <name>Friday Night Funkin' - Kade Engine</name>
+    <name>Friday Night Funkin' Kade Engine</name>
     <version>1.5.4</version>
+    <description>A competitive rhythm game engine rewrite for FNF.</description>
     
     <exports>
         <character id="basegame:bf" />

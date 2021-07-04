@@ -53,8 +53,6 @@ class ModLoader
         {
             throw new Exception('Mod "${xml.att.id}" was loaded with incorrect ID "$id". Try renaming the mod folder or ZIP to "${xml.att.id}".');
         }
-        var name = xml.node.name.innerData;
-        var description = xml.hasNode.description ? xml.node.description.innerData : null;
 
         var format = Std.parseInt(xml.att.format);
         if (format < CURRENT_FORMAT)
@@ -66,7 +64,12 @@ class ModLoader
             throw new Exception('Mod too new: "$id" uses mod format $format, current version is $CURRENT_FORMAT.');
         }
         
-        Registry.mods.push({id: id, name: name, description: description});
+        Registry.mods.push({
+            id: id,
+            name: xml.node.name.innerData,
+            version: xml.hasNode.version ? xml.node.version.innerData : null,
+            description: xml.hasNode.description ? xml.node.description.innerData : null
+        });
         
         if (!sparse && xml.hasNode.exports)
         {
