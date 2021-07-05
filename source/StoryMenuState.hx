@@ -188,7 +188,7 @@ class StoryMenuState extends MusicBeatState
 		var entries = Registry.weeks.getAllEntries();
 		
 		weekIds        = entries.map(function(e) return e.id);
-		weekData       = entries.map(function(e) return e.item.playlist);
+		weekData       = entries.map(function(e) return e.item.playlist.copy());
 		weekUnlocked   = entries.map(function(e) return !e.item.locked);
 		weekCharacters = entries.map(function(e) return [e.item.leftCharacter, e.item.middleCharacter, e.item.rightCharacter]);
 		weekNames      = entries.map(function(e) return e.item.name);

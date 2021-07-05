@@ -244,7 +244,7 @@ class ResultsScreen extends FlxSubState
 
             music.fadeOut(0.3);
 
-            PlayState.SONG = new Song(Identifier.parse(PlayState.rep.replay.songId)).load(CoolUtil.difficultyFromInt(PlayState.storyDifficulty).toLowerCase());
+            PlayState.SONG = new Song(PlayState.SONG.id).load(CoolUtil.difficultyFromInt(PlayState.storyDifficulty).toLowerCase());
             PlayState.isStoryMode = false;
             PlayState.storyDifficulty = PlayState.storyDifficulty;
             PlayState.storyWeek = null;
