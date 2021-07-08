@@ -39,13 +39,15 @@ class ModLoader
         {
             throw new Exception("Not yet implemented.");
         }
+        else #end if (Assets.exists('default:mods/$id/modish.xml'))
+        {
+            var library = new ProxyAssetLibrary(Assets.getLibrary("default"), 'mods/$id/');
+            Assets.registerLibrary(id, library);
+        }
         else
         {
             throw new Exception('Mod "$id" not found.');
         }
-        #else
-        throw new Exception("Mod loading is not implemented on non-sys targets.");
-        #end
         
         var xml = new Access(Xml.parse(Assets.getText('$id:modish.xml')).firstElement());
 

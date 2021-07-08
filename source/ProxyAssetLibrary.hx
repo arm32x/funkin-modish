@@ -61,9 +61,9 @@ class ProxyAssetLibrary extends AssetLibrary
     {
         var output = library.list(type);
         return output
-            .filter(function(id) return id.startsWith(basePath))
-            .map(function(id) return id.substring(basePath.length))
-            .map(function(id) return if (id.startsWith("/")) id.substring(1) else id);
+            .filter(id -> id.startsWith(basePath))
+            .map(id -> id.substring(basePath.length))
+            .map(id -> id.startsWith("/") ? id.substring(1) : id);
     }
     
     override public function load():Future<AssetLibrary>

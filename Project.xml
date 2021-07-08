@@ -103,7 +103,10 @@
 	</section> -->
 	<!-- END NEW ASSETS LAYOUT -->
 	
+	<!-- All mods in the 'mods' folder at compile time will be bundled with
+	     the engine. -->
 	<assets path='mods' embed='false'/>
+	
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
 	<!-- <template path='mods' /> -->
