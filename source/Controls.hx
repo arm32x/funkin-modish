@@ -1,5 +1,9 @@
 package;
 
+#if android
+import flixel.input.android.FlxAndroidKey;
+import flixel.input.android.FlxAndroidKeys.FlxAndroidKeyInput;
+#end
 import flixel.input.gamepad.FlxGamepad;
 import flixel.FlxG;
 import flixel.input.FlxInput;
@@ -596,6 +600,11 @@ class Controls extends FlxActionSet
 		inline bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
 		inline bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
 		inline bindKeys(Control.RESET, [FlxKey.fromString(FlxG.save.data.killBind)]);
+		
+		#if android
+		FlxG.android.preventDefaultKeys.push(FlxAndroidKey.BACK);
+		_back.addInput(@:privateAccess FlxG.android.getKey(FlxAndroidKey.BACK), JUST_RELEASED);
+		#end
 	}
 
 	function removeKeyboard()
