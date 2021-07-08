@@ -179,8 +179,31 @@ class MainMenuState extends MusicBeatState
 			{
 				FlxG.switchState(new TitleState());
 			}
+			
+			var accepted = controls.ACCEPT;
+			
+			#if !FLX_NO_TOUCH
+			for (index => sprite in menuItems.members)
+			{
+				if (TouchControls.areaJustTouched(sprite.getHitbox()))
+				{
+					trace('Item $index with rect ${sprite.getHitbox()} touched when item $curSelected was selected.');
+					if (index == curSelected)
+					{
+						accepted = true;
+					}
+					else
+					{
+						FlxG.sound.play(Paths.sound('scrollMenu'));
+						changeItem(index - curSelected);
+					}
+					
+					break;
+				}
+			}
+			#end
 
-			if (controls.ACCEPT)
+			if (accepted)
 			{
 				if (optionShit[curSelected] == 'donate')
 				{
