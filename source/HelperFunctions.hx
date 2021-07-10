@@ -52,19 +52,19 @@ class HelperFunctions
 		return result;
 	}
 
-	public static inline function getAtlas(id:Identifier, type:String, ?file:Null<String>):FlxAtlasFrames
+	public static inline function getAtlas(id:Identifier, collection:String, ?file:Null<String>):FlxAtlasFrames
 	{
-		var imagePath = id.getAssetPath(type, file, "png");
+		var imagePath = id.getAssetPath(collection, file, "png");
 		var atlasPath:String;
-		if (Assets.exists(atlasPath = id.getAssetPath(type, file, "xml")))
+		if (Assets.exists(atlasPath = id.getAssetPath(collection, file, "xml")))
 		{
 			return FlxAtlasFrames.fromSparrow(imagePath, atlasPath);
 		}
-		else if (Assets.exists(atlasPath = id.getAssetPath(type, file, "txt")))
+		else if (Assets.exists(atlasPath = id.getAssetPath(collection, file, "txt")))
 		{
 			return FlxAtlasFrames.fromSpriteSheetPacker(imagePath, atlasPath);
 		}
-		else if (Assets.exists(atlasPath = id.getAssetPath(type, file, "atlas")))
+		else if (Assets.exists(atlasPath = id.getAssetPath(collection, file, "atlas")))
 		{
 			return FlxAtlasFrames.fromLibGdx(imagePath, atlasPath);
 		}

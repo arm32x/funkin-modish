@@ -71,15 +71,15 @@ class Identifier
         return '$namespace:$path';
     }
     
-    public function getAssetPath(type:String, file:Null<String>, extension:String):String
+    public function getAssetPath(collection:String, file:Null<String>, extension:String):String
     {
         if (file != null)
         {
-            return '$namespace:$type/$path/$file.$extension';
+            return '$namespace:$collection/$path/$file.$extension';
         }
         else
         {
-            return '$namespace:$type/$path/$path.$extension';
+            return '$namespace:$collection/$path/$path.$extension';
         }
     }
     
