@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxTimer;
 import Registry.SongMetadata;
 import flixel.input.gamepad.FlxGamepad;
 import flash.text.TextField;
@@ -33,6 +34,8 @@ class FreeplayState extends MusicBeatState
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 	var combo:String = '';
+	
+	var songTimer:Null<FlxTimer> = null;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
@@ -285,9 +288,15 @@ class FreeplayState extends MusicBeatState
 		// lerpScore = 0;
 		#end
 
-		#if PRELOAD_ALL
-		FlxG.sound.playMusic(songs[curSelected].id.getAssetPath("songs", "instrumental", Paths.SOUND_EXT), 0);
-		#end
+		FlxG.sound.music.stop();
+		if (songTimer != null)
+		{
+			songTimer.cancel();
+		}
+		songTimer = new FlxTimer().start(0.5, function(timer)
+		{
+			FlxG.sound.playMusic(songs[curSelected].id.getAssetPath("songs", "instrumental", Paths.SOUND_EXT), 0);
+		});
 
 		var bullShit:Int = 0;
 
