@@ -29,6 +29,7 @@ class FreeplayState extends MusicBeatState
 	var curDifficulty:Int = 1;
 
 	var scoreText:FlxText;
+	var scoreBG:FlxSprite;
 	var comboText:FlxText;
 	var diffText:FlxText;
 	var lerpScore:Int = 0;
@@ -107,7 +108,7 @@ class FreeplayState extends MusicBeatState
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 		// scoreText.alignment = RIGHT;
 
-		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 66, 0xFF000000);
+		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 66, 0xFF000000);
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
 
@@ -235,6 +236,31 @@ class FreeplayState extends MusicBeatState
 		{
 			FlxG.switchState(new MainMenuState());
 		}
+		
+		#if !FLX_NO_TOUCH
+		if (TouchControls.areaJustTouched(scoreBG.getHitbox()))
+		{
+			changeDiff(1);
+		}
+
+		for (index => sprite in grpSongs.members)
+		{
+			if (TouchControls.areaJustTouched(sprite.getHitbox()))
+			{
+				trace('Item $index with rect ${sprite.getHitbox()} touched when item $curSelected was selected.');
+				if (index == curSelected)
+				{
+					accepted = true;
+				}
+				else
+				{
+					changeSelection(index - curSelected);
+				}
+				
+				break;
+			}
+		}
+		#end
 
 		if (accepted)
 		{
