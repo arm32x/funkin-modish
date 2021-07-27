@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxDestroyUtil;
 import haxe.Exception;
 import openfl.utils.Assets;
 import haxe.Json;
@@ -53,6 +54,13 @@ enum AnimationMode
 	Dance;
 }
 
+enum Position
+{
+	Player;
+	Girlfriend;
+	Opponent;
+}
+
 class Character extends FlxSprite
 {
 	static final CURRENT_FORMAT:Int = 3;
@@ -61,8 +69,10 @@ class Character extends FlxSprite
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
 
-	public var isPlayer:Bool = false;
+	public var curPosition:Position;
 	public var curCharacter:Identifier;
+	
+	public var isPlayer(get, never):Bool;
 
 	public var holdTimer:Float = 0;
 	
@@ -73,17 +83,17 @@ class Character extends FlxSprite
 	public var cameraOffsetX:Float = 0;
 	public var cameraOffsetY:Float = 0;
 	
+	public var script:Script;
+	
 	var animationMode:AnimationMode = Idle;
 
-	public function new(x:Float, y:Float, ?character:Identifier, ?isPlayer:Bool = false)
+	public function new(x:Float, y:Float, character:Identifier, position:Position, runScripts:Bool = false)
 	{
 		super(x, y);
-		
-		if (character == null) character = new Identifier("basegame", "bf");
 
 		animOffsets = new Map<String, Array<Dynamic>>();
 		curCharacter = character;
-		this.isPlayer = isPlayer;
+		curPosition = position;
 
 		antialiasing = true;
 
@@ -244,6 +254,21 @@ class Character extends FlxSprite
 				}
 			}
 		}
+		
+		if (runScripts)
+		{
+			script = EventTarget.register(new Script("characters", curCharacter), switch(curPosition)
+			{
+				case Player: "player";
+				case Girlfriend: "girlfriend";
+				case Opponent: "opponent";
+			});
+			script.run([
+				"animation" => this.animation,
+				"dance" => this.dance,
+				"playAnim" => this.playAnim
+			]);
+		}
 	}
 
 	override function update(elapsed:Float)
@@ -350,5 +375,14 @@ class Character extends FlxSprite
 	public static inline function getCharacterJSON(character:Identifier):CharacterJSON
 	{
 		return Json.parse(Assets.getText(character.getAssetPath("characters", null, "json")));
+	}
+	
+	override public function destroy()
+	{
+		script = FlxDestroyUtil.destroy(script);
+	}
+
+	function get_isPlayer():Bool {
+		return curPosition == Player;
 	}
 }

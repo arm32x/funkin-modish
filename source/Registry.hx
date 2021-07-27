@@ -80,6 +80,17 @@ class Registry<T>
         }
     }
     
+    public function unregister(id:Identifier) {
+        if (!items.exists(id)) 
+        {
+            throw new Exception('Item "$id" not registered in registry "$name".');
+        }
+        else {
+            ids.remove(id);
+            items.remove(id);
+        }
+    }
+    
     public function get(id:Identifier):Null<T>
     {
         return items.get(id);

@@ -1,5 +1,7 @@
 package;
 
+import flixel.util.FlxDestroyUtil;
+import flixel.util.FlxDestroyUtil.IFlxDestroyable;
 import Section.SwagSection;
 import haxe.Json;
 import haxe.format.JsonParser;
@@ -24,9 +26,9 @@ typedef SongJSON =
 	var ?validScore:Bool;
 }
 
-class Song
+class Song implements IFlxDestroyable
 {
-	public var id:Identifier;
+	public var id(default, null):Identifier;
 	
 	public var name:String = "Untitled";
 	public var notes:Array<SwagSection> = [];
@@ -40,6 +42,8 @@ class Song
 	public var noteStyle:String = 'normal'; // TODO: Replace with Identifier.
 	public var stage:String = 'stage'; // TODO: Replace with Identifier.
 	public var validScore:Bool = true; // TODO: Remove.
+	
+	public var script(default, null):Null<Script> = null;
 
 	public function new(id:Identifier)
 	{
@@ -50,6 +54,14 @@ class Song
 	{
 		var jsonText = Assets.getText(id.getAssetPath("songs", difficulty, "json"));
 		loadFromJSON(jsonText, false);
+		
+		if (script == null || id != script.id)
+		{
+			EventTarget.unregister(script);
+			script = EventTarget.register(new Script("songs", id), "song");
+			script.run();
+		}
+		
 		return this;
 	}
 
@@ -68,5 +80,10 @@ class Song
 		if (data.noteStyle != null) noteStyle = data.noteStyle;
 		if (data.stage != null) stage = data.stage;
 		return this;
+	}
+	
+	public function destroy()
+	{
+		script = FlxDestroyUtil.destroy(script);
 	}
 }

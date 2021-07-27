@@ -1,18 +1,18 @@
 package;
 
+import haxe.extern.EitherType;
+import flixel.util.FlxDestroyUtil.IFlxDestroyable;
 import haxe.ds.HashMap;
 
 class Event
 {
     public final id:Identifier;
-    public final data:Any;
-    public final sender:EventTarget;
+    public final data:Null<Dynamic>;
     
-    public function new(id:Identifier, data:Any, sender:EventTarget)
+    public function new(id:Identifier, data:Any)
     {
         this.id = id;
         this.data = data;
-        this.sender = sender;
     }
     
     public var defaultPrevented(default, null):Bool = false;
@@ -23,30 +23,29 @@ class Event
     }
 }
 
-class EventTarget
+class EventTarget implements IFlxDestroyable
 {
-    private var handlers:HashMap<Identifier, Array<Event->Void>> = new HashMap();
+    private static var registry:Map<String, Array<EventTarget>> = [];
 
-    private static var registered:Array<EventTarget> = [];
+    // An EventTarget for events to/from the game's Haxe code.
+    public static final CORE:EventTarget = register(new EventTarget(), "core");
+
+    private var handlers:HashMap<Identifier, Array<Event->Void>> = new HashMap();
     
-    public function unicast(target:EventTarget, eventId:Identifier, data:Any, ?defaultHandler:Event->Void)
-    {
-        var event = new Event(eventId, data, this);
-        target.handle(event);
-        if (defaultHandler != null && !event.defaultPrevented)
-        {
-            defaultHandler(event);
-        }
-    }
+    public function new() {}
     
-    public function broadcast(eventId:Identifier, data:Any, ?defaultHandler:Event->Void)
+    public function fire(targetSelectors:Array<String>, eventId:Identifier, ?data:Dynamic, ?defaultHandler:Event->Void)
     {
-        var event = new Event(eventId, data, this);
-        for (target in registered)
+        var event = new Event(eventId, data);
+        for (selector in targetSelectors)
         {
-            if (target != this)
+            var targets = registry.get(selector);
+            if (targets != null)
             {
-                target.handle(event);
+                for (target in targets)
+                {
+                    target.handle(event);
+                }
             }
         }
         if (defaultHandler != null && !event.defaultPrevented)
@@ -67,6 +66,11 @@ class EventTarget
         }
     }
     
+    public function forward(targetSelectors:Array<String>):Event->Void
+    {
+        return e -> fire(targetSelectors, e.id, e.data);
+    }
+    
     private function handle(event:Event)
     {
         if (handlers.exists(event.id))
@@ -78,13 +82,42 @@ class EventTarget
         }
     }
     
-    public static function register(target:EventTarget)
+    public static function register<T:EventTarget>(target:T, selector:String):T
     {
-        registered.push(target);
+        if (registry.exists(selector))
+        {
+            registry.get(selector).push(target);
+        }
+        else
+        {
+            registry.set(selector, [target]);
+        }
+        if (selector != "all")
+        {
+            register(target, "all");
+        }
+        return target;
     }
     
-    public static function unregister(target:EventTarget)
+    public static function unregister<T:EventTarget>(target:T, selector:String = "all"):T
     {
-        registered.remove(target);
+        if (selector != "all")
+        {
+            registry.get(selector).remove(target);
+            registry.get("all").remove(target);
+        }
+        else
+        {
+            for (_ => targets in registry)
+            {
+                targets.remove(target);
+            }
+        }
+        return target;
+    }
+    
+    public function destroy()
+    {
+        unregister(this);
     }
 }

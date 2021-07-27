@@ -11,9 +11,9 @@ class Boyfriend extends Character
 {
 	public var stunned:Bool = false;
 
-	public function new(x:Float, y:Float, ?character:Identifier)
+	public function new(x:Float, y:Float, character:Identifier, position:Character.Position = Player, ?runScripts:Bool)
 	{
-		super(x, y, character, true);
+		super(x, y, character, position, runScripts);
 	}
 
 	override function update(elapsed:Float)

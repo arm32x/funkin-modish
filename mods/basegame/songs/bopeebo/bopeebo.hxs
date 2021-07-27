@@ -1,0 +1,7 @@
+on(new Identifier("core", "beat"), function(e)
+{
+    if (e.data.beat % 8 == 7)
+    {
+        fire(["player"], new Identifier("basegame", "cheer"));
+    }
+});

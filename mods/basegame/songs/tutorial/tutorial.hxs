@@ -1,0 +1,7 @@
+on(new Identifier("core", "beat"), function(e)
+{
+    if (e.data.beat % 16 == 15 && e.data.beat > 16 && e.data.beat < 48)
+    {
+        fire(["player", "girlfriend"], new Identifier("basegame", "cheer"));
+    }
+});

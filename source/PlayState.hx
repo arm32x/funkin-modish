@@ -764,10 +764,10 @@ class PlayState extends MusicBeatState
 		}
 		var gfVersion:Identifier = SONG.gfVersion;
 
-		gf = new Character(400, 130, gfVersion);
+		gf = new Character(400, 130, gfVersion, Girlfriend, true);
 		gf.scrollFactor.set(0.95, 0.95);
 
-		dad = new Character(100, 100, SONG.player2);
+		dad = new Character(100, 100, SONG.player2, Opponent, true);
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
@@ -820,7 +820,7 @@ class PlayState extends MusicBeatState
 		camPos.x += dad.cameraOffsetX;
 		camPos.y += dad.cameraOffsetY;
 		
-		boyfriend = new Boyfriend(770, 450, SONG.player1);
+		boyfriend = new Boyfriend(770, 450, SONG.player1, Player, true);
 
 		// REPOSITIONING PER STAGE
 		switch (curStage)
@@ -1967,6 +1967,8 @@ class PlayState extends MusicBeatState
 				iconP2.setIcon(iconP1Id);
 			}
 		}
+
+		EventTarget.CORE.fire(["all"], new Identifier("core", "update"), {elapsed: elapsed});
 
 		switch (curStage)
 		{
@@ -3753,6 +3755,8 @@ class PlayState extends MusicBeatState
 		{
 			resyncVocals();
 		}
+		
+		EventTarget.CORE.fire(["all"], new Identifier("core", "step"), {step: curStep, beat: curBeat});
 
 		// #if windows
 		// if (executeModchart && luaModchart != null)
@@ -3853,16 +3857,18 @@ class PlayState extends MusicBeatState
 		}
 		
 
-		if (curBeat % 8 == 7 && curSong.equals(new Identifier("basegame", "bopeepo")))
-		{
-			boyfriend.playAnim('hey', true);
-		}
+		// if (curBeat % 8 == 7 && curSong.equals(new Identifier("basegame", "bopeepo")))
+		// {
+		// 	boyfriend.playAnim('hey', true);
+		// }
 
-		if (curBeat % 16 == 15 && SONG.id.equals(new Identifier("basegame", "tutorial")) && dad.curCharacter.equals(new Identifier("basegame", "gf")) && curBeat > 16 && curBeat < 48)
-			{
-				boyfriend.playAnim('hey', true);
-				dad.playAnim('cheer', true);
-			}
+		// if (curBeat % 16 == 15 && SONG.id.equals(new Identifier("basegame", "tutorial")) && dad.curCharacter.equals(new Identifier("basegame", "gf")) && curBeat > 16 && curBeat < 48)
+		// 	{
+		// 		boyfriend.playAnim('hey', true);
+		// 		dad.playAnim('cheer', true);
+		// 	}
+
+		EventTarget.CORE.fire(["all"], new Identifier("core", "beat"), {step: curStep, beat: curBeat});
 
 		switch (curStage)
 		{

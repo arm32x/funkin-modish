@@ -48,7 +48,7 @@ class AnimationDebug extends FlxState
 
 		if (isDad)
 		{
-			dad = new Character(0, 0, daAnim);
+			dad = new Character(0, 0, daAnim, Opponent, false);
 			dad.screenCenter();
 			dad.debugMode = true;
 			add(dad);
@@ -58,7 +58,7 @@ class AnimationDebug extends FlxState
 		}
 		else
 		{
-			bf = new Boyfriend(0, 0);
+			bf = new Boyfriend(0, 0, daAnim, Player, false);
 			bf.screenCenter();
 			bf.debugMode = true;
 			add(bf);
