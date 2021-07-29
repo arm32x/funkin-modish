@@ -115,9 +115,9 @@ class PlayState extends MusicBeatState
 
 	public var originalX:Float;
 
-	public static var dad:Character;
-	public static var gf:Character;
-	public static var boyfriend:Boyfriend;
+	public var dad:Character;
+	public var gf:Character;
+	public var boyfriend:Boyfriend;
 
 	public var notes:FlxTypedGroup<Note>;
 	private var unspawnNotes:Array<Note> = [];
