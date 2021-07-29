@@ -1,0 +1,38 @@
+{
+    "$schema": "../stage-schema.json",
+    "zoom": 0.9,
+    "sprites": [
+        {
+            "position": [ -600, -200 ],
+            "graphic": "back",
+            "antialiasing": true,
+            "scrollFactor": [ 0.9, 0.9 ]
+        },
+        {
+            "position": [ -650, 600 ],
+            "graphic": "front",
+            "scale": [ 1.1, 1.1 ],
+            "antialiasing": true,
+            "scrollFactor": [ 0.9, 0.9 ]
+        },
+        {
+            "type": "girlfriend",
+            "position": [ 400, 130 ]
+        },
+        {
+            "type": "opponent",
+            "position": [ 100, 100 ]
+        },
+        {
+            "type": "player",
+            "position": [ 770, 450 ]
+        },
+        {
+            "position": [ -500, -300 ],
+            "graphic": "curtains",
+            "scale": [ 0.9, 0.9 ],
+            "antialiasing": true,
+            "scrollFactor": [ 1.3, 1.3 ]
+        }
+    ]
+}
