@@ -329,9 +329,12 @@ class ChartingState extends MusicBeatState
 
 		var stageDropDown = new FlxUIDropDownMenu(140, 200, FlxUIDropDownMenu.makeStrIdLabelArray(stages, true), function(stage:String)
 			{
-				_song.stage = stages[Std.parseInt(stage)];
+				// TODO
+				throw new NotImplementedException();
+				// _song.stage = stages[Std.parseInt(stage)];
 			});
-		stageDropDown.selectedLabel = _song.stage;
+		// TODO
+		// stageDropDown.selectedLabel = _song.stage;
 		
 		var stageLabel = new FlxText(140,180,64,'Stage');
 

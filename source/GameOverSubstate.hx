@@ -16,7 +16,6 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	public function new(x:Float, y:Float)
 	{
-		var daStage = PlayState.curStage;
 		var daBf:Identifier = if (PlayState.SONG.player1.equals(new Identifier("basegame", "bf-pixel")))
 		{
 			stageSuffix = "-pixel";

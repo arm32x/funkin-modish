@@ -42,7 +42,7 @@ class Song implements IFlxDestroyable
 	public var player2:Identifier = new Identifier("basegame", "dad");
 	public var gfVersion:Identifier = new Identifier("basegame", "gf");
 	public var noteStyle:String = 'normal'; // TODO: Replace with Identifier.
-	public var stage:String = 'stage'; // TODO: Replace with Identifier.
+	public var stage:Identifier = new Identifier("basegame", "stage");
 	public var validScore:Bool = true; // TODO: Remove.
 	
 	public var script(default, null):Null<Script> = null;
@@ -85,7 +85,7 @@ class Song implements IFlxDestroyable
 		if (data.player2 != null) player2 = Identifier.parse(data.player2);
 		if (data.gfVersion != null) gfVersion = Identifier.parse(data.gfVersion);
 		if (data.noteStyle != null) noteStyle = data.noteStyle;
-		if (data.stage != null) stage = data.stage;
+		if (data.stage != null) stage = Identifier.parse(data.stage);
 		return this;
 	}
 	

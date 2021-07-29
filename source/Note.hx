@@ -60,8 +60,6 @@ class Note extends FlxSprite
 
 		this.noteData = noteData;
 
-		var daStage:String = PlayState.curStage;
-
 		var noteTypeCheck:String = PlayState.SONG.noteStyle != null ? PlayState.SONG.noteStyle : 'normal';
 
 		switch (noteTypeCheck)
@@ -161,7 +159,7 @@ class Note extends FlxSprite
 
 			x -= width / 2;
 
-			if (PlayState.curStage.startsWith('school'))
+			if (PlayState.instance.stage.id.namespace == "basegame" && PlayState.instance.stage.id.path.startsWith('school'))
 				x += 30;
 
 			if (prevNote.isSustainNote)

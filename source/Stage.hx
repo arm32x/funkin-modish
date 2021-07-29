@@ -18,7 +18,7 @@ typedef StageData =
         var ?scrollFactor:Array<Float>;
         var ?scale:Array<Float>;
         var ?id:Null<String>;
-        var graphic:String;
+        var ?graphic:String;
         var ?group:Null<String>;
         var ?distraction:Bool;
         var ?antialiasing:Bool;
@@ -48,9 +48,10 @@ class Stage extends FlxGroup
     public final id:Identifier;
     
     public var zoom(default, null):Float = 1.0;
-    public var playerPosition(default, null):FlxPoint = FlxPoint.get();
-    public var girlfriendPosition(default, null):FlxPoint = FlxPoint.get();
-    public var opponentPosition(default, null):FlxPoint = FlxPoint.get();
+    
+    public var player(default, null):Null<Boyfriend> = null;
+    public var girlfriend(default, null):Null<Character> = null;
+    public var opponent(default, null):Null<Character> = null;
     
     private var spritesById:Map<String, FlxSprite> = [];
     private var groupsById:Map<String, FlxTypedGroup<FlxSprite>> = [];
@@ -62,9 +63,12 @@ class Stage extends FlxGroup
         this.id = id;
     }
     
-    public function load(runScripts:Bool = false)
+    public function load(?data:StageData, runScripts:Bool = false):Stage
     {
-        var data:StageData = Json.parse(Assets.getText(id.getAssetPath("stages", null, "json")));
+        if (data == null)
+        {
+            data = Json.parse(Assets.getText(id.getAssetPath("stages", null, "json")));
+        }
 
         if (data.zoom != null)
         {
@@ -78,11 +82,38 @@ class Stage extends FlxGroup
                 switch (spr.type)
                 {
                     case "player":
-                        playerPosition.set(spr.position[0], spr.position[1]);
+                        player = new Boyfriend(spr.position[0], spr.position[1], PlayState.SONG.player1, Player, runScripts);
+                        if (spr.scrollFactor != null)
+                        {
+                            player.scrollFactor.set(spr.scrollFactor[0], spr.scrollFactor[1]);
+                        }
+                        if (spr.scale != null)
+                        {
+                            player.scale.set(spr.scale[0], spr.scale[1]);
+                        }
+                        add(player);
                     case "girlfriend":
-                        girlfriendPosition.set(spr.position[0], spr.position[1]);
+                        girlfriend = new Character(spr.position[0], spr.position[1], PlayState.SONG.gfVersion, Girlfriend, runScripts);
+                        if (spr.scrollFactor != null)
+                        {
+                            girlfriend.scrollFactor.set(spr.scrollFactor[0], spr.scrollFactor[1]);
+                        }
+                        if (spr.scale != null)
+                        {
+                            girlfriend.scale.set(spr.scale[0], spr.scale[1]);
+                        }
+                        add(girlfriend);
                     case "opponent":
-                        opponentPosition.set(spr.position[0], spr.position[1]);
+                        opponent = new Character(spr.position[0], spr.position[1], PlayState.SONG.player2, Opponent, runScripts);
+                        if (spr.scrollFactor != null)
+                        {
+                            opponent.scrollFactor.set(spr.scrollFactor[0], spr.scrollFactor[1]);
+                        }
+                        if (spr.scale != null)
+                        {
+                            opponent.scale.set(spr.scale[0], spr.scale[1]);
+                        }
+                        add(opponent);
                     default:
                         if (spr.distraction == true && !FlxG.save.data.distractions)
                         {
@@ -176,5 +207,7 @@ class Stage extends FlxGroup
                 "groups" => groupsById
             ]);
         }
+        
+        return this;
     }
 }
