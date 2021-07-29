@@ -300,7 +300,7 @@ class ChartingState extends MusicBeatState
 
 		var characters:Array<Identifier> = Registry.characters.list();
 		var gfVersions:Array<Identifier> = Registry.characters.list(); // TODO: Filter based on animations.
-		var stages:Array<String> = CoolUtil.coolTextFile(Paths.txt('stageList'));
+		var stages:Array<Identifier> = Registry.stages.list();
 		var noteStyles:Array<String> = CoolUtil.coolTextFile(Paths.txt('noteStyleList'));
 
 		var player1DropDown = new FlxUIDropDownMenu(10, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters.map(Std.string), true), function(character:String)
@@ -327,14 +327,11 @@ class ChartingState extends MusicBeatState
 
 		var gfVersionLabel = new FlxText(10,180,64,'Girlfriend');
 
-		var stageDropDown = new FlxUIDropDownMenu(140, 200, FlxUIDropDownMenu.makeStrIdLabelArray(stages, true), function(stage:String)
+		var stageDropDown = new FlxUIDropDownMenu(140, 200, FlxUIDropDownMenu.makeStrIdLabelArray(stages.map(Std.string), true), function(stage:String)
 			{
-				// TODO
-				throw new NotImplementedException();
-				// _song.stage = stages[Std.parseInt(stage)];
+				_song.stage = stages[Std.parseInt(stage)];
 			});
-		// TODO
-		// stageDropDown.selectedLabel = _song.stage;
+		stageDropDown.selectedLabel = _song.stage.toString();
 		
 		var stageLabel = new FlxText(140,180,64,'Stage');
 

@@ -117,6 +117,7 @@ class PlayState extends MusicBeatState
 	
 	public var stage:Stage;
 
+	// TODO: Deprecate these.
 	/* @:deprecated */ public var dad(get, never):Character;
 	/* @:deprecated */ public var gf(get, never):Character;
 	/* @:deprecated */ public var boyfriend(get, never):Boyfriend;
@@ -380,8 +381,12 @@ class PlayState extends MusicBeatState
 
 		// if (!PlayStateChangeables.Optimize)
 		// {
-
-		if (SONG.stage.namespace == "basegame") switch (SONG.stage.path)
+		
+		if (Registry.stages.exists(SONG.stage))
+		{
+			stage = new Stage(SONG.stage).load(true);
+		}
+		else if (SONG.stage.namespace == "basegame") switch (SONG.stage.path)
 		{
 			case 'halloween': 
 			{
@@ -756,6 +761,8 @@ class PlayState extends MusicBeatState
 				"zoom": defaultCamZoom
 			}, true);
 		}
+		
+		add(stage);
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
@@ -851,14 +858,14 @@ class PlayState extends MusicBeatState
 
 		if (!PlayStateChangeables.Optimize)
 		{
-			add(gf);
+			// add(gf);
 
 			// Shitty layering but whatev it works LOL
 			if (stage.id.equals(new Identifier("basegame", 'limo')))
 				add(limo);
 
-			add(dad);
-			add(boyfriend);
+			// add(dad);
+			// add(boyfriend);
 		}
 
 

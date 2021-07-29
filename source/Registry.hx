@@ -30,6 +30,8 @@ typedef SongMetadata =
     var ?week:Identifier;
 };
 
+typedef StageMetadata = {};
+
 typedef WeekMetadata =
 {
     var name:String;
@@ -55,6 +57,7 @@ class Registry<T>
     public static var healthIcons:Registry<HealthIconMetadata> = new Registry("health-icons");
     public static var menuCharacters:Registry<MenuCharacterMetadata> = new Registry("menu-characters");
     public static var songs:Registry<SongMetadata> = new Registry("songs");
+    public static var stages:Registry<StageMetadata> = new Registry("stages");
     public static var weeks:Registry<WeekMetadata> = new Registry("weeks");
     
     private final name:String;
@@ -112,6 +115,11 @@ class Registry<T>
     {
         return list()
             .map(function(id) return {id: id, item: get(id)});
+    }
+    
+    public function exists(id:Identifier):Bool
+    {
+        return items.exists(id);
     }
     
     public function list():Array<Identifier>

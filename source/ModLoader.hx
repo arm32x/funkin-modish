@@ -98,6 +98,8 @@ class ModLoader
                             icon: Identifier.parse(export.att.icon),
                             week: export.has.week ? Identifier.parse(export.att.week) : null
                         });
+                    case "stage":
+                        Registry.stages.register(Identifier.parse(export.att.id), {});
                     case "week":
                         Registry.weeks.register(Identifier.parse(export.att.id), {
                             name: export.att.name,
