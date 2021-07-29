@@ -17,7 +17,8 @@
         },
         {
             "type": "girlfriend",
-            "position": [ 400, 130 ]
+            "position": [ 400, 130 ],
+            "scrollFactor": [ 0.95, 0.95 ]
         },
         {
             "type": "opponent",
