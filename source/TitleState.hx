@@ -302,6 +302,9 @@ class TitleState extends MusicBeatState
 
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
+				#if MODISH_IGNORE_OUTDATED_KADE
+				FlxG.switchState(new MainMenuState());
+				#else
 				// Get current version of Kade Engine
 				
 				var http = new haxe.Http("https://raw.githubusercontent.com/KadeDev/Kade-Engine/master/version.downloadMe");
@@ -330,6 +333,7 @@ class TitleState extends MusicBeatState
 				}
 				
 				http.request();
+				#end
 			});
 			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
 		}

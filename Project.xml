@@ -144,6 +144,8 @@
 	<haxelib name="csv" />
 
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
+	
+	<define name="MODISH_IGNORE_OUTDATED_KADE" />
 
 	<!-- <haxelib name="markdown" /> -->
 	<!-- <haxelib name="HtmlParser" /> -->
