@@ -19,7 +19,7 @@
                         "type": "array",
                         "description": "The position of this sprite on the stage.",
                         "items": {
-                            "type": "integer"
+                            "type": "number"
                         },
                         "minItems": 2,
                         "maxItems": 2
@@ -64,7 +64,7 @@
                     },
                     "antialiasing": {
                         "type": "boolean",
-                        "default": true
+                        "default": false
                     },
                     "alpha": {
                         "type": "number",
@@ -140,13 +140,13 @@
                                         }
                                     ],
                                     "dependencies": {
-                                        "postfix": [ "indices" ]
+                                        "postfix": [ "prefix", "indices" ]
                                     },
                                     "additionalProperties": false
                                 }
                             },
                             "startingAnimation": {
-                                "type": [ "string", "object" ],
+                                "type": "object",
                                 "description": "The animation to play when the sprite is first created.",
                                 "properties": {
                                     "name": {
@@ -172,7 +172,7 @@
                                 "additionalProperties": false
                             }
                         },
-                        "required": [ "animated", "animations", "startingAnimation" ]
+                        "required": [ "animated", "animations" ]
                     }
                 ],
                 "required": [ "position" ],
