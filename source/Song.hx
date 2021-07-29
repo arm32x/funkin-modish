@@ -1,5 +1,7 @@
 package;
 
+import haxe.Exception;
+import haxe.Unserializer;
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxDestroyUtil.IFlxDestroyable;
 import Section.SwagSection;
@@ -9,7 +11,7 @@ import lime.utils.Assets;
 
 using StringTools;
 
-typedef SongJSON =
+typedef SongData =
 {
 	var ?id:String;
 	var ?song:String;
@@ -52,8 +54,8 @@ class Song implements IFlxDestroyable
 
 	public function load(difficulty:String):Song
 	{
-		var jsonText = Assets.getText(id.getAssetPath("songs", difficulty, "json"));
-		loadFromJSON(jsonText, false);
+		var serializedData = Assets.getText(id.getAssetPath("songs", difficulty, "sol"));
+		loadFromSerialized(serializedData, false);
 		
 		if (script == null || id != script.id)
 		{
@@ -65,9 +67,14 @@ class Song implements IFlxDestroyable
 		return this;
 	}
 
-	public function loadFromJSON(jsonText:String, ?allowOverwritingId:Bool = true):Song
+	private function loadFromSerialized(serializedData:String, ?allowOverwritingId:Bool):Song
 	{
-		var data:SongJSON = cast Json.parse(jsonText).song;
+		var data:SongData = cast Unserializer.run(serializedData).song;
+		return loadFromData(data, allowOverwritingId);
+	}
+	
+	public function loadFromData(data:SongData, allowOverwritingId:Bool = true):Song
+	{
 		if (allowOverwritingId && data.id != null) id = Identifier.parse(data.id);
 		if (data.song != null) name = data.song;
 		if (data.notes != null) notes = data.notes;

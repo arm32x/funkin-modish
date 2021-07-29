@@ -1,5 +1,6 @@
 package;
 
+import haxe.exceptions.NotImplementedException;
 import flixel.FlxCamera;
 import flixel.addons.ui.FlxUIText;
 import haxe.zip.Writer;
@@ -1457,20 +1458,22 @@ class ChartingState extends MusicBeatState
 
 	function loadAutosave():Void
 	{
-		PlayState.SONG = new Song(new Identifier("unknown", "unknown")).loadFromJSON(FlxG.save.data.autosave);
-		LoadingState.loadAndSwitchState(new ChartingState());
+		// PlayState.SONG = new Song(new Identifier("unknown", "unknown")).loadFromJSON(FlxG.save.data.autosave);
+		// LoadingState.loadAndSwitchState(new ChartingState());
 	}
 
 	function autosaveSong():Void
 	{
-		FlxG.save.data.autosave = Json.stringify({
-			"song": _song
-		});
-		FlxG.save.flush();
+		// FlxG.save.data.autosave = Json.stringify({
+		// 	"song": _song
+		// });
+		// FlxG.save.flush();
 	}
 
 	private function saveLevel()
 	{
+		throw new NotImplementedException("Needs to save in the new asset layout.");
+		
 		var json = {
 			"song": _song
 		};
