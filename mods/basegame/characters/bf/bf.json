@@ -70,7 +70,8 @@
             "prefix": "BF HEY",
             "frameRate": 24,
             "looped": false,
-            "offsets": [7, 4]
+            "offsets": [7, 4],
+            "priority": 10
         },
         {
             "name": "firstDeath",

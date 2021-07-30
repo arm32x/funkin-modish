@@ -45,6 +45,11 @@
                         "items": {
                             "type": "number"
                         }
+                    },
+                    "priority": {
+                        "type": [ "integer", "null" ],
+                        "description": "Higher priority animations will not get interrupted by lower priority ones.",
+                        "default": 0
                     }
                 },
                 "required": [ "name", "prefix", "offsets" ],

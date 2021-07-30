@@ -23,6 +23,7 @@ typedef CharacterJSON = {
 		var ?looped:Bool;
 		var ?condition:String;
 		var offsets:Array<Float>;
+		var ?priority:Int;
 	}>;
 	var ?startingAnimation:{
 		var name:String;
@@ -67,6 +68,7 @@ class Character extends FlxSprite
 	static final MIN_SUPPORTED_FORMAT:Int = 2;
 	
 	public var animOffsets:Map<String, Array<Dynamic>>;
+	public var animPriorities:Map<String, Int> = [];
 	public var debugMode:Bool = false;
 
 	public var curPosition:Position;
@@ -141,6 +143,8 @@ class Character extends FlxSprite
 					anim.offsets.push(0);
 				}
 				addOffset(anim.name, anim.offsets[0], anim.offsets[1]);
+				
+				animPriorities.set(anim.name, anim.priority != null ? anim.priority : 0);
 			}
 		}
 
@@ -322,8 +326,16 @@ class Character extends FlxSprite
 		}
 	}
 
-	public function playAnim(animName:String, force:Bool = false, reversed:Bool = false, frame:Int = 0):Void
+	public function playAnim(animName:String, force:Bool = false, reversed:Bool = false, frame:Int = 0, ?forcedPriority:Int):Void
 	{
+		if (animation.curAnim != null && !animation.curAnim.finished)
+		{
+			if (animPriorities.get(animation.curAnim.name) > (forcedPriority != null ? forcedPriority : animPriorities.get(animName)))
+			{
+				return;
+			}
+		}
+		
 		animation.play(animName, force, reversed, frame);
 
 		var daOffset = animOffsets.get(animName);
