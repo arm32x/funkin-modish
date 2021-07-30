@@ -40,6 +40,8 @@ class Script extends EventTarget
         {
             interp.variables.set("Identifier", Identifier);
             
+            interp.variables.set("getAssetPath", (file, extension) -> id.getAssetPath(collection, file, extension));
+            
             interp.variables.set("fire", this.fire);
             interp.variables.set("on", this.on);
             interp.variables.set("forward", this.forward);
