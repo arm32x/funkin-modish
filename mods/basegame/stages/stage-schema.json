@@ -76,106 +76,93 @@
                     "visible": {
                         "type": "boolean",
                         "default": true
-                    }
-                },
-                "oneOf": [
-                    {
-                        "properties": {
-                            "animated": {
-                                "type": "boolean",
-                                "description": "Whether or not this sprite is animated. If it is animated, frames will be loaded from a texture atlas file.",
-                                "const": false
+                    },
+                    "animated": {
+                        "type": "boolean",
+                        "description": "Whether or not this sprite is animated. If it is animated, frames will be loaded from a texture atlas file.",
+                        "const": true
+                    },
+                    "animations": {
+                        "type": "array",
+                        "description": "All of the animations this sprite has. Ignored if the sprite is not animated.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name used to play the animation in scripts."
+                                },
+                                "prefix": {
+                                    "type": "string",
+                                    "description": "Common beginning of image names in the atlas."
+                                },
+                                "indices": {
+                                    "type": "array",
+                                    "description": "An array of integers indicating what frames to play in what order.",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "postfix": {
+                                    "type": "string",
+                                    "description": "Common ending of image names in the atlas.",
+                                    "default": ""
+                                },
+                                "frameRate": {
+                                    "type": "integer",
+                                    "default": 30
+                                },
+                                "looped": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            "required": [ "name" ],
+                            "anyOf": [
+                                {
+                                    "required": [ "prefix" ]
+                                },
+                                {
+                                    "required": [ "indices" ]
+                                }
+                            ],
+                            "dependencies": {
+                                "postfix": [ "prefix", "indices" ]
                             }
                         }
                     },
-                    {
+                    "startingAnimation": {
+                        "type": "object",
+                        "description": "The animation to play when the sprite is first created. Ignored if the sprite is not animated.",
                         "properties": {
-                            "animated": {
+                            "name": {
+                                "type": "string",
+                                "description": "The name of the animation. Should refer to one of the animations in the 'animations' array."
+                            },
+                            "force": {
                                 "type": "boolean",
-                                "description": "Whether or not this sprite is animated. If it is animated, frames will be loaded from a texture atlas file.",
-                                "const": true
+                                "description": "Whether to restart the animation if it is already playing.",
+                                "default": false
                             },
-                            "animations": {
-                                "type": "array",
-                                "description": "All of the animations this sprite has.",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {
-                                            "type": "string",
-                                            "description": "The name used to play the animation in scripts."
-                                        },
-                                        "prefix": {
-                                            "type": "string",
-                                            "description": "Common beginning of image names in the atlas."
-                                        },
-                                        "indices": {
-                                            "type": "array",
-                                            "description": "An array of integers indicating what frames to play in what order.",
-                                            "items": {
-                                                "type": "integer"
-                                            }
-                                        },
-                                        "postfix": {
-                                            "type": "string",
-                                            "description": "Common ending of image names in the atlas.",
-                                            "default": ""
-                                        },
-                                        "frameRate": {
-                                            "type": "integer",
-                                            "default": 30
-                                        },
-                                        "looped": {
-                                            "type": "boolean",
-                                            "default": true
-                                        }
-                                    },
-                                    "required": [ "name" ],
-                                    "anyOf": [
-                                        {
-                                            "required": [ "prefix" ]
-                                        },
-                                        {
-                                            "required": [ "indices" ]
-                                        }
-                                    ],
-                                    "dependencies": {
-                                        "postfix": [ "prefix", "indices" ]
-                                    },
-                                    "additionalProperties": false
-                                }
+                            "reversed": {
+                                "type": "boolean",
+                                "default": false
                             },
-                            "startingAnimation": {
-                                "type": "object",
-                                "description": "The animation to play when the sprite is first created.",
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "description": "The name of the animation. Should refer to one of the animations in the 'animations' array."
-                                    },
-                                    "force": {
-                                        "type": "boolean",
-                                        "description": "Whether to restart the animation if it is already playing.",
-                                        "default": false
-                                    },
-                                    "reversed": {
-                                        "type": "boolean",
-                                        "default": false
-                                    },
-                                    "frame": {
-                                        "type": "integer",
-                                        "description": "The frame number in the animation you want to start from. If a negative value is passed, a random frame is used.",
-                                        "default": 0
-                                    }
-                                },
-                                "required": [ "name" ],
-                                "additionalProperties": false
+                            "frame": {
+                                "type": "integer",
+                                "description": "The frame number in the animation you want to start from. If a negative value is passed, a random frame is used.",
+                                "default": 0
                             }
                         },
-                        "required": [ "animated", "animations" ]
+                        "required": [ "name" ],
+                        "additionalProperties": false
                     }
-                ],
+                },
                 "required": [ "position" ],
+                "dependencies": {
+                    "animations": [ "animated" ],
+                    "startingAnimation": [ "animated", "animations" ]
+                },
                 "if": {
                     "properties": {
                         "type": {
