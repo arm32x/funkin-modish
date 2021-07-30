@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxDestroyUtil;
 import openfl.ui.KeyLocation;
 import openfl.events.Event;
 import haxe.EnumTools;
@@ -78,7 +79,7 @@ class PlayState extends MusicBeatState
 	public static var instance:PlayState = null;
 
 	// public static var curStage:String = '';
-	public static var SONG:Song;
+	public static var SONG(default, set):Song;
 	public static var isStoryMode:Bool = false;
 	public static var storyWeek:Null<Identifier> = null;
 	public static var storyPlaylist:Array<Identifier> = [];
@@ -3938,5 +3939,10 @@ class PlayState extends MusicBeatState
 
 	function get_boyfriend():Boyfriend {
 		return stage.player;
+	}
+
+	static function set_SONG(value:Song):Song {
+		SONG = FlxDestroyUtil.destroy(SONG);
+		return SONG = value;
 	}
 }

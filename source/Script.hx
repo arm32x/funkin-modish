@@ -56,4 +56,16 @@ class Script extends EventTarget
         
         return this;
     }
+
+    #if debug
+    override private function onRegister(selector:String)
+    {
+        trace('Script "$id" registered as "$selector".');
+    }
+    
+    override private function onUnregister()
+    {
+        trace('Script "$id" unregistered.');
+    }
+    #end
 }

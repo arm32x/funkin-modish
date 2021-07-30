@@ -96,6 +96,12 @@ class EventTarget implements IFlxDestroyable
         {
             register(target, "all");
         }
+        #if debug
+        if (target != null)
+        {
+            target.onRegister(selector);
+        }
+        #end
         return target;
     }
     
@@ -113,8 +119,19 @@ class EventTarget implements IFlxDestroyable
                 targets.remove(target);
             }
         }
+        #if debug
+        if (target != null)
+        {
+            target.onUnregister();
+        }
+        #end
         return target;
     }
+    
+    #if debug
+    private function onRegister(selector:String) {}
+    private function onUnregister() {}
+    #end
     
     public function destroy()
     {

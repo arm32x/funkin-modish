@@ -210,4 +210,11 @@ class Stage extends FlxGroup
         
         return this;
     }
+    
+    override public function destroy()
+    {
+        super.destroy();
+        
+        script = FlxDestroyUtil.destroy(script);
+    }
 }
