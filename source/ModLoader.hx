@@ -16,7 +16,7 @@ class ModLoader
     // continue to increment with each breaking change.
     inline private static final CURRENT_FORMAT:Int = 0;
     
-    public static function load(id:String, sparse:Bool = false)
+    public static function load(id:String, sparse:Bool = false, ?progressFunction:(Int, Int)->Void)
     {
         trace('Loading mod "$id"...');
         
@@ -75,8 +75,24 @@ class ModLoader
         
         if (!sparse && xml.hasNode.exports)
         {
+            var totalExports = 0;
+            if (progressFunction != null)
+            {
+                for (export in xml.node.exports.elements)
+                {
+                    totalExports++;
+                }
+            }
+            
+            var exportsProcessed = 0;
             for (export in xml.node.exports.elements)
             {
+                if (progressFunction != null)
+                {
+                    progressFunction(exportsProcessed, totalExports);
+                    exportsProcessed++;
+                }
+                
                 switch (export.name)
                 {
                     case "character":
@@ -114,6 +130,10 @@ class ModLoader
                         throw new Exception('Invalid export type "${export.name}" in mod "$id".');
                 }
             }
+        }
+        else if (progressFunction != null)
+        {
+            progressFunction(0, 0);
         }
     }
 }
