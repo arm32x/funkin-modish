@@ -39,12 +39,12 @@ class ModsMenuState extends MusicBeatState
             FlxG.switchState(new MainMenuState());
         }
         
-        if (controls.UP)
+        if (controls.UP_P)
         {
             FlxG.sound.play(Paths.sound('scrollMenu'));
             changeItem(-1);
         }
-        else if (controls.DOWN)
+        else if (controls.DOWN_P)
         {
             FlxG.sound.play(Paths.sound('scrollMenu'));
             changeItem(1);
