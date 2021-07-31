@@ -60,6 +60,18 @@ class Registry<T>
     public static var stages:Registry<StageMetadata> = new Registry("stages");
     public static var weeks:Registry<WeekMetadata> = new Registry("weeks");
     
+    public static function clearAll()
+    {
+        mods = [];
+        characters.clear();
+        introTexts = [];
+        healthIcons.clear();
+        menuCharacters.clear();
+        songs.clear();
+        stages.clear();
+        weeks.clear();
+    }
+    
     private final name:String;
     
     private var ids:Array<Identifier> = [];
@@ -125,5 +137,11 @@ class Registry<T>
     public function list():Array<Identifier>
     {
         return ids;
+    }
+    
+    public function clear()
+    {
+        ids = [];
+        items.clear();
     }
 }

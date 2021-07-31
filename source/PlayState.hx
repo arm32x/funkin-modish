@@ -91,8 +91,8 @@ class PlayState extends MusicBeatState
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
 
-	public static var songPosBG:FlxSprite;
-	public static var songPosBar:FlxBar;
+	public var songPosBG:FlxSprite;
+	public var songPosBar:FlxBar;
 
 	public static var rep:Replay;
 	public static var loadRep:Bool = false;
@@ -131,11 +131,11 @@ class PlayState extends MusicBeatState
 
 	private var camFollow:FlxObject;
 
-	private static var prevCamFollow:FlxObject;
+	private var prevCamFollow:FlxObject;
 
-	public static var strumLineNotes:FlxTypedGroup<FlxSprite> = null;
-	public static var playerStrums:FlxTypedGroup<FlxSprite> = null;
-	public static var cpuStrums:FlxTypedGroup<FlxSprite> = null;
+	public var strumLineNotes:FlxTypedGroup<FlxSprite> = null;
+	public var playerStrums:FlxTypedGroup<FlxSprite> = null;
+	public var cpuStrums:FlxTypedGroup<FlxSprite> = null;
 
 	private var camZooming:Bool = false;
 	private var curSong:Null<Identifier> = null;
@@ -927,7 +927,7 @@ class PlayState extends MusicBeatState
 
 		add(camFollow);
 
-		FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
+		FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPSCap()));
 		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
 		FlxG.camera.zoom = stage.zoom;
 		FlxG.camera.focusOn(camFollow.getPosition());
@@ -2018,7 +2018,6 @@ class PlayState extends MusicBeatState
 			// DiscordClient.changePresence("Chart Editor", null, null, true);
 			// #end
 			FlxG.switchState(new ChartingState());
-			FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN,handleInput);
 			// #if windows
 			// if (luaModchart != null)
 			// {
@@ -2070,7 +2069,6 @@ class PlayState extends MusicBeatState
 				}
 
 			FlxG.switchState(new AnimationDebug(SONG.player2));
-			FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN,handleInput);
 			// #if windows
 			// if (luaModchart != null)
 			// {
@@ -2083,7 +2081,6 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.ZERO)
 		{
 			FlxG.switchState(new AnimationDebug(SONG.player1));
-			FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN,handleInput);
 			// #if windows
 			// if (luaModchart != null)
 			// {
@@ -3887,5 +3884,10 @@ class PlayState extends MusicBeatState
 	static function set_SONG(value:Song):Song {
 		SONG = FlxDestroyUtil.destroy(SONG);
 		return SONG = value;
+	}
+	
+	override public function destroy()
+	{
+		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN,handleInput);
 	}
 }

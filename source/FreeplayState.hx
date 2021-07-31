@@ -76,6 +76,11 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD MUSIC
 
+		if (FlxG.sound.music == null || !FlxG.sound.music.playing)
+		{
+			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		}
+
 		// LOAD CHARACTERS
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));

@@ -37,8 +37,6 @@ class MenuCharacter extends FlxSprite
 	// 	'senpai' => new CharacterSetting(-40, -45, 1.4)
 	// ];
 	
-	private static var cachedData:HashMap<Identifier, MenuCharacterJSON> = new HashMap();
-
 	private var initialScale:Float;
 	private var flipped:Bool = false;
 
@@ -68,18 +66,9 @@ class MenuCharacter extends FlxSprite
 	
 	private function loadCharacter(character:Identifier):MenuCharacterJSON
 	{
-		var data = cachedData.get(character);
-		if (data != null)
-		{
-			return data;
-		}
-		else
-		{
-			var json = Assets.getText(character.getAssetPath("menu-characters", null, "json"));	
-			var newData:MenuCharacterJSON = Json.parse(json);
-			cachedData.set(character, newData);
-			return newData;
-		}
+		var json = Assets.getText(character.getAssetPath("menu-characters", null, "json"));	
+		var newData:MenuCharacterJSON = Json.parse(json);
+		return newData;
 	}
 
 	public function setCharacter(character:Null<Identifier>):Void
