@@ -765,8 +765,6 @@ class PlayState extends MusicBeatState
 		
 		add(stage);
 
-		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
-
 		// if (SONG.player2.namespace == "basegame") switch (SONG.player2.path)
 		// {
 		// 	case 'gf':
@@ -811,10 +809,10 @@ class PlayState extends MusicBeatState
 			gf.visible = false;
 		}
 		
-		dad.x += dad.positionOffsetX;
-		dad.y += dad.positionOffsetY;
-		camPos.x += dad.cameraOffsetX;
-		camPos.y += dad.cameraOffsetY;
+		// dad.x += dad.positionOffsetX;
+		// dad.y += dad.positionOffsetY;
+		// camPos.x += dad.cameraOffsetX;
+		// camPos.y += dad.cameraOffsetY;
 		
 		// boyfriend = new Boyfriend(770, 450, SONG.player1, Player, true);
 
@@ -918,9 +916,8 @@ class PlayState extends MusicBeatState
 
 		// add(strumLine);
 
-		camFollow = new FlxObject(0, 0, 1, 1);
-
-		camFollow.setPosition(camPos.x, camPos.y);
+		var camPos:FlxPoint = stage.opponent.getCameraPosition();
+		camFollow = new FlxObject(camPos.x, camPos.y, 1, 1);
 
 		if (prevCamFollow != null)
 		{

@@ -1,5 +1,6 @@
 package;
 
+import flixel.math.FlxPoint;
 import flixel.util.FlxDestroyUtil;
 import haxe.Exception;
 import openfl.utils.Assets;
@@ -80,10 +81,8 @@ class Character extends FlxSprite
 	
 	public var replacesGF:Bool = false;
 	
-	public var positionOffsetX:Float = 0;
-	public var positionOffsetY:Float = 0;
-	public var cameraOffsetX:Float = 0;
-	public var cameraOffsetY:Float = 0;
+	private var positionOffset:FlxPoint = FlxPoint.get();
+	private var cameraOffset:FlxPoint = FlxPoint.get();
 	
 	public var script:Script;
 	
@@ -98,6 +97,8 @@ class Character extends FlxSprite
 		curPosition = position;
 
 		antialiasing = true;
+		
+		debugBoundingBoxColor = 0xFFFABD2F;
 
 		var data = getCharacterJSON(character);
 		if (data.version > CURRENT_FORMAT)
@@ -222,21 +223,24 @@ class Character extends FlxSprite
 		
 		if (data.positionOffset != null)
 		{
-			if (data.positionOffset.length >= 1)
-				positionOffsetX = data.positionOffset[0];
-			if (data.positionOffset.length >= 2)
-				positionOffsetY = data.positionOffset[1];
+			while (data.positionOffset.length < 2)
+			{
+				data.positionOffset.push(0);
+			}
+			positionOffset.set(data.positionOffset[0], data.positionOffset[1]);
 		}
 		if (data.cameraOffset != null)
 		{
-			if (data.cameraOffset.length >= 1)
-				cameraOffsetX = data.cameraOffset[0];
-			if (data.cameraOffset.length >= 2)
-				cameraOffsetY = data.cameraOffset[1];
+			while (data.cameraOffset.length < 2)
+			{
+				data.cameraOffset.push(0);
+			}
+			cameraOffset.set(data.cameraOffset[0], data.cameraOffset[1]);
 		}
 
 		dance();
 
+		// TODO: Figure out what this does and remove it.
 		if (isPlayer)
 		{
 			flipX = !flipX;
@@ -273,6 +277,17 @@ class Character extends FlxSprite
 				"playAnim" => this.playAnim
 			]);
 		}
+	}
+	
+	public function applyOffset()
+	{
+		x += positionOffset.x;
+		y += positionOffset.y;
+	}
+	
+	public function getCameraPosition(?point:FlxPoint):FlxPoint
+	{
+		return getGraphicMidpoint(point).addPoint(cameraOffset);
 	}
 
 	override function update(elapsed:Float)
