@@ -1,0 +1,196 @@
+{
+    "$schema": "../stage-schema.json",
+    "zoom": 0.9,
+    "sprites": [
+        {
+            "position": [ -120, -50 ],
+            "graphic": "sunset",
+            "scrollFactor": [ 0.1, 0.1 ]
+        },
+        {
+            "position": [ -200, 480 ],
+            "graphic": "bg-limo",
+            "animated": true,
+            "animations": [
+                {
+                    "name": "drive",
+                    "prefix": "background limo pink",
+                    "frameRate": 24
+                }
+            ],
+            "startingAnimation": {
+                "name": "drive"
+            },
+            "scrollFactor": [ 0.4, 0.4 ]
+        },
+        {
+            "position": [ 130, 80 ],
+            "graphic": "dancer",
+            "animated": true,
+            "animations": [
+                {
+                    "name": "danceLeft",
+                    "prefix": "bg dancer sketch PINK",
+                    "indices": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
+                    "frameRate": 24,
+                    "looped": false
+                },
+                {
+                    "name": "danceRight",
+                    "prefix": "bg dancer sketch PINK",
+                    "indices": [ 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 ],
+                    "frameRate": 24,
+                    "looped": false
+                }
+            ],
+            "startingAnimation": {
+                "name": "danceLeft"
+            },
+            "scrollFactor": [ 0.4, 0.4 ],
+            "antialiasing": true,
+            "distraction": true,
+            "group": "dancers"
+        },
+        {
+            "position": [ 500, 80 ],
+            "graphic": "dancer",
+            "animated": true,
+            "animations": [
+                {
+                    "name": "danceLeft",
+                    "prefix": "bg dancer sketch PINK",
+                    "indices": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
+                    "frameRate": 24,
+                    "looped": false
+                },
+                {
+                    "name": "danceRight",
+                    "prefix": "bg dancer sketch PINK",
+                    "indices": [ 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 ],
+                    "frameRate": 24,
+                    "looped": false
+                }
+            ],
+            "startingAnimation": {
+                "name": "danceLeft"
+            },
+            "scrollFactor": [ 0.4, 0.4 ],
+            "antialiasing": true,
+            "distraction": true,
+            "group": "dancers"
+        },
+        {
+            "position": [ 870, 80 ],
+            "graphic": "dancer",
+            "animated": true,
+            "animations": [
+                {
+                    "name": "danceLeft",
+                    "prefix": "bg dancer sketch PINK",
+                    "indices": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
+                    "frameRate": 24,
+                    "looped": false
+                },
+                {
+                    "name": "danceRight",
+                    "prefix": "bg dancer sketch PINK",
+                    "indices": [ 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 ],
+                    "frameRate": 24,
+                    "looped": false
+                }
+            ],
+            "startingAnimation": {
+                "name": "danceLeft"
+            },
+            "scrollFactor": [ 0.4, 0.4 ],
+            "antialiasing": true,
+            "distraction": true,
+            "group": "dancers"
+        },
+        {
+            "position": [ 1240, 80 ],
+            "graphic": "dancer",
+            "animated": true,
+            "animations": [
+                {
+                    "name": "danceLeft",
+                    "prefix": "bg dancer sketch PINK",
+                    "indices": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
+                    "frameRate": 24,
+                    "looped": false
+                },
+                {
+                    "name": "danceRight",
+                    "prefix": "bg dancer sketch PINK",
+                    "indices": [ 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 ],
+                    "frameRate": 24,
+                    "looped": false
+                }
+            ],
+            "startingAnimation": {
+                "name": "danceLeft"
+            },
+            "scrollFactor": [ 0.4, 0.4 ],
+            "antialiasing": true,
+            "distraction": true,
+            "group": "dancers"
+        },
+        {
+            "position": [ 1610, 80 ],
+            "graphic": "dancer",
+            "animated": true,
+            "animations": [
+                {
+                    "name": "danceLeft",
+                    "prefix": "bg dancer sketch PINK",
+                    "indices": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ],
+                    "frameRate": 24,
+                    "looped": false
+                },
+                {
+                    "name": "danceRight",
+                    "prefix": "bg dancer sketch PINK",
+                    "indices": [ 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 ],
+                    "frameRate": 24,
+                    "looped": false
+                }
+            ],
+            "startingAnimation": {
+                "name": "danceLeft"
+            },
+            "scrollFactor": [ 0.4, 0.4 ],
+            "antialiasing": true,
+            "distraction": true,
+            "group": "dancers"
+        },
+        {
+            "type": "girlfriend",
+            "position": [ 400, 130 ],
+            "scrollFactor": [ 0.95, 0.95 ]
+        },
+        {
+            "position": [ -120, 550 ],
+            "graphic": "limo",
+            "animated": true,
+            "animations": [
+                {
+                    "name": "drive",
+                    "prefix": "Limo stage",
+                    "frameRate": 24
+                }
+            ],
+            "startingAnimation": {
+                "name": "drive"
+            },
+            "antialiasing": true
+        },
+        {
+            "type": "opponent",
+            "position": [ 100, 100 ]
+        },
+        {
+            "type": "player",
+            "position": [ 1030, 230 ]
+        }
+    ]
+}

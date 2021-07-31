@@ -819,25 +819,25 @@ class PlayState extends MusicBeatState
 		// REPOSITIONING PER STAGE
 		if (stage.id.namespace == "basegame") switch (stage.id.path)
 		{
-			case 'limo':
-				boyfriend.y -= 220;
-				boyfriend.x += 260;
-				if(FlxG.save.data.distractions){
-					resetFastCar();
-					add(fastCar);
-				}
+			// case 'limo':
+			// 	boyfriend.y -= 220;
+			// 	boyfriend.x += 260;
+			// 	if(FlxG.save.data.distractions){
+			// 		resetFastCar();
+			// 		add(fastCar);
+			// 	}
 
-			case 'mall':
-				boyfriend.x += 200;
+			// case 'mall':
+			// 	boyfriend.x += 200;
 
-			case 'mall-evil':
-				boyfriend.x += 320;
-				dad.y -= 80;
-			case 'school':
-				boyfriend.x += 200;
-				boyfriend.y += 220;
-				gf.x += 180;
-				gf.y += 300;
+			// case 'mall-evil':
+			// 	boyfriend.x += 320;
+			// 	dad.y -= 80;
+			// case 'school':
+			// 	boyfriend.x += 200;
+			// 	boyfriend.y += 220;
+			// 	gf.x += 180;
+			// 	gf.y += 300;
 			case 'school-evil':
 				if(FlxG.save.data.distractions){
 				// trailArea.scrollFactor.set();
@@ -849,10 +849,10 @@ class PlayState extends MusicBeatState
 				}
 
 
-				boyfriend.x += 200;
-				boyfriend.y += 220;
-				gf.x += 180;
-				gf.y += 300;
+				// boyfriend.x += 200;
+				// boyfriend.y += 220;
+				// gf.x += 180;
+				// gf.y += 300;
 		}
 
 		if (!PlayStateChangeables.Optimize)
@@ -860,8 +860,8 @@ class PlayState extends MusicBeatState
 			// add(gf);
 
 			// Shitty layering but whatev it works LOL
-			if (stage.id.equals(new Identifier("basegame", 'limo')))
-				add(limo);
+			// if (stage.id.equals(new Identifier("basegame", 'limo')))
+			// 	add(limo);
 
 			// add(dad);
 			// add(boyfriend);
@@ -3877,16 +3877,16 @@ class PlayState extends MusicBeatState
 					santa.animation.play('idle', true);
 				}
 
-			case 'limo':
-				if(FlxG.save.data.distractions){
-					grpLimoDancers.forEach(function(dancer:BackgroundDancer)
-						{
-							dancer.dance();
-						});
+			// case 'limo':
+			// 	if(FlxG.save.data.distractions){
+			// 		grpLimoDancers.forEach(function(dancer:BackgroundDancer)
+			// 			{
+			// 				dancer.dance();
+			// 			});
 		
-						if (FlxG.random.bool(10) && fastCarCanDrive)
-							fastCarDrive();
-				}
+			// 			if (FlxG.random.bool(10) && fastCarCanDrive)
+			// 				fastCarDrive();
+			// 	}
 			case "philly":
 				if(FlxG.save.data.distractions){
 					if (!trainMoving)
