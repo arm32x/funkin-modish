@@ -92,6 +92,7 @@ class Stage extends FlxGroup
                         if (spr.scale != null)
                         {
                             player.scale.set(spr.scale[0], spr.scale[1]);
+                            player.updateHitbox();
                         }
                         add(player);
                     case "girlfriend":
@@ -104,6 +105,7 @@ class Stage extends FlxGroup
                         if (spr.scale != null)
                         {
                             girlfriend.scale.set(spr.scale[0], spr.scale[1]);
+                            girlfriend.updateHitbox();
                         }
                         add(girlfriend);
                     case "opponent":
@@ -116,6 +118,7 @@ class Stage extends FlxGroup
                         if (spr.scale != null)
                         {
                             opponent.scale.set(spr.scale[0], spr.scale[1]);
+                            opponent.updateHitbox();
                         }
                         add(opponent);
                     default:
@@ -126,15 +129,16 @@ class Stage extends FlxGroup
 
                         var sprite = new FlxSprite(spr.position[0], spr.position[1]);
                         
+                        for (part in spr.graphic.split("/"))
+                        {
+                            if (!Identifier.isValidPart(part))
+                            {
+                                throw new Exception('Sprite graphic "${spr.graphic}" is invalid; it must only contain 0-9, a-z, -, and /.');
+                            }
+                        }
+
                         if (spr.animated == true)
                         {
-                            for (part in spr.graphic.split("/"))
-                            {
-                                if (!Identifier.isValidPart(part))
-                                {
-                                    throw new Exception('Sprite graphic "$part" is invalid; it must only contain 0-9, a-z, -, and /.');
-                                }
-                            }
                             sprite.frames = HelperFunctions.getAtlas(id, "stages", spr.graphic);
 
                             for (index => anim in spr.animations)
@@ -177,6 +181,7 @@ class Stage extends FlxGroup
                         if (spr.scale != null)
                         {
                             sprite.scale.set(spr.scale[0], spr.scale[1]);
+                            sprite.updateHitbox();
                         }
                         sprite.antialiasing = spr.antialiasing != null ? spr.antialiasing : false;
                         sprite.alpha = spr.alpha != null ? spr.alpha : 1.0;
