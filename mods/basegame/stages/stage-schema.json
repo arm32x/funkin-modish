@@ -46,15 +46,18 @@
                     "id": {
                         "type": [ "string", "null" ],
                         "description": "The ID of this sprite. Scripts can use this ID to interact with the sprite.",
+                        "pattern": "^[0-9a-z-]+$",
                         "default": null
                     },
                     "graphic": {
                         "type": "string",
-                        "description": "The filename of the graphic assets used by this sprite."
+                        "description": "The filename of the graphic assets used by this sprite.",
+                        "pattern": "^[0-9a-z/-]+$"
                     },
                     "group": {
                         "type": [ "string", "null" ],
                         "description": "The group to put this sprite in; used by scripts to refer to multiple sprites at once.",
+                        "pattern": "^[0-9a-z-]+$",
                         "default": null
                     },
                     "distraction": {

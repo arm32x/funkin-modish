@@ -1,5 +1,6 @@
 package;
 
+import haxe.Exception;
 import flixel.util.FlxDestroyUtil;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
@@ -127,6 +128,13 @@ class Stage extends FlxGroup
                         
                         if (spr.animated == true)
                         {
+                            for (part in spr.graphic.split("/"))
+                            {
+                                if (!Identifier.isValidPart(part))
+                                {
+                                    throw new Exception('Sprite graphic "$part" is invalid; it must only contain 0-9, a-z, -, and /.');
+                                }
+                            }
                             sprite.frames = HelperFunctions.getAtlas(id, "stages", spr.graphic);
 
                             for (index => anim in spr.animations)
@@ -176,10 +184,18 @@ class Stage extends FlxGroup
                         
                         if (spr.id != null)
                         {
+                            if (!Identifier.isValidPart(spr.id))
+                            {
+                                throw new Exception('Sprite ID "${spr.id}" is invalid; it must only contain 0-9, a-z, and -.');
+                            }
                             spritesById.set(spr.id, sprite);
                         }
                         if (spr.group != null)
                         {
+                            if (!Identifier.isValidPart(spr.group))
+                            {
+                                throw new Exception('Sprite group "${spr.group}" is invalid; it must only contain 0-9, a-z, and -.');
+                            }
                             if (groupsById.exists(spr.group))
                             {
                                 var group = groupsById.get(spr.group);
