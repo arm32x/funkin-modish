@@ -1,7 +1,5 @@
 package;
 
-#if (target.threaded)
-
 import flixel.system.FlxAssets;
 import flixel.FlxG;
 import flixel.FlxState;
@@ -9,15 +7,20 @@ import flixel.group.FlxSpriteGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
+
+#if (target.threaded)
 import sys.thread.Deque;
 import sys.thread.Thread;
+#end
 
+#if (target.threaded)
 enum ProgressUpdate
 {
     Begin(total:Int, message:String);
     Update(done:Int);
     End;
 }
+#end
 
 class ProgressBar extends FlxSpriteGroup
 {
@@ -54,7 +57,11 @@ class ProgressBar extends FlxSpriteGroup
 
 class ModLoadingState extends FlxState
 {
+    public static var nextState:Class<FlxState> = TitleState;
+    
+    #if (target.threaded)
     private var deque:Deque<ProgressUpdate> = new Deque();
+    #end
 
     private var elements:Array<ProgressBar> = [];
     
@@ -64,6 +71,7 @@ class ModLoadingState extends FlxState
 
         FlxG.worldBounds.set(0,0);
 
+        #if (target.threaded)
         Thread.create(function()
         {
             var modList = CoolUtil.coolTextFile("default:mods/mod-list.txt");
@@ -83,12 +91,21 @@ class ModLoadingState extends FlxState
             }
             deque.add(End);
         });
+        #else
+		var modList = CoolUtil.coolTextFile("default:mods/mod-list.txt");
+		for (mod in modList)
+		{
+			ModLoader.load(mod);
+		}
+        FlxG.switchState(Type.createInstance(nextState, []));
+        #end
 
         super.create();
     }
     
     override public function update(elapsed:Float)
     {
+        #if (target.threaded)
         var update:Null<ProgressUpdate> = null;
         while ((update = deque.pop(false)) != null)
         {
@@ -109,13 +126,12 @@ class ModLoadingState extends FlxState
                     remove(element);
                     if (elements.length == 0)
                     {
-                        FlxG.switchState(new TitleState());
+                        FlxG.switchState(Type.createInstance(nextState, []));
                     }
             }
         }
+        #end
 
         super.update(elapsed);
     }
 }
-
-#end
