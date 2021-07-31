@@ -1,0 +1,41 @@
+
+lights.png
+size: 8192,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+win0
+  rotate: false
+  xy: 0, 0
+  size: 1425, 370
+  orig: 1729, 955
+  offset: 112, 403
+  index: -1
+win1
+  rotate: false
+  xy: 1425, 0
+  size: 1425, 370
+  orig: 1729, 955
+  offset: 112, 403
+  index: -1
+win2
+  rotate: false
+  xy: 2850, 0
+  size: 1425, 370
+  orig: 1729, 955
+  offset: 112, 403
+  index: -1
+win3
+  rotate: false
+  xy: 4275, 0
+  size: 1425, 370
+  orig: 1729, 955
+  offset: 112, 403
+  index: -1
+win4
+  rotate: false
+  xy: 5700, 0
+  size: 1425, 370
+  orig: 1729, 955
+  offset: 112, 403
+  index: -1

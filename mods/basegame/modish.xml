@@ -112,6 +112,7 @@
         <song id="basegame:thorns" name="Thorns" icon="basegame:spirit" week="basegame:week6" />
         
         <stage id="basegame:stage" />
+        <stage id="basegame:philly" />
         <stage id="basegame:limo" />
         
         <week id="basegame:tutorial" name="" middle="basegame:bf" right="basegame:gf">

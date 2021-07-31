@@ -1,0 +1,113 @@
+var train = sprites.get("train");
+
+var trainCars = 8;
+var trainCooldown = 0;
+var trainFinishing = false;
+var trainFrameTiming = 0.0;
+var trainMoving = false;
+var trainStartedMoving = false;
+
+var trainSound = new FlxSound().loadEmbedded(getAssetPath("train-passing", "ogg"));
+FlxG.sound.list.add(trainSound);
+
+on(new Identifier("core", "update"), function(e)
+{
+    if (train != null && trainMoving)
+    {
+        trainFrameTiming += e.data.elapsed;
+        if (trainFrameTiming >= 1 / 24)
+        {
+            updateTrainPos();
+            trainFrameTiming = 0.0;
+        }
+    }
+});
+
+on(new Identifier("core", "beat"), function(e)
+{
+    if (!trainMoving)
+    {
+        trainCooldown += 1;
+    }
+    
+    if (e.data.beat % 4 == 0)
+    {
+        var lights = sprites.get("lights");
+        if (lights != null)
+        {
+            lights.visible = true;
+            lights.animation.randomFrame();
+        }
+    }
+    
+    if (e.data.beat % 8 == 4 && FlxG.random.bool(30) && !trainMoving && trainCooldown > 8)
+    {
+        if (train != null)
+        {
+            trainCooldown = FlxG.random.int(-4, 0);
+            trainStart();
+        }
+    }
+});
+
+function trainStart()
+{
+    trace("trainStart");
+    if (train != null)
+    {
+        trainMoving = true;
+        if (!trainSound.playing)
+        {
+            trainSound.play(true);
+        }
+    }
+}
+
+function updateTrainPos()
+{
+    trace("updateTrainPos");
+    if (train != null)
+    {
+        if (trainSound.time >= 4700)
+        {
+            trainStartedMoving = true;
+            fire(["girlfriend"], new Identifier("basegame", "train-start"));
+        }
+
+        if (trainStartedMoving)
+        {
+            train.x -= 400;
+            trace(train.x + " " + trainCars + " " + trainFinishing);
+            
+            if (train.x < -2000 && !trainFinishing)
+            {
+                train.x = -1150;
+                trainCars -= 1;
+                
+                if (trainCars <= 0)
+                {
+                    trainFinishing = true;
+                }
+            }
+            
+            if (train.x < -4000 && trainFinishing)
+            {
+                trainReset();
+            }
+        }
+    }
+}
+
+function trainReset()
+{
+    trace("trainReset");
+    if (train != null)
+    {
+        fire(["girlfriend"], new Identifier("basegame", "train-stop"));
+        train.x = FlxG.width + 200;
+        trainMoving = false;
+        trainCars = 8;
+        trainFinishing = false;
+        trainStartedMoving = false;
+    }
+}

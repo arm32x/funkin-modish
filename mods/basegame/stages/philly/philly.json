@@ -1,0 +1,64 @@
+{
+    "$schema": "../stage-schema.json",
+    "zoom": 1.05,
+    "sprites": [
+        {
+            "position": [ -100, 0 ],
+            "graphic": "sky",
+            "scrollFactor": [ 0.1, 0.1 ]
+        },
+        {
+            "position": [ -10, 0 ],
+            "graphic": "city",
+            "scrollFactor": [ 0.3, 0.3 ],
+            "scale": [ 0.85, 0.85 ]
+        },
+        {
+            "position": [ -10, 0 ],
+            "graphic": "lights",
+            "animated": true,
+            "animations": [
+                {
+                    "name": "cycle",
+                    "prefix": "win",
+                    "frameRate": 0
+                }
+            ],
+            "startingAnimation": {
+                "name": "cycle"
+            },
+            "scrollFactor": [ 0.3, 0.3 ],
+            "visible": false,
+            "scale": [ 0.85, 0.85 ],
+            "antialiasing": true,
+            "id": "lights"
+        },
+        {
+            "position": [ -40, 50 ],
+            "graphic": "behind-train"
+        },
+        {
+            "position": [ 2000, 360 ],
+            "graphic": "train",
+            "distraction": true,
+            "id": "train"
+        },
+        {
+            "position": [ -40, 50 ],
+            "graphic": "street"
+        },
+        {
+            "type": "girlfriend",
+            "position": [ 400, 130 ],
+            "scrollFactor": [ 0.95, 0.95 ]
+        },
+        {
+            "type": "opponent",
+            "position": [ 100, 100 ]
+        },
+        {
+            "type": "player",
+            "position": [ 770, 450 ]
+        }
+    ]
+}

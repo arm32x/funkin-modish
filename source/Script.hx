@@ -1,9 +1,11 @@
 package;
 
-import lime.utils.Assets;
-import hscript.Parser;
-import hscript.Interp;
+import flixel.FlxG;
+import flixel.system.FlxSound;
 import hscript.Expr;
+import hscript.Interp;
+import hscript.Parser;
+import lime.utils.Assets;
 
 class Script extends EventTarget
 {
@@ -45,6 +47,9 @@ class Script extends EventTarget
             interp.variables.set("fire", this.fire);
             interp.variables.set("on", this.on);
             interp.variables.set("forward", this.forward);
+            
+            interp.variables.set("FlxG", FlxG);
+            interp.variables.set("FlxSound", FlxSound);
         }
 
         if (variables != null)
