@@ -107,8 +107,10 @@ class ModLoadingState extends FlxState
     {
         #if (target.threaded)
         var update:Null<ProgressUpdate> = null;
+        var lastUpdate:Null<ProgressUpdate> = null;
         while ((update = deque.pop(false)) != null)
         {
+            lastUpdate = update;
             switch (update)
             {
                 case Begin(total, message):
@@ -119,7 +121,6 @@ class ModLoadingState extends FlxState
                 case Update(done):
                     var element = elements[elements.length - 1];
                     element.done = done;
-                    trace('${element.message}: $done / ${element.total}');
                 case End:
                     var element = elements.pop();
                     trace('${element.message}: Done');
@@ -128,6 +129,16 @@ class ModLoadingState extends FlxState
                     {
                         FlxG.switchState(Type.createInstance(nextState, []));
                     }
+            }
+        }
+        if (lastUpdate != null)
+        {
+            switch (lastUpdate)
+            {
+                case Update(done):
+                    var element = elements[elements.length - 1];
+                    trace('${element.message}: $done / ${element.total}');
+                default:
             }
         }
         #end
