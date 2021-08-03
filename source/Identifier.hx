@@ -1,14 +1,15 @@
 package;
 
+import haxe.Serializer;
+import haxe.Unserializer;
 import haxe.Exception;
-import openfl.utils.Assets;
 
 using StringTools;
 
 class Identifier
 {
-    public final namespace:String;
-    public final path:String;
+    public var namespace(default, null):String;
+    public var path(default, null):String;
     
     private var hash:Null<Int> = null;
     
@@ -87,8 +88,7 @@ class Identifier
     
     public static function isValidPart(part:String):Bool
     {
-        // The .. syntax didn’t compile.
-        for (index in new IntIterator(0, part.length))
+        for (index in 0...part.length)
         {
             var char = part.charAt(index);
             if (!VALID_CHARS.contains(char))
@@ -97,5 +97,17 @@ class Identifier
             }
         }
         return true;
+    }
+    
+    @:keep function hxSerialize(s:Serializer)
+    {
+        s.serialize(toString());
+    }
+    
+    @:keep function hxUnserialize(u:Unserializer)
+    {
+        var parsed = parse(u.unserialize());
+        namespace = parsed.namespace;
+        path = parsed.path;
     }
 }
