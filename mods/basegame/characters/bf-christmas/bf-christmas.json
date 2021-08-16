@@ -1,6 +1,6 @@
 {
     "$schema": "../character-schema.json",
-    "version": 2,
+    "version": 3,
     "animations": [
         {
             "name": "idle",
@@ -76,5 +76,6 @@
     "startingAnimation": {
         "name": "idle"
     },
-    "flipX": true
+    "flipX": true,
+    "cameraOffset": [ -100, -100 ]
 }

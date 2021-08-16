@@ -83,7 +83,7 @@ class Stage extends FlxGroup
                 switch (spr.type)
                 {
                     case "player":
-                        player = new Boyfriend(spr.position[0], spr.position[1], PlayState.SONG.player1, Player, runScripts);
+                        player = new Boyfriend(spr.position[0], spr.position[1], PlayState.SONG.info.player, Player, runScripts);
                         player.applyOffset();
                         if (spr.scrollFactor != null)
                         {
@@ -96,7 +96,7 @@ class Stage extends FlxGroup
                         }
                         add(player);
                     case "girlfriend":
-                        girlfriend = new Character(spr.position[0], spr.position[1], PlayState.SONG.gfVersion, Girlfriend, runScripts);
+                        girlfriend = new Character(spr.position[0], spr.position[1], PlayState.SONG.info.girlfriend, Girlfriend, runScripts);
                         girlfriend.applyOffset();
                         if (spr.scrollFactor != null)
                         {
@@ -109,7 +109,7 @@ class Stage extends FlxGroup
                         }
                         add(girlfriend);
                     case "opponent":
-                        opponent = new Character(spr.position[0], spr.position[1], PlayState.SONG.player2, Opponent, runScripts);
+                        opponent = new Character(spr.position[0], spr.position[1], PlayState.SONG.info.opponent, Opponent, runScripts);
                         opponent.applyOffset();
                         if (spr.scrollFactor != null)
                         {

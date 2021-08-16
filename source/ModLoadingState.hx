@@ -57,6 +57,8 @@ class ProgressBar extends FlxSpriteGroup
 
 class ModLoadingState extends FlxState
 {
+    public static inline final PRELOAD_ASSETS:Bool = false;
+    
     public static var nextState:Class<FlxState> = TitleState;
     
     #if (target.threaded)
@@ -70,6 +72,8 @@ class ModLoadingState extends FlxState
         FlxG.mouse.visible = false;
 
         FlxG.worldBounds.set(0,0);
+        
+        Registry.noteTypes.register(new Identifier("core", "normal"), {});
 
         #if (target.threaded)
         Thread.create(function()
@@ -79,7 +83,7 @@ class ModLoadingState extends FlxState
             for (index => mod in modList)
             {
                 deque.add(Update(index));
-                ModLoader.load(mod, function(done, total)
+                ModLoader.load(mod, false, PRELOAD_ASSETS, function(done, total)
                 {
                     if (done == 0)
                     {

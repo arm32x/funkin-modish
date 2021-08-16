@@ -1,0 +1,7 @@
+{
+    "stage": "basegame:mall",
+    "girlfriend": "basegame:gf-christmas",
+    "opponent": "basegame:parents-christmas",
+    "uiStyle": "basegame:normal",
+    "player": "basegame:bf-christmas"
+}

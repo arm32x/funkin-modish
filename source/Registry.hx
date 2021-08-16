@@ -23,11 +23,17 @@ typedef HealthIconMetadata =
 
 typedef MenuCharacterMetadata = {};
 
+typedef NoteTypeMetadata =
+{
+    var ?animationSuffix:String;
+};
+
 typedef SongMetadata =
 {
     var name:String;
     var icon:Identifier;
     var ?week:Identifier;
+    var hasVocals:Bool;
 };
 
 typedef StageMetadata = {};
@@ -56,6 +62,7 @@ class Registry<T>
     public static var introTexts:Array<Array<String>> = [];
     public static var healthIcons:Registry<HealthIconMetadata> = new Registry("health-icons");
     public static var menuCharacters:Registry<MenuCharacterMetadata> = new Registry("menu-characters");
+    public static var noteTypes:Registry<NoteTypeMetadata> = new Registry("note-types");
     public static var songs:Registry<SongMetadata> = new Registry("songs");
     public static var stages:Registry<StageMetadata> = new Registry("stages");
     public static var weeks:Registry<WeekMetadata> = new Registry("weeks");

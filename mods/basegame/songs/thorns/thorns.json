@@ -1,0 +1,7 @@
+{
+    "stage": "basegame:school-evil",
+    "girlfriend": "basegame:gf-pixel",
+    "opponent": "basegame:spirit",
+    "uiStyle": "basegame:pixel",
+    "player": "basegame:bf-pixel"
+}

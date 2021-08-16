@@ -1,5 +1,9 @@
 package;
 
+import haxe.Serializer;
+import sys.io.File;
+import haxe.Unserializer;
+import ChartConverter.BasegameChartImporter;
 import haxe.ds.HashMap;
 import haxe.Exception;
 import haxe.xml.Access;
@@ -16,7 +20,7 @@ class ModLoader
     // continue to increment with each breaking change.
     inline private static final CURRENT_FORMAT:Int = 0;
     
-    public static function load(id:String, sparse:Bool = false, ?progressFunction:(Int, Int)->Void)
+    public static function load(id:String, sparse:Bool = false, preloadAssets:Bool = false, ?progressFunction:(Int, Int)->Void)
     {
         trace('Loading mod "$id"...');
         
@@ -108,11 +112,16 @@ class ModLoader
                         });
                     case "menuCharacter":
                         Registry.menuCharacters.register(Identifier.parse(export.att.id), {});
+                    case "noteType":
+                        Registry.noteTypes.register(Identifier.parse(export.att.id), {
+                            animationSuffix: export.has.animationSuffix ? export.att.animationSuffix : null
+                        });
                     case "song":
                         Registry.songs.register(Identifier.parse(export.att.id), {
                             name: export.att.name,
                             icon: Identifier.parse(export.att.icon),
-                            week: export.has.week ? Identifier.parse(export.att.week) : null
+                            week: export.has.week ? Identifier.parse(export.att.week) : null,
+                            hasVocals: export.has.hasVocals ? export.att.hasVocals.toLowerCase() == "true" : true
                         });
                     case "stage":
                         Registry.stages.register(Identifier.parse(export.att.id), {});
@@ -123,11 +132,62 @@ class ModLoader
                             middleCharacter: export.has.middle ? Identifier.parse(export.att.middle) : null,
                             rightCharacter: export.has.right ? Identifier.parse(export.att.right) : null,
                             playlist: export.nodes.song
-                                .map(function(node) return Identifier.parse(node.att.id)),
+                                .map(node -> Identifier.parse(node.att.id)),
                             locked: export.has.locked ? (export.att.locked.toLowerCase() == "true") : false
                         });
                     default:
                         throw new Exception('Invalid export type "${export.name}" in mod "$id".');
+                }
+                
+                if (preloadAssets)
+                {
+                    var id = export.has.id ? Identifier.parse(export.att.id) : null;
+                    // The Assets class has an internal cache.
+                    switch (export.name)
+                    {
+                        case "character":
+                            Assets.getImage(id.getAssetPath("characters", null, "png"));
+                        case "healthIcon":
+                            Assets.getImage(id.getAssetPath("health-icons", null, "png"));
+                        case "menuCharacter":
+                            Assets.getImage(id.getAssetPath("menu-characters", null, "png"));
+                        case "song":
+                            Assets.getAudioBuffer(id.getAssetPath("songs", "instrumental", Paths.SOUND_EXT));
+                            if (Registry.songs.get(id).hasVocals)
+                                Assets.getAudioBuffer(id.getAssetPath("songs", "vocals", Paths.SOUND_EXT));
+                            
+                            // TODO: Remove once all songs are converted.
+                            #if sys
+                            for (difficulty in ["easy", "normal", "hard"])
+                            {
+                                var original = Unserializer.run(Assets.getText(id.getAssetPath("songs", difficulty, "sol")));
+                                // Check if the song is in the basegame format.
+                                if (original.song != null)
+                                {
+                                    var converter = new BasegameChartImporter();
+                                    var converted = converter.convert(original.song, difficulty);
+                                    
+                                    var infoPath = Assets.getLibrary(id.namespace).getPath('songs/${id.path}/${id.path}.json');
+                                    var chartPath = Assets.getLibrary(id.namespace).getPath('songs/${id.path}/$difficulty.sol');
+                                    
+                                    if (infoPath != null && !FileSystem.exists(infoPath))
+                                    {
+                                        File.saveContent(infoPath, converted.info.toJSON());
+                                    }
+                                    if (chartPath != null)
+                                    {
+                                        if (FileSystem.exists(chartPath))
+                                        {
+                                            File.copy(chartPath, chartPath + "~");
+                                        }
+                                        File.saveContent(chartPath, Serializer.run(converted.chart));
+                                    }
+                                }
+                            }
+                            #end
+                        case "week":
+                            Assets.getImage(id.getAssetPath("weeks", null, "png"));
+                    }
                 }
             }
         }

@@ -44,14 +44,14 @@ class Conductor
 	{
 		bpmChangeMap = [];
 
-		var curBPM:Float = song.bpm;
+		var curBPM:Float = song.chart.bpm;
 		var totalSteps:Int = 0;
 		var totalPos:Float = 0;
-		for (i in 0...song.notes.length)
+		for (section in song.chart.sections)
 		{
-			if(song.notes[i].changeBPM && song.notes[i].bpm != curBPM)
+			if(section.bpm != null && section.bpm != curBPM)
 			{
-				curBPM = song.notes[i].bpm;
+				curBPM = section.bpm;
 				var event:BPMChangeEvent = {
 					stepTime: totalSteps,
 					songTime: totalPos,
@@ -60,7 +60,7 @@ class Conductor
 				bpmChangeMap.push(event);
 			}
 
-			var deltaSteps:Int = song.notes[i].lengthInSteps;
+			var deltaSteps:Int = 16;
 			totalSteps += deltaSteps;
 			totalPos += ((60 / curBPM) * 1000 / 4) * deltaSteps;
 		}

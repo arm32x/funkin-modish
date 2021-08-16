@@ -91,7 +91,9 @@
         <menuCharacter id="basegame:senpai" />
         <menuCharacter id="basegame:spooky" />
         
-        <song id="basegame:tutorial" name="Tutorial" icon="basegame:gf" week="basegame:tutorial" />
+        <noteType id="basegame:alt" animationSuffix="alt" />
+        
+        <song id="basegame:tutorial" name="Tutorial" icon="basegame:gf" week="basegame:tutorial" hasVocals="false" />
         <song id="basegame:bopeebo" name="Bopeebo" icon="basegame:dad" week="basegame:week1" />
         <song id="basegame:fresh" name="Fresh" icon="basegame:dad" week="basegame:week1" />
         <song id="basegame:dad-battle" name="Dad Battle" icon="basegame:dad" week="basegame:week1" />

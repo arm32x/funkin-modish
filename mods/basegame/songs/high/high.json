@@ -1,0 +1,7 @@
+{
+    "stage": "basegame:limo",
+    "girlfriend": "basegame:gf-car",
+    "opponent": "basegame:mom-car",
+    "uiStyle": "basegame:normal",
+    "player": "basegame:bf-car"
+}

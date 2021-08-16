@@ -1,5 +1,6 @@
 package;
 
+@:deprecated("SwagSection is deprecated in favor of Section")
 typedef SwagSection =
 {
 	var sectionNotes:Array<Dynamic>;
@@ -11,21 +12,17 @@ typedef SwagSection =
 	var altAnim:Bool;
 }
 
-class Section
+typedef Section =
 {
-	public var sectionNotes:Array<Dynamic> = [];
-
-	public var lengthInSteps:Int = 16;
-	public var typeOfSection:Int = 0;
-	public var mustHitSection:Bool = true;
-
-	/**
-	 *	Copies the first section into the second section!
-	 */
-	public static var COPYCAT:Int = 0;
-
-	public function new(lengthInSteps:Int = 16)
-	{
-		this.lengthInSteps = lengthInSteps;
-	}
+	var notes:Array<{
+		var strumTime:Float;
+		var column:Int;
+		var sustainLength:Float;
+		var type:Identifier;
+		var ?data:Dynamic;
+	}>;
+	// var lengthInSteps:Int; // Every section is 16 steps.
+	var ?cameraFocus:Character.Position;
+	var ?bpm:Float;
+	// var ?scrollSpeed:Float; // TODO: Add support for changing scroll speed.
 }

@@ -1,0 +1,7 @@
+{
+    "player": "basegame:bf",
+    "opponent": "basegame:pico",
+    "girlfriend": "basegame:gf",
+    "uiStyle": "core:normal",
+    "stage": "basegame:philly"
+}

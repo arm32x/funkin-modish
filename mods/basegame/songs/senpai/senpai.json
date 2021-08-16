@@ -1,0 +1,7 @@
+{
+    "stage": "basegame:school",
+    "girlfriend": "basegame:gf-pixel",
+    "opponent": "basegame:senpai",
+    "uiStyle": "basegame:pixel",
+    "player": "basegame:bf-pixel"
+}

@@ -16,7 +16,8 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	public function new(x:Float, y:Float)
 	{
-		var daBf:Identifier = if (PlayState.SONG.player1.equals(new Identifier("basegame", "bf-pixel")))
+		// TODO: Make this not hardcoded.
+		var daBf:Identifier = if (PlayState.SONG.info.player.equals(new Identifier("basegame", "bf-pixel")))
 		{
 			stageSuffix = "-pixel";
 			new Identifier("basegame", "bf-pixel-dead");

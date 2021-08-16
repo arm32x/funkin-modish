@@ -1,0 +1,7 @@
+{
+    "stage": "basegame:mall-evil",
+    "girlfriend": "basegame:gf-christmas",
+    "opponent": "basegame:monster-christmas",
+    "uiStyle": "basegame:normal",
+    "player": "basegame:bf-christmas"
+}

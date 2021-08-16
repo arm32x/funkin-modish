@@ -1,0 +1,7 @@
+{
+    "stage": "basegame:halloween",
+    "girlfriend": "basegame:gf",
+    "opponent": "basegame:monster",
+    "uiStyle": "basegame:normal",
+    "player": "basegame:bf"
+}

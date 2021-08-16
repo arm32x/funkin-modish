@@ -81,8 +81,8 @@ class Character extends FlxSprite
 	
 	public var replacesGF:Bool = false;
 	
-	private var positionOffset:FlxPoint = FlxPoint.get();
-	private var cameraOffset:FlxPoint = FlxPoint.get();
+	public var positionOffset:FlxPoint = FlxPoint.get();
+	public var cameraOffset:FlxPoint = FlxPoint.get();
 	
 	public var script:Script;
 	
@@ -287,7 +287,7 @@ class Character extends FlxSprite
 	
 	public function getCameraPosition(?point:FlxPoint):FlxPoint
 	{
-		return getGraphicMidpoint(point).addPoint(cameraOffset);
+		return getMidpoint(point).addPoint(cameraOffset);
 	}
 
 	override function update(elapsed:Float)
