@@ -1,32 +1,32 @@
 package;
 
-import openfl.geom.Matrix;
-import openfl.display.BitmapData;
-import flixel.system.FlxSound;
-import flixel.util.FlxAxes;
-import flixel.FlxSubState;
-import Options.Option;
-import flixel.input.FlxInput;
-import flixel.input.keyboard.FlxKey;
+import flixel.effects.FlxFlicker;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.effects.FlxFlicker;
+import flixel.FlxSubState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.input.FlxInput;
+import flixel.input.FlxKeyManager;
+import flixel.input.keyboard.FlxKey;
+import flixel.math.FlxMath;
+import flixel.system.FlxSound;
+import flixel.text.FlxText;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxAxes;
 import flixel.util.FlxColor;
+import lime.app.Application;
+import lime.utils.Assets;
+import openfl.display.BitmapData;
+import openfl.geom.Matrix;
+import Options.Option;
+
 #if newgrounds
 import io.newgrounds.NG;
 #end
-import lime.app.Application;
-import lime.utils.Assets;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.input.FlxKeyManager;
-
 
 using StringTools;
 

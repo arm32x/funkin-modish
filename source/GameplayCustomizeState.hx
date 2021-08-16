@@ -1,20 +1,21 @@
+package;
+
+import flixel.FlxCamera;
+import flixel.FlxG;
+import flixel.FlxObject;
+import flixel.FlxSprite;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.math.FlxMath;
+import flixel.math.FlxPoint;
+import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
-import flixel.text.FlxText;
-import flixel.math.FlxMath;
-import flixel.FlxCamera;
-import flixel.math.FlxPoint;
-import flixel.FlxObject;
+
 #if windows
 import Discord.DiscordClient;
 import sys.thread.Thread;
 #end
-
-import flixel.group.FlxGroup.FlxTypedGroup;
-import openfl.ui.Keyboard;
-import flixel.FlxSprite;
-import flixel.FlxG;
 
 class GameplayCustomizeState extends MusicBeatState
 {

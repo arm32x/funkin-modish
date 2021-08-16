@@ -1,18 +1,19 @@
 package;
 
-import Registry.SongMetadata;
-import Controls.KeyboardScheme;
 import Controls.Control;
+import Controls.KeyboardScheme;
 import flash.text.TextField;
+import flixel.addons.display.FlxGridOverlay;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
+import Registry.SongMetadata;
+
 #if sys
 import sys.io.File;
 #end

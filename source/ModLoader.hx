@@ -1,16 +1,15 @@
 package;
 
 import haxe.Serializer;
-import sys.io.File;
 import haxe.Unserializer;
 import ChartConverter.BasegameChartImporter;
-import haxe.ds.HashMap;
 import haxe.Exception;
 import haxe.xml.Access;
 import lime.utils.Assets;
 
 #if sys
 import sys.FileSystem;
+import sys.io.File;
 #end
 
 class ModLoader

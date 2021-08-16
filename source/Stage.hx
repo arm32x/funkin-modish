@@ -1,14 +1,12 @@
 package;
 
-import haxe.Exception;
-import flixel.util.FlxDestroyUtil;
 import flixel.FlxG;
-import flixel.math.FlxPoint;
 import flixel.FlxSprite;
-import lime.utils.Assets;
-import haxe.Json;
-import haxe.extern.EitherType;
 import flixel.group.FlxGroup;
+import flixel.util.FlxDestroyUtil;
+import haxe.Exception;
+import haxe.Json;
+import lime.utils.Assets;
 
 // See 'mods/basegame/stages/stage-schema.json' for full schema.
 typedef StageData =

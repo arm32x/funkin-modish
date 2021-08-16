@@ -1,10 +1,10 @@
 package;
 
-import haxe.Exception;
 import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
-import openfl.utils.AssetType;
+import haxe.Exception;
 import openfl.utils.Assets as OpenFlAssets;
+import openfl.utils.AssetType;
 
 class Paths
 {

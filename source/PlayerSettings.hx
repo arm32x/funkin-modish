@@ -1,12 +1,9 @@
 package;
 
 import Controls;
-import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.util.FlxSignal;
 
-// import ui.DeviceManager;
-// import props.Player;
 class PlayerSettings
 {
 	static public var numPlayers(default, null) = 0;

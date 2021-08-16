@@ -1,6 +1,5 @@
 package;
 
-import haxe.extern.EitherType;
 import flixel.util.FlxDestroyUtil.IFlxDestroyable;
 import haxe.ds.HashMap;
 

@@ -1,12 +1,12 @@
 package;
 
-import lime.app.Future;
-import lime.media.AudioBuffer;
-import lime.utils.Bytes;
-import lime.text.Font;
-import lime.graphics.Image;
 import haxe.io.Path;
+import lime.app.Future;
+import lime.graphics.Image;
+import lime.media.AudioBuffer;
+import lime.text.Font;
 import lime.utils.AssetLibrary;
+import lime.utils.Bytes;
 
 using StringTools;
 

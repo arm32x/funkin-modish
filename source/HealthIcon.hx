@@ -1,10 +1,7 @@
 package;
 
 import flixel.FlxSprite;
-import format.csv.Data;
-import format.csv.Reader;
 import haxe.Exception;
-import openfl.utils.Assets;
 
 class HealthIcon extends FlxSprite
 {

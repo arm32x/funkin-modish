@@ -1,7 +1,9 @@
+package;
+
 import flixel.graphics.frames.FlxAtlasFrames;
-import lime.utils.Assets;
-import haxe.Exception;
 import flixel.math.FlxMath;
+import haxe.Exception;
+import lime.utils.Assets;
 
 class HelperFunctions
 {

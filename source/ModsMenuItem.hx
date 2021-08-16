@@ -1,13 +1,11 @@
 package;
 
-import flixel.util.FlxColor;
-import flixel.text.FlxText;
-import flixel.group.FlxSpriteGroup;
-import openfl.utils.Assets;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup;
 import flixel.FlxG;
-import flixel.FlxObject;
+import flixel.FlxSprite;
+import flixel.group.FlxSpriteGroup;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
+import openfl.utils.Assets;
 
 class ModsMenuItem extends FlxSpriteGroup
 {

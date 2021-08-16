@@ -1,18 +1,14 @@
 package;
 
-import flixel.util.FlxTimer;
-import Registry.SongMetadata;
-import flixel.input.gamepad.FlxGamepad;
-import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.input.gamepad.FlxGamepad;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
-
+import flixel.util.FlxTimer;
+import Registry.SongMetadata;
 
 #if windows
 import Discord.DiscordClient;

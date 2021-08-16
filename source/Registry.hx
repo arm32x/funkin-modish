@@ -1,7 +1,7 @@
 package;
 
-import haxe.Exception;
 import haxe.ds.HashMap;
+import haxe.Exception;
 
 typedef ModMetadata =
 {

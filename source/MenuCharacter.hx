@@ -1,11 +1,8 @@
 package;
 
-import haxe.ds.HashMap;
-import haxe.Exception;
+import flixel.FlxSprite;
 import haxe.Json;
 import openfl.utils.Assets;
-import flixel.FlxSprite;
-import flixel.graphics.frames.FlxAtlasFrames;
 
 typedef MenuCharacterJSON = {
 	var version:Int;

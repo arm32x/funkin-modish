@@ -1,14 +1,16 @@
 package;
 
-import sys.io.Process;
-import lime.utils.Assets;
-import haxe.io.Path;
-import sys.io.File;
-import sys.FileSystem;
-import flixel.input.keyboard.FlxKey;
-import flixel.input.actions.FlxAction.FlxActionDigital;
-import flixel.FlxG;
 import flixel.FlxBasic;
+import flixel.FlxG;
+import flixel.input.actions.FlxAction.FlxActionDigital;
+import flixel.input.keyboard.FlxKey;
+import haxe.io.Path;
+import lime.utils.Assets;
+
+#if sys
+import sys.FileSystem;
+import sys.io.Process;
+#end
 
 class ReloadManager extends FlxBasic
 {
@@ -64,7 +66,7 @@ class ReloadManager extends FlxBasic
                 trace('Failed to copy files (exit code $exitCode)!');
             }
         }
-        Assets.cache.clear();
         #end
+        Assets.cache.clear();
     }
 }

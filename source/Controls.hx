@@ -1,20 +1,18 @@
 package;
 
+import flixel.FlxG;
+import flixel.input.actions.FlxAction;
+import flixel.input.actions.FlxActionInput;
+import flixel.input.actions.FlxActionManager;
+import flixel.input.actions.FlxActionSet;
+import flixel.input.FlxInput;
+import flixel.input.gamepad.FlxGamepadInputID;
+import flixel.input.keyboard.FlxKey;
+
 #if android
 import flixel.input.android.FlxAndroidKey;
 import flixel.input.android.FlxAndroidKeys.FlxAndroidKeyInput;
 #end
-import flixel.input.gamepad.FlxGamepad;
-import flixel.FlxG;
-import flixel.input.FlxInput;
-import flixel.input.actions.FlxAction;
-import flixel.input.actions.FlxActionInput;
-import flixel.input.actions.FlxActionInputDigital;
-import flixel.input.actions.FlxActionManager;
-import flixel.input.actions.FlxActionSet;
-import flixel.input.gamepad.FlxGamepadButton;
-import flixel.input.gamepad.FlxGamepadInputID;
-import flixel.input.keyboard.FlxKey;
 
 #if (haxe >= "4.0.0")
 enum abstract Action(String) to String from String

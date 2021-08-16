@@ -1,3 +1,5 @@
+package;
+
 import flixel.FlxG;
 
 class Ratings

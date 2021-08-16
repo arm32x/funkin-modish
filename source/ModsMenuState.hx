@@ -1,10 +1,10 @@
 package;
 
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.group.FlxGroup;
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.group.FlxGroup;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 
 class ModsMenuState extends MusicBeatState
 {

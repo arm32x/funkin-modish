@@ -1,8 +1,7 @@
 package;
 
-import flixel.FlxG;
 import flixel.util.FlxSignal;
-import flixel.util.FlxTimer;
+
 #if newgrounds
 import io.newgrounds.NG;
 import io.newgrounds.components.ScoreBoardComponent.Period;
@@ -13,8 +12,6 @@ import io.newgrounds.objects.events.Response;
 import io.newgrounds.objects.events.Result.GetCurrentVersionResult;
 import io.newgrounds.objects.events.Result.GetVersionResult;
 #end
-import lime.app.Application;
-import openfl.display.Stage;
 
 using StringTools;
 

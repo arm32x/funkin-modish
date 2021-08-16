@@ -1,21 +1,11 @@
 package;
 
-import haxe.Serializer;
-import ChartConverter.BasegameChartImporter;
-import Registry.SongMetadata;
-import haxe.Exception;
-import haxe.Unserializer;
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxDestroyUtil.IFlxDestroyable;
-import Section.SwagSection;
 import haxe.Json;
-import haxe.format.JsonParser;
+import haxe.Unserializer;
 import lime.utils.Assets;
-
-#if sys
-import sys.io.File;
-import sys.FileSystem;
-#end
+import Registry.SongMetadata;
 
 using StringTools;
 

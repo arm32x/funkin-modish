@@ -1,14 +1,11 @@
 package;
 
+import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.util.FlxDestroyUtil;
 import haxe.Exception;
-import openfl.utils.Assets;
 import haxe.Json;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.animation.FlxBaseAnimation;
-import flixel.graphics.frames.FlxAtlasFrames;
+import openfl.utils.Assets;
 
 using StringTools;
 

@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 
 using StringTools;
+
 class Highscore
 {
 	public static var songScores:Map<String, Int> = new Map();

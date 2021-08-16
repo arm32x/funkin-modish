@@ -1,8 +1,8 @@
 package;
 
+import haxe.Exception;
 import haxe.Serializer;
 import haxe.Unserializer;
-import haxe.Exception;
 
 using StringTools;
 
