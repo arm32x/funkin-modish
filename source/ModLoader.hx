@@ -154,36 +154,6 @@ class ModLoader
                             Assets.getAudioBuffer(id.getAssetPath("songs", "instrumental", Paths.SOUND_EXT));
                             if (Registry.songs.get(id).hasVocals)
                                 Assets.getAudioBuffer(id.getAssetPath("songs", "vocals", Paths.SOUND_EXT));
-                            
-                            // TODO: Remove once all songs are converted.
-                            #if sys
-                            for (difficulty in ["easy", "normal", "hard"])
-                            {
-                                var original = Unserializer.run(Assets.getText(id.getAssetPath("songs", difficulty, "sol")));
-                                // Check if the song is in the basegame format.
-                                if (original.song != null)
-                                {
-                                    var converter = new BasegameChartImporter();
-                                    var converted = converter.convert(original.song, difficulty);
-                                    
-                                    var infoPath = Assets.getLibrary(id.namespace).getPath('songs/${id.path}/${id.path}.json');
-                                    var chartPath = Assets.getLibrary(id.namespace).getPath('songs/${id.path}/$difficulty.sol');
-                                    
-                                    if (infoPath != null && !FileSystem.exists(infoPath))
-                                    {
-                                        File.saveContent(infoPath, converted.info.toJSON());
-                                    }
-                                    if (chartPath != null)
-                                    {
-                                        if (FileSystem.exists(chartPath))
-                                        {
-                                            File.copy(chartPath, chartPath + "~");
-                                        }
-                                        File.saveContent(chartPath, Serializer.run(converted.chart));
-                                    }
-                                }
-                            }
-                            #end
                         case "week":
                             Assets.getImage(id.getAssetPath("weeks", null, "png"));
                     }
