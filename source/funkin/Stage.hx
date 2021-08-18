@@ -38,6 +38,7 @@ typedef StageData =
             var ?reversed:Bool;
             var ?frame:Int;
         };
+        var ?cameraOffset:Array<Float>;
     }>;
     var ?zoom:Float;
 };
@@ -82,7 +83,6 @@ class Stage extends FlxGroup
                 {
                     case "player":
                         player = new Boyfriend(spr.position[0], spr.position[1], PlayState.SONG.info.player, Player, runScripts);
-                        player.applyOffset();
                         if (spr.scrollFactor != null)
                         {
                             player.scrollFactor.set(spr.scrollFactor[0], spr.scrollFactor[1]);
@@ -92,10 +92,14 @@ class Stage extends FlxGroup
                             player.scale.set(spr.scale[0], spr.scale[1]);
                             player.updateHitbox();
                         }
+                        if (spr.cameraOffset != null)
+                        {
+                            player.cameraOffset.add(spr.cameraOffset[0], spr.cameraOffset[1]);
+                        }
+                        player.applyOffset();
                         add(player);
                     case "girlfriend":
                         girlfriend = new Character(spr.position[0], spr.position[1], PlayState.SONG.info.girlfriend, Girlfriend, runScripts);
-                        girlfriend.applyOffset();
                         if (spr.scrollFactor != null)
                         {
                             girlfriend.scrollFactor.set(spr.scrollFactor[0], spr.scrollFactor[1]);
@@ -105,10 +109,14 @@ class Stage extends FlxGroup
                             girlfriend.scale.set(spr.scale[0], spr.scale[1]);
                             girlfriend.updateHitbox();
                         }
+                        if (spr.cameraOffset != null)
+                        {
+                            girlfriend.cameraOffset.add(spr.cameraOffset[0], spr.cameraOffset[1]);
+                        }
+                        girlfriend.applyOffset();
                         add(girlfriend);
                     case "opponent":
                         opponent = new Character(spr.position[0], spr.position[1], PlayState.SONG.info.opponent, Opponent, runScripts);
-                        opponent.applyOffset();
                         if (spr.scrollFactor != null)
                         {
                             opponent.scrollFactor.set(spr.scrollFactor[0], spr.scrollFactor[1]);
@@ -118,8 +126,13 @@ class Stage extends FlxGroup
                             opponent.scale.set(spr.scale[0], spr.scale[1]);
                             opponent.updateHitbox();
                         }
+                        if (spr.cameraOffset != null)
+                        {
+                            opponent.cameraOffset.add(spr.cameraOffset[0], spr.cameraOffset[1]);
+                        }
+                        opponent.applyOffset();
                         add(opponent);
-                    default:
+                    case "sprite" | null:
                         if (spr.distraction == true && !FlxG.save.data.distractions)
                         {
                             continue;
@@ -147,7 +160,7 @@ class Stage extends FlxGroup
                                 switch ([anim.prefix, anim.indices])
                                 {
                                     case [null, null]:
-                                        trace('Animation "${anim.name}" on sprite ${spr.id != null ? '"${spr.id}"' : Std.string(index)} in stage "$id" is invalid: Neither "prefix" nor "indices" is specified.');
+                                        trace('Animation "${anim.name}" on sprite ${spr.id != null ? '"${spr.id}" ' : ""}in stage "$id" is invalid: Neither "prefix" nor "indices" is specified.');
                                         continue;
                                     case [prefix, null]:
                                         sprite.animation.addByPrefix(anim.name, prefix, frameRate, looped);
@@ -216,6 +229,8 @@ class Stage extends FlxGroup
                         {
                             add(sprite);
                         }
+                    default:
+                        trace('Sprite ${spr.id != null ? '"${spr.id}" ' : ""}in stage "$id" has invalid sprite type "${spr.type}".');
                 }
             }
         }

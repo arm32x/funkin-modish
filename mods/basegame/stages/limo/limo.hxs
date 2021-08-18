@@ -1,0 +1,13 @@
+var danced = false;
+on(new Identifier("core", "beat"), function(e)
+{
+    var dancers = groups.get("dancers");
+    if (dancers != null)
+    {
+        dancers.forEach(function(dancer)
+        {
+            dancer.animation.play(danced ? "danceRight" : "danceLeft");
+        });
+        danced = !danced;
+    }
+});

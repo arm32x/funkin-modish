@@ -105,5 +105,5 @@
     },
     "animationMode": "idle",
     "positionOffset": [0, 300],
-    "cameraOffset": [600, 0]
+    "cameraOffset": [150, -100]
 }

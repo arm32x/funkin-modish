@@ -51,5 +51,6 @@
         "name": "danceRight"
     },
     "animationMode": "dance",
-    "positionOffset": [0, 200]
+    "positionOffset": [0, 200],
+    "cameraOffset": [150, -100]
 }

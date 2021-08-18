@@ -1,6 +1,6 @@
 {
     "$schema": "../character-schema.json",
-    "version": 2,
+    "version": 3,
     "animations": [
         {
             "name": "idle",
@@ -41,5 +41,6 @@
     ],
     "startingAnimation": {
         "name": "idle"
-    }
+    },
+    "cameraOffset": [ 150, -100 ]
 }

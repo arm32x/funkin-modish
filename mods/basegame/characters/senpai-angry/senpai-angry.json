@@ -50,5 +50,5 @@
     ],
     "antialiasing": false,
     "positionOffset": [150, 360],
-    "cameraOffset": [300, 0]
+    "cameraOffset": [-100, -430]
 }

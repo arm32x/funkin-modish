@@ -37,5 +37,5 @@
         "name": "idle"
     },
     "animationMode": "idle",
-    "cameraOffset": [400, 0]
+    "cameraOffset": [ 150, -100 ]
 }

@@ -52,7 +52,6 @@ on(new Identifier("core", "beat"), function(e)
 
 function trainStart()
 {
-    trace("trainStart");
     if (train != null)
     {
         trainMoving = true;
@@ -65,7 +64,6 @@ function trainStart()
 
 function updateTrainPos()
 {
-    trace("updateTrainPos");
     if (train != null)
     {
         if (trainSound.time >= 4700)
@@ -77,7 +75,6 @@ function updateTrainPos()
         if (trainStartedMoving)
         {
             train.x -= 400;
-            trace(train.x + " " + trainCars + " " + trainFinishing);
             
             if (train.x < -2000 && !trainFinishing)
             {
@@ -100,7 +97,6 @@ function updateTrainPos()
 
 function trainReset()
 {
-    trace("trainReset");
     if (train != null)
     {
         fire(["girlfriend"], new Identifier("basegame", "train-stop"));

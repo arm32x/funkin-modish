@@ -159,22 +159,39 @@
                         },
                         "required": [ "name" ],
                         "additionalProperties": false
+                    },
+                    "cameraOffset": {
+                        "type": "array",
+                        "description": "Only for characters. Offsets the camera's position when it is focused on this character.",
+                        "default": [ 0.0, 0.0 ],
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2
                     }
                 },
                 "required": [ "position" ],
                 "dependencies": {
                     "animations": [ "animated" ],
-                    "startingAnimation": [ "animated", "animations" ]
+                    "startingAnimation": [ "animated", "animations" ],
+                    "cameraOffset": {
+                        "properties": {
+                            "type": {
+                                "enum": [ "player", "girlfriend", "opponent" ]
+                            }
+                        },
+                        "required": [ "type" ]
+                    }
                 },
                 "if": {
                     "properties": {
                         "type": {
-                            "enum": [ "player", "girlfriend", "opponent" ]
+                            "const": "sprite"
                         }
-                    },
-                    "required": [ "type" ]
+                    }
                 },
-                "else": {
+                "then": {
                     "required": [ "graphic" ]
                 },
                 "additionalProperties": false

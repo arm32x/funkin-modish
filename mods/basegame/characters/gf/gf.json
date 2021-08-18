@@ -88,5 +88,5 @@
     },
     "animationMode": "dance",
     "replacesGF": true,
-    "cameraOffset": [600, 0]
+    "cameraOffset": [ 0, 0 ]
 }
