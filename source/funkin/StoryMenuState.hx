@@ -322,7 +322,7 @@ class StoryMenuState extends MusicBeatState
 			PlayState.shits = 0;
 			PlayState.goods = 0;
 			PlayState.campaignMisses = 0;
-			PlayState.SONG = new Song(PlayState.storyPlaylist[0]).load(diffic);
+			PlayState.SONG = new Song(PlayState.storyPlaylist[0]).load(diffic, true);
 			PlayState.storyWeek = weekIds[curWeek];
 			PlayState.campaignScore = 0;
 			new FlxTimer().start(1, function(tmr:FlxTimer)

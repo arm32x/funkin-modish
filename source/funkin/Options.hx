@@ -639,7 +639,7 @@ class OffsetMenu extends Option
 	public override function press():Bool
 	{
 		trace("switch");
-		PlayState.SONG = new Song(new Identifier("basegame", "tutorial")).load("normal");
+		PlayState.SONG = new Song(new Identifier("basegame", "tutorial")).load("normal", true);
 		PlayState.isStoryMode = false;
 		PlayState.storyDifficulty = 0;
 		PlayState.storyWeek = null;

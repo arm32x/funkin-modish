@@ -13,7 +13,6 @@ class KeyBinds
         FlxG.save.data.downBind = "S";
         FlxG.save.data.leftBind = "A";
         FlxG.save.data.rightBind = "D";
-        FlxG.save.data.killBind = "R";
         FlxG.save.data.gpupBind = "DPAD_UP";
         FlxG.save.data.gpdownBind = "DPAD_DOWN";
         FlxG.save.data.gpleftBind = "DPAD_LEFT";

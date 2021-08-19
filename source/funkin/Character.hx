@@ -269,8 +269,7 @@ class Character extends FlxSprite
 				case Opponent: "opponent";
 			});
 			script.run([
-				"animation" => this.animation,
-				"dance" => this.dance,
+				"sprite" => this,
 				"playAnim" => this.playAnim
 			]);
 		}

@@ -146,6 +146,8 @@
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
 	
 	<define name="MODISH_IGNORE_OUTDATED_KADE" />
+	<!-- Use -DMODISH_DEV on the command line to enable in release mode. -->
+	<define name="MODISH_DEV" if="debug" />
 
 	<!-- <haxelib name="markdown" /> -->
 	<!-- <haxelib name="HtmlParser" /> -->

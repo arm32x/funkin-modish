@@ -2,6 +2,7 @@ package funkin;
 
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxDestroyUtil.IFlxDestroyable;
+import funkin.Character.Position;
 import funkin.Registry.SongMetadata;
 import haxe.Json;
 import haxe.Unserializer;
@@ -82,7 +83,18 @@ class Song implements IFlxDestroyable
 
 	public function load(difficulty:String, runScripts:Bool = false):Song
 	{
-		chart = Unserializer.run(Assets.getText(id.getAssetPath("songs", difficulty, "sol")));
+		var unserializer = new Unserializer(Assets.getText(id.getAssetPath("songs", difficulty, "sol")));
+		unserializer.setResolver({
+			resolveClass: function resolveClass(name:String):Null<Class<Dynamic>>
+			{
+				return name == "Identifier" ? Identifier : null;	
+			},
+			resolveEnum: function resolveEnum(name:String):Null<Enum<Dynamic>>
+			{
+				return name == "Position" ? Position : null;
+			}
+		});
+		chart = unserializer.unserialize();
 		
 		script = FlxDestroyUtil.destroy(script);
 		if (runScripts)

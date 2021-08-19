@@ -74,6 +74,7 @@ class Registry<T>
         introTexts = [];
         healthIcons.clear();
         menuCharacters.clear();
+        noteTypes.clear();
         songs.clear();
         stages.clear();
         weeks.clear();
