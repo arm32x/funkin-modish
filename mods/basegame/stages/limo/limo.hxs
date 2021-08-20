@@ -1,4 +1,3 @@
-var danced = false;
 on(new Identifier("core", "beat"), function(e)
 {
     var dancers = groups.get("dancers");
@@ -6,8 +5,7 @@ on(new Identifier("core", "beat"), function(e)
     {
         dancers.forEach(function(dancer)
         {
-            dancer.animation.play(danced ? "danceRight" : "danceLeft");
+            dancer.animation.play(e.data.beat % 2 == 0 ? "danceRight" : "danceLeft");
         });
-        danced = !danced;
     }
 });

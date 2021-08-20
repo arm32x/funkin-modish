@@ -88,5 +88,6 @@
     "startingAnimation": {
         "name": "idle"
     },
+    "positionOffset": [0, 350],
     "cameraOffset": [ -100, -100 ]
 }

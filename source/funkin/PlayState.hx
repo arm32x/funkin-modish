@@ -752,7 +752,7 @@ class PlayState extends MusicBeatState
 					},
 					{
 						"type": "player",
-						"position": [ 770, 450 ]
+						"position": [ 770, 100 ]
 					},
 				],
 				"zoom": defaultCamZoom

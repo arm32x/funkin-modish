@@ -58,7 +58,7 @@
         },
         {
             "type": "player",
-            "position": [ 770, 450 ]
+            "position": [ 770, 100 ]
         }
     ]
 }
