@@ -50,6 +50,8 @@ class Script extends EventTarget
             
             interp.variables.set("FlxG", FlxG);
             interp.variables.set("FlxSound", FlxSound);
+
+            interp.variables.set("Math", Math);
         }
 
         if (variables != null)
