@@ -1,0 +1,156 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "FNF Modish Character",
+    "description": "A character definition file for the Friday Night Funkin' mod loader Modish.",
+    "type": "object",
+    "properties": {
+        "version": {
+            "type": "integer",
+            "const": 3
+        },
+        "animations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "prefix": {
+                        "type": "string"
+                    },
+                    "indices": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "postfix": {
+                        "type": "string"
+                    },
+                    "frameRate": {
+                        "type": "integer"
+                    },
+                    "looped": {
+                        "type": "boolean"
+                    },
+                    "condition": {
+                        "type": "string",
+                        "enum": [ "player", "not-player" ]
+                    },
+                    "offsets": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                            "type": "number"
+                        }
+                    },
+                    "priority": {
+                        "type": [ "integer", "null" ],
+                        "description": "Higher priority animations will not get interrupted by lower priority ones.",
+                        "default": 0
+                    }
+                },
+                "required": [ "name", "prefix", "offsets" ],
+                "dependencies": {
+                    "postfix": [ "indices" ]
+                }
+            }
+        },
+        "startingAnimation": {
+            "description": "The animation to play after initialization.",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "force": {
+                    "type": "boolean"
+                },
+                "reversed": {
+                    "type": "boolean"
+                },
+                "frame": {
+                    "type": "integer"
+                },
+                "playOnly": {
+                    "type": "boolean"
+                }
+            },
+            "required": [ "name" ]
+        },
+        "animationMode": {
+            "type": "string",
+            "enum": [ "idle", "dance" ]
+        },
+        "antialiasing": {
+            "type": "boolean"
+        },
+        "flipX": {
+            "type": "boolean"
+        },
+        "flipY": {
+            "type": "boolean"
+        },
+        "size": {
+            "description": "The hitbox size of the character.",
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+                "type": [ "null", "object" ],
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "enum": [ "set", "add", "scale" ]
+                    },
+                    "value": {
+                        "type": "number"
+                    }
+                },
+                "required": [ "operation", "value" ]
+            }
+        },
+        "graphicSize": {
+            "description": "The graphic size of the character.",
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+                "type": [ "null", "object" ],
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "enum": [ "set", "add", "scale" ]
+                    },
+                    "value": {
+                        "type": "number"
+                    }
+                },
+                "required": [ "operation", "value" ]
+            }
+        },
+        "replacesGF": {
+            "description": "Places this character in the GF position when it is set as opponent.",
+            "type": "boolean"
+        },
+        "positionOffset": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+                "type": "number"
+            }
+        },
+        "cameraOffset": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+                "type": "number"
+            }
+        }
+    },
+    "required": [ "version", "animations" ]
+}

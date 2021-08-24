@@ -1,0 +1,211 @@
+{
+    "$schema": "../stage-schema.json",
+    "zoom": 0.9,
+    "sprites": [
+        {
+            "position": [ -400, -400 ],
+            "graphic": "tank-sky",
+            "antialiasing": true,
+            "scrollFactor": [ 0, 0 ]
+        },
+        {
+            "position": [ -700, -100 ],
+            "graphic": "tank-clouds",
+            "antialiasing": true,
+            "scrollFactor": [ 0.1, 0.1 ],
+            "id": "clouds"
+        },
+        {
+            "position": [ -300, -20 ],
+            "graphic": "tank-mountains",
+            "scale": [ 1.2, 1.2 ],
+            "antialiasing": true,
+            "scrollFactor": [ 0.2, 0.2 ]
+        },
+        {
+            "position": [ -200, 0 ],
+            "graphic": "tank-buildings",
+            "scale": [ 1.1, 1.1 ],
+            "antialiasing": true,
+            "scrollFactor": [ 0.3, 0.3 ]
+        },
+        {
+            "position": [ -200, 0 ],
+            "graphic": "tank-ruins",
+            "scale": [ 1.1, 1.1 ],
+            "antialiasing": true,
+            "scrollFactor": [ 0.35, 0.35 ]
+        },
+        {
+            "position": [ 1100, -100 ],
+            "graphic": "smoke-right",
+            "antialiasing": true,
+            "scrollFactor": [ 0.4, 0.4 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "idle",
+                    "prefix": "SmokeRight instance",
+                    "frameRate": 24
+                }
+            ],
+            "startingAnimation": { "name": "idle" }
+        },
+        {
+            "position": [ -200, -100 ],
+            "graphic": "smoke-left",
+            "antialiasing": true,
+            "scrollFactor": [ 0.4, 0.4 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "idle",
+                    "prefix": "SmokeBlurLeft instance",
+                    "frameRate": 24
+                }
+            ],
+            "startingAnimation": { "name": "idle" }
+        },
+        {
+            "position": [ 100, 50 ],
+            "graphic": "tank-watchtower",
+            "antialiasing": true,
+            "scrollFactor": [ 0.5, 0.5 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "idle",
+                    "prefix": "watchtower gradient color instance",
+                    "frameRate": 24
+                }
+            ],
+            "id": "watchtower"
+        },
+        {
+            "position": [ 300, 300 ],
+            "graphic": "rolling-tank",
+            "antialiasing": true,
+            "scrollFactor": [ 0.5, 0.5 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "idle",
+                    "prefix": "BG tank w lighting instance",
+                    "frameRate": 24
+                }
+            ],
+            "id": "rolling-tank",
+            "startingAnimation": { "name": "idle" }
+        },
+        {
+            "position": [ -420, -150 ],
+            "graphic": "tank-ground",
+            "scale": [ 1.15, 1.15 ],
+            "antialiasing": true,
+            "scrollFactor": [ 1, 1 ]
+        },
+        {
+            "type": "girlfriend",
+            "position": [ 400, 80 ],
+            "scrollFactor": [ 0.95, 0.95 ]
+        },
+        {
+            "type": "opponent",
+            "position": [ 80, 150 ]
+        },
+        {
+            "type": "player",
+            "position": [ 890, 100 ]
+        },
+        {
+            "position": [ -480, 650 ],
+            "graphic": "tank0",
+            "antialiasing": true,
+            "scrollFactor": [ 1.7, 1.5 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "bop",
+                    "prefix": "fg tankhead far right instance",
+                    "frameRate": 24
+                }
+            ],
+            "group": "tankmen"
+        },
+        {
+            "position": [ -280, 750 ],
+            "graphic": "tank1",
+            "antialiasing": true,
+            "scrollFactor": [ 2, 0.2 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "bop",
+                    "prefix": "fg tankhead 5 instance",
+                    "frameRate": 24
+                }
+            ],
+            "group": "tankmen"
+        },
+        {
+            "position": [ 470, 940 ],
+            "graphic": "tank2",
+            "antialiasing": true,
+            "scrollFactor": [ 1.5, 1.5 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "bop",
+                    "prefix": "foreground man 3 instance",
+                    "frameRate": 24
+                }
+            ],
+            "group": "tankmen"
+        },
+        {
+            "position": [ 1320, 1200 ],
+            "graphic": "tank3",
+            "antialiasing": true,
+            "scrollFactor": [ 3.5, 2.5 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "bop",
+                    "prefix": "fg tankhead 4 instance",
+                    "frameRate": 24
+                }
+            ],
+            "group": "tankmen"
+        },
+        {
+            "position": [ 1320, 900 ],
+            "graphic": "tank4",
+            "antialiasing": true,
+            "scrollFactor": [ 1.5, 1.5 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "bop",
+                    "prefix": "fg tankman bobbin 3 instance",
+                    "frameRate": 24
+                }
+            ],
+            "group": "tankmen"
+        },
+        {
+            "position": [ 1640, 700 ],
+            "graphic": "tank5",
+            "antialiasing": true,
+            "scrollFactor": [ 1.5, 1.5 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "bop",
+                    "prefix": "fg tankhead far right instance",
+                    "frameRate": 24
+                }
+            ],
+            "group": "tankmen"
+        }
+    ]
+}

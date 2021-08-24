@@ -1,0 +1,20 @@
+on(new Identifier("core", "beat"), function(e)
+{
+    sprites.get("watchtower").animation.play("idle", true);
+    groups.get("tankmen").forEach(function(tankman)
+    {
+        tankman.animation.play("bop", true);
+    });
+});
+var tankAngle = FlxG.random.int(-90, 45);
+var tankSpeed = FlxG.random.float(5, 7);
+on(new Identifier("core", "update"), function(e)
+{
+    var rollingTank = sprites.get("rolling-tank");
+
+    tankAngle += FlxG.elapsed * tankSpeed;
+    rollingTank.angle = tankAngle - 90 + 15;
+    rollingTank.x = 400 + 1500 * Math.cos(Math.PI / 180 * (1 * tankAngle + 180));
+    rollingTank.y = 1300 + 1100 * Math.sin(Math.PI / 180 * (1 * tankAngle + 180));
+});
+sprites.get("clouds").velocity.set(FlxG.random.float(5, 15));

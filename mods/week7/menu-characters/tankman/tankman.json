@@ -1,0 +1,9 @@
+{
+    "$schema": "../menu-character-schema.json",
+    "version": 2,
+    "prefix": "Tankman-Menu-BLACK",
+    "frameRate": 24,
+    "x": -100,
+    "y": -50,
+    "width": 415
+}

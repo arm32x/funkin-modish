@@ -1,0 +1,210 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "FNF Modish Stage",
+    "description": "A stage definition file for the Friday Night Funkin' mod loader Modish.",
+    "type": "object",
+    "properties": {
+        "sprites": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [ "sprite", "player", "girlfriend", "opponent" ],
+                        "description": "The type of sprite to use. Used to specify where the characters are on the stage.",
+                        "default": "sprite"
+                    },
+                    "position": {
+                        "type": "array",
+                        "description": "The position of this sprite on the stage.",
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2
+                    },
+                    "scrollFactor": {
+                        "type": "array",
+                        "description": "How fast this sprite moves in response to camera movements. Lower values make the sprite appear distant.",
+                        "default": [ 1.0, 1.0 ],
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2
+                    },
+                    "scale": {
+                        "type": "array",
+                        "default": [ 1.0, 1.0 ],
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2
+                    },
+                    "id": {
+                        "type": [ "string", "null" ],
+                        "description": "The ID of this sprite. Scripts can use this ID to interact with the sprite.",
+                        "pattern": "^[0-9a-z-]+$",
+                        "default": null
+                    },
+                    "graphic": {
+                        "type": "string",
+                        "description": "The filename of the graphic assets used by this sprite.",
+                        "pattern": "^[0-9a-z/-]+$"
+                    },
+                    "group": {
+                        "type": [ "string", "null" ],
+                        "description": "The group to put this sprite in; used by scripts to refer to multiple sprites at once.",
+                        "pattern": "^[0-9a-z-]+$",
+                        "default": null
+                    },
+                    "distraction": {
+                        "type": "boolean",
+                        "description": "Whether or not this sprite is disabled when distractions are off.",
+                        "default": false
+                    },
+                    "antialiasing": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "alpha": {
+                        "type": "number",
+                        "description": "The opacity of the sprite.",
+                        "default": 1.0,
+                        "minimum": 0.0,
+                        "maximum": 1.0
+                    },
+                    "visible": {
+                        "type": "boolean",
+                        "default": true
+                    },
+                    "animated": {
+                        "type": "boolean",
+                        "description": "Whether or not this sprite is animated. If it is animated, frames will be loaded from a texture atlas file.",
+                        "const": true
+                    },
+                    "animations": {
+                        "type": "array",
+                        "description": "All of the animations this sprite has. Ignored if the sprite is not animated.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The name used to play the animation in scripts."
+                                },
+                                "prefix": {
+                                    "type": "string",
+                                    "description": "Common beginning of image names in the atlas."
+                                },
+                                "indices": {
+                                    "type": "array",
+                                    "description": "An array of integers indicating what frames to play in what order.",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "postfix": {
+                                    "type": "string",
+                                    "description": "Common ending of image names in the atlas.",
+                                    "default": ""
+                                },
+                                "frameRate": {
+                                    "type": "integer",
+                                    "default": 30
+                                },
+                                "looped": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            "required": [ "name" ],
+                            "anyOf": [
+                                {
+                                    "required": [ "prefix" ]
+                                },
+                                {
+                                    "required": [ "indices" ]
+                                }
+                            ],
+                            "dependencies": {
+                                "postfix": [ "prefix", "indices" ]
+                            }
+                        }
+                    },
+                    "startingAnimation": {
+                        "type": "object",
+                        "description": "The animation to play when the sprite is first created. Ignored if the sprite is not animated.",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "The name of the animation. Should refer to one of the animations in the 'animations' array."
+                            },
+                            "force": {
+                                "type": "boolean",
+                                "description": "Whether to restart the animation if it is already playing.",
+                                "default": false
+                            },
+                            "reversed": {
+                                "type": "boolean",
+                                "default": false
+                            },
+                            "frame": {
+                                "type": "integer",
+                                "description": "The frame number in the animation you want to start from. If a negative value is passed, a random frame is used.",
+                                "default": 0
+                            }
+                        },
+                        "required": [ "name" ],
+                        "additionalProperties": false
+                    },
+                    "cameraOffset": {
+                        "type": "array",
+                        "description": "Only for characters. Offsets the camera's position when it is focused on this character.",
+                        "default": [ 0.0, 0.0 ],
+                        "items": {
+                            "type": "number"
+                        },
+                        "minItems": 2,
+                        "maxItems": 2
+                    }
+                },
+                "required": [ "position" ],
+                "dependencies": {
+                    "animations": [ "animated" ],
+                    "startingAnimation": [ "animated", "animations" ],
+                    "cameraOffset": {
+                        "properties": {
+                            "type": {
+                                "enum": [ "player", "girlfriend", "opponent" ]
+                            }
+                        },
+                        "required": [ "type" ]
+                    }
+                },
+                "if": {
+                    "properties": {
+                        "type": {
+                            "const": "sprite"
+                        }
+                    }
+                },
+                "then": {
+                    "required": [ "graphic" ]
+                },
+                "additionalProperties": false
+            }
+        },
+        "zoom": {
+            "type": "number",
+            "description": "How far the camera is zoomed in on this stage.",
+            "default": 1.0
+        },
+        "$schema": {
+            "$comment": "Allow specifying the schema location using VS Code's '$schema' property without breaking validation."
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,63 @@
+{
+    "$schema": "../character-schema.json",
+    "version": 3,
+    "animations": [
+        {
+            "name": "singUP",
+            "prefix": "Tankman UP note instance",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [61, 50]
+        },
+        {
+            "name": "singDOWN",
+            "prefix": "Tankman DOWN note instance",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [71, -112]
+        },
+        {
+            "name": "singLEFT",
+            "prefix": "Tankman Right Note instance",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [81, -17]
+        },
+        {
+            "name": "singRIGHT",
+            "prefix": "Tankman Note Left instance",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-15, -29]
+        },
+        {
+            "name": "idle",
+            "prefix": "Tankman Idle Dance instance",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [0, -10]
+        },
+        {
+            "name": "singUP-alt",
+            "prefix": "TANKMAN UGH instance",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-13, -14]
+        },
+        {
+            "name": "singDOWN-alt",
+            "prefix": "PRETTY GOOD tankman instance",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [2, -6],
+            "priority": 10
+        }
+    ],
+    "startingAnimation": {
+        "name": "idle"
+    },
+    "flipX": true,
+    "animationMode": "idle",
+    "positionOffset": [0, 180],
+    "cameraOffset": [150, -100]
+}

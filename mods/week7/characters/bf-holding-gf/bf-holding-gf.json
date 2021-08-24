@@ -1,0 +1,75 @@
+{
+    "$schema": "../character-schema.json",
+    "version": 3,
+    "animations": [
+        {
+            "name": "idle",
+            "prefix": "BF idle dance w gf",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [0, 0]
+        },
+        {
+            "name": "singUP",
+            "prefix": "BF NOTE UP0",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-29, 10]
+        },
+        {
+            "name": "singLEFT",
+            "prefix": "BF NOTE LEFT0",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [12, 7]
+        },
+        {
+            "name": "singRIGHT",
+            "prefix": "BF NOTE RIGHT0",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-41, 23]
+        },
+        {
+            "name": "singDOWN",
+            "prefix": "BF NOTE DOWN0",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-10, -10]
+        },
+        {
+            "name": "singUPmiss",
+            "prefix": "BF NOTE UP MISS",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-29, 10]
+        },
+        {
+            "name": "singLEFTmiss",
+            "prefix": "BF NOTE LEFT MISS",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [12, 7]
+        },
+        {
+            "name": "singRIGHTmiss",
+            "prefix": "BF NOTE RIGHT MISS",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-41, 23]
+        },
+        {
+            "name": "singDOWNmiss",
+            "prefix": "BF NOTE DOWN MISS",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-10, -10]
+        }
+    ],
+    "startingAnimation": {
+        "name": "idle"
+    },
+    "flipX": true,
+    "positionOffset": [0, 350],
+    "cameraOffset": [ -100, -100 ]
+}

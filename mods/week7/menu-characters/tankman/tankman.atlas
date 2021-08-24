@@ -1,0 +1,104 @@
+
+tankman.png
+size: 512, 1024
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Tankman-Menu-BLACK0000
+  rotate: false
+  xy: 2, 608
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0001
+  rotate: false
+  xy: 2, 608
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0002
+  rotate: false
+  xy: 2, 2
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0003
+  rotate: false
+  xy: 2, 2
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0005
+  rotate: false
+  xy: 235, 608
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0004
+  rotate: false
+  xy: 235, 608
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0006
+  rotate: false
+  xy: 235, 2
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0007
+  rotate: false
+  xy: 235, 305
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0013
+  rotate: false
+  xy: 2, 305
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0008
+  rotate: false
+  xy: 2, 305
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0009
+  rotate: false
+  xy: 2, 305
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0010
+  rotate: false
+  xy: 2, 305
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0011
+  rotate: false
+  xy: 2, 305
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1
+Tankman-Menu-BLACK0012
+  rotate: false
+  xy: 2, 305
+  size: 231, 301
+  orig: 231, 301
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,7 @@
+{
+    "stage": "week7:tank-stage",
+    "girlfriend": "week7:gf-tankmen",
+    "opponent": "week7:tankman",
+    "uiStyle": "basegame:normal",
+    "player": "basegame:bf"
+}

@@ -1,0 +1,40 @@
+{
+    "$schema": "../character-schema.json",
+    "version": 3,
+    "animations": [
+        {
+            "name": "danceRight",
+            "prefix": "Pico shoot 1",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [0, 135]
+        },
+        {
+            "name": "danceRight-alt",
+            "prefix": "Pico shoot 2",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [-1, 7]
+        },
+        {
+            "name": "danceLeft",
+            "prefix": "Pico shoot 3",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [412, 71]
+        },
+        {
+            "name": "danceLeft-alt",
+            "prefix": "Pico shoot 4",
+            "frameRate": 24,
+            "looped": false,
+            "offsets": [439, 116]
+        }
+    ],
+    "startingAnimation": {
+        "name": "danceRight"
+    },
+    "animationMode": "dance",
+    "replacesGF": true,
+    "cameraOffset": [ -250, -150 ]
+}
