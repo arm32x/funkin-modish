@@ -6,9 +6,9 @@ import flixel.util.FlxColor;
 import funkin.Conductor.BPMChangeEvent;
 import openfl.Lib;
 
-#if windows
-import Discord.DiscordClient;
-#end
+// #if windows
+// import Discord.DiscordClient;
+// #end
 
 class MusicBeatState extends FlxUIState
 {

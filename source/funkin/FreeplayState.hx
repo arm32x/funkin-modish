@@ -10,9 +10,9 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import funkin.Registry.SongMetadata;
 
-#if windows
-import Discord.DiscordClient;
-#end
+// #if windows
+// import Discord.DiscordClient;
+// #end
 
 using StringTools;
 
@@ -59,10 +59,10 @@ class FreeplayState extends MusicBeatState
 		
 		songs = Registry.songs.getAllEntries();
 
-		 #if windows
-		 // Updating Discord Rich Presence
-		 DiscordClient.changePresence("In the Freeplay Menu", null);
-		 #end
+		//  #if windows
+		//  // Updating Discord Rich Presence
+		//  DiscordClient.changePresence("In the Freeplay Menu", null);
+		//  #end
 
 		var isDebug:Bool = false;
 

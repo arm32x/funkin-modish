@@ -15,9 +15,9 @@ import flixel.util.FlxTimer;
 import funkin.Controls.KeyboardScheme;
 import lime.app.Application;
 
-#if windows
-import Discord.DiscordClient;
-#end
+// #if windows
+// import Discord.DiscordClient;
+// #end
 
 #if newgrounds
 import io.newgrounds.NG;
@@ -52,10 +52,10 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
-		#if windows
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
-		#end
+		// #if windows
+		// // Updating Discord Rich Presence
+		// DiscordClient.changePresence("In the Menus", null);
+		// #end
 
 		if (FlxG.sound.music == null || !FlxG.sound.music.playing)
 		{

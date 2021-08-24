@@ -18,9 +18,9 @@ import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 #end
 
-#if windows
-import Discord.DiscordClient;
-#end
+// #if windows
+// import Discord.DiscordClient;
+// #end
 
 #if cpp
 import sys.thread.Thread;
@@ -56,14 +56,14 @@ class TitleState extends MusicBeatState
 		
 		PlayerSettings.init();
 
-		#if windows
-		DiscordClient.initialize();
+		// #if windows
+		// DiscordClient.initialize();
 
-		Application.current.onExit.add (function (exitCode) {
-			DiscordClient.shutdown();
-		 });
+		// Application.current.onExit.add (function (exitCode) {
+		// 	DiscordClient.shutdown();
+		//  });
 		 
-		#end
+		// #end
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 

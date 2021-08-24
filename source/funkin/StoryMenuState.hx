@@ -17,9 +17,9 @@ import format.csv.Reader;
 import lime.net.curl.CURLCode;
 import openfl.utils.Assets;
 
-#if windows
-import Discord.DiscordClient;
-#end
+// #if windows
+// import Discord.DiscordClient;
+// #end
 
 using StringTools;
 
@@ -58,10 +58,10 @@ class StoryMenuState extends MusicBeatState
 	{
 		loadData();
 		
-		#if windows
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Story Mode Menu", null);
-		#end
+		// #if windows
+		// // Updating Discord Rich Presence
+		// DiscordClient.changePresence("In the Story Mode Menu", null);
+		// #end
 
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
