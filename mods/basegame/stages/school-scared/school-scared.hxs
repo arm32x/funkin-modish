@@ -1,0 +1,10 @@
+var danced = false;
+on(new Identifier("core", "beat"), function(e)
+{
+    danced = !danced;
+    
+    if (danced)
+	    sprites.get("bg-girls").animation.play('bobRight', true);
+	else
+		sprites.get("bg-girls").animation.play('bobLeft', true);
+});

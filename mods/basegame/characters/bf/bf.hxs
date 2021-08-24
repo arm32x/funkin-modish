@@ -1,1 +1,2 @@
 on(new Identifier("basegame", "cheer"), e -> playAnim("hey", true));
+on(new Identifier("basegame", "lightning"), e -> playAnim("scared", true));

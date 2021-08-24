@@ -1,0 +1,34 @@
+{
+    "$schema": "../stage-schema.json",
+    "zoom": 1.05,
+    "sprites": [
+        {
+            "position": [ -882.5, -1080 ],
+            "graphic": "animated-evil-school",
+            "scrollFactor": [ 0.8, 0.9 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name" : "idle",
+                    "prefix": "background 2",
+                    "frameRate": 24
+                }
+            ],
+            "startingAnimation": {"name": "idle"},
+            "scale": [ 6, 6 ]
+        },
+        {
+            "type": "girlfriend",
+            "position": [ 400, 130 ],
+            "scrollFactor": [ 0.95, 0.95 ]
+        },
+        {
+            "type": "opponent",
+            "position": [ 100, 100 ]
+        },
+        {
+            "type": "player",
+            "position": [ 770, 100 ]
+        }
+    ]
+}

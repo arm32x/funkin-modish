@@ -1,0 +1,40 @@
+{
+    "$schema": "../stage-schema.json",
+    "zoom": 1.05,
+    "sprites": [
+        {
+            "position": [ -200, -100 ],
+            "graphic": "bg",
+            "antialiasing": true,
+            "animated": true,
+            "animations": [
+                {
+                    "name": "idle",
+                    "prefix": "halloweem bg0",
+                    "frameRate": 24
+                },
+                {
+                    "name": "lightning",
+                    "prefix": "halloweem bg lightning strike",
+                    "frameRate": 24,
+                    "looped": false
+                }
+            ],
+            "id": "bg",
+            "startingAnimation": { "name": "idle" }
+        },
+        {
+            "type": "girlfriend",
+            "position": [ 400, 130 ],
+            "scrollFactor": [ 0.95, 0.95 ]
+        },
+        {
+            "type": "opponent",
+            "position": [ 100, 100 ]
+        },
+        {
+            "type": "player",
+            "position": [ 770, 100 ]
+        }
+    ]
+}

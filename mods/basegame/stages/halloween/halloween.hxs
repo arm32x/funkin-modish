@@ -1,0 +1,14 @@
+var lightningStrikeBeat = 0;
+var lightningOffset = 8;
+on(new Identifier("core", "beat"), function(e)
+{
+    if (FlxG.random.bool(10) && e.data.beat > lightningStrikeBeat + lightningOffset)
+    {
+        FlxG.sound.play(getAssetPath("thunder" + FlxG.random.int(1, 2), "ogg"));
+        fire(["all"], new Identifier("basegame", "lightning"));
+        sprites.get("bg").animation.play("lightning", true);
+
+		lightningStrikeBeat = e.data.beat;
+		lightningOffset = FlxG.random.int(8, 24);
+    }
+});

@@ -1,3 +1,4 @@
 on(new Identifier("basegame", "cheer"), e -> playAnim("cheer", true));
 on(new Identifier("basegame", "train-start"), e -> playAnim("hairBlow"));
 on(new Identifier("basegame", "train-stop"), e -> playAnim("hairFall"));
+on(new Identifier("basegame", "lightning"), e -> playAnim("scared"));

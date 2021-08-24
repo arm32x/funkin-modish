@@ -1,0 +1,98 @@
+{
+    "$schema": "../stage-schema.json",
+    "zoom": 0.8,
+    "sprites": [
+        {
+            "position": [ -1000, -500 ],
+            "graphic": "mall-bg",
+            "antialiasing": true,
+            "scrollFactor": [ 0.2, 0.2 ],
+            "scale": [ 0.8, 0.8 ]
+        },
+        {
+            "position": [ -240, -90 ],
+            "graphic": "upper-boppers",
+            "scale": [ 0.85, 0.85 ],
+            "antialiasing": true,
+            "scrollFactor": [ 0.33, 0.33 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "bop",
+                    "prefix": "Upper Crowd Bob",
+                    "frameRate": 24,
+                    "looped": false
+                }
+            ],
+            "id": "top-bop",
+            "distraction": true
+        },
+        {
+            "position": [ -1100, -600 ],
+            "graphic": "escalator",
+            "scale": [ 0.9, 0.9 ],
+            "antialiasing": true,
+            "scrollFactor": [ 0.4, 0.4 ]
+        },
+        {
+            "position": [ 370, -250 ],
+            "graphic": "christmas-tree",
+            "antialiasing": true,
+            "scrollFactor": [ 0.4, 0.4 ]
+        },
+        {
+            "position": [ -300, 140 ],
+            "graphic": "bottom-boppers",
+            "antialiasing": true,
+            "scrollFactor": [ 0.9, 0.9 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "bop",
+                    "prefix": "Bottom Level Boppers",
+                    "frameRate": 24,
+                    "looped": false
+                }
+            ],
+            "id": "bottom-bop",
+            "distraction": true
+        },
+        {
+            "position": [ -600, 700 ],
+            "graphic": "fg-snow",
+            "antialiasing": true,
+            "scrollFactor": [ 1, 1 ]
+        },
+        {
+            "type": "girlfriend",
+            "position": [ 400, 130 ],
+            "scrollFactor": [ 0.95, 0.95 ]
+        },
+        {
+            "type": "opponent",
+            "position": [ 100, 100 ]
+        },
+        {
+            "type": "player",
+            "position": [ 970, 100 ],
+            "cameraOffset": [ -100, -100 ]
+        },
+        {
+            "position": [ -840, 150 ],
+            "graphic": "santa",
+            "antialiasing": true,
+            "scrollFactor": [ 1, 1 ],
+            "animated": true,
+            "animations": [
+                {
+                    "name": "bop",
+                    "prefix": "santa idle in fear",
+                    "frameRate": 24,
+                    "looped": false
+                }
+            ],
+            "id": "santa-bop",
+            "distraction": true
+        }
+    ]
+}

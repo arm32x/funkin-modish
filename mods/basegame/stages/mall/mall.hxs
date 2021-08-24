@@ -1,0 +1,6 @@
+on(new Identifier("core", "beat"), function(e)
+{
+    sprites.get("top-bop").animation.play("bop", true);
+    sprites.get("bottom-bop").animation.play("bop", true);
+    sprites.get("santa-bop").animation.play("bop", true);
+});
