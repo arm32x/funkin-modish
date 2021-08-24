@@ -1087,6 +1087,8 @@ class PlayState extends MusicBeatState
 				default:
 					startCountdown();
 			}
+			else
+				startCountdown();
 		}
 		else
 		{
