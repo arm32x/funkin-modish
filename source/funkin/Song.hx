@@ -87,11 +87,23 @@ class Song implements IFlxDestroyable
 		unserializer.setResolver({
 			resolveClass: function resolveClass(name:String):Null<Class<Dynamic>>
 			{
-				return name == "Identifier" ? Identifier : null;	
+				switch (name)
+				{
+					case "Identifier" | "funkin.Identifier":
+						return Identifier;
+					default:
+						return null;
+				}	
 			},
 			resolveEnum: function resolveEnum(name:String):Null<Enum<Dynamic>>
 			{
-				return name == "Position" ? Position : null;
+				switch (name)
+				{
+					case "Position" | "Character.Position" | "funkin.Character.Position" | "funkin.Position":
+						return Position;
+					default:
+						return null;
+				}	
 			}
 		});
 		chart = unserializer.unserialize();
