@@ -151,6 +151,25 @@ class ModLoader
                             Assets.getAudioBuffer(id.getAssetPath("songs", "instrumental", Paths.SOUND_EXT));
                             if (Registry.songs.get(id).hasVocals)
                                 Assets.getAudioBuffer(id.getAssetPath("songs", "vocals", Paths.SOUND_EXT));
+                            // #if sys
+                            // var library = Assets.getLibrary(id.namespace);
+                            // var converter = new BasegameChartImporter();
+                            // for (difficulty in ["easy", "normal", "hard"])
+                            // {
+                            //     var originalPath = id.getAssetPath("songs", difficulty, "json");
+                            //     if (Assets.exists(originalPath))
+                            //     {
+                            //         var original = haxe.Json.parse(Assets.getText(originalPath));
+                            //         var converted = converter.convert(original.song, difficulty);
+                                    
+                            //         var infoPath = library.getPath('songs/${id.path}/${id.path}.json');
+                            //         var chartPath = library.getPath('songs/${id.path}/$difficulty.sol');
+    
+                            //         sys.io.File.saveContent(infoPath, converted.info.toJSON());
+                            //         sys.io.File.saveContent(chartPath, haxe.Serializer.run(converted.chart));
+                            //     }
+                            // }
+                            // #end
                         case "week":
                             Assets.getImage(id.getAssetPath("weeks", null, "png"));
                     }
