@@ -67,6 +67,7 @@ typedef SongChart =
 class Song implements IFlxDestroyable
 {
 	public final id:Identifier;
+	public var difficulty(default, null):Null<String> = null;
 	
 	public final meta:Null<SongMetadata>;
 	public final info:SongInfo;
@@ -83,6 +84,8 @@ class Song implements IFlxDestroyable
 
 	public function load(difficulty:String, runScripts:Bool = false):Song
 	{
+		this.difficulty = difficulty;
+		
 		var unserializer = new Unserializer(Assets.getText(id.getAssetPath("songs", difficulty, "sol")));
 		unserializer.setResolver({
 			resolveClass: function resolveClass(name:String):Null<Class<Dynamic>>

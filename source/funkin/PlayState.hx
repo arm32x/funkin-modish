@@ -1561,28 +1561,30 @@ class PlayState extends MusicBeatState
 
 
 		// TODO: Make improved chart editor.
-		// if (FlxG.keys.justPressed.SEVEN)
-		// {
-		// 	if (useVideo)
-		// 		{
-		// 			GlobalVideo.get().stop();
-		// 			remove(videoSprite);
-		// 			FlxG.stage.window.onFocusOut.remove(focusOut);
-		// 			FlxG.stage.window.onFocusIn.remove(focusIn);
-		// 			removedVideo = true;
-		// 		}
-		// 	// #if windows
-		// 	// DiscordClient.changePresence("Chart Editor", null, null, true);
-		// 	// #end
-		// 	FlxG.switchState(new ChartingState());
-		// 	// #if windows
-		// 	// if (luaModchart != null)
-		// 	// {
-		// 	// 	luaModchart.die();
-		// 	// 	luaModchart = null;
-		// 	// }
-		// 	// #end
-		// }
+		#if MODISH_DEV
+		if (FlxG.keys.justPressed.F7)
+		{
+			if (useVideo)
+			{
+				GlobalVideo.get().stop();
+				remove(videoSprite);
+				FlxG.stage.window.onFocusOut.remove(focusOut);
+				FlxG.stage.window.onFocusIn.remove(focusIn);
+				removedVideo = true;
+			}
+			// #if windows
+			// DiscordClient.changePresence("Chart Editor", null, null, true);
+			// #end
+			FlxG.switchState(ChartingState.withSong(SONG.id, SONG.difficulty));
+			// #if windows
+			// if (luaModchart != null)
+			// {
+			// 	luaModchart.die();
+			// 	luaModchart = null;
+			// }
+			// #end
+		}
+		#end
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);

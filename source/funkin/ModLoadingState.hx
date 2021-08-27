@@ -59,7 +59,7 @@ class ModLoadingState extends FlxState
 {
     public static inline final PRELOAD_ASSETS:Bool = false;
     
-    public static var nextState:Class<FlxState> = TitleState;
+    public static var nextState:Class<FlxState> = ChartingState;
     
     #if (target.threaded)
     private var deque:Deque<ProgressUpdate> = new Deque();
