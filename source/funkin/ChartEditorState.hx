@@ -5,7 +5,7 @@ import flixel.input.actions.FlxAction.FlxActionDigital;
 import flixel.system.FlxSound;
 import flixel.util.FlxDestroyUtil;
 
-class ChartingState extends MusicBeatState
+class ChartEditorState extends MusicBeatState
 {
     private static final PLAY_PAUSE_ACTION:FlxActionDigital = new FlxActionDigital().addKey(SPACE, JUST_PRESSED);
     private static final TOGGLE_METRONOME_ACTION:FlxActionDigital = new FlxActionDigital().addKey(M, JUST_PRESSED);
@@ -120,17 +120,17 @@ class ChartingState extends MusicBeatState
         return instrumental != null && instrumental.playing;
     }
     
-    public static function empty():ChartingState
+    public static function empty():ChartEditorState
     {
         startingSongId = null;
         startingDifficulty = "normal";
-        return new ChartingState();
+        return new ChartEditorState();
     }
     
-    public static function withSong(songId:Identifier, difficulty:String):ChartingState
+    public static function withSong(songId:Identifier, difficulty:String):ChartEditorState
     {
         startingSongId = songId;
         startingDifficulty = difficulty;
-        return new ChartingState();
+        return new ChartEditorState();
     }
 }
