@@ -1,5 +1,8 @@
 package funkin;
 
+import funkin.gui.SubMenu;
+import funkin.gui.MenuAction;
+import funkin.gui.MenuBar;
 import flixel.FlxG;
 import flixel.input.actions.FlxAction.FlxActionDigital;
 import flixel.system.FlxSound;
@@ -34,6 +37,26 @@ class ChartEditorState extends MusicBeatState
         super.create();
         
         FlxG.sound.music.stop();
+
+        FlxG.mouse.visible = true;
+        FlxG.mouse.useSystemCursor = true;
+        
+        bgColor = 0xFF1F1F1F;
+        
+        var menuBar = MenuBar.builder()
+            .withAction("File", () -> {})
+            .withAction("Edit", () -> {})
+            .withAction("View", () -> {})
+            .withSubMenu("Test")
+                .withAction("Test 1", () -> trace("Clicked Test 1."))
+                .withAction("Test 2", () -> trace("Clicked Test 2."))
+                .withSubMenu("Test 3")
+                    .withAction("Test 4", () -> trace("Clicked Test 4."))
+                    .withAction("Test 5", () -> trace("Clicked Test 5."))
+                .end()
+            .end()
+            .build();
+        add(menuBar);
         
         if (startingSongId != null)
         {
@@ -61,6 +84,7 @@ class ChartEditorState extends MusicBeatState
             }
             
             Conductor.mapBPMChanges(song);
+            Conductor.changeBPM(song.chart.bpm);
         }
     }
     
