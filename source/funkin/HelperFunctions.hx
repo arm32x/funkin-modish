@@ -1,5 +1,7 @@
 package funkin;
 
+import flixel.FlxG;
+import flixel.math.FlxRect;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.math.FlxMath;
 import haxe.Exception;
@@ -75,4 +77,13 @@ class HelperFunctions
 			throw new Exception('Could not find texture atlas for "$id" - tried ".xml", ".txt", and ".atlas" formats.');
 		}
 	}
+
+    public static function isHovered(rect:FlxRect):Bool
+    {
+        var cursor = FlxG.mouse.getPosition();
+        var result = rect.containsPoint(cursor);
+        cursor.put();
+        return result;
+    }
+
 }

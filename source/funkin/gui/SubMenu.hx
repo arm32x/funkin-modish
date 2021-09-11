@@ -7,10 +7,9 @@ import flixel.math.FlxRect;
 import flixel.text.FlxText;
 import funkin.gui.MenuItem.MenuBuilder;
 import funkin.gui.MenuItem.MenuItemAlignment;
-import funkin.gui.MenuItem.PositionedMenuItem;
 import haxe.Exception;
 
-class SubMenu extends FlxSpriteGroup implements PositionedMenuItem
+class SubMenu extends FlxSpriteGroup implements MenuItem
 {
     private static inline final ACTION_HEIGHT = 24;
     private static inline final ACTION_PADDING = 24;
@@ -25,6 +24,9 @@ class SubMenu extends FlxSpriteGroup implements PositionedMenuItem
     }> = [];
     
     private var alignment:MenuItemAlignment = RightDown;
+    
+    private final hitbox:FlxRect = FlxRect.get();
+    private final anchor:FlxRect = FlxRect.get();
     
     public function new(label:String, items:Array<MenuItem>)
     {
@@ -66,20 +68,25 @@ class SubMenu extends FlxSpriteGroup implements PositionedMenuItem
             add(item.background);
             add(item.text);
             
-            if (item is PositionedMenuItem)
+            if (item is SubMenu)
             {
-                var positioned = cast(item, PositionedMenuItem);
-                var anchor = item.background.getHitbox();
-                positioned.setAnchorRect(anchor, alignment);
-                anchor.put();
+                var menu = cast(item, SubMenu);
+                menu.setBestPosition(hitbox, alignment);
             }
             if (item is FlxSprite)
                 add(cast(item, FlxSprite));
         }
     }
     
-    public function setAnchorRect(anchor:FlxRect, alignment:MenuItemAlignment = RightDown)
+    public function setAnchorRect(anchor:FlxRect)
     {
+        // The 'anchor' parameter will likely be put() after this call.
+        this.anchor.copyFrom(anchor);
+    }
+    
+    public function setBestPosition(anchor:FlxRect, alignment:MenuItemAlignment = RightDown)
+    {
+        setAnchorRect(anchor);
         // Vertical correction.
         alignment = switch (alignment)
         {
@@ -101,10 +108,47 @@ class SubMenu extends FlxSpriteGroup implements PositionedMenuItem
         // Set position based on alignment.
         switch (alignment)
         {
-            case RightDown: setPosition(anchor.right, anchor.top);
-            case LeftDown: setPosition(anchor.left - background.width, anchor.top);
-            case RightUp: setPosition(anchor.right, anchor.bottom - background.height);
-            case LeftUp: setPosition(anchor.left - background.width, anchor.bottom - background.height);
+            case RightDown: setExactPosition(anchor.right, anchor.top, alignment);
+            case LeftDown: setExactPosition(anchor.left, anchor.top, alignment);
+            case RightUp: setExactPosition(anchor.right, anchor.bottom, alignment);
+            case LeftUp: setExactPosition(anchor.left, anchor.bottom, alignment);
+        }
+    }
+    
+    public function setExactPosition(x:Float, y:Float, alignment:MenuItemAlignment = RightDown)
+    {
+        this.alignment = alignment;
+        // Set position based on alignment.
+        switch (alignment)
+        {
+            case RightDown: setPosition(x, y);
+            case LeftDown: setPosition(x - background.width, y);
+            case RightUp: setPosition(x, y - background.height);
+            case LeftUp: setPosition(x - background.width, y - background.height);
+        }
+    }
+    
+    override public function update(elapsed:Float)
+    {
+        super.update(elapsed);
+        
+        // The menu should be automatically closed when (a) the mouse is no
+        // longer hovering over it, (b) none of its sub-menus are open, and
+        // (c) its anchor rect (the menu item that opened it) is not hovered.
+        background.getHitbox(hitbox);
+        if (isOpen
+            && FlxG.mouse.justMoved
+            && !HelperFunctions.isHovered(hitbox)
+            && !HelperFunctions.isHovered(anchor))
+        {
+            var anySubMenuIsOpen = false;
+            for (item in items)
+            {
+                if (item.item is SubMenu && cast(item.item, SubMenu).isOpen)
+                    anySubMenuIsOpen = true;
+            }
+            if (!anySubMenuIsOpen)
+                close();
         }
     }
     

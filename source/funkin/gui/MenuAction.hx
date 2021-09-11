@@ -1,7 +1,5 @@
 package funkin.gui;
 
-import haxe.Exception;
-
 class MenuAction implements MenuItem
 {
     public final label:String;
@@ -13,18 +11,8 @@ class MenuAction implements MenuItem
         this.action = action;
     }
     
-    public var isOpen(get, never):Bool;
-    
-    public function open() {}
-    public function close() {}
-    
     public function activate()
     {
         this.action();
-    }
-    
-    private function get_isOpen()
-    {
-        return false;
     }
 }

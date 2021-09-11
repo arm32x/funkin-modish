@@ -1,7 +1,5 @@
 package funkin;
 
-import funkin.gui.SubMenu;
-import funkin.gui.MenuAction;
 import funkin.gui.MenuBar;
 import flixel.FlxG;
 import flixel.input.actions.FlxAction.FlxActionDigital;
@@ -44,9 +42,9 @@ class ChartEditorState extends MusicBeatState
         bgColor = 0xFF1F1F1F;
         
         var menuBar = MenuBar.builder()
-            .withAction("File", () -> {})
-            .withAction("Edit", () -> {})
-            .withAction("View", () -> {})
+            .withAction("File", () -> trace("Clicked File."))
+            .withAction("Edit", () -> trace("Clicked Edit."))
+            .withAction("View", () -> trace("Clicked View."))
             .withSubMenu("Test")
                 .withAction("Test 1", () -> trace("Clicked Test 1."))
                 .withAction("Test 2", () -> trace("Clicked Test 2."))
@@ -55,6 +53,7 @@ class ChartEditorState extends MusicBeatState
                     .withAction("Test 5", () -> trace("Clicked Test 5."))
                 .end()
             .end()
+            .withAction("Exit", () -> FlxG.switchState(new TitleState())) // Temporary.
             .build();
         add(menuBar);
         

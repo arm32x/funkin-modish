@@ -1,6 +1,5 @@
 package funkin.gui;
 
-import funkin.gui.MenuItem.PositionedMenuItem;
 import funkin.gui.MenuItem.MenuBuilder;
 import funkin.gui.SubMenu.SubMenuBuilder;
 import flixel.FlxG;
@@ -42,12 +41,13 @@ class MenuBar extends FlxSpriteGroup
             labelBackground.alpha = 0.0;
             add(labelBackground);
             
-            if (item is PositionedMenuItem)
+            if (item is SubMenu)
             {
-                var positioned = cast(item, PositionedMenuItem);
-                var anchor = FlxRect.get(0, 20, x, FlxG.height); // Force into specific position.
-                positioned.setAnchorRect(anchor);
+                var menu = cast(item, SubMenu);
+                var anchor = labelBackground.getHitbox();
+                menu.setAnchorRect(anchor);
                 anchor.put();
+                menu.setExactPosition(x, 20, RightDown);
             }
             if (item is FlxSprite)
                 add(cast(item, FlxSprite));
@@ -74,12 +74,19 @@ class MenuBar extends FlxSpriteGroup
             {
                 item.background.color = 0xFFFFFF;
                 item.background.alpha = 0.15;
-                if (!item.item.isOpen)
-                    item.item.open();
+                if (FlxG.mouse.justPressed)
+                {
+                    item.item.activate();
+                    if (item.item is SubMenu)
+                    {
+                        var menu = cast(item.item, SubMenu);
+                        if (!menu.isOpen)
+                            menu.open();
+                    }
+                }
             }
-            else if (item.item.isOpen)
-                item.item.close();
         }
+        hitbox.put();
     }
     
     public static inline function builder():MenuBarBuilder

@@ -7,17 +7,7 @@ interface MenuItem
 {
     public final label:String;
     
-    public var isOpen(get, never):Bool;
-    
-    public function open():Void;
-    public function close():Void;
-    
     public function activate():Void;
-}
-
-interface PositionedMenuItem extends MenuItem
-{
-    public function setAnchorRect(anchor:FlxRect, preferredAlignment:MenuItemAlignment = RightDown):Void;
 }
 
 enum MenuItemAlignment
