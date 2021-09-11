@@ -7,7 +7,7 @@ interface MenuItem
 {
     public final label:String;
     
-    public function activate():Void;
+    public function activate():Bool;
 }
 
 enum MenuItemAlignment

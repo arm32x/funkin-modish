@@ -14,5 +14,6 @@ class MenuAction implements MenuItem
     public function activate()
     {
         this.action();
+        return true;
     }
 }

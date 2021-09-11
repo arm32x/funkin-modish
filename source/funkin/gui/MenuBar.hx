@@ -62,15 +62,14 @@ class MenuBar extends FlxSpriteGroup
     {
         super.update(elapsed);
         
-        var mousePosition = FlxG.mouse.getPosition();
         
-        var hitbox = FlxRect.get();
+        var itemHitbox = FlxRect.get();
         for (item in items)
         {
             item.background.alpha = 0.0;
 
-            item.background.getHitbox(hitbox);
-            if (hitbox.containsPoint(mousePosition))
+            item.background.getHitbox(itemHitbox);
+            if (HelperFunctions.isHovered(itemHitbox))
             {
                 item.background.color = 0xFFFFFF;
                 item.background.alpha = 0.15;
@@ -86,7 +85,7 @@ class MenuBar extends FlxSpriteGroup
                 }
             }
         }
-        hitbox.put();
+        itemHitbox.put();
     }
     
     public static inline function builder():MenuBarBuilder

@@ -68,13 +68,16 @@ class SubMenu extends FlxSpriteGroup implements MenuItem
             add(item.background);
             add(item.text);
             
-            if (item is SubMenu)
+            if (item.item is FlxSprite)
+                add(cast(item.item, FlxSprite));
+            if (item.item is SubMenu)
             {
-                var menu = cast(item, SubMenu);
-                menu.setBestPosition(hitbox, alignment);
+                var menu = cast(item.item, SubMenu);
+                add(menu);
+                var anchor = item.background.getHitbox();
+                menu.setBestPosition(anchor, alignment);
+                anchor.put();
             }
-            if (item is FlxSprite)
-                add(cast(item, FlxSprite));
         }
     }
     
@@ -136,6 +139,8 @@ class SubMenu extends FlxSpriteGroup implements MenuItem
         // longer hovering over it, (b) none of its sub-menus are open, and
         // (c) its anchor rect (the menu item that opened it) is not hovered.
         background.getHitbox(hitbox);
+        hitbox.width -= 1;
+        hitbox.height -= 1;
         if (isOpen
             && FlxG.mouse.justMoved
             && !HelperFunctions.isHovered(hitbox)
@@ -150,17 +155,59 @@ class SubMenu extends FlxSpriteGroup implements MenuItem
             if (!anySubMenuIsOpen)
                 close();
         }
+        else if (isOpen)
+        {
+            var itemHitbox = FlxRect.get();
+            for (item in items)
+            {
+                item.background.alpha = 0.0;
+                
+                item.background.getHitbox(itemHitbox);
+                itemHitbox.width -= 1;
+                itemHitbox.height -= 1;
+                if (HelperFunctions.isHovered(itemHitbox))
+                {
+                    item.background.alpha = 0.15;
+                    if (FlxG.mouse.justPressed)
+                    {
+                        if (item.item.activate())
+                        {
+                            close();
+                        }
+                    }
+                    if (item.item is SubMenu)
+                    {
+                        var menu = cast(item.item, SubMenu);
+                        if (!menu.isOpen)
+                        {
+                            menu.setAnchorRect(itemHitbox);
+                            menu.open();
+                        }
+                    }
+                }
+            }
+            itemHitbox.put();
+        }
     }
     
     public var isOpen(get, never):Bool;
 
 	public function open()
     {
+        trace('Menu $label opened.');
         this.visible = true;
+        
+        // https://github.com/HaxeFlixel/flixel/issues/2403
+        for (item in items)
+        {
+            if (item.item is SubMenu)
+                cast(item.item, SubMenu).visible = false;
+        }
     }
 
 	public function close()
     {
+        trace('Menu $label closed.');
         this.visible = false;
     }
     
@@ -169,7 +216,10 @@ class SubMenu extends FlxSpriteGroup implements MenuItem
         return this.visible;
     }
 
-	public function activate() {}
+	public function activate()
+    {
+        return false;
+    }
     
     public static inline function builder<P:MenuBuilder<P>>():SubMenuBuilder<P>
     {

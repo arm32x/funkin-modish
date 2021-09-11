@@ -42,7 +42,9 @@ class ChartEditorState extends MusicBeatState
         bgColor = 0xFF1F1F1F;
         
         var menuBar = MenuBar.builder()
-            .withAction("File", () -> trace("Clicked File."))
+            .withSubMenu("File")
+                .withAction("Exit to Title", () -> FlxG.switchState(new TitleState()))
+            .end()
             .withAction("Edit", () -> trace("Clicked Edit."))
             .withAction("View", () -> trace("Clicked View."))
             .withSubMenu("Test")
@@ -53,7 +55,6 @@ class ChartEditorState extends MusicBeatState
                     .withAction("Test 5", () -> trace("Clicked Test 5."))
                 .end()
             .end()
-            .withAction("Exit", () -> FlxG.switchState(new TitleState())) // Temporary.
             .build();
         add(menuBar);
         
