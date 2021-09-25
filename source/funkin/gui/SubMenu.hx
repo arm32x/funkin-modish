@@ -9,7 +9,7 @@ import funkin.gui.MenuItem.MenuBuilder;
 import funkin.gui.MenuItem.MenuItemAlignment;
 import haxe.Exception;
 
-class SubMenu extends FlxSpriteGroup implements MenuItem
+final class SubMenu extends FlxSpriteGroup implements MenuItem
 {
     private static inline final ACTION_HEIGHT = 24;
     private static inline final ACTION_PADDING = 24;
@@ -28,7 +28,8 @@ class SubMenu extends FlxSpriteGroup implements MenuItem
     private final hitbox:FlxRect = FlxRect.get();
     private final anchor:FlxRect = FlxRect.get();
     
-    public function new(label:String, items:Array<MenuItem>)
+    @:allow(funkin.gui.SubMenuBuilder)
+    private function new(label:String, items:Array<MenuItem>)
     {
         super(0, 0);
         this.label = label;

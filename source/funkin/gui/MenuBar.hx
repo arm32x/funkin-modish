@@ -9,7 +9,7 @@ import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxRect;
 import flixel.text.FlxText;
 
-class MenuBar extends FlxSpriteGroup
+final class MenuBar extends FlxSpriteGroup
 {
     private static inline final ACTION_MARGIN = 0;
     private static inline final ACTION_PADDING = 8;
@@ -21,7 +21,8 @@ class MenuBar extends FlxSpriteGroup
         background:FlxSprite
     }> = [];
     
-    public function new(items:Array<MenuItem>)
+    @:allow(funkin.gui.MenuBarBuilder)
+    private function new(items:Array<MenuItem>)
     {
         super(0, 0);
         
