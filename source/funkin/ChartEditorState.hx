@@ -54,6 +54,7 @@ class ChartEditorState extends MusicBeatState
                     .withAction("Test 4", () -> trace("Clicked Test 4."))
                     .withAction("Test 5", () -> trace("Clicked Test 5."))
                 .end()
+                .withCheckbox("Test 6", (v) -> trace((v ? "Checked" : "Unchecked") + " Test 6."))
             .end()
             .build();
         add(menuBar);

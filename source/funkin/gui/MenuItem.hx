@@ -36,6 +36,11 @@ abstract class MenuBuilder<B:MenuBuilder<B>>
         return this.withItem(new MenuAction(label, action));
     }
     
+    public function withCheckbox(label:String, action:Bool->Void, checked:Bool = false, disabled:Bool = false):B
+    {
+        return this.withItem(new CheckboxMenuItem(label, action, checked, disabled));
+    }
+    
     public function withSubMenu(label:String):SubMenuBuilder<B>
     {
         return SubMenu.builder()

@@ -80,6 +80,14 @@ final class SubMenu extends FlxSpriteGroup implements MenuItem
                 menu.setBestPosition(anchor, alignment);
                 anchor.put();
             }
+            if (item.item is CheckboxMenuItem)
+            {
+                var checkbox = cast(item.item, CheckboxMenuItem);
+                var anchor = item.background.getHitbox();
+                checkbox.setPosition(anchor.left, anchor.top);
+                add(checkbox);
+                anchor.put();
+            }
         }
     }
     
