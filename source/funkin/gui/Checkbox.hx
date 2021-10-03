@@ -25,15 +25,15 @@ class Checkbox extends FlxSprite
         animation.addByPrefix("checked", "checked", 0);
         animation.addByPrefix("unchecked", "unchecked", 0);
         
-        this.checked = checked;
-        this.disabled = disabled;
-        
         if (radioButtonGroup != null)
         {
             if (!radioButtons.exists(radioButtonGroup))
                 radioButtons.set(radioButtonGroup, []);
             radioButtons.get(radioButtonGroup).push(this);
         }
+        
+        this.checked = checked;
+        this.disabled = disabled;
     }
     
     override public function update(elapsed:Float)
@@ -42,8 +42,23 @@ class Checkbox extends FlxSprite
             && HelperFunctions.isHovered(getHitbox(hitbox))
             && !disabled)
         {
-            checked = !checked;
+            if (radioButtonGroup != null)
+                checked = true;
+            else
+                checked = !checked;
         }
+    }
+    
+    public static function getSelectedRadioButton(radioButtonGroup:String):Null<Int>
+    {
+        if (!radioButtons.exists(radioButtonGroup))
+            return null;
+        for (index => checkbox in radioButtons.get(radioButtonGroup))
+        {
+            if (checkbox.checked)
+                return index;
+        }
+        return null;
     }
     
     private function set_checked(value:Bool):Bool

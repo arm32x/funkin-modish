@@ -51,10 +51,13 @@ class ChartEditorState extends MusicBeatState
                 .withAction("Test 1", () -> trace("Clicked Test 1."))
                 .withAction("Test 2", () -> trace("Clicked Test 2."))
                 .withSubMenu("Test 3")
-                    .withAction("Test 4", () -> trace("Clicked Test 4."))
-                    .withAction("Test 5", () -> trace("Clicked Test 5."))
+                    .withAction("Test 3.1", () -> trace("Clicked Test 3.1."))
+                    .withAction("Test 3.2", () -> trace("Clicked Test 3.2."))
                 .end()
-                .withCheckbox("Test 6", (v) -> trace((v ? "Checked" : "Unchecked") + " Test 6."))
+                .withCheckbox("Test 4", (v) -> trace((v ? "Checked" : "Unchecked") + " Test 4."))
+                .withSubMenu("Test 5")
+                    .withRadioButtons(["Test 5.1", "Test 5.2", "Test 5.3"], (i) -> trace('Selected Test 5.${i + 1}.'), 0, "test5")
+                .end()
             .end()
             .build();
         add(menuBar);

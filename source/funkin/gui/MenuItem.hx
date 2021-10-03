@@ -36,9 +36,25 @@ abstract class MenuBuilder<B:MenuBuilder<B>>
         return this.withItem(new MenuAction(label, action));
     }
     
-    public function withCheckbox(label:String, action:Bool->Void, checked:Bool = false, disabled:Bool = false):B
+    public function withCheckbox(label:String, action:Bool->Void, ?checked:Bool, ?disabled:Bool):B
     {
         return this.withItem(new CheckboxMenuItem(label, action, checked, disabled));
+    }
+    
+    public function withRadioButton(label:String, action:Void->Void, ?checked:Bool, ?disabled:Bool, radioButtonGroup:String):B
+    {
+        return this.withItem(new RadioButtonMenuItem(label, action, checked, disabled, radioButtonGroup));
+    }
+    
+    public function withRadioButtons(labels:Array<String>, action:Int->Void, ?checkedIndex:Int, ?disabled:Bool, radioButtonGroup:String):B
+    {
+        for (index => label in labels)
+        {
+            // This relies on withItem() mutating the current builder instead of
+            // returning a completely new one.
+            withRadioButton(label, () -> action(Checkbox.getSelectedRadioButton(radioButtonGroup)), index == checkedIndex, disabled, radioButtonGroup);
+        }
+        return chain();
     }
     
     public function withSubMenu(label:String):SubMenuBuilder<B>
