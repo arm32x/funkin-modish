@@ -39,12 +39,12 @@ class ModLoader
         {
             throw new Exception("Not yet implemented.");
         }
-        else #end if (Assets.exists('default:mods/$id/modish.xml'))
+        else #elseif MODISH_BUNDLE_MODS if (Assets.exists('default:mods/$id/modish.xml'))
         {
             var library = new ProxyAssetLibrary(Assets.getLibrary("default"), 'mods/$id/');
             Assets.registerLibrary(id, library);
         }
-        else
+        else #else
         {
             throw new Exception('Mod "$id" not found.');
         }

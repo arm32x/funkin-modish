@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
+	<!-- _________________________ Modish Compile Flags _________________________ -->
+	
+	<!-- If this is set, the Kade Engine update checker will be disabled. -->
+	<define name="MODISH_IGNORE_OUTDATED_KADE" />
+	<!-- If this is set, the Modish developer tools will be enabled. Use
+	     -DMODISH_DEV on the command line to enable in release mode. -->
+	<define name="MODISH_DEV" if="debug" />
+	<!-- If this is set, any mods in the 'mods' folder at compile time will be
+	     bundled with the final distribution. -->
+	<define name="MODISH_BUNDLE_MODS" />
+
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Friday Night Funkin'" file="funkin-modish" packageName="funkin" package="funkin" main="funkin.Main" />
@@ -104,8 +115,8 @@
 	<!-- END NEW ASSETS LAYOUT -->
 	
 	<!-- All mods in the 'mods' folder at compile time will be bundled with
-	     the engine. -->
-	<assets path='mods' embed='false'/>
+	     the engine if MODISH_BUNDLE_MODS is set. -->
+	<assets path='mods' embed='false' if="MODISH_BUNDLE_MODS" />
 	
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
@@ -144,10 +155,6 @@
 	<haxelib name="csv" />
 
 	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
-	
-	<define name="MODISH_IGNORE_OUTDATED_KADE" />
-	<!-- Use -DMODISH_DEV on the command line to enable in release mode. -->
-	<define name="MODISH_DEV" if="debug" />
 
 	<!-- <haxelib name="markdown" /> -->
 	<!-- <haxelib name="HtmlParser" /> -->
