@@ -1,0 +1,20 @@
+
+checkbox.png
+size: 48, 24
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+checked
+  rotate: false
+  xy: 0, 0
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+unchecked
+  rotate: false
+  xy: 24, 0
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
