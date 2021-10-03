@@ -76,6 +76,7 @@ final class SubMenu extends FlxSpriteGroup implements MenuItem
                 var menu = cast(item.item, SubMenu);
                 add(menu);
                 var anchor = item.background.getHitbox();
+                add(new FlxSprite(anchor.right - 24, anchor.top, "core:images/devtools/menu-arrow.png"));
                 menu.setBestPosition(anchor, alignment);
                 anchor.put();
             }
