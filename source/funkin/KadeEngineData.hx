@@ -2,6 +2,7 @@ package funkin;
 
 import flixel.FlxG;
 import flixel.input.gamepad.FlxGamepad;
+import funkin.song.Conductor;
 import openfl.Lib;
 
 class KadeEngineData

@@ -3,7 +3,7 @@ package funkin;
 import flixel.addons.ui.FlxUIState;
 import flixel.FlxG;
 import flixel.util.FlxColor;
-import funkin.Conductor.BPMChangeEvent;
+import funkin.song.Conductor;
 import openfl.Lib;
 
 // #if windows
@@ -12,11 +12,10 @@ import openfl.Lib;
 
 class MusicBeatState extends FlxUIState
 {
-	private var lastBeat:Float = 0;
-	private var lastStep:Float = 0;
+	private var oldStep:Int = 0;
 
-	private var curStep:Int = 0;
-	private var curBeat:Int = 0;
+	private var curStep(get, never):Int;
+	private var curBeat(get, never):Int;
 	private var controls(get, never):Controls;
 
 	inline function get_controls():Controls
@@ -47,14 +46,9 @@ class MusicBeatState extends FlxUIState
 
 	override function update(elapsed:Float)
 	{
-		//everyStep();
-		var oldStep:Int = curStep;
-
-		updateCurStep();
-		updateBeat();
-
 		if (oldStep != curStep && curStep > 0)
 			stepHit();
+		oldStep = curStep;
 
 		if (FlxG.save.data.fpsRain && skippedFrames >= 6)
 			{
@@ -73,33 +67,10 @@ class MusicBeatState extends FlxUIState
 		super.update(elapsed);
 	}
 
-	private function updateBeat():Void
-	{
-		lastBeat = curStep;
-		curBeat = Math.floor(curStep / 4);
-	}
-
 	public static var currentColor = 0;
-
-	private function updateCurStep():Void
-	{
-		var lastChange:BPMChangeEvent = {
-			stepTime: 0,
-			songTime: 0,
-			bpm: 0
-		}
-		for (i in 0...Conductor.bpmChangeMap.length)
-		{
-			if (Conductor.songPosition >= Conductor.bpmChangeMap[i].songTime)
-				lastChange = Conductor.bpmChangeMap[i];
-		}
-
-		curStep = lastChange.stepTime + Math.floor((Conductor.songPosition - lastChange.songTime) / Conductor.stepCrochet);
-	}
 
 	public function stepHit():Void
 	{
-
 		if (curStep % 4 == 0)
 			beatHit();
 	}
@@ -116,5 +87,14 @@ class MusicBeatState extends FlxUIState
 		#else
 		FlxG.openURL(schmancy);
 		#end
+	}
+	
+	private inline function get_curStep():Int
+	{
+		return Conductor.curStep;
+	}
+	private inline function get_curBeat():Int
+	{
+		return Conductor.curBeat;
 	}
 }

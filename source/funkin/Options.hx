@@ -2,6 +2,7 @@ package funkin;
 
 import flixel.FlxG;
 import flixel.util.FlxColor;
+import funkin.song.Conductor;
 import lime.app.Application;
 import openfl.Lib;
 

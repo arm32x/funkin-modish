@@ -6,6 +6,7 @@ import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
+import funkin.song.Conductor;
 
 #if polymod
 import polymod.format.ParseRules.TargetSignatureElement;

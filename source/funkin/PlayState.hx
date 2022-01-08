@@ -36,7 +36,7 @@ import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import funkin.Replay.Ana;
 import funkin.Replay.Analysis;
-import funkin.Section.SwagSection;
+import funkin.song.Conductor;
 import haxe.EnumTools;
 import haxe.Exception;
 import haxe.Json;
@@ -328,7 +328,6 @@ class PlayState extends MusicBeatState
 			SONG = new Song(new Identifier("basegame", "tutorial")).load("normal");
 
 		Conductor.mapBPMChanges(SONG);
-		Conductor.changeBPM(SONG.chart.bpm);
 
 		trace('INFORMATION ABOUT WHAT U PLAYIN WIT:\nFRAMES: ' + PlayStateChangeables.safeFrames + '\nZONE: ' + Conductor.safeZoneOffset + '\nTS: ' + Conductor.timeScale + '\nBotPlay : ' + PlayStateChangeables.botPlay);
 	
@@ -1044,7 +1043,6 @@ class PlayState extends MusicBeatState
 		// FlxG.log.add(ChartParser.parse());
 
 		var songData = SONG;
-		Conductor.changeBPM(songData.chart.bpm);
 
 		curSong = songData.id;
 
@@ -3249,11 +3247,11 @@ class PlayState extends MusicBeatState
 
 		if (SONG.chart.sections[Math.floor(curStep / 16)] != null)
 		{
-			if (SONG.chart.sections[Math.floor(curStep / 16)].bpm != null)
-			{
-				Conductor.changeBPM(SONG.chart.sections[Math.floor(curStep / 16)].bpm);
-				FlxG.log.add('CHANGED BPM!');
-			}
+			// if (SONG.chart.sections[Math.floor(curStep / 16)].bpm != null)
+			// {
+			// 	Conductor.changeBPM(SONG.chart.sections[Math.floor(curStep / 16)].bpm);
+			// 	FlxG.log.add('CHANGED BPM!');
+			// }
 			// else
 			// Conductor.changeBPM(SONG.bpm);
 

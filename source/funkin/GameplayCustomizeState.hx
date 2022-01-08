@@ -11,6 +11,7 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import funkin.song.Conductor;
 
 // #if windows
 // import Discord.DiscordClient;
@@ -52,7 +53,7 @@ class GameplayCustomizeState extends MusicBeatState
         curt = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains','shared'));
         front = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront','shared'));
 
-		Conductor.changeBPM(102);
+		Conductor.setConstantBPM(102);
 		persistentUpdate = true;
 
         super.create();

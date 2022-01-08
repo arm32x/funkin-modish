@@ -1,6 +1,7 @@
 package funkin;
 
 import flixel.FlxG;
+import funkin.song.Conductor;
 import haxe.Json;
 
 #if sys

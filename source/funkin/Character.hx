@@ -3,6 +3,7 @@ package funkin;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.util.FlxDestroyUtil;
+import funkin.song.Conductor;
 import haxe.Exception;
 import haxe.Json;
 import openfl.utils.Assets;
