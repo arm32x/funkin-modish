@@ -81,6 +81,10 @@ class Main extends Sprite
 		addChild(game);
 
 		FlxG.plugins.add(new ReloadManager());
+
+		#if MODISH_DEV
+		FlxG.plugins.add(new ImGuiPlugin());
+		#end
 		
 		fpsCounter = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsCounter);

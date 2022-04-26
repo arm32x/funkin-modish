@@ -150,6 +150,9 @@
 	<haxelib name="linc_luajit" if="windows"/>
 	
 	<haxelib name="csv" />
+	
+	<!-- Make sure to use https://github.com/arm32x/imgui-hx -->
+	<haxelib name="imgui-hx" if="MODISH_DEV" />
 
 	<haxelib name="hxcpp-debug-server" if="cpp debug"/>
 
