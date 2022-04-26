@@ -1,5 +1,6 @@
 package funkin.devtools;
 
+#if (MODISH_DEV && cpp)
 import flixel.FlxBasic;
 
 #if MODISH_DEV

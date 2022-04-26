@@ -5,8 +5,9 @@
 	<!-- Skip the Kade Engine update check. -->
 	<define name="MODISH_IGNORE_OUTDATED_KADE" />
 	<!-- Build Modish Developer Edition, which includes several additonal
-	     features for mod developers. -->
-	<define name="MODISH_DEV" if="debug cpp" />
+	     features for mod developers. Some features are only available in the
+		 desktop version. -->
+	<define name="MODISH_DEV" if="debug" />
 
 	<!-- _________________________ Application Settings _________________________ -->
 
@@ -151,8 +152,9 @@
 	
 	<haxelib name="csv" />
 	
-	<!-- Make sure to use https://github.com/arm32x/imgui-hx -->
-	<haxelib name="imgui-hx" if="MODISH_DEV" />
+	<haxelib name="imgui-hx" if="MODISH_DEV cpp" /> <!-- https://github.com/arm32x/imgui-hx -->
+	<haxelib name="linc_sdl" if="MODISH_DEV cpp" /> <!-- https://github.com/snowkit/linc_sdl -->
+	<haxelib name="linc_opengl" if="MODISH_DEV cpp" /> <!-- https://github.com/snowkit/linc_opengl -->
 
 	<haxelib name="hxcpp-debug-server" if="cpp debug"/>
 
