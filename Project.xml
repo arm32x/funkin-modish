@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
+	<!-- _________________________ Modish Compile Flags _________________________ -->
+	
+	<!-- Skip the Kade Engine update check. -->
+	<define name="MODISH_IGNORE_OUTDATED_KADE" />
+	<!-- Build Modish Developer Edition, which includes several additonal
+	     features for mod developers. -->
+	<define name="MODISH_DEV" if="debug cpp" />
+
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Friday Night Funkin'" file="funkin-modish" packageName="funkin" package="funkin" main="funkin.Main" />
@@ -143,11 +151,7 @@
 	
 	<haxelib name="csv" />
 
-	<haxelib name="hxcpp-debug-server" if="desktop debug"/>
-	
-	<define name="MODISH_IGNORE_OUTDATED_KADE" />
-	<!-- Use -DMODISH_DEV on the command line to enable in release mode. -->
-	<define name="MODISH_DEV" if="debug" />
+	<haxelib name="hxcpp-debug-server" if="cpp debug"/>
 
 	<!-- <haxelib name="markdown" /> -->
 	<!-- <haxelib name="HtmlParser" /> -->
