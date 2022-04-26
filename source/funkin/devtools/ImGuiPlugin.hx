@@ -203,28 +203,28 @@ class ImGuiPlugin extends FlxBasic
         // See @:headerCode metadata above for implementation of
         // imgui_event_filter.
         untyped __cpp__("SDL_SetEventFilter(imgui_event_filter, NULL)");
-    }
-    
-    private static function filterEvent(event:sdl.Event.EventRef):Int
-    {
-        return 1;
+        
+        // Using these pre- and post- update signals allows ImGui to be used
+        // anywhere in the game.
+        FlxG.signals.preUpdate.add(() -> {
+            ImGui_ImplOpenGL3.newFrame();
+            ImGui_ImplSDL2.newFrame();
+            ImGui.newFrame();
+        });
+        FlxG.signals.postUpdate.add(() -> {
+            ImGui.render();
+        });
     }
     
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
         
-        ImGui_ImplOpenGL3.newFrame();
-        ImGui_ImplSDL2.newFrame();
-        ImGui.newFrame();
-        
         ImGui.showDemoWindow();
         
         ImGui.begin("Test Window");
         ImGui.text("This is a test window.");
         ImGui.end();
-        
-        ImGui.render();
     }
     
     override public function destroy()
