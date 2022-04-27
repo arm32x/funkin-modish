@@ -196,6 +196,9 @@ class ImGuiPlugin extends FlxBasic
         var io = ImGui.getIO();
         io.configFlags |= ImGuiConfigFlags.NavEnableKeyboard;
         io.configFlags |= ImGuiConfigFlags.DockingEnable;
+        #if MODISH_IMGUI_VIEWPORTS
+        io.configFlags |= ImGuiConfigFlags.ViewportsEnable;
+        #end
         
         var sdlWindowPtr = getSDLWindowPtr();
         var sdlGLContext = getSDLGLContext();
@@ -217,6 +220,13 @@ class ImGuiPlugin extends FlxBasic
         });
         FlxG.signals.postUpdate.add(() -> {
             ImGui.render();
+            
+            #if MODISH_IMGUI_VIEWPORTS
+            // These functions can change the current OpenGL context, but Lime
+            // always makes its own context current before rendering.
+            ImGui.updatePlatformWindows();
+            ImGui.renderPlatformWindowsDefault(null, null);
+            #end
         });
     }
     

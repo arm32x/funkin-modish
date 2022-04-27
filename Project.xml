@@ -2,12 +2,16 @@
 <project>
 	<!-- _________________________ Modish Compile Flags _________________________ -->
 	
-	<!-- Skip the Kade Engine update check. -->
+	<!--Skip the Kade Engine update check. -->
 	<define name="MODISH_IGNORE_OUTDATED_KADE" />
-	<!-- Build Modish Developer Edition, which includes several additonal
-	     features for mod developers. Some features are only available in the
-		 desktop version. -->
+
+	<!--Build Modish Developer Edition, which includes several additonal
+	    features for mod developers. Some features are only available in the
+		desktop version. -->
 	<define name="MODISH_DEV" if="debug" />
+	<!--Enable dragging devtools windows outside of the game window. This
+	    option is unstable and might cause crashes. -->
+	<!-- <define name="MODISH_IMGUI_VIEWPORTS" if="MODISH_DEV" /> -->
 
 	<!-- _________________________ Application Settings _________________________ -->
 
