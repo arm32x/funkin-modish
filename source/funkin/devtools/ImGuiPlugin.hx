@@ -193,6 +193,10 @@ class ImGuiPlugin extends FlxBasic
         ImGui.createContext();
         ImGui.styleColorsDark();
         
+        var io = ImGui.getIO();
+        io.configFlags |= ImGuiConfigFlags.NavEnableKeyboard;
+        io.configFlags |= ImGuiConfigFlags.DockingEnable;
+        
         var sdlWindowPtr = getSDLWindowPtr();
         var sdlGLContext = getSDLGLContext();
         ImGui_ImplSDL2.initForOpenGL(sdlWindowPtr, sdlGLContext);
