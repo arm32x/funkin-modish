@@ -154,8 +154,6 @@
 	<haxelib name="discord_rpc" if="windows"/>
 	<haxelib name="linc_luajit" if="windows"/>
 	
-	<haxelib name="csv" />
-	
 	<haxelib name="imgui-hx" if="MODISH_DEV cpp" /> <!-- https://github.com/arm32x/imgui-hx -->
 	<haxelib name="linc_sdl" if="MODISH_DEV cpp" /> <!-- https://github.com/snowkit/linc_sdl -->
 	<haxelib name="linc_opengl" if="MODISH_DEV cpp" /> <!-- https://github.com/snowkit/linc_opengl -->

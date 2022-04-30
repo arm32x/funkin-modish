@@ -3,7 +3,6 @@ package funkin;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.gamepad.FlxGamepad;
@@ -12,10 +11,6 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import format.csv.Data;
-import format.csv.Reader;
-import lime.net.curl.CURLCode;
-import openfl.utils.Assets;
 
 // #if windows
 // import Discord.DiscordClient;
