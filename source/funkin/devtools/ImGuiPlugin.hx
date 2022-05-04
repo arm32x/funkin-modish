@@ -5,11 +5,7 @@ import flixel.FlxBasic;
 import flixel.FlxG;
 import imguicpp.ImGui;
 import openfl.display.Sprite;
-import openfl.events.KeyboardEvent;
-import openfl.events.MouseEvent;
 import openfl.events.RenderEvent;
-import openfl.ui.Keyboard as OpenFLKeyboard;
-import openfl.ui.KeyLocation;
 
 // Bindings to ImGui backends. Note that imgui-hx must be used at least once
 // in the file for the include paths to resolve.
@@ -27,9 +23,6 @@ extern class ImGui_ImplSDL2
     
     @:native("ImGui_ImplSDL2_NewFrame")
     static function newFrame():Void;
-    
-    @:native("ImGui_ImplSDL2_ProcessEvent")
-    static function processEvent(event:cpp.ConstStar<SDLEvent>):Bool;
 }
 
 @:include("imgui_impl_opengl3.h")
