@@ -26,7 +26,7 @@
 	  - `haxelib install hscript`
 	  - `haxelib install newgrounds`
 	  - `haxelib install actuate`
-	  - `haxelib git extension-webm https://github.com/arm32x/extension-webm`
+	  - `haxelib git extension-webm https://github.com/arm32x/extension-webm kade-compat`
 	  - `lime rebuild extension-webm windows`
 	  - `lime rebuild extension-webm windows -static` (only required when building Modish Developer Edition)
 	  - `haxelib git linc_sdl https://github.com/snowkit/linc_sdl` (only required when building Modish Developer Edition)
