@@ -55,6 +55,8 @@ extern class ImGui_ImplOpenGL3
 // See original source code here:
 // https://github.com/native-toolkit/lime/blob/develop/project/src/backend/sdl/SDLWindow.h
 @:headerCode("
+#define SDL_MAIN_HANDLED 1
+#include <imgui_impl_sdl.h>
 #include <SDL.h>
 
 namespace lime {
