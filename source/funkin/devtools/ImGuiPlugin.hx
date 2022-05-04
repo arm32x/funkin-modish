@@ -229,12 +229,12 @@ class ImGuiPlugin extends FlxBasic
         FlxG.signals.postUpdate.add(() -> {
             ImGui.render();
             
-            #if MODISH_IMGUI_VIEWPORTS
-            // These functions can change the current OpenGL context, but Lime
-            // always makes its own context current before rendering.
-            ImGui.updatePlatformWindows();
-            ImGui.renderPlatformWindowsDefault(null, null);
-            #end
+            if ((io.configFlags & ImGuiConfigFlags.ViewportsEnable) != 0) { 
+                // These functions can change the current OpenGL context, but
+                // Lime always makes its own context current before rendering.
+                ImGui.updatePlatformWindows();
+                ImGui.renderPlatformWindowsDefault(null, null);
+            }
         });
     }
     
