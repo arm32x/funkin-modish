@@ -26,7 +26,6 @@
 	  - `haxelib install flixel-addons`
  6. Install additional libraries.
 	  - `haxelib install hscript`
-	  - `haxelib install newgrounds`
 	  - `haxelib install actuate`
 	  - `haxelib git extension-webm https://github.com/arm32x/extension-webm kade-compat`
 	  - `lime rebuild extension-webm windows`
