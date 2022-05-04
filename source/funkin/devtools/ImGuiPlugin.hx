@@ -7,16 +7,17 @@ import imguicpp.ImGui;
 import openfl.display.Sprite;
 import openfl.events.RenderEvent;
 
+@:native("SDL_Window")
+extern class SDL_Window {}
+typedef SDL_GLContext = cpp.Star<cpp.Void>;
+
 // Bindings to ImGui backends. Note that imgui-hx must be used at least once
 // in the file for the include paths to resolve.
-@:include("imgui_impl_sdl.h") @:native("SDL_Window") extern class SDLWindow {}
-@:include("imgui_impl_sdl.h") @:native("SDL_Event") extern class SDLEvent {}
-
 @:include("imgui_impl_sdl.h")
 extern class ImGui_ImplSDL2
 {
     @:native("ImGui_ImplSDL2_InitForOpenGL")
-    static function initForOpenGL(window:cpp.Star<SDLWindow>, sdlGlContext:cpp.Star<cpp.Void>):Bool;
+    static function initForOpenGL(window:cpp.Star<SDL_Window>, glContext:SDL_GLContext):Bool;
 
     @:native("ImGui_ImplSDL2_Shutdown")
     static function shutdown():Void;
@@ -40,6 +41,21 @@ extern class ImGui_ImplOpenGL3
     @:native("ImGui_ImplOpenGL3_RenderDrawData")
     static function renderDrawData(drawData:cpp.Star<ImDrawData>):Void;
 }
+
+// Add SDL's header files to the include path. This is necessary since SDL
+// types and functions are used in this file.
+//
+// This requires the haxelib linc_sdl to be installed.
+@:buildXml("
+<files id='haxe' append='true'>
+    <compilerflag value='-I${haxelib:linc_sdl}/lib/sdl/include/' />
+
+    <compilerflag value='-I${haxelib:linc_sdl}/lib/sdl/include/configs/default/'    unless='windows || mac || linux'/>
+    <compilerflag value='-I${haxelib:linc_sdl}/lib/sdl/include/configs/linux/'      if='linux'/>
+    <compilerflag value='-I${haxelib:linc_sdl}/lib/sdl/include/configs/windows/'    if='windows'/>
+    <compilerflag value='-I${haxelib:linc_sdl}/lib/sdl/include/configs/mac/'        if='mac'/>
+</files>
+")
 
 // This code is a slightly modified version of Lime's internal Window and
 // SDLWindow class definitions. It is here because the header these classes are
@@ -181,9 +197,6 @@ class ImGuiPlugin extends FlxBasic
     public function new()
     {
         super();
-
-        // Use a function from linc_sdl so the compiler will compile SDL.
-        sdl.SDL.getRevisionNumber();
         
         ImGui.createContext();
         ImGui.styleColorsDark();
@@ -195,9 +208,9 @@ class ImGuiPlugin extends FlxBasic
         io.configFlags |= ImGuiConfigFlags.ViewportsEnable;
         #end
         
-        var sdlWindowPtr = getSDLWindowPtr();
-        var sdlGLContext = getSDLGLContext();
-        ImGui_ImplSDL2.initForOpenGL(sdlWindowPtr, sdlGLContext);
+        var sdlWindow = getLimeSDLWindow();
+        var sdlGLContext = getLimeSDLGLContext();
+        ImGui_ImplSDL2.initForOpenGL(sdlWindow, sdlGLContext);
         ImGui_ImplOpenGL3.init("#version 130");
         
         FlxG.stage.addChild(new ImGuiSprite());
@@ -251,7 +264,7 @@ class ImGuiPlugin extends FlxBasic
         This function will throw an exception if the window is not backed by
         SDL, such as on Adobe AIR, Flash, and HTML5.
     **/
-    private static function getSDLWindowPtr():cpp.Star<SDLWindow>
+    private static function getLimeSDLWindow():cpp.Star<SDL_Window>
     {
         // Step 1: Dig through Lime to get the NativeWindow.
         var window = FlxG.stage.application.window;
@@ -259,7 +272,7 @@ class ImGuiPlugin extends FlxBasic
         var nativeWindow = cast(windowBackend, lime._internal.backend.native.NativeWindow);
 
         // Step 2: Reach into the C++ class and pull out the window pointer.
-        var sdlWindowPtr: cpp.Star<SDLWindow> = untyped __cpp__(
+        var sdlWindowPtr:cpp.Star<SDL_Window> = untyped __cpp__(
             "static_cast<lime::SDLWindow*>({0}->__GetHandle())->sdlWindow",
             nativeWindow.handle
         );
@@ -272,7 +285,7 @@ class ImGuiPlugin extends FlxBasic
         This function will throw an exception if the window is not backed by
         SDL, such as on Adobe AIR, Flash, and HTML5.
     **/
-    private static function getSDLGLContext():cpp.Star<cpp.Void>
+    private static function getLimeSDLGLContext():SDL_GLContext
     {
         // Step 1: Dig through Lime to get the NativeWindow.
         var window = FlxG.stage.application.window;
@@ -280,7 +293,7 @@ class ImGuiPlugin extends FlxBasic
         var nativeWindow = cast(windowBackend, lime._internal.backend.native.NativeWindow);
 
         // Step 2: Reach into the C++ class and pull out the window pointer.
-        var sdlGLContext: cpp.Star<cpp.Void> = untyped __cpp__(
+        var sdlGLContext:SDL_GLContext = untyped __cpp__(
             "static_cast<lime::SDLWindow*>({0}->__GetHandle())->context",
             nativeWindow.handle
         );
