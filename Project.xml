@@ -2,15 +2,14 @@
 <project>
 	<!-- _________________________ Modish Compile Flags _________________________ -->
 	
-	<!--Skip the Kade Engine update check. -->
+	<!-- Skip the Kade Engine update check. -->
 	<define name="MODISH_IGNORE_OUTDATED_KADE" />
 
-	<!--Build Modish Developer Edition, which includes several additonal
-	    features for mod developers. Some features are only available in the
-		desktop version. -->
+	<!-- Build Modish Developer Edition, which includes several additonal
+	     features for mod developers. Only supported on C++ targets. -->
 	<define name="MODISH_DEV" if="debug" />
-	<!--Enable dragging devtools windows outside of the game window. This
-	    option is unstable and might cause crashes. -->
+	<!-- Enable dragging devtools windows outside of the game window. This
+	     option is unstable and might cause crashes. -->
 	<!-- <define name="MODISH_IMGUI_VIEWPORTS" if="MODISH_DEV" /> -->
 
 	<!-- _________________________ Application Settings _________________________ -->
@@ -144,9 +143,14 @@
 	<haxelib name="extension-webm"/> <!-- Make sure to use https://github.com/arm32x/extension-webm/ -->
 
 	<haxelib name="hscript" />
-	<define name="hscriptPos" if="debug" />
+	<define name="hscriptPos" if="MODISH_DEV" />
 	
 	<section if="MODISH_DEV">
+		<error unless="cpp" value="Modish Developer Edition only supports C++ targets." />
+		<log unless="desktop" warn="Modish Developer Edition is not designed for mobile or console targets. Developer tools may not be usable." />
+		
+		<error unless="static_link" value="Modish Developer Edition must be statically linked. Try building with the -static option." />
+	
 		<!-- These definitions trick imgui-hx into compiling its backends
 		     without actually including these libraries in the project. -->
 		<define name="linc_sdl" />
