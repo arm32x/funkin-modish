@@ -1,6 +1,6 @@
 package funkin;
 
-import flixel.addons.ui.FlxUIState;
+import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxG;
 import flixel.util.FlxColor;
 import funkin.song.Conductor;
@@ -10,7 +10,7 @@ import openfl.Lib;
 // import Discord.DiscordClient;
 // #end
 
-class MusicBeatState extends FlxUIState
+class MusicBeatState extends FlxTransitionableState
 {
 	private var oldStep:Int = 0;
 
