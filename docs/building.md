@@ -11,6 +11,8 @@
 	  - Linux: install the `git` package: `sudo apt install git` (Ubuntu), `sudo pacman -S git` (Arch), etc... (you probably already have it)
  3. Install and set up Lime.
       - `haxelib git lime https://github.com/arm32x/lime fix/static-debug-build`
+	  - `haxelib install format`
+	  - `haxelib install hxp`
 	  - `haxelib run lime setup`
 	  - `lime rebuild windows`
 	  - `lime rebuild windows -static` (only required when building Modish Developer Edition)
