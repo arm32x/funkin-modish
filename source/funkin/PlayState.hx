@@ -2847,9 +2847,9 @@ class PlayState extends MusicBeatState
 					FlxG.stage.window.onFocusIn.add(focusIn);
 
 					var ourSource:String = "assets/videos/daWeirdVid/dontDelete.webm";
-					WebmPlayer.SKIP_STEP_LIMIT = 90;
 					var str1:String = "WEBM SHIT"; 
 					webmHandler = new WebmHandler();
+					webmHandler.webm.SKIP_STEP_LIMIT = 90;
 					webmHandler.source(ourSource);
 					webmHandler.makePlayer();
 					webmHandler.webm.name = str1;

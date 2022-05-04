@@ -141,7 +141,7 @@
 	<haxelib name="flixel-addons" />
 
 	<haxelib name="actuate" />
-	<haxelib name="extension-webm"/> <!-- Make sure to use https://github.com/KadeDev/extension-webm/ -->
+	<haxelib name="extension-webm"/> <!-- Make sure to use https://github.com/arm32x/extension-webm/ -->
 
 	<haxelib name="hscript" />
 	<define name="hscriptPos" if="debug" />
