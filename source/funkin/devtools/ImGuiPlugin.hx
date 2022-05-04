@@ -238,17 +238,6 @@ class ImGuiPlugin extends FlxBasic
         });
     }
     
-    override public function update(elapsed:Float)
-    {
-        super.update(elapsed);
-        
-        ImGui.showDemoWindow();
-        
-        ImGui.begin("Test Window");
-        ImGui.text("This is a test window.");
-        ImGui.end();
-    }
-    
     override public function destroy()
     {
         ImGui_ImplOpenGL3.shutdown();
