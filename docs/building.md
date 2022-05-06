@@ -15,7 +15,7 @@
 	  - `haxelib install hxp`
 	  - `haxelib run lime setup`
 	  - `lime rebuild windows`
-	  - `lime rebuild windows -static` (only required when building Modish Developer Edition)
+	  - `lime rebuild windows -static -DLIME_OPENALSOFT -DLIME_OPENAL` (only required when building Modish Developer Edition)
  4. Install OpenFL.
 	  - `haxelib git openfl https://github.com/openfl/openfl`
  5. Install and set up HaxeFlixel.
