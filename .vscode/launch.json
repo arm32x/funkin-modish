@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Modish",
+            "type": "hxcpp",
+            "request": "launch",
+            "windows": {
+                "program": "${workspaceFolder}/export/debug/linux/bin/funkin-modish.exe"
+            },
+            "program": "${workspaceFolder}/export/debug/linux/bin/funkin-modish",
+            "preLaunchTask": "lime: build (active configuration)"
+        }
+    ]
+}

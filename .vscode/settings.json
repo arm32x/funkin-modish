@@ -1,0 +1,40 @@
+{
+    "lime.targetConfigurations": [
+        {
+            "label": "Modish / Desktop / Debug",
+            "target": "cpp",
+            "args": ["-debug"]
+        },
+        {
+            "label": "Modish / Desktop / Release",
+            "target": "cpp",
+            "args": ["-final"]
+        },
+        {
+            "label": "Modish Developer Edition / Desktop / Debug",
+            "target": "cpp",
+            "args": ["-debug", "-static", "-DMODISH_DEV"]
+        },
+        {
+            "label": "Modish Developer Edition / Desktop / Release",
+            "target": "cpp",
+            "args": ["-final", "-static", "-DMODISH_DEV"]
+        }
+    ],
+    "lime.defaultTargetConfiguration": "Modish Developer Edition / Desktop / Debug",
+    // Disable Lime's default targets.
+    "lime.targets": [
+        { "label": "AIR", "enabled": false },
+        { "label": "Android", "enabled": false },
+        { "label": "Electron", "enabled": false },
+        { "label": "Flash", "enabled": false },
+        { "label": "HashLink", "enabled": false },
+        { "label": "HTML5", "enabled": false },
+        { "label": "Linux", "enabled": false },
+        { "label": "macOS", "enabled": false },
+        { "label": "iOS", "enabled": false },
+        { "label": "tvOS", "enabled": false },
+        { "label": "Windows", "enabled": false },
+        { "label": "Neko", "enabled": false }
+    ]
+}
