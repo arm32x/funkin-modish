@@ -10,7 +10,7 @@
 	  - Windows: install from the [git-scm](https://git-scm.com/downloads) website.
 	  - Linux: install the `git` package: `sudo apt install git` (Ubuntu), `sudo pacman -S git` (Arch), etc... (you probably already have it)
  3. Install and set up Lime.
-      - `haxelib git lime https://github.com/arm32x/lime fix/static-debug-build`
+      - `haxelib git lime https://github.com/arm32x/lime everything`
 	  - `haxelib install format`
 	  - `haxelib install hxp`
 	  - `haxelib run lime setup`
