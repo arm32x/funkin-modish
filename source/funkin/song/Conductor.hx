@@ -133,11 +133,11 @@ class Conductor
 
 
     // Using these functions repeatedly may cause floating point rounding error.
-    private static inline function beatsToMilliseconds(bpm:Float, beats:Float):Float
+    public static inline function beatsToMilliseconds(bpm:Float, beats:Float):Float
     {
         return beats * (60 / bpm * 1000);
     }
-    private static inline function millisecondsToBeats(bpm:Float, millis:Float):Float
+    public static inline function millisecondsToBeats(bpm:Float, millis:Float):Float
     {
         return millis / (60 / bpm * 1000);
     }
