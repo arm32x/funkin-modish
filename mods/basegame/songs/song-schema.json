@@ -1,0 +1,188 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "FNF Modish Song",
+    "description": "A song chart for the Friday Night Funkin' mod loader Modish.",
+    "type": "object",
+    "properties": {
+        "characters": {
+            "type": "object",
+            "properties": {
+                "player": {
+                    "$ref": "#/$defs/identifier"
+                },
+                "girlfriend": {
+                    "$ref": "#/$defs/identifier"
+                },
+                "opponent": {
+                    "$ref": "#/$defs/identifier"
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "player",
+                "girlfriend",
+                "opponent"
+            ]
+        },
+        "stage": {
+            "$ref": "#/$defs/identifier"
+        },
+        "bpm": {
+            "type": [
+                "number",
+                "array"
+            ],
+            "exclusiveMinimum": 0,
+            "items": {
+                "type": "object",
+                "properties": {
+                    "time": {
+                        "type": "number",
+                        "minimum": 0.0,
+                        "description": "The time, in beats, of this BPM change. There must be a BPM change at the start of the song."
+                    },
+                    "bpm": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "The BPM to change to."
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "time",
+                    "bpm"
+                ]
+            },
+            "contains": {
+                "$comment": "Make sure there is a BPM change at the start of the song.",
+                "type": "object",
+                "properties": {
+                    "time": {
+                        "const": 0.0
+                    }
+                },
+                "required": [
+                    "time"
+                ]
+            },
+            "description": "The BPM of this song. It can either be a number, or an array of BPM changes."
+        },
+        "scrollSpeed": {
+            "type": "number",
+            "default": 1.0,
+            "exclusiveMinimum": 0.0
+        },
+        "offset": {
+            "type": "number",
+            "default": 0.0,
+            "description": "The audio offset of this song, in milliseconds."
+        },
+        "tracks": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "$comment": "TODO: Add support for specifying a keybind, Minecraft-style",
+                "properties": {
+                    "variant": {
+                        "type": "string",
+                        "description": "Determines how notes on this track appear. Common values are 'left', 'down', 'up', 'right', and 'center'."
+                    },
+                    "targetCharacter": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "The character slot that needs to respond to notes on this track.",
+                        "default": null
+                    },
+                    "position": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "description": "The position of the strum arrow when downscroll is disabled. Also affects the position of all notes on this track."
+                    },
+                    "scale": {
+                        "type": "number",
+                        "default": 1.0,
+                        "exclusiveMinimum": 0.0,
+                        "description": "The scale of the strum arrow and all notes on this track."
+                    },
+                    "tag": {
+                        "type": "string",
+                        "description": "A tag that can be referenced by scripts. Does not have to be unique."
+                    },
+                    "notes": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": [
+                                {
+                                    "type": "number",
+                                    "minimum": 0.0,
+                                    "description": "The strum time of this note, in beats."
+                                },
+                                {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "$ref": "#/$defs/identifier",
+                                    "description": "The note type of this note."
+                                },
+                                {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "$ref": "#/$defs/identifier",
+                                    "description": "The note skin used for this note."
+                                },
+                                {
+                                    "type": "number",
+                                    "minimum": 0.0,
+                                    "default": 0.0,
+                                    "description": "The sustain length of this note."
+                                },
+                                {
+                                    "description": "Additional data to pass to scripts. Can be any JSON data."
+                                }
+                            ],
+                            "additionalItems": false,
+                            "minItems": 1
+                        }
+                    }
+                },
+                "required": [
+                    "notes"
+                ],
+                "dependencies": {
+                    "position": [
+                        "side"
+                    ]
+                },
+                "additionalProperties": false
+            }
+        },
+        "$schema": {
+            "$comment": "Allow specifying the schema location using VS Code's '$schema' property without breaking validation."
+        }
+    },
+    "required": [
+        "bpm",
+        "characters",
+        "chart",
+        "stage",
+        "tracks"
+    ],
+    "$comment": "Modish ignores any unknown properties in JSON files; this is here to catch typos in optional property names.",
+    "additionalProperties": false,
+    "$defs": {
+        "identifier": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+:[a-z0-9-]+$"
+        }
+    }
+}
