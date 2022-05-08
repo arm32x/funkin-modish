@@ -20,7 +20,7 @@ class OptionCategory
 		_options.push(opt);
 	}
 
-	
+
 	public final function removeOption(opt:Option)
 	{
 		_options.remove(opt);
@@ -63,7 +63,7 @@ class Option
 	}
 
 	public function getValue():String { return throw "stub!"; };
-	
+
 	// Returns whether the label is to be updated.
 	public function press():Bool { return throw "stub!"; }
 	private function updateDisplay():String { return throw "stub!"; }
@@ -106,7 +106,7 @@ class CpuStrums extends Option
 	public override function press():Bool
 	{
 		FlxG.save.data.cpuStrums = !FlxG.save.data.cpuStrums;
-		
+
 		display = updateDisplay();
 		return true;
 	}
@@ -283,7 +283,7 @@ class ShowInput extends Option
 
 class Judgement extends Option
 {
-	
+
 
 	public function new(desc:String)
 	{
@@ -291,7 +291,7 @@ class Judgement extends Option
 		description = desc;
 		acceptValues = true;
 	}
-	
+
 	public override function press():Bool
 	{
 		return true;
@@ -318,7 +318,7 @@ class Judgement extends Option
 		return "Safe Frames: " + Conductor.safeFrames +
 		" - SIK: " + HelperFunctions.truncateFloat(45 * Conductor.timeScale, 0) +
 		"ms GD: " + HelperFunctions.truncateFloat(90 * Conductor.timeScale, 0) +
-		"ms BD: " + HelperFunctions.truncateFloat(135 * Conductor.timeScale, 0) + 
+		"ms BD: " + HelperFunctions.truncateFloat(135 * Conductor.timeScale, 0) +
 		"ms SHT: " + HelperFunctions.truncateFloat(166 * Conductor.timeScale, 0) +
 		"ms TOTAL: " + HelperFunctions.truncateFloat(Conductor.safeZoneOffset,0) + "ms";
 	}
@@ -400,7 +400,7 @@ class FPSCapOption extends Option
 	{
 		return "FPS Cap";
 	}
-	
+
 	override function right():Bool {
 		if (FlxG.save.data.fpsCap >= 290)
 		{
@@ -427,7 +427,7 @@ class FPSCapOption extends Option
 
 	override function getValue():String
 	{
-		return "Current FPS Cap: " + FlxG.save.data.fpsCap + 
+		return "Current FPS Cap: " + FlxG.save.data.fpsCap +
 		(FlxG.save.data.fpsCap == Application.current.window.displayMode.refreshRate ? "Hz (Refresh Rate)" : "");
 	}
 }
@@ -510,14 +510,14 @@ class Optimization extends Option
 			super();
 			description = desc;
 		}
-	
+
 		public override function press():Bool
 		{
 			FlxG.save.data.optimize = !FlxG.save.data.optimize;
 			display = updateDisplay();
 			return true;
 		}
-	
+
 		private override function updateDisplay():String
 		{
 			return "Optimization " + (FlxG.save.data.optimize ? "ON" : "OFF");
@@ -552,7 +552,7 @@ class ReplayOption extends Option
 		super();
 		description = desc;
 	}
-	
+
 	public override function press():Bool
 	{
 		trace("switch");
@@ -573,7 +573,7 @@ class AccuracyDOption extends Option
 		super();
 		description = desc;
 	}
-	
+
 	public override function press():Bool
 	{
 		FlxG.save.data.accuracyMod = FlxG.save.data.accuracyMod == 1 ? 0 : 1;
@@ -663,7 +663,7 @@ class BotPlay extends Option
 		super();
 		description = desc;
 	}
-	
+
 	public override function press():Bool
 	{
 		FlxG.save.data.botplay = !FlxG.save.data.botplay;
@@ -671,7 +671,7 @@ class BotPlay extends Option
 		display = updateDisplay();
 		return true;
 	}
-	
+
 	private override function updateDisplay():String
 		return "BotPlay " + (FlxG.save.data.botplay ? "on" : "off");
 }

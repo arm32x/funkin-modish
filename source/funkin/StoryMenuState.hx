@@ -22,7 +22,7 @@ using StringTools;
 class StoryMenuState extends MusicBeatState
 {
 	var scoreText:FlxText;
-	
+
 	public static var weekIds:Array<Identifier> = [];
 
 	public static var weekData:Array<Array<Identifier>> = [];
@@ -53,7 +53,7 @@ class StoryMenuState extends MusicBeatState
 	override function create()
 	{
 		loadData();
-		
+
 		// #if windows
 		// // Updating Discord Rich Presence
 		// DiscordClient.changePresence("In the Story Mode Menu", null);
@@ -178,11 +178,11 @@ class StoryMenuState extends MusicBeatState
 
 		super.create();
 	}
-	
+
 	private function loadData()
 	{
 		var entries = Registry.weeks.getAllEntries();
-		
+
 		weekIds        = entries.map(function(e) return e.id);
 		weekData       = entries.map(function(e) return e.item.playlist.copy());
 		weekUnlocked   = entries.map(function(e) return !e.item.locked);

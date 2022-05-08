@@ -52,7 +52,7 @@ class ResultsScreen extends FlxSubState
     public var accuracy:String;
 
 	override function create()
-	{	
+	{
         background = new FlxSprite(0,0).makeGraphic(FlxG.width,FlxG.height,FlxColor.BLACK);
         background.scrollFactor.set();
         add(background);
@@ -96,7 +96,7 @@ class ResultsScreen extends FlxSubState
         anotherBackground.scrollFactor.set();
         anotherBackground.alpha = 0;
         add(anotherBackground);
-        
+
         graph = new HitGraph(FlxG.width - 500,45,495,240);
         graph.alpha = 0;
 
@@ -104,7 +104,7 @@ class ResultsScreen extends FlxSubState
 
         graphSprite.scrollFactor.set();
         graphSprite.alpha = 0;
-        
+
         add(graphSprite);
 
 
@@ -178,7 +178,7 @@ class ResultsScreen extends FlxSubState
         if (PlayerSettings.player1.controls.ACCEPT)
         {
             music.fadeOut(0.3);
-            
+
             PlayState.loadRep = false;
             PlayState.rep = null;
 
@@ -253,6 +253,6 @@ class ResultsScreen extends FlxSubState
         }
 
 		super.update(elapsed);
-		
+
 	}
 }

@@ -7,13 +7,13 @@ class Event
 {
     public final id:Identifier;
     public final data:Null<Dynamic>;
-    
+
     public function new(id:Identifier, data:Any)
     {
         this.id = id;
         this.data = data;
     }
-    
+
     public var defaultPrevented(default, null):Bool = false;
 
     public function preventDefault():Void
@@ -30,9 +30,9 @@ class EventTarget implements IFlxDestroyable
     public static final CORE:EventTarget = register(new EventTarget(), "core");
 
     private var handlers:HashMap<Identifier, Array<Event->Void>> = new HashMap();
-    
+
     public function new() {}
-    
+
     public function fire(targetSelectors:Array<String>, eventId:Identifier, ?data:Dynamic, ?defaultHandler:Event->Void)
     {
         var event = new Event(eventId, data);
@@ -52,7 +52,7 @@ class EventTarget implements IFlxDestroyable
             defaultHandler(event);
         }
     }
-    
+
     public function on(eventId:Identifier, handler:Event->Void)
     {
         if (handlers.exists(eventId))
@@ -64,12 +64,12 @@ class EventTarget implements IFlxDestroyable
             handlers.set(eventId, [handler]);
         }
     }
-    
+
     public function forward(targetSelectors:Array<String>):Event->Void
     {
         return e -> fire(targetSelectors, e.id, e.data);
     }
-    
+
     private function handle(event:Event)
     {
         if (handlers.exists(event.id))
@@ -80,7 +80,7 @@ class EventTarget implements IFlxDestroyable
             }
         }
     }
-    
+
     public static function register<T:EventTarget>(target:T, selector:String):T
     {
         if (registry.exists(selector))
@@ -103,7 +103,7 @@ class EventTarget implements IFlxDestroyable
         #end
         return target;
     }
-    
+
     public static function unregister<T:EventTarget>(target:T, selector:String = "all"):T
     {
         if (selector != "all")
@@ -126,12 +126,12 @@ class EventTarget implements IFlxDestroyable
         #end
         return target;
     }
-    
+
     #if debug
     private function onRegister(selector:String) {}
     private function onUnregister() {}
     #end
-    
+
     public function destroy()
     {
         unregister(this);

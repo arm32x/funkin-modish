@@ -26,17 +26,17 @@ typedef ExtendedBPMChange =
 class Conductor
 {
     // The current BPM of the song.
-    // 
+    //
     // This is dependent on the current song time, and will update according to
     // the currently effective BPM.
-    // 
+    //
     // Setting this variable clears the current BPM map and sets the BPM to a
     // constant number.
     public static var bpm(default, null):Float;
     // A list of BPM changes in the current song.
     public static var bpmChanges(get, set):Array<BPMChange>;
     private static var extendedBPMChanges:Array<ExtendedBPMChange> = [];
-    
+
     // The current song time, in beats.
     public static var time(default, null):Float = 0;
     // The current song time, in milliseconds.
@@ -68,19 +68,19 @@ class Conductor
             if (songPosition >= change.milliseconds)
                 lastChange = change;
         }
-        
+
         if (lastChange != null)
         {
             bpm = lastChange.bpm;
             crochet = beatsToMilliseconds(bpm, 1);
             stepCrochet = beatsToMilliseconds(bpm, 0.25);
-            
+
             time = (songPosition - lastChange.milliseconds) / crochet + lastChange.time;
         }
         else
             trace("Warning: Conductor updated without setting BPM first");
     }
-    
+
     private static inline function set_songPosition(songPosition:Float):Float
     {
         Conductor.songPosition = songPosition;
@@ -141,12 +141,12 @@ class Conductor
     {
         return millis / (60 / bpm * 1000);
     }
-    
+
     private static inline function get_bpmChanges():Array<BPMChange>
     {
         return extendedBPMChanges;
     }
-    
+
     private static function set_bpmChanges(changes:Array<BPMChange>):Array<BPMChange>
     {
         throw new Exception("Not yet implemented");
@@ -154,7 +154,7 @@ class Conductor
         // updateTime();
         // return extendedBPMChanges;
     }
-    
+
     private static inline function get_curBeat():Int
     {
         return Math.floor(time);

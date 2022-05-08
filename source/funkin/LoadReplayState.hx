@@ -80,7 +80,7 @@ class LoadReplayState extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
-		
+
 		poggerDetails = new FlxText(5, 34, 0, "Replay Details - \nnone", 12);
 		poggerDetails.scrollFactor.set();
 		poggerDetails.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -119,22 +119,22 @@ class LoadReplayState extends MusicBeatState
     //     {
     //         songs.push(new FreeplayState.SongMetadata(songId, songName, weekNum, songIcon));
     //     }
-    
+
     //     public function addWeek(songIds:Array<Identifier>, songs:Array<String>, weekNum:Int, ?songIcons:Array<Identifier>)
     //     {
     //         if (songIcons == null)
     //             songIcons = [new Identifier("basegame", "bf")];
-    
+
     //         var num:Int = 0;
     //         for (index => id in songIds)
     //         {
     //             addSong(id, songs[index], weekNum, songIcons[num]);
-    
+
     //             if (songIcons.length != 1)
     //                 num++;
     //         }
     //     }
-    
+
 
 	override function update(elapsed:Float)
 	{
@@ -146,7 +146,7 @@ class LoadReplayState extends MusicBeatState
 				changeSelection(-1);
 			if (controls.DOWN_P)
 				changeSelection(1);
-		
+
 
 			if (controls.ACCEPT && grpControls.members[curSelected].text != "No Replays...")
 			{
@@ -178,7 +178,7 @@ class LoadReplayState extends MusicBeatState
 		#if !switch
 		// NGio.logEvent('Fresh');
 		#end
-		
+
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 		curSelected += change;

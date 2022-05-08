@@ -32,7 +32,7 @@ class FreeplayState extends MusicBeatState
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 	var combo:String = '';
-	
+
 	var songTimer:Null<FlxTimer> = null;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
@@ -50,14 +50,14 @@ class FreeplayState extends MusicBeatState
 		// 	songs.push(new SongMetadata(Identifier.parse(data[0]), data[1], Std.parseInt(data[3]), data[2]));
 		// }
 
-		/* 
+		/*
 			if (FlxG.sound.music != null)
 			{
 				if (!FlxG.sound.music.playing)
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 		 */
-		
+
 		songs = Registry.songs.getAllEntries();
 
 		//  #if windows
@@ -138,7 +138,7 @@ class FreeplayState extends MusicBeatState
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
 
 		// JUST DOIN THIS SHIT FOR TESTING!!!
-		/* 
+		/*
 			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
 
 			var texFel:TextField = new TextField();
@@ -238,7 +238,7 @@ class FreeplayState extends MusicBeatState
 		{
 			FlxG.switchState(new MainMenuState());
 		}
-		
+
 		#if !FLX_NO_TOUCH
 		if (TouchControls.areaJustTouched(scoreBG.getHitbox()))
 		{
@@ -258,7 +258,7 @@ class FreeplayState extends MusicBeatState
 				{
 					changeSelection(index - curSelected);
 				}
-				
+
 				break;
 			}
 		}
@@ -283,7 +283,7 @@ class FreeplayState extends MusicBeatState
 			curDifficulty = 2;
 		if (curDifficulty > 2)
 			curDifficulty = 0;
-		
+
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].id, curDifficulty);
 		combo = Highscore.getCombo(songs[curSelected].id, curDifficulty);
