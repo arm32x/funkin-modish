@@ -9,6 +9,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import funkin.Registry.SongMetadata;
+import funkin.song.Song;
 
 // #if windows
 // import Discord.DiscordClient;

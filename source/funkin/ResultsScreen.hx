@@ -19,6 +19,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxAxes;
 import flixel.util.FlxColor;
 import funkin.Options.Option;
+import funkin.song.Song;
 import lime.app.Application;
 import lime.utils.Assets;
 import openfl.display.BitmapData;

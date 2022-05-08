@@ -11,6 +11,7 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import funkin.song.Song;
 
 // #if windows
 // import Discord.DiscordClient;

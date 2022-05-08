@@ -2,7 +2,6 @@ package funkin.song;
 
 import haxe.Exception;
 import flixel.FlxG;
-import funkin.Song;
 
 /**
  * ...

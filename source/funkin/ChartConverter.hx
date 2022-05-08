@@ -1,8 +1,8 @@
 package funkin;
 
 import funkin.Character.Position;
-import funkin.Song.SongChart;
-import funkin.Song.SongInfo;
+import funkin.song.Song.SongChart;
+import funkin.song.Song.SongInfo;
 
 interface ChartConverter<I, O>
 {
@@ -39,7 +39,7 @@ typedef BasegameSong =
 class BasegameChartImporter implements ChartImporter<BasegameSong>
 {
     public function new() {}
-    
+
     public function convert(data:BasegameSong, difficulty:String):{info:SongInfo, chart:SongChart}
     {
         return {
@@ -55,7 +55,7 @@ class BasegameChartImporter implements ChartImporter<BasegameSong>
                     notes: section.sectionNotes.map(note -> {
                         strumTime: cast note[0],
                         column: Std.int(
-                            if (section.mustHitSection) 
+                            if (section.mustHitSection)
                                 note[1]
                             else if (note[1] < 4)
                                 note[1] + 4

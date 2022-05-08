@@ -1,4 +1,4 @@
-package funkin;
+package funkin.song;
 
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxDestroyUtil.IFlxDestroyable;
@@ -17,7 +17,7 @@ class SongInfo
 	public var girlfriend:Identifier;
 	public var uiStyle:Identifier;
 	public var stage:Identifier;
-	
+
 	public function new(player:Identifier, opponent:Identifier, girlfriend:Identifier, ?uiStyle:Identifier, stage:Identifier)
 	{
 		this.player = player;
@@ -26,7 +26,7 @@ class SongInfo
 		this.uiStyle = uiStyle != null ? uiStyle : new Identifier("basegame", "normal");
 		this.stage = stage;
 	}
-	
+
 	public static function fromJSON(json:String):SongInfo
 	{
 		var data:{
@@ -44,7 +44,7 @@ class SongInfo
 			Identifier.parse(data.stage)
 		);
 	}
-	
+
 	public function toJSON():String
 	{
 		return Json.stringify({
@@ -67,11 +67,11 @@ typedef SongChart =
 class Song implements IFlxDestroyable
 {
 	public final id:Identifier;
-	
+
 	public final meta:Null<SongMetadata>;
 	public final info:SongInfo;
 	public var chart(default, null):Null<SongChart> = null;
-	
+
 	public var script(default, null):Null<Script> = null;
 
 	public function new(id:Identifier)
@@ -93,7 +93,7 @@ class Song implements IFlxDestroyable
 						return Identifier;
 					default:
 						return null;
-				}	
+				}
 			},
 			resolveEnum: function resolveEnum(name:String):Null<Enum<Dynamic>>
 			{
@@ -103,18 +103,18 @@ class Song implements IFlxDestroyable
 						return Position;
 					default:
 						return null;
-				}	
+				}
 			}
 		});
 		chart = unserializer.unserialize();
-		
+
 		script = FlxDestroyUtil.destroy(script);
 		if (runScripts)
 		{
 			script = EventTarget.register(new Script("songs", id), "song");
 			script.run();
 		}
-		
+
 		return this;
 	}
 

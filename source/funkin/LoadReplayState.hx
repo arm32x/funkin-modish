@@ -12,6 +12,7 @@ import flixel.util.FlxColor;
 import funkin.Controls.Control;
 import funkin.Controls.KeyboardScheme;
 import funkin.Registry.SongMetadata;
+import funkin.song.Song;
 import lime.utils.Assets;
 
 #if sys

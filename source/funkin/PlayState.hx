@@ -37,6 +37,7 @@ import flixel.util.FlxTimer;
 import funkin.Replay.Ana;
 import funkin.Replay.Analysis;
 import funkin.song.Conductor;
+import funkin.song.Song;
 import haxe.EnumTools;
 import haxe.Exception;
 import haxe.Json;
