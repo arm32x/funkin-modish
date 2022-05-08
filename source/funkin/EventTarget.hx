@@ -3,6 +3,7 @@ package funkin;
 import flixel.util.FlxDestroyUtil.IFlxDestroyable;
 import haxe.ds.HashMap;
 
+// TODO: Rename to Message.
 class Event
 {
     public final id:Identifier;
@@ -22,6 +23,7 @@ class Event
     }
 }
 
+// TODO: Rename to Actor.
 class EventTarget implements IFlxDestroyable
 {
     private static var registry:Map<String, Array<EventTarget>> = [];
