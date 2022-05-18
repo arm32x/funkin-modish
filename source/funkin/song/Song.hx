@@ -119,8 +119,8 @@ class Song implements IFlxDestroyable
         info = SongInfo.fromJSON(Assets.getText(id.getAssetPath("songs", null, "json")));
         chart = unserializer.unserialize();
 
-        // This chart conversion is very temporary. Eventually songs will be
-        // loaded from the new format (see song-schema.json).
+        // This chart conversion is very temporary.
+        // TODO: Load songs from the new format (see song-schema.json).
 
         // TODO: Support changing the UI style.
         characters = [
@@ -137,6 +137,7 @@ class Song implements IFlxDestroyable
             var track = new NoteTrack();
             track.targetCharacter = index < 4 ? "player" : "opponent";
             track.variant = ["left", "down", "up", "right"][index % 4];
+            track.defaultNoteSkin = info.uiStyle;
             tracks.push(track);
         }
 
