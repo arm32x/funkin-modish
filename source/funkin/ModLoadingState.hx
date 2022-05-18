@@ -26,28 +26,28 @@ class ProgressBar extends FlxSpriteGroup
 {
     public final total:Int;
     public final message:String;
-    
+
     public var done(default, set):Int = 0;
-    
+
     private var text:FlxText;
-    
+
     public function new(x:Float, y:Float, total:Int, message:String)
     {
         super(x, y);
         this.total = total;
         this.message = message;
-        
+
         text = new FlxText(x, y, total > 0 ? '$message: 0 / $total' : '$message...');
         text.setFormat(FlxAssets.FONT_DEFAULT, 16, FlxColor.WHITE);
         text.alpha = 1.0;
         add(text);
-        
+
         var bar = new FlxBar(x, y + 25, 500, 3, this, "done", 0, total, false);
         bar.createFilledBar(0xFF3C3C3C, 0xFFFABD2F);
         bar.alpha = 1.0;
         add(bar);
     }
-    
+
     private function set_done(value:Int)
     {
         text.text = total > 0 ? '$message: $value / $total' : '$message...';
@@ -58,21 +58,21 @@ class ProgressBar extends FlxSpriteGroup
 class ModLoadingState extends FlxState
 {
     public static inline final PRELOAD_ASSETS:Bool = false;
-    
+
     public static var nextState:Class<FlxState> = TitleState;
-    
+
     #if (target.threaded)
     private var deque:Deque<ProgressUpdate> = new Deque();
     #end
 
     private var elements:Array<ProgressBar> = [];
-    
+
     override public function create()
     {
         FlxG.mouse.visible = false;
 
         FlxG.worldBounds.set(0,0);
-        
+
         Registry.noteTypes.register(new Identifier("core", "normal"), {});
 
         #if (target.threaded)
@@ -106,7 +106,7 @@ class ModLoadingState extends FlxState
 
         super.create();
     }
-    
+
     override public function update(elapsed:Float)
     {
         #if (target.threaded)
