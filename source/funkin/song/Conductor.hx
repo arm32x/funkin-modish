@@ -1,5 +1,6 @@
 package funkin.song;
 
+import haxe.ds.ArraySort;
 import haxe.Exception;
 import flixel.FlxG;
 
@@ -95,33 +96,10 @@ class Conductor
 		Conductor.timeScale = Conductor.safeZoneOffset / 166;
 	}
 
+	@:deprecated
 	public static function mapBPMChanges(song:Song)
 	{
-		extendedBPMChanges = [{bpm: song.chart.bpm, time: 0, milliseconds: 0}];
-
-		var curBPM:Float = song.chart.bpm;
-		var totalSteps:Int = 0;
-		var totalPos:Float = 0;
-
-		for (section in song.chart.sections)
-		{
-			if(section.bpm != null && section.bpm != curBPM)
-			{
-				curBPM = section.bpm;
-				var event:ExtendedBPMChange = {
-					time: totalSteps / 4,
-					milliseconds: totalPos,
-					bpm: curBPM
-				};
-				extendedBPMChanges.push(event);
-			}
-
-			var deltaSteps:Int = 16;
-			totalSteps += deltaSteps;
-			totalPos += ((60 / curBPM) * 1000 / 4) * deltaSteps;
-		}
-		trace("new BPM map BUDDY " + extendedBPMChanges);
-        updateTime();
+		bpmChanges = song.bpmChanges;
 	}
 
     public static function setConstantBPM(bpm:Float):Float
@@ -149,10 +127,28 @@ class Conductor
 
     private static function set_bpmChanges(changes:Array<BPMChange>):Array<BPMChange>
     {
-        throw new Exception("Not yet implemented");
-        // extendedBPMChanges = addMillisecondsToBPMChanges(changes);
-        // updateTime();
-        // return extendedBPMChanges;
+        ArraySort.sort(changes, (a, b) -> Reflect.compare(a.time, b.time));
+        if (changes.length == 0 || changes[0].time != 0)
+            throw new Exception("There must be a BPM change at time 0");
+
+        var currentBPM:Float = 0;
+        var currentTime:Float = 0;
+        var currentPosition:Float = 0;
+
+        extendedBPMChanges = [];
+
+        for (change in changes)
+        {
+            if (currentBPM != 0)
+                currentPosition += beatsToMilliseconds(currentBPM, change.time - currentTime);
+            currentTime = change.time;
+            currentBPM = change.bpm;
+
+            extendedBPMChanges.push({milliseconds: currentPosition, time: currentTime, bpm: currentBPM});
+        }
+
+        updateTime();
+        return extendedBPMChanges;
     }
 
     private static inline function get_curBeat():Int
