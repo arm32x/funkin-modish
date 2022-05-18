@@ -84,7 +84,7 @@ class Conductor
 
     private static inline function set_songPosition(songPosition:Float):Float
     {
-        Conductor.songPosition = songPosition;
+        Conductor.songPosition = songPosition - offset / 1000;
         updateTime();
         return songPosition;
     }
