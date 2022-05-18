@@ -18,5 +18,19 @@ class NoteTrack extends FlxTypedGroup<NoteSprite>
     {
         super();
     }
+
+    override public function update(elapsed:Float)
+    {
+        super.update(elapsed);
+
+        for (note in notes)
+        {
+            if (!note.passed && Conductor.time >= note.time)
+            {
+                note.passed = true;
+                EventTarget.CORE.fire(["song"], new Identifier("core", "note-pass"), {note: note, track: this});
+            }
+        }
+    }
 }
 
