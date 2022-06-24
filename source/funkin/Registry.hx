@@ -1,5 +1,6 @@
 package funkin;
 
+import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.input.keyboard.FlxKey;
 import haxe.ds.HashMap;
 import haxe.Exception;
@@ -25,7 +26,8 @@ typedef HealthIconMetadata =
 typedef KeybindingMetadata =
 {
     var name:String;
-    var ?defaults:Array<FlxKey>;
+    var ?defaultKeys:Array<FlxKey>;
+    var ?defaultButtons:Array<FlxGamepadInputID>;
 };
 
 typedef MenuCharacterMetadata = {};

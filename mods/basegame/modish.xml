@@ -81,10 +81,19 @@
         <healthIcon id="basegame:spooky" />
         <healthIcon id="basegame:tankman" />
         
+        <!-- TODO: Add descriptions (tooltips or otherwise) to keybindings. -->
         <keybinding id="basegame:left" name="Left" defaults="A LEFT" />
         <keybinding id="basegame:down" name="Down" defaults="S DOWN" />
         <keybinding id="basegame:up" name="Up" defaults="W UP" />
         <keybinding id="basegame:right" name="Right" defaults="D RIGHT" />
+        <keybinding id="basegame:menu-left" name="Menu Left" defaults="LEFT" />
+        <keybinding id="basegame:menu-down" name="Menu Down" defaults="DOWN" />
+        <keybinding id="basegame:menu-up" name="Menu Up" defaults="UP" />
+        <keybinding id="basegame:menu-right" name="Menu Right" defaults="RIGHT" />
+        <keybinding id="basegame:menu-accept" name="Accept" defaults="Z SPACE ENTER" />
+        <keybinding id="basegame:menu-back" name="Back" defaults="BACKSPACE ESCAPE" />
+        <keybinding id="basegame:pause" name="Pause" defaults="P ENTER ESCAPE" />
+        <keybinding id="basegame:reset" name="Reset" defaults="R" />
         
         <menuCharacter id="basegame:bf" />
         <menuCharacter id="basegame:bf-confirm" />

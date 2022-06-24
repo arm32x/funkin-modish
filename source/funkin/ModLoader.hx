@@ -1,5 +1,6 @@
 package funkin;
 
+import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.input.keyboard.FlxKey;
 import funkin.ChartConverter.BasegameChartImporter;
 import haxe.Exception;
@@ -114,10 +115,18 @@ class ModLoader
                             name: export.att.name,
                             // TODO: Throw an error if an invalid key name is
                             //       specified instead of using FlxKey.NONE.
-                            defaults: export.att.defaults
-                                .split(" ")
-                                .filter(keyStr -> keyStr != "")
-                                .map(FlxKey.fromString)
+                            defaultKeys: export.has.defaultKeys
+                                ? export.att.defaultKeys
+                                    .split(" ")
+                                    .filter(keyStr -> keyStr != "")
+                                    .map(FlxKey.fromString)
+                                : [],
+                            defaultButtons: export.has.defaultButtons
+                                ? export.att.defaultButtons
+                                    .split(" ")
+                                    .filter(buttonStr -> buttonStr != "")
+                                    .map(FlxGamepadInputID.fromString)
+                                : []
                         });
                     case "menuCharacter":
                         Registry.menuCharacters.register(Identifier.parse(export.att.id), {});
