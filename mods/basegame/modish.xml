@@ -81,6 +81,11 @@
         <healthIcon id="basegame:spooky" />
         <healthIcon id="basegame:tankman" />
         
+        <keybinding id="basegame:left" name="Left" defaults="A LEFT" />
+        <keybinding id="basegame:down" name="Down" defaults="S DOWN" />
+        <keybinding id="basegame:up" name="Up" defaults="W UP" />
+        <keybinding id="basegame:right" name="Right" defaults="D RIGHT" />
+        
         <menuCharacter id="basegame:bf" />
         <menuCharacter id="basegame:bf-confirm" />
         <menuCharacter id="basegame:dad" />

@@ -1,5 +1,6 @@
 package funkin;
 
+import flixel.input.keyboard.FlxKey;
 import funkin.ChartConverter.BasegameChartImporter;
 import haxe.Exception;
 import haxe.xml.Access;
@@ -14,6 +15,8 @@ class ModLoader
     // The mod API is not stable yet, so this number will stay at 0 for a while.
     // Once the API is deemed stable, this number will increment to 1 and will
     // continue to increment with each breaking change.
+    // TODO: Replace this integer version number with a SemVer range in the
+    //       dependencies section of modish.xml (once that exists).
     inline private static final CURRENT_FORMAT:Int = 0;
     
     public static function load(id:String, sparse:Bool = false, preloadAssets:Bool = false, ?progressFunction:(Int, Int)->Void)
@@ -105,6 +108,16 @@ class ModLoader
                     case "healthIcon":
                         Registry.healthIcons.register(Identifier.parse(export.att.id), {
                             antialiasing: export.has.antialiasing ? (export.att.antialiasing.toLowerCase() == "true") : true
+                        });
+                    case "keybinding":
+                        Registry.keybindings.register(Identifier.parse(export.att.id), {
+                            name: export.att.name,
+                            // TODO: Throw an error if an invalid key name is
+                            //       specified instead of using FlxKey.NONE.
+                            defaults: export.att.defaults
+                                .split(" ")
+                                .filter(keyStr -> keyStr != "")
+                                .map(FlxKey.fromString)
                         });
                     case "menuCharacter":
                         Registry.menuCharacters.register(Identifier.parse(export.att.id), {});
