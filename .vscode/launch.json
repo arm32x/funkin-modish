@@ -6,7 +6,10 @@
             "type": "hxcpp",
             "request": "launch",
             "windows": {
-                "program": "${workspaceFolder}/export/debug/linux/bin/funkin-modish.exe"
+                "program": "${workspaceFolder}/export/debug/windows/bin/funkin-modish.exe"
+            },
+            "osx": {
+                "program": "${workspaceFolder}/export/debug/mac/bin/funkin-modish"
             },
             "program": "${workspaceFolder}/export/debug/linux/bin/funkin-modish",
             "preLaunchTask": "lime: build (active configuration)"
