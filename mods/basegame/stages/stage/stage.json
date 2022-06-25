@@ -1,5 +1,5 @@
 {
-    "$schema": "../stage-schema.json",
+    "$schema": "../../../../schemas/stage.schema.json",
     "zoom": 0.9,
     "sprites": [
         {

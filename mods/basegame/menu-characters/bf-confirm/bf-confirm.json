@@ -1,5 +1,5 @@
 {
-    "$schema": "../menu-character-schema.json",
+    "$schema": "../../../../schemas/menu-character.schema.json",
     "version": 2,
     "prefix": "BF-HEY--",
     "frameRate": 24,

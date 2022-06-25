@@ -1,5 +1,5 @@
 {
-    "$schema": "../character-schema.json",
+    "$schema": "../../../../schemas/character.schema.json",
     "version": 2,
     "animations": [
         {

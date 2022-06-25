@@ -83,7 +83,7 @@
     "required": [ "version", "animations" ],
     "allOf": [
         {
-            "$ref": "../../../schemas/animation-set.schema.json"
+            "$ref": "animation-set.schema.json"
         }
     ]
 }
