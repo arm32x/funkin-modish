@@ -1,5 +1,6 @@
 package funkin;
 
+import funkin.util.AnimationSet;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
@@ -12,6 +13,7 @@ import lime.utils.Assets;
 typedef StageData =
 {
     var ?sprites:Array<{
+        > AnimationSetJson,
         var ?type:String;
         var position:Array<Float>;
         var ?scrollFactor:Array<Float>;
@@ -24,20 +26,6 @@ typedef StageData =
         var ?alpha:Float;
         var ?visible:Bool;
         var ?animated:Bool;
-        var ?animations:Array<{
-            var name:String;
-            var ?prefix:String;
-            var ?indices:Array<Int>;
-            var ?postfix:String;
-            var ?frameRate:Int;
-            var ?looped:Bool;
-        }>;
-        var ?startingAnimation:{
-            var name:String;
-            var ?force:Bool;
-            var ?reversed:Bool;
-            var ?frame:Int;
-        };
         var ?cameraOffset:Array<Float>;
     }>;
     var ?zoom:Float;
@@ -46,23 +34,23 @@ typedef StageData =
 class Stage extends FlxGroup
 {
     public final id:Identifier;
-    
+
     public var zoom(default, null):Float = 1.0;
-    
+
     public var player(default, null):Null<Boyfriend> = null;
     public var girlfriend(default, null):Null<Character> = null;
     public var opponent(default, null):Null<Character> = null;
-    
+
     private var spritesById:Map<String, FlxSprite> = [];
     private var groupsById:Map<String, FlxTypedGroup<FlxSprite>> = [];
-    
+
     private var script:Null<Script> = null;
-    
+
     public function new(id:Identifier) {
         super();
         this.id = id;
     }
-    
+
     public function load(?data:StageData, runScripts:Bool = false):Stage
     {
         if (data == null)
@@ -139,7 +127,7 @@ class Stage extends FlxGroup
                         }
 
                         var sprite = new FlxSprite(spr.position[0], spr.position[1]);
-                        
+
                         for (part in spr.graphic.split("/"))
                         {
                             if (!Identifier.isValidPart(part))
@@ -151,40 +139,13 @@ class Stage extends FlxGroup
                         if (spr.animated == true)
                         {
                             sprite.frames = HelperFunctions.getAtlas(id, "stages", spr.graphic);
-
-                            for (index => anim in spr.animations)
-                            {
-                                var frameRate = anim.frameRate != null ? anim.frameRate : 30;
-                                var looped = anim.looped != null ? anim.looped : true;
-                                
-                                switch ([anim.prefix, anim.indices])
-                                {
-                                    case [null, null]:
-                                        trace('Animation "${anim.name}" on sprite ${spr.id != null ? '"${spr.id}" ' : ""}in stage "$id" is invalid: Neither "prefix" nor "indices" is specified.');
-                                        continue;
-                                    case [prefix, null]:
-                                        sprite.animation.addByPrefix(anim.name, prefix, frameRate, looped);
-                                    case [null, indices]:
-                                        sprite.animation.add(anim.name, indices, frameRate, looped);
-                                    case [prefix, indices]:
-                                        var postfix = anim.postfix != null ? anim.postfix : "";
-                                        sprite.animation.addByIndices(anim.name, prefix, indices, postfix, frameRate, looped);
-                                }
-                            }
-                            
-                            if (spr.startingAnimation != null)
-                            {
-                                var force = spr.startingAnimation.force != null ? spr.startingAnimation.force : false;
-                                var reversed = spr.startingAnimation.reversed != null ? spr.startingAnimation.reversed : false;
-                                var frame = spr.startingAnimation.frame != null ? spr.startingAnimation.frame : 0;
-                                sprite.animation.play(spr.startingAnimation.name, force, reversed, frame);
-                            }
+                            sprite.animation = AnimationSet.fromJson(sprite, spr);
                         }
                         else
                         {
                             sprite.loadGraphic(id.getAssetPath("stages", spr.graphic, "png"));
                         }
-                        
+
                         if (spr.scrollFactor != null)
                         {
                             sprite.scrollFactor.set(spr.scrollFactor[0], spr.scrollFactor[1]);
@@ -197,7 +158,7 @@ class Stage extends FlxGroup
                         sprite.antialiasing = spr.antialiasing != null ? spr.antialiasing : false;
                         sprite.alpha = spr.alpha != null ? spr.alpha : 1.0;
                         sprite.visible = spr.visible != null ? spr.visible : true;
-                        
+
                         if (spr.id != null)
                         {
                             if (!Identifier.isValidPart(spr.id))
@@ -234,7 +195,7 @@ class Stage extends FlxGroup
                 }
             }
         }
-        
+
         if (runScripts)
         {
             script = FlxDestroyUtil.destroy(script);
@@ -244,14 +205,14 @@ class Stage extends FlxGroup
                 "groups" => groupsById
             ]);
         }
-        
+
         return this;
     }
-    
+
     override public function destroy()
     {
         super.destroy();
-        
+
         script = FlxDestroyUtil.destroy(script);
     }
 }

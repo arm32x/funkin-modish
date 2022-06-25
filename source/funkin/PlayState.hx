@@ -1613,18 +1613,18 @@ class PlayState extends MusicBeatState
 			FlxG.switchState(new Charting()); */
 
 		#if debug
-		if (FlxG.keys.justPressed.SIX)
-		{
-			if (useVideo)
-				{
-					GlobalVideo.get().stop();
-					remove(videoSprite);
-					FlxG.stage.window.onFocusOut.remove(focusOut);
-					FlxG.stage.window.onFocusIn.remove(focusIn);
-					removedVideo = true;
-				}
+		// if (FlxG.keys.justPressed.SIX)
+		// {
+		// 	if (useVideo)
+		// 		{
+		// 			GlobalVideo.get().stop();
+		// 			remove(videoSprite);
+		// 			FlxG.stage.window.onFocusOut.remove(focusOut);
+		// 			FlxG.stage.window.onFocusIn.remove(focusIn);
+		// 			removedVideo = true;
+		// 		}
 
-			FlxG.switchState(new AnimationDebug(SONG.info.opponent));
+		// 	FlxG.switchState(new AnimationDebug(SONG.info.opponent));
 			// #if windows
 			// if (luaModchart != null)
 			// {
@@ -1632,11 +1632,11 @@ class PlayState extends MusicBeatState
 			// 	luaModchart = null;
 			// }
 			// #end
-		}
+		// }
 
-		if (FlxG.keys.justPressed.ZERO)
-		{
-			FlxG.switchState(new AnimationDebug(SONG.info.player));
+		// if (FlxG.keys.justPressed.ZERO)
+		// {
+		// 	FlxG.switchState(new AnimationDebug(SONG.info.player));
 			// #if windows
 			// if (luaModchart != null)
 			// {
@@ -1644,7 +1644,7 @@ class PlayState extends MusicBeatState
 			// 	luaModchart = null;
 			// }
 			// #end
-		}
+		// }
 
 		#end
 
@@ -2900,7 +2900,7 @@ class PlayState extends MusicBeatState
 		if (!boyfriend.stunned)
 		{
 			health -= 0.04;
-			if (combo > 5 && gf.animOffsets.exists('sad'))
+			if (combo > 5 && gf.animation.exists('sad'))
 			{
 				gf.playAnim('sad');
 			}
@@ -3240,9 +3240,9 @@ class PlayState extends MusicBeatState
 		// #end
 
 		if (curSong.equals(new Identifier("basegame", "tutorial")) && dad.curCharacter.equals(new Identifier("basegame", "gf"))) {
-			if (curBeat % 2 == 1 && dad.animOffsets.exists('danceLeft'))
+			if (curBeat % 2 == 1 && dad.animation.exists('danceLeft'))
 				dad.playAnim('danceLeft');
-			if (curBeat % 2 == 0 && dad.animOffsets.exists('danceRight'))
+			if (curBeat % 2 == 0 && dad.animation.exists('danceRight'))
 				dad.playAnim('danceRight');
 		}
 

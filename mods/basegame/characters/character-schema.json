@@ -8,78 +8,6 @@
             "type": "integer",
             "const": 3
         },
-        "animations": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "prefix": {
-                        "type": "string"
-                    },
-                    "indices": {
-                        "type": "array",
-                        "items": {
-                            "type": "integer"
-                        }
-                    },
-                    "postfix": {
-                        "type": "string"
-                    },
-                    "frameRate": {
-                        "type": "integer"
-                    },
-                    "looped": {
-                        "type": "boolean"
-                    },
-                    "condition": {
-                        "type": "string",
-                        "enum": [ "player", "not-player" ]
-                    },
-                    "offsets": {
-                        "type": "array",
-                        "minItems": 2,
-                        "maxItems": 2,
-                        "items": {
-                            "type": "number"
-                        }
-                    },
-                    "priority": {
-                        "type": [ "integer", "null" ],
-                        "description": "Higher priority animations will not get interrupted by lower priority ones.",
-                        "default": 0
-                    }
-                },
-                "required": [ "name", "prefix", "offsets" ],
-                "dependencies": {
-                    "postfix": [ "indices" ]
-                }
-            }
-        },
-        "startingAnimation": {
-            "description": "The animation to play after initialization.",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "force": {
-                    "type": "boolean"
-                },
-                "reversed": {
-                    "type": "boolean"
-                },
-                "frame": {
-                    "type": "integer"
-                },
-                "playOnly": {
-                    "type": "boolean"
-                }
-            },
-            "required": [ "name" ]
-        },
         "animationMode": {
             "type": "string",
             "enum": [ "idle", "dance" ]
@@ -152,5 +80,10 @@
             }
         }
     },
-    "required": [ "version", "animations" ]
+    "required": [ "version", "animations" ],
+    "allOf": [
+        {
+            "$ref": "../../../schemas/animation-set.schema.json"
+        }
+    ]
 }
