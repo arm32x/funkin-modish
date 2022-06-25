@@ -19,6 +19,7 @@ class NoteTracksTestState extends FlxState
     public function new()
     {
         super();
+        
     }
 
     override public function create()
@@ -26,8 +27,15 @@ class NoteTracksTestState extends FlxState
         super.create();
 
         song = new Song(new Identifier("basegame", "blammed")).load("hard");
-        for (track in song.tracks)
+        for (index => track in song.tracks)
+        {
+            track.y = 50;
+            track.screenCenter(X);
+            track.x += (index - 4.5) * 110; // ocd positioning :)
+            if (index >= 4)
+                track.x += 220;
             add(track);
+        }
 
         Conductor.bpmChanges = song.bpmChanges;
 
@@ -44,7 +52,7 @@ class NoteTracksTestState extends FlxState
 
         eventTarget = EventTarget.register(new EventTarget(), "song");
         eventTarget.on(new Identifier("core", "note-pass"), e -> {
-            FlxG.sound.play("shared:assets/shared/sounds/metronome-high.ogg");
+            e.data.track.strumLine.animation.play("strum-hit", true);
         });
     }
 
