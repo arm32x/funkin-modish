@@ -58,6 +58,7 @@ class ProgressBar extends FlxSpriteGroup
 class ModLoadingState extends FlxState
 {
     public static inline final PRELOAD_ASSETS:Bool = false;
+    public static final CORE_MOD_IDS:Array<String> = ["core"];
     
     public static var nextState:Class<FlxState> = TitleState;
     
@@ -78,7 +79,7 @@ class ModLoadingState extends FlxState
         #if (target.threaded)
         Thread.create(function()
         {
-            var modList = CoolUtil.coolTextFile("default:mods/mod-list.txt");
+            var modList = CORE_MOD_IDS.concat(CoolUtil.coolTextFile("default:mods/mod-list.txt"));
             deque.add(Begin(modList.length, "Loading mods"));
             for (index => mod in modList)
             {

@@ -86,15 +86,6 @@
         <keybinding id="basegame:down" name="Down" defaultKeys="S DOWN" defaultButtons="DPAD_DOWN LEFT_STICK_DIGITAL_DOWN" />
         <keybinding id="basegame:up" name="Up" defaultKeys="W UP" defaultButtons="DPAD_UP LEFT_STICK_DIGITAL_UP" />
         <keybinding id="basegame:right" name="Right" defaultKeys="D RIGHT" defaultButtons="DPAD_RIGHT LEFT_STICK_DIGITAL_RIGHT" />
-        <!-- TODO: Move menu navigation keybindings to the 'core' mod. -->
-        <keybinding id="basegame:menu-left" name="Menu Left" defaultKeys="LEFT" defaultButtons="DPAD_LEFT LEFT_STICK_DIGITAL_LEFT" />
-        <keybinding id="basegame:menu-down" name="Menu Down" defaultKeys="DOWN" defaultButtons="DPAD_DOWN LEFT_STICK_DIGITAL_DOWN" />
-        <keybinding id="basegame:menu-up" name="Menu Up" defaultKeys="UP" defaultButtons="DPAD_UP LEFT_STICK_DIGITAL_UP" />
-        <keybinding id="basegame:menu-right" name="Menu Right" defaultKeys="RIGHT" defaultButtons="DPAD_RIGHT LEFT_STICK_DIGITAL_RIGHT" />
-        <keybinding id="basegame:menu-accept" name="Accept" defaultKeys="Z SPACE ENTER" defaultButtons="A" />
-        <keybinding id="basegame:menu-back" name="Back" defaultKeys="BACKSPACE ESCAPE" defaultButtons="B" />
-        <keybinding id="basegame:pause" name="Pause" defaultKeys="P ENTER ESCAPE" defaultButtons="START" />
-        <keybinding id="basegame:reset" name="Reset" defaultKeys="R" defaultButtons="Y" />
         
         <menuCharacter id="basegame:bf" />
         <menuCharacter id="basegame:bf-confirm" />

@@ -34,8 +34,13 @@ class ModLoader
             throw new Exception('Mod "$id" already loaded!');
         }
 
+        if ((id == "core" || StringTools.startsWith(id, "core-")))
+        {
+            var library = new ProxyAssetLibrary(Assets.getLibrary("default"), 'assets/core-mods/$id/');
+            Assets.registerLibrary(id, library);
+        }
         #if sys
-        if (FileSystem.exists('./mods/$id') && FileSystem.isDirectory('./mods/$id'))
+        else if (FileSystem.exists('./mods/$id') && FileSystem.isDirectory('./mods/$id'))
         {
             var library = new DirectoryAssetLibrary('./mods/$id');
             Assets.registerLibrary(id, library);
@@ -44,7 +49,7 @@ class ModLoader
         {
             throw new Exception("Not yet implemented.");
         }
-        else #end if (Assets.exists('default:mods/$id/modish.xml'))
+        #end else if (Assets.exists('default:mods/$id/modish.xml'))
         {
             var library = new ProxyAssetLibrary(Assets.getLibrary("default"), 'mods/$id/');
             Assets.registerLibrary(id, library);

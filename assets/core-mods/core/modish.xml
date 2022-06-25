@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mod id="core" format="0">
+    <name>Modish</name>
+    <version>0.1.0-dev</version>
+    
+    <exports>
+        <keybinding id="core:menu-left" name="Menu Left" defaultKeys="LEFT" defaultButtons="DPAD_LEFT LEFT_STICK_DIGITAL_LEFT" />
+        <keybinding id="core:menu-down" name="Menu Down" defaultKeys="DOWN" defaultButtons="DPAD_DOWN LEFT_STICK_DIGITAL_DOWN" />
+        <keybinding id="core:menu-up" name="Menu Up" defaultKeys="UP" defaultButtons="DPAD_UP LEFT_STICK_DIGITAL_UP" />
+        <keybinding id="core:menu-right" name="Menu Right" defaultKeys="RIGHT" defaultButtons="DPAD_RIGHT LEFT_STICK_DIGITAL_RIGHT" />
+        <keybinding id="core:menu-accept" name="Accept" defaultKeys="Z SPACE ENTER" defaultButtons="A" />
+        <keybinding id="core:menu-back" name="Back" defaultKeys="BACKSPACE ESCAPE" defaultButtons="B" />
+        <keybinding id="core:pause" name="Pause" defaultKeys="P ENTER ESCAPE" defaultButtons="START" />
+        <keybinding id="core:reset" name="Reset" defaultKeys="R" defaultButtons="Y" />
+    </exports>
+</mod>

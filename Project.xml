@@ -118,6 +118,10 @@
 	<!-- All mods in the 'mods' folder at compile time will be bundled with
 	     the engine. -->
 	<assets path='mods' embed='false'/>
+	<!-- The 'core' mod and mods starting with 'core-' are always loaded from
+	     this folder, which is embedded in the executable. These mods will never
+		 be loaded from the regular mods folder. -->
+	<assets path='assets/core-mods' embed='true' />
 
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 	<assets path='LICENSE' rename='LICENSE.txt' />
