@@ -1,7 +1,6 @@
 package funkin;
 
-import flixel.input.gamepad.FlxGamepadInputID;
-import flixel.input.keyboard.FlxKey;
+import funkin.keybinding.Keybinding;
 import haxe.ds.HashMap;
 import haxe.Exception;
 
@@ -21,13 +20,6 @@ typedef CharacterMetadata =
 typedef HealthIconMetadata =
 {
     var antialiasing:Bool;
-};
-
-typedef KeybindingMetadata =
-{
-    var name:String;
-    var ?defaultKeys:Array<FlxKey>;
-    var ?defaultButtons:Array<FlxGamepadInputID>;
 };
 
 typedef MenuCharacterMetadata = {};
@@ -70,7 +62,7 @@ class Registry<T>
     public static var characters:Registry<CharacterMetadata> = new Registry("characters");
     public static var introTexts:Array<Array<String>> = [];
     public static var healthIcons:Registry<HealthIconMetadata> = new Registry("health-icons");
-    public static var keybindings:Registry<KeybindingMetadata> = new Registry("keybindings");
+    public static var keybindings:Registry<Keybinding> = new Registry("keybindings");
     public static var menuCharacters:Registry<MenuCharacterMetadata> = new Registry("menu-characters");
     public static var noteTypes:Registry<NoteTypeMetadata> = new Registry("note-types");
     public static var songs:Registry<SongMetadata> = new Registry("songs");

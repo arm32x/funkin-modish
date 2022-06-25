@@ -3,6 +3,7 @@ package funkin;
 import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.input.keyboard.FlxKey;
 import funkin.ChartConverter.BasegameChartImporter;
+import funkin.keybinding.Keybinding;
 import haxe.Exception;
 import haxe.xml.Access;
 import lime.utils.Assets;
@@ -111,23 +112,19 @@ class ModLoader
                             antialiasing: export.has.antialiasing ? (export.att.antialiasing.toLowerCase() == "true") : true
                         });
                     case "keybinding":
-                        Registry.keybindings.register(Identifier.parse(export.att.id), {
-                            name: export.att.name,
-                            // TODO: Throw an error if an invalid key name is
-                            //       specified instead of using FlxKey.NONE.
-                            defaultKeys: export.has.defaultKeys
-                                ? export.att.defaultKeys
-                                    .split(" ")
-                                    .filter(keyStr -> keyStr != "")
-                                    .map(FlxKey.fromString)
-                                : [],
-                            defaultButtons: export.has.defaultButtons
-                                ? export.att.defaultButtons
-                                    .split(" ")
-                                    .filter(buttonStr -> buttonStr != "")
-                                    .map(FlxGamepadInputID.fromString)
-                                : []
-                        });
+                        Registry.keybindings.register(Identifier.parse(export.att.id), new Keybinding(
+                            export.att.name,
+                            !export.has.defaultKeys ? [] : export.att.defaultKeys
+                                .split(" ")
+                                .filter(keyStr -> keyStr != "")
+                                .map(FlxKey.fromString)
+                                .filter(key -> key != FlxKey.NONE),
+                            !export.has.defaultButtons ? [] : export.att.defaultButtons
+                                .split(" ")
+                                .filter(buttonStr -> buttonStr != "")
+                                .map(FlxGamepadInputID.fromString)
+                                .filter(button -> button != FlxGamepadInputID.NONE)
+                        ));
                     case "menuCharacter":
                         Registry.menuCharacters.register(Identifier.parse(export.att.id), {});
                     case "noteType":

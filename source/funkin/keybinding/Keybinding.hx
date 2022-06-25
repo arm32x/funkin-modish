@@ -6,28 +6,21 @@ import flixel.input.keyboard.FlxKey;
 
 class Keybinding
 {
-    public final id:Identifier;
+    public final name:String;
     
     public var pressed(get, never):Bool;
     public var justPressed(get, never):Bool;
     public var released(get, never):Bool;
     public var justReleased(get, never):Bool;
     
-    private var keys:Array<FlxKey> = [];
-    private var buttons:Array<FlxGamepadInputID> = [];
+    public final keys:Array<FlxKey>;
+    public final buttons:Array<FlxGamepadInputID>;
 
-    public function new(id:Identifier)
+    public function new(name: String, ?keys:Array<FlxKey>, ?buttons:Array<FlxGamepadInputID>)
     {
-        this.id = id;
-    }
-    
-    public function load():Keybinding
-    {
-        // TODO: Load keybindings from a preferences file of some kind.
-        var meta = Registry.keybindings.get(id);
-        this.keys = meta.defaultKeys;
-        this.buttons = meta.defaultButtons;
-        return this;
+        this.name = name;
+        this.keys = keys != null ? keys : [];
+        this.buttons = buttons != null ? buttons : [];
     }
     
     private function get_pressed():Bool
