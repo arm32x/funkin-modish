@@ -95,7 +95,7 @@ enum KeyboardScheme
  * A list of actions that a player would invoke via some input device.
  * Uses FlxActions to funnel various inputs to a single action.
  */
-class Controls extends FlxActionSet
+@:deprecated class Controls extends FlxActionSet
 {
 	var _up = new FlxActionDigital(Action.UP);
 	var _left = new FlxActionDigital(Action.LEFT);
@@ -262,7 +262,7 @@ class Controls extends FlxActionSet
 
 		for (action in digitalActions)
 			byName[action.name] = action;
-			
+
 		if (scheme == null)
 			scheme = None;
 		setKeyboardScheme(scheme, false);
@@ -498,7 +498,7 @@ class Controls extends FlxActionSet
 			removeKeyboard();
 
 		keyboardScheme = scheme;
-		
+
 		#if (haxe >= "4.0.0")
 		switch (scheme)
 		{
@@ -598,7 +598,7 @@ class Controls extends FlxActionSet
 		inline bindKeys(Control.BACK, [BACKSPACE, ESCAPE]);
 		inline bindKeys(Control.PAUSE, [P, ENTER, ESCAPE]);
 		inline bindKeys(Control.RESET, [R]);
-		
+
 		#if android
 		FlxG.android.preventDefaultKeys.push(FlxAndroidKey.BACK);
 		_back.addInput(@:privateAccess FlxG.android.getKey(FlxAndroidKey.BACK), JUST_RELEASED);
@@ -625,7 +625,7 @@ class Controls extends FlxActionSet
 			gamepadsAdded.remove(id);
 
 		gamepadsAdded.push(id);
-		
+
 		#if (haxe >= "4.0.0")
 		for (control => buttons in buttonMap)
 			inline bindButtons(control, id, buttons);

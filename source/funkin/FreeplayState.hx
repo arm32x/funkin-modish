@@ -31,13 +31,21 @@ class FreeplayState extends MusicBeatState
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 	var combo:String = '';
-	
+
 	var songTimer:Null<FlxTimer> = null;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
 	private var iconArray:Array<HealthIcon> = [];
+
+	private final leftKey = Registry.keybindings.get(new Identifier("core", "menu-left"));
+	private final downKey = Registry.keybindings.get(new Identifier("core", "menu-down"));
+	private final upKey = Registry.keybindings.get(new Identifier("core", "menu-up"));
+	private final rightKey = Registry.keybindings.get(new Identifier("core", "menu-right"));
+
+	private final acceptKey = Registry.keybindings.get(new Identifier("core", "menu-accept"));
+	private final backKey = Registry.keybindings.get(new Identifier("core", "menu-back"));
 
 	override function create()
 	{
@@ -49,14 +57,14 @@ class FreeplayState extends MusicBeatState
 		// 	songs.push(new SongMetadata(Identifier.parse(data[0]), data[1], Std.parseInt(data[3]), data[2]));
 		// }
 
-		/* 
+		/*
 			if (FlxG.sound.music != null)
 			{
 				if (!FlxG.sound.music.playing)
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 		 */
-		
+
 		songs = Registry.songs.getAllEntries();
 
 		//  #if windows
@@ -137,7 +145,7 @@ class FreeplayState extends MusicBeatState
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
 
 		// JUST DOIN THIS SHIT FOR TESTING!!!
-		/* 
+		/*
 			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
 
 			var texFel:TextField = new TextField();
@@ -193,51 +201,22 @@ class FreeplayState extends MusicBeatState
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
 		comboText.text = combo + '\n';
 
-		var upP = FlxG.keys.justPressed.UP;
-		var downP = FlxG.keys.justPressed.DOWN;
-		var accepted = controls.ACCEPT;
+		var accepted = acceptKey.justPressed;
 
-		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
-		if (gamepad != null)
-		{
-			if (gamepad.justPressed.DPAD_UP)
-			{
-				changeSelection(-1);
-			}
-			if (gamepad.justPressed.DPAD_DOWN)
-			{
-				changeSelection(1);
-			}
-			if (gamepad.justPressed.DPAD_LEFT)
-			{
-				changeDiff(-1);
-			}
-			if (gamepad.justPressed.DPAD_RIGHT)
-			{
-				changeDiff(1);
-			}
-		}
-
-		if (upP)
-		{
+		if (upKey.justPressed)
 			changeSelection(-1);
-		}
-		if (downP)
-		{
+		if (downKey.justPressed)
 			changeSelection(1);
-		}
-
-		if (FlxG.keys.justPressed.LEFT)
+		if (leftKey.justPressed)
 			changeDiff(-1);
-		if (FlxG.keys.justPressed.RIGHT)
+		if (rightKey.justPressed)
 			changeDiff(1);
 
-		if (controls.BACK)
+		if (backKey.justPressed)
 		{
 			FlxG.switchState(new MainMenuState());
 		}
-		
+
 		#if !FLX_NO_TOUCH
 		if (TouchControls.areaJustTouched(scoreBG.getHitbox()))
 		{
@@ -257,7 +236,7 @@ class FreeplayState extends MusicBeatState
 				{
 					changeSelection(index - curSelected);
 				}
-				
+
 				break;
 			}
 		}
@@ -282,7 +261,7 @@ class FreeplayState extends MusicBeatState
 			curDifficulty = 2;
 		if (curDifficulty > 2)
 			curDifficulty = 0;
-		
+
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].id, curDifficulty);
 		combo = Highscore.getCombo(songs[curSelected].id, curDifficulty);

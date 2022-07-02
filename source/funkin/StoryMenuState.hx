@@ -21,7 +21,7 @@ using StringTools;
 class StoryMenuState extends MusicBeatState
 {
 	var scoreText:FlxText;
-	
+
 	public static var weekIds:Array<Identifier> = [];
 
 	public static var weekData:Array<Array<Identifier>> = [];
@@ -49,10 +49,18 @@ class StoryMenuState extends MusicBeatState
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 
+	private final leftKey = Registry.keybindings.get(new Identifier("core", "menu-left"));
+	private final downKey = Registry.keybindings.get(new Identifier("core", "menu-down"));
+	private final upKey = Registry.keybindings.get(new Identifier("core", "menu-up"));
+	private final rightKey = Registry.keybindings.get(new Identifier("core", "menu-right"));
+
+	private final acceptKey = Registry.keybindings.get(new Identifier("core", "menu-accept"));
+	private final backKey = Registry.keybindings.get(new Identifier("core", "menu-back"));
+
 	override function create()
 	{
 		loadData();
-		
+
 		// #if windows
 		// // Updating Discord Rich Presence
 		// DiscordClient.changePresence("In the Story Mode Menu", null);
@@ -177,11 +185,11 @@ class StoryMenuState extends MusicBeatState
 
 		super.create();
 	}
-	
+
 	private function loadData()
 	{
 		var entries = Registry.weeks.getAllEntries();
-		
+
 		weekIds        = entries.map(function(e) return e.id);
 		weekData       = entries.map(function(e) return e.item.playlist.copy());
 		weekUnlocked   = entries.map(function(e) return !e.item.locked);
@@ -212,71 +220,39 @@ class StoryMenuState extends MusicBeatState
 		{
 			if (!selectedWeek)
 			{
-				var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
-				if (gamepad != null)
-				{
-					if (gamepad.justPressed.DPAD_UP)
-					{
-						changeWeek(-1);
-					}
-					if (gamepad.justPressed.DPAD_DOWN)
-					{
-						changeWeek(1);
-					}
-
-					if (gamepad.pressed.DPAD_RIGHT)
-						rightArrow.animation.play('press')
-					else
-						rightArrow.animation.play('idle');
-					if (gamepad.pressed.DPAD_LEFT)
-						leftArrow.animation.play('press');
-					else
-						leftArrow.animation.play('idle');
-
-					if (gamepad.justPressed.DPAD_RIGHT)
-					{
-						changeDifficulty(1);
-					}
-					if (gamepad.justPressed.DPAD_LEFT)
-					{
-						changeDifficulty(-1);
-					}
-				}
-
-				if (FlxG.keys.justPressed.UP)
+				if (upKey.justPressed)
 				{
 					changeWeek(-1);
 				}
 
-				if (FlxG.keys.justPressed.DOWN)
+				if (downKey.justPressed)
 				{
 					changeWeek(1);
 				}
 
-				if (controls.RIGHT)
+				if (rightKey.pressed)
 					rightArrow.animation.play('press')
 				else
 					rightArrow.animation.play('idle');
 
-				if (controls.LEFT)
+				if (leftKey.pressed)
 					leftArrow.animation.play('press');
 				else
 					leftArrow.animation.play('idle');
 
-				if (controls.RIGHT_P)
+				if (rightKey.justPressed)
 					changeDifficulty(1);
-				if (controls.LEFT_P)
+				if (leftKey.justPressed)
 					changeDifficulty(-1);
 			}
 
-			if (controls.ACCEPT)
+			if (acceptKey.justPressed)
 			{
 				selectWeek();
 			}
 		}
 
-		if (controls.BACK && !movedBack && !selectedWeek)
+		if (backKey.justPressed && !movedBack && !selectedWeek)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;

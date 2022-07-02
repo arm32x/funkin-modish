@@ -24,8 +24,16 @@ class PauseSubState extends MusicBeatSubstate
 
 	var pauseMusic:FlxSound;
 	var perSongOffset:FlxText;
-	
+
 	var offsetChanged:Bool = false;
+
+	private final leftKey = Registry.keybindings.get(new Identifier("core", "menu-left"));
+	private final downKey = Registry.keybindings.get(new Identifier("core", "menu-down"));
+	private final upKey = Registry.keybindings.get(new Identifier("core", "menu-up"));
+	private final rightKey = Registry.keybindings.get(new Identifier("core", "menu-right"));
+
+	private final acceptKey = Registry.keybindings.get(new Identifier("core", "menu-accept"));
+	private final backKey = Registry.keybindings.get(new Identifier("core", "menu-back"));
 
 	public function new(x:Float, y:Float)
 	{
@@ -78,7 +86,7 @@ class PauseSubState extends MusicBeatSubstate
 		perSongOffset = new FlxText(5, FlxG.height - 18, 0, "Additive Offset (Left, Right): " + PlayState.songOffset + " - Description - " + 'Adds value to global offset, per song.', 12);
 		perSongOffset.scrollFactor.set();
 		perSongOffset.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		
+
 		#if cpp
 			add(perSongOffset);
 		#end
@@ -106,34 +114,13 @@ class PauseSubState extends MusicBeatSubstate
 		if (PlayState.instance.useVideo)
 			menuItems.remove('Resume');
 
-		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
-		var upP = controls.UP_P;
-		var downP = controls.DOWN_P;
-		var leftP = controls.LEFT_P;
-		var rightP = controls.RIGHT_P;
-		var accepted = controls.ACCEPT;
-		var oldOffset:Float = 0;
-
-		if (gamepad != null && KeyBinds.gamepad)
-		{
-			upP = gamepad.justPressed.DPAD_UP;
-			downP = gamepad.justPressed.DPAD_DOWN;
-			leftP = gamepad.justPressed.DPAD_LEFT;
-			rightP = gamepad.justPressed.DPAD_RIGHT;
-		}
-
 		var songPath = 'assets/data/' + PlayState.SONG.id.path + '/';
 
-		if (upP)
-		{
+		if (upKey.justPressed)
 			changeSelection(-1);
-   
-		}else if (downP)
-		{
+		else if (downKey.justPressed)
 			changeSelection(1);
-		}
-		
+
 		// #if cpp
 		// 	else if (leftP)
 		// 	{
@@ -190,7 +177,7 @@ class PauseSubState extends MusicBeatSubstate
 		// 	}
 		// #end
 
-		if (accepted)
+		if (acceptKey.justPressed)
 		{
 			var daSelected:String = menuItems[curSelected];
 
@@ -229,7 +216,7 @@ class PauseSubState extends MusicBeatSubstate
 					// #end
 					if (FlxG.save.data.fpsCap > 290)
 						(cast (Lib.current.getChildAt(0), Main)).setFPSCap(290);
-					
+
 					FlxG.switchState(new MainMenuState());
 			}
 		}

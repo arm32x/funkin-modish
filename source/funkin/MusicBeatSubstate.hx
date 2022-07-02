@@ -9,10 +9,6 @@ class MusicBeatSubstate extends FlxSubState
 
 	private var curStep(get, never):Int;
 	private var curBeat(get, never):Int;
-	private var controls(get, never):Controls;
-
-	inline function get_controls():Controls
-		return PlayerSettings.player1.controls;
 
 	override function update(elapsed:Float)
 	{
@@ -33,7 +29,7 @@ class MusicBeatSubstate extends FlxSubState
 	{
 		//do literally nothing dumbass
 	}
-	
+
 	private inline function get_curStep():Int
 	{
 		return Conductor.curStep;

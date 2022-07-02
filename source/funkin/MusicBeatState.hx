@@ -16,10 +16,6 @@ class MusicBeatState extends FlxTransitionableState
 
 	private var curStep(get, never):Int;
 	private var curBeat(get, never):Int;
-	private var controls(get, never):Controls;
-
-	inline function get_controls():Controls
-		return PlayerSettings.player1.controls;
 
 	override function create()
 	{
@@ -79,7 +75,7 @@ class MusicBeatState extends FlxTransitionableState
 	{
 		//do literally nothing dumbass
 	}
-	
+
 	public function fancyOpenURL(schmancy:String)
 	{
 		#if linux
@@ -88,7 +84,7 @@ class MusicBeatState extends FlxTransitionableState
 		FlxG.openURL(schmancy);
 		#end
 	}
-	
+
 	private inline function get_curStep():Int
 	{
 		return Conductor.curStep;

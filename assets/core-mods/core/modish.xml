@@ -2,8 +2,9 @@
 <mod id="core" format="0">
     <name>Modish</name>
     <version>0.1.0-dev</version>
-    
+
     <exports>
+        <!-- TODO: Move these to 'basegame' once menus are handled by mods. -->
         <keybinding id="core:menu-left" name="Menu Left" defaultKeys="LEFT" defaultButtons="DPAD_LEFT LEFT_STICK_DIGITAL_LEFT" />
         <keybinding id="core:menu-down" name="Menu Down" defaultKeys="DOWN" defaultButtons="DPAD_DOWN LEFT_STICK_DIGITAL_DOWN" />
         <keybinding id="core:menu-up" name="Menu Up" defaultKeys="UP" defaultButtons="DPAD_UP LEFT_STICK_DIGITAL_UP" />

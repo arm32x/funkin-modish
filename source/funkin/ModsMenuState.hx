@@ -11,17 +11,22 @@ class ModsMenuState extends MusicBeatState
     private var menuItems = new FlxTypedGroup<ModsMenuItem>();
     private var curSelected = 0;
 
+	private final downKey = Registry.keybindings.get(new Identifier("core", "menu-down"));
+	private final upKey = Registry.keybindings.get(new Identifier("core", "menu-up"));
+
+	private final backKey = Registry.keybindings.get(new Identifier("core", "menu-back"));
+
     override public function create()
     {
         super.create();
-        
+
         var bg = new FlxSprite(0, 0, Paths.image("menuBGBlack"));
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = true;
 		add(bg);
-        
+
         for (mod in Registry.mods)
         {
             menuItems.add(new ModsMenuItem(360, mod));
@@ -29,28 +34,28 @@ class ModsMenuState extends MusicBeatState
         add(menuItems);
         changeItem(0);
     }
-    
+
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
-        
-        if (controls.BACK)
+
+        if (backKey.justPressed)
         {
             FlxG.switchState(new MainMenuState());
         }
-        
-        if (controls.UP_P)
+
+        if (upKey.justPressed)
         {
             FlxG.sound.play(Paths.sound('scrollMenu'));
             changeItem(-1);
         }
-        else if (controls.DOWN_P)
+        else if (downKey.justPressed)
         {
             FlxG.sound.play(Paths.sound('scrollMenu'));
             changeItem(1);
         }
     }
-    
+
     private function changeItem(delta:Int)
     {
         curSelected += delta;

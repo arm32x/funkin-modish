@@ -40,7 +40,9 @@ class GameplayCustomizeState extends MusicBeatState
     var strumLineNotes:FlxTypedGroup<FlxSprite>;
     var playerStrums:FlxTypedGroup<FlxSprite>;
     private var camHUD:FlxCamera;
-    
+
+    private final backKey = Registry.keybindings.get(new Identifier("core", "menu-back"));
+
     public override function create() {
         // #if windows
 		// // Updating Discord Rich Presence
@@ -97,7 +99,7 @@ class GameplayCustomizeState extends MusicBeatState
         strumLine.alpha = 0.4;
 
         add(strumLine);
-		
+
 		if (FlxG.save.data.downscroll)
 			strumLine.y = FlxG.height - 165;
 
@@ -109,14 +111,14 @@ class GameplayCustomizeState extends MusicBeatState
         sick.cameras = [camHUD];
         strumLine.cameras = [camHUD];
         playerStrums.cameras = [camHUD];
-        
+
 		generateStaticArrows(0);
 		generateStaticArrows(1);
 
         text = new FlxText(5, FlxG.height + 40, 0, "Drag around gameplay elements, R to reset, Escape to go back.", 12);
 		text.scrollFactor.set();
 		text.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-        
+
         blackBorder = new FlxSprite(-30,FlxG.height + 40).makeGraphic((Std.int(text.width + 900)),Std.int(text.height + 600),FlxColor.BLACK);
 		blackBorder.alpha = 0.5;
 
@@ -177,7 +179,7 @@ class GameplayCustomizeState extends MusicBeatState
             FlxG.save.data.changedHit = false;
         }
 
-        if (controls.BACK)
+        if (backKey.justPressed)
         {
             FlxG.mouse.visible = false;
             FlxG.sound.play(Paths.sound('cancelMenu'));
@@ -186,7 +188,7 @@ class GameplayCustomizeState extends MusicBeatState
 
     }
 
-    override function beatHit() 
+    override function beatHit()
     {
         super.beatHit();
 
@@ -202,7 +204,7 @@ class GameplayCustomizeState extends MusicBeatState
 
 
     // ripped from play state cuz im lazy
-    
+
 	private function generateStaticArrows(player:Int):Void
         {
             for (i in 0...4)
@@ -241,16 +243,16 @@ class GameplayCustomizeState extends MusicBeatState
                 }
                 babyArrow.updateHitbox();
                 babyArrow.scrollFactor.set();
-    
+
                 babyArrow.ID = i;
-    
+
                 if (player == 1)
                     playerStrums.add(babyArrow);
-    
+
                 babyArrow.animation.play('static');
                 babyArrow.x += 50;
                 babyArrow.x += ((FlxG.width / 2) * player);
-    
+
                 strumLineNotes.add(babyArrow);
             }
         }

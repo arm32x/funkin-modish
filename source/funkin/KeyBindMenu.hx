@@ -19,6 +19,7 @@ import io.newgrounds.NG;
 
 using StringTools;
 
+// TODO: Replace this.
 class KeyBindMenu extends FlxSubState
 {
 
@@ -47,7 +48,7 @@ class KeyBindMenu extends FlxSubState
     var state:String = "select";
 
 	override function create()
-	{	
+	{
 
         for (i in 0...keys.length)
         {
@@ -62,7 +63,7 @@ class KeyBindMenu extends FlxSubState
             if (k == null)
                 gpKeys[i] = defaultGpKeys[i];
         }
-	
+
 		//FlxG.sound.playMusic('assets/music/configurator' + TitleState.soundExt);
 
 		persistentUpdate = true;
@@ -234,7 +235,7 @@ class KeyBindMenu extends FlxSubState
 			textUpdate();
 
 		super.update(elapsed);
-		
+
 	}
 
     function textUpdate(){
@@ -248,7 +249,7 @@ class KeyBindMenu extends FlxSubState
                 var textStart = (i == curSelected) ? "> " : "  ";
                 trace(gpKeys[i]);
                 keyTextDisplay.text += textStart + keyText[i] + ": " + gpKeys[i] + "\n";
-                
+
             }
         }
         else
@@ -271,7 +272,7 @@ class KeyBindMenu extends FlxSubState
         FlxG.save.data.downBind = keys[1];
         FlxG.save.data.leftBind = keys[0];
         FlxG.save.data.rightBind = keys[3];
-        
+
         FlxG.save.data.gpupBind = gpKeys[2];
         FlxG.save.data.gpdownBind = gpKeys[1];
         FlxG.save.data.gpleftBind = gpKeys[0];
@@ -383,7 +384,7 @@ class KeyBindMenu extends FlxSubState
     function changeItem(_amount:Int = 0)
     {
         curSelected += _amount;
-                
+
         if (curSelected > 3)
             curSelected = 0;
         if (curSelected < 0)

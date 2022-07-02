@@ -50,6 +50,12 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	public static var finishedFunnyMove:Bool = false;
 
+	private final downKey = Registry.keybindings.get(new Identifier("core", "menu-down"));
+	private final upKey = Registry.keybindings.get(new Identifier("core", "menu-up"));
+
+	private final acceptKey = Registry.keybindings.get(new Identifier("core", "menu-accept"));
+	private final backKey = Registry.keybindings.get(new Identifier("core", "menu-back"));
+
 	override function create()
 	{
 		// #if windows
@@ -106,9 +112,9 @@ class MainMenuState extends MusicBeatState
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
 			if (firstStart)
-				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
-					{ 
-						finishedFunnyMove = true; 
+				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween)
+					{
+						finishedFunnyMove = true;
 						changeItem();
 					}});
 			else
@@ -127,10 +133,10 @@ class MainMenuState extends MusicBeatState
 		// NG.core.calls.event.logEvent('swag').send();
 
 
-		if (FlxG.save.data.dfjk)
-			controls.setKeyboardScheme(KeyboardScheme.Solo, true);
-		else
-			controls.setKeyboardScheme(KeyboardScheme.Duo(true), true);
+		// if (FlxG.save.data.dfjk)
+		// 	controls.setKeyboardScheme(KeyboardScheme.Solo, true);
+		// else
+		// 	controls.setKeyboardScheme(KeyboardScheme.Duo(true), true);
 
 		changeItem();
 
@@ -148,41 +154,25 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
-			var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
-
-			if (gamepad != null)
-			{
-				if (gamepad.justPressed.DPAD_UP)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
-					changeItem(-1);
-				}
-				if (gamepad.justPressed.DPAD_DOWN)
-				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
-					changeItem(1);
-				}
-			}
-
-			if (FlxG.keys.justPressed.UP)
+			if (upKey.justPressed)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeItem(-1);
 			}
 
-			if (FlxG.keys.justPressed.DOWN)
+			if (downKey.justPressed)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeItem(1);
 			}
 
-			if (controls.BACK)
+			if (backKey.justPressed)
 			{
 				FlxG.switchState(new TitleState());
 			}
-			
-			var accepted = controls.ACCEPT;
-			
+
+			var accepted = acceptKey.justPressed;
+
 			#if !FLX_NO_TOUCH
 			for (index => sprite in menuItems.members)
 			{
@@ -198,7 +188,7 @@ class MainMenuState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('scrollMenu'));
 						changeItem(index - curSelected);
 					}
-					
+
 					break;
 				}
 			}
@@ -214,7 +204,7 @@ class MainMenuState extends MusicBeatState
 				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
-					
+
 					if (FlxG.save.data.flashing)
 						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
@@ -259,7 +249,7 @@ class MainMenuState extends MusicBeatState
 			spr.screenCenter(X);
 		});
 	}
-	
+
 	function goToState()
 	{
 		var daChoice:String = optionShit[curSelected];
@@ -276,7 +266,7 @@ class MainMenuState extends MusicBeatState
 
 			case 'options':
 				FlxG.switchState(new OptionsMenu());
-			
+
 			case 'mods':
 				FlxG.switchState(new ModsMenuState());
 		}

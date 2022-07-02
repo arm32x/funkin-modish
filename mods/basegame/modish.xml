@@ -2,7 +2,7 @@
 <mod id="basegame" format="0">
     <name>Friday Night Funkin'</name>
     <version>0.2.7.1</version>
-    
+
     <exports>
         <character id="basegame:bf" />
         <character id="basegame:dad" />
@@ -23,7 +23,7 @@
         <character id="basegame:senpai" />
         <character id="basegame:senpai-angry" icon="basegame:senpai" />
         <character id="basegame:spirit" />
-        
+
         <introText top="shoutouts to tom fulp" bottom="lmao" />
         <introText top="Ludum dare" bottom="extraordinaire" />
         <introText top="cyberzone" bottom="coming soon" />
@@ -65,7 +65,7 @@
         <introText top="updates each friday" bottom="on time every time" />
         <introText top="shoutouts to mason" bottom="for da homies" />
         <introText top="bonk" bottom="get in the discord call" />
-        
+
         <healthIcon id="basegame:bf" />
         <healthIcon id="basegame:bf-old" />
         <healthIcon id="basegame:bf-pixel" antialiasing="false" />
@@ -80,13 +80,13 @@
         <healthIcon id="basegame:spirit" antialiasing="false" />
         <healthIcon id="basegame:spooky" />
         <healthIcon id="basegame:tankman" />
-        
+
         <!-- TODO: Add descriptions (tooltips or otherwise) to keybindings. -->
         <keybinding id="basegame:left" name="Left" defaultKeys="A LEFT" defaultButtons="DPAD_LEFT LEFT_STICK_DIGITAL_LEFT" />
         <keybinding id="basegame:down" name="Down" defaultKeys="S DOWN" defaultButtons="DPAD_DOWN LEFT_STICK_DIGITAL_DOWN" />
         <keybinding id="basegame:up" name="Up" defaultKeys="W UP" defaultButtons="DPAD_UP LEFT_STICK_DIGITAL_UP" />
         <keybinding id="basegame:right" name="Right" defaultKeys="D RIGHT" defaultButtons="DPAD_RIGHT LEFT_STICK_DIGITAL_RIGHT" />
-        
+
         <menuCharacter id="basegame:bf" />
         <menuCharacter id="basegame:bf-confirm" />
         <menuCharacter id="basegame:dad" />
@@ -96,9 +96,9 @@
         <menuCharacter id="basegame:pico" />
         <menuCharacter id="basegame:senpai" />
         <menuCharacter id="basegame:spooky" />
-        
+
         <noteType id="basegame:alt" animationSuffix="alt" />
-        
+
         <song id="basegame:tutorial" name="Tutorial" icon="basegame:gf" week="basegame:tutorial" hasVocals="false" />
         <song id="basegame:bopeebo" name="Bopeebo" icon="basegame:dad" week="basegame:week1" />
         <song id="basegame:fresh" name="Fresh" icon="basegame:dad" week="basegame:week1" />
@@ -118,7 +118,7 @@
         <song id="basegame:senpai" name="Senpai" icon="basegame:senpai" week="basegame:week6" />
         <song id="basegame:roses" name="Roses" icon="basegame:senpai" week="basegame:week6" />
         <song id="basegame:thorns" name="Thorns" icon="basegame:spirit" week="basegame:week6" />
-        
+
         <stage id="basegame:stage" />
         <stage id="basegame:halloween" />
         <stage id="basegame:philly" />
@@ -128,7 +128,7 @@
         <stage id="basegame:school" />
         <stage id="basegame:school-scared" />
         <stage id="basegame:school-evil" />
-        
+
         <week id="basegame:tutorial" name="" middle="basegame:bf" right="basegame:gf">
             <song id="basegame:tutorial" />
         </week>

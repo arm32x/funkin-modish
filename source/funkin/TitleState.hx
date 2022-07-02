@@ -43,6 +43,8 @@ class TitleState extends MusicBeatState
 
 	var wackyImage:FlxSprite;
 
+	private final acceptKey = Registry.keybindings.get(new Identifier("core", "menu-accept"));
+
 	override public function create():Void
 	{
 		#if desktop
@@ -54,7 +56,7 @@ class TitleState extends MusicBeatState
 		{
 			trace("Loaded " + openfl.Assets.getLibrary("default").assetsLoaded + " assets (DEFAULT)");
 		}
-		
+
 		PlayerSettings.init();
 
 		// #if windows
@@ -63,7 +65,7 @@ class TitleState extends MusicBeatState
 		// Application.current.onExit.add (function (exitCode) {
 		// 	DiscordClient.shutdown();
 		//  });
-		 
+
 		// #end
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
@@ -87,7 +89,7 @@ class TitleState extends MusicBeatState
 
 		// var file:SMFile = SMFile.loadFile("file.sm");
 		// this was testing things
-		
+
 		Highscore.load();
 
 		if (FlxG.save.data.weekUnlocked != null)
@@ -257,7 +259,7 @@ class TitleState extends MusicBeatState
 			FlxG.fullscreen = !FlxG.fullscreen;
 		}
 
-		var pressedEnter:Bool = controls.ACCEPT;
+		var pressedEnter:Bool = acceptKey.justPressed;
 
 		#if !FLX_NO_TOUCH
 		for (touch in FlxG.touches.list)
@@ -296,10 +298,10 @@ class TitleState extends MusicBeatState
 				FlxG.switchState(new MainMenuState());
 				#else
 				// Get current version of Kade Engine
-				
+
 				var http = new haxe.Http("https://raw.githubusercontent.com/KadeDev/Kade-Engine/master/version.downloadMe");
 				var returnedData:Array<String> = [];
-				
+
 				http.onData = function (data:String)
 				{
 					returnedData[0] = data.substring(0, data.indexOf(';'));
@@ -316,12 +318,12 @@ class TitleState extends MusicBeatState
 						FlxG.switchState(new MainMenuState());
 					}
 				}
-				
+
 				http.onError = function (error) {
 				  trace('error: $error');
 				  FlxG.switchState(new MainMenuState()); // fail but we go anyway
 				}
-				
+
 				http.request();
 				#end
 			});

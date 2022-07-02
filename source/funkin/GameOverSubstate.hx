@@ -13,6 +13,9 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	var stageSuffix:String = "";
 
+	private final acceptKey = Registry.keybindings.get(new Identifier("core", "menu-accept"));
+	private final backKey = Registry.keybindings.get(new Identifier("core", "menu-back"));
+
 	public function new(x:Float, y:Float)
 	{
 		// TODO: Make this not hardcoded.
@@ -51,12 +54,12 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		super.update(elapsed);
 
-		if (controls.ACCEPT)
+		if (acceptKey.justPressed)
 		{
 			endBullshit();
 		}
 
-		if (controls.BACK)
+		if (backKey.justPressed)
 		{
 			FlxG.sound.music.stop();
 

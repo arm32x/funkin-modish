@@ -10,6 +10,11 @@ class GitarooPause extends MusicBeatState
 
 	var replaySelect:Bool = false;
 
+	private final leftKey = Registry.keybindings.get(new Identifier("core", "menu-left"));
+	private final rightKey = Registry.keybindings.get(new Identifier("core", "menu-right"));
+
+	private final acceptKey = Registry.keybindings.get(new Identifier("core", "menu-accept"));
+
 	public function new():Void
 	{
 		super();
@@ -51,10 +56,10 @@ class GitarooPause extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (controls.LEFT_P || controls.RIGHT_P)
+		if (leftKey.justPressed || rightKey.justPressed)
 			changeThing();
 
-		if (controls.ACCEPT)
+		if (acceptKey.justPressed)
 		{
 			if (replaySelect)
 			{

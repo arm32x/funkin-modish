@@ -26,7 +26,7 @@ class OptionsMenu extends MusicBeatState
 
 	var options:Array<OptionCategory> = [
 		new OptionCategory("Gameplay", [
-			new DFJKOption(controls),
+			// new DFJKOption(controls),
 			new DownscrollOption("Change the layout of the strumline."),
 			new GhostTapOption("Ghost Tapping is when you tap a direction and it doesn't give you a miss."),
 			new Judgement("Customize your Hit Timings (LEFT or RIGHT)"),
@@ -50,7 +50,7 @@ class OptionsMenu extends MusicBeatState
 			new CpuStrums("CPU's strumline lights up when a note hits it."),
 			#end
 		]),
-		
+
 		new OptionCategory("Misc", [
 			#if desktop
 			new FPSOption("Toggle the FPS Counter"),
@@ -63,7 +63,7 @@ class OptionsMenu extends MusicBeatState
 			new Optimization("No backgrounds, no characters, centered notes, no player 2."),
 			new BotPlay("Showcase your charts and mods with autoplay."),
 		])
-		
+
 	];
 
 	public var acceptInput:Bool = true;
@@ -74,6 +74,17 @@ class OptionsMenu extends MusicBeatState
 
 	var currentSelectedCat:OptionCategory;
 	var blackBorder:FlxSprite;
+
+	private final leftKey = Registry.keybindings.get(new Identifier("core", "menu-left"));
+	private final downKey = Registry.keybindings.get(new Identifier("core", "menu-down"));
+	private final upKey = Registry.keybindings.get(new Identifier("core", "menu-up"));
+	private final rightKey = Registry.keybindings.get(new Identifier("core", "menu-right"));
+
+	private final acceptKey = Registry.keybindings.get(new Identifier("core", "menu-accept"));
+	private final backKey = Registry.keybindings.get(new Identifier("core", "menu-back"));
+
+	private final resetKey = Registry.keybindings.get(new Identifier("core", "reset"));
+
 	override function create()
 	{
 		instance = this;
@@ -103,7 +114,7 @@ class OptionsMenu extends MusicBeatState
 		versionShit = new FlxText(5, FlxG.height + 40, 0, "Offset (Left, Right, Shift for slow): " + HelperFunctions.truncateFloat(FlxG.save.data.offset,2) + " - Description - " + currentDescription, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		
+
 		blackBorder = new FlxSprite(-30,FlxG.height + 40).makeGraphic((Std.int(versionShit.width + 900)),Std.int(versionShit.height + 600),FlxColor.BLACK);
 		blackBorder.alpha = 0.5;
 
@@ -118,7 +129,7 @@ class OptionsMenu extends MusicBeatState
 	}
 
 	var isCat:Bool = false;
-	
+
 
 	override function update(elapsed:Float)
 	{
@@ -126,9 +137,9 @@ class OptionsMenu extends MusicBeatState
 
 		if (acceptInput)
 		{
-			if (controls.BACK && !isCat)
+			if (backKey.justPressed && !isCat)
 				FlxG.switchState(new MainMenuState());
-			else if (controls.BACK)
+			else if (backKey.justPressed)
 			{
 				isCat = false;
 				grpControls.clear();
@@ -140,9 +151,9 @@ class OptionsMenu extends MusicBeatState
 					grpControls.add(controlLabel);
 					// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 				}
-				
+
 				curSelected = 0;
-				
+
 				changeSelection(curSelected);
 			}
 
@@ -161,12 +172,12 @@ class OptionsMenu extends MusicBeatState
 					changeSelection(1);
 				}
 			}
-			
+
 			if (FlxG.keys.justPressed.UP)
 				changeSelection(-1);
 			if (FlxG.keys.justPressed.DOWN)
 				changeSelection(1);
-			
+
 			if (isCat)
 			{
 				if (currentSelectedCat.getOptions()[curSelected].getAccept())
@@ -199,7 +210,7 @@ class OptionsMenu extends MusicBeatState
 						FlxG.save.data.offset += 0.1;
 					else if (FlxG.keys.pressed.LEFT)
 						FlxG.save.data.offset -= 0.1;
-					
+
 					versionShit.text = "Offset (Left, Right, Shift for slow): " + HelperFunctions.truncateFloat(FlxG.save.data.offset,2) + " - Description - " + currentDescription;
 				}
 				if (currentSelectedCat.getOptions()[curSelected].getAccept())
@@ -211,24 +222,24 @@ class OptionsMenu extends MusicBeatState
 			{
 				if (FlxG.keys.pressed.SHIFT)
 				{
-					if (FlxG.keys.justPressed.RIGHT)
+					if (rightKey.justPressed)
 						FlxG.save.data.offset += 0.1;
-					else if (FlxG.keys.justPressed.LEFT)
+					else if (leftKey.justPressed)
 						FlxG.save.data.offset -= 0.1;
 				}
-				else if (FlxG.keys.pressed.RIGHT)
+				else if (rightKey.pressed)
 					FlxG.save.data.offset += 0.1;
-				else if (FlxG.keys.pressed.LEFT)
+				else if (leftKey.pressed)
 					FlxG.save.data.offset -= 0.1;
-				
+
 				versionShit.text = "Offset (Left, Right, Shift for slow): " + HelperFunctions.truncateFloat(FlxG.save.data.offset,2) + " - Description - " + currentDescription;
 			}
-		
 
-			if (controls.RESET)
+
+			if (resetKey.justPressed)
 					FlxG.save.data.offset = 0;
 
-			if (controls.ACCEPT)
+			if (acceptKey.justPressed)
 			{
 				if (isCat)
 				{
@@ -252,7 +263,7 @@ class OptionsMenu extends MusicBeatState
 						}
 					curSelected = 0;
 				}
-				
+
 				changeSelection();
 			}
 		}
@@ -266,7 +277,7 @@ class OptionsMenu extends MusicBeatState
 		#if !switch
 		// NGio.logEvent("Fresh");
 		#end
-		
+
 		FlxG.sound.play(Paths.sound("scrollMenu"), 0.4);
 
 		curSelected += change;
